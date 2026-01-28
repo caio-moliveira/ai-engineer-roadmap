@@ -1,86 +1,84 @@
-# The Ultimate AI Engineer Roadmap
+# 🧭 O Guia Definitivo do Engenheiro de IA
 
-> **From Absolute Beginner to Production-First AI Engineer.**
+> **De Iniciante a Engenheiro de IA em Produção.**  
+> *A diferença entre rodar um notebook e construir um sistema.*
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com)
 
-## 🎯 Mission
-This repository is the definitive, production-grade handbook for building AI systems that work in the real world. 
+## 🎯 A Missão
+Este repositório é o manual definitivo, "livre de hype", para construir sistemas de IA que funcionam no mundo real.
 
-It is designed for:
-- **Software Engineers** transitioning to AI.
-- **Data Scientists** needing to build production systems.
-- **MLOps Engineers** looking for architectural patterns.
-- **CTOs & Tech Leads** defining their AI stack.
+Ele foi desenhado para:
+- **Engenheiros de Software** migrando para IA.
+- **Cientistas de Dados** que precisam colocar modelos em produção.
+- **CTOs & Tech Leads** definindo seu stack de IA.
 
-### 🚫 What this is NOT
-- ❌ **Not Academic:** No proofs, no fluff, no "toy" examples.
-- ❌ **Not Theoretical:** If it doesn't run in production, it's not here.
-- ❌ **Not Just Code:** It's about **Mental Models**, **Architecture**, and **Reliability**.
+### 🚫 O que este guia NÃO é
+- ❌ **Não é Acadêmico:** Sem provas matemáticas, sem teoria inútil.
+- ❌ **Não é Teórico:** Se não roda em produção, não está aqui.
+- ❌ **Não é apenas Código:** É sobre **Modelos Mentais**, **Arquitetura** e **Confiabilidade**.
 
 ---
 
-## 📚 Learning Path (The "Block" System)
-We follow a strictly structured progression. Do not skip blocks.
+## 📚 A Jornada (O Sistema de Blocos)
+Seguimos uma progressão estrita. Não pule etapas.
 
-### [🔹 Block 1: Real Foundations](./01-foundations)
-Start here. The professional environment. Forget Jupyter Notebooks in production.
-- **Topics:** Async Python, FastAPI, Docker, Poetry/Uv, Pydantic, LangChain v1.
+### [🔹 Bloco 1: Fundamentos Reais](./01-foundations)
+Onde tudo começa. Esqueça Jupyter Notebooks.
+- **Tópicos:** Python Assíncrono, FastAPI, Docker, `uv`, Pydantic, Engenharia de Software para IA.
 
-### [🔹 Block 2: RAG Systems](./02-rag-systems)
-Retrieval Augmented Generation is the bread and butter of modern AI.
-- **Topics:** Vector DBs (Qdrant), Advanced Retrievers, Reranking, Hybrid Search, Observability.
+### [🔹 Bloco 2: Sistemas RAG](./02-rag-systems)
+Retrieval Augmented Generation é o feijão com arroz da IA moderna.
+- **Tópicos:** Vector DBs (Qdrant), Retrievers Avançados, Reranking, Busca Híbrida, Observabilidade.
 
-### [🔹 Block 3: AI Agents](./03-ai-agents)
-The future of automation. From simple tools to autonomous systems.
-- **Topics:** LangGraph, Tool Calling, MCP, Memory, Guardrails, Human-in-the-loop.
+### [🔹 Bloco 3: Agentes de IA](./03-ai-agents)
+O futuro da automação. De ferramentas simples a sistemas autônomos.
+- **Tópicos:** LangGraph, Tool Calling, MCP (Model Context Protocol), Memória, Human-in-the-loop.
 
-### [🔹 Block 4: Infrastructure & Models](./04-infra-ocr-models)
-Running models efficiently and handling unstructured data.
-- **Topics:** vLLM, Ollama, HuggingFace, Inference Optimization, Document AI (OCR).
+### [🔹 Bloco 4: Infraestrutura & Modelos](./04-infra-ocr-models)
+Rodando modelos com eficiência e lidando com dados não estruturados.
+- **Tópicos:** vLLM, Ollama, HuggingFace, Otimização de Inferência, Document AI (OCR).
 
-### [🔹 Block 5: Fine-Tuning](./05-fine-tuning)
-When RAG isn't enough. The art of customizing models.
-- **Topics:** Unsloth, PEFT/LoRA, Dataset Curation, Cost-Benefit Analysis.
-
----
-
-## 🏗️ Architecture & Philosophy
-This repository is built as a **Monorepo** representing a complete Enterprise AI Platform.
-
-- **Production-First:** Every example handles errors, logs telemetry, and uses environment variables.
-- **Scalable:** Folder structures match what you'd see at Netflix, Uber, or a high-growth AI startup.
-- **Opinionated:** We choose the stack that *works* (e.g., Pydantic over dataclasses, FastAPI over Flask).
-
-> **"Amateurs talk about algorithms. Professionals talk about logistics (infrastructure, cost, latency)."**
+### [🔹 Bloco 5: Fine-Tuning](./05-fine-tuning)
+Quando o RAG não é suficiente. A arte de customizar modelos.
+- **Tópicos:** Unsloth, PEFT/LoRA, Curadoria de Datasets, Análise de Custo-Benefício.
 
 ---
 
-## 🚀 Getting Started
+## 🏗️ Arquitetura & Filosofia
+Este repositório é construído como um **Monorepo** representando uma Plataforma de IA Enterprise completa.
 
-1. **Clone the repository:**
+- **Production-First:** Todo exemplo trata erros, logs e variáveis de ambiente.
+- **Escalável:** Estrutura de pastas que você veria na Netflix, Uber ou startups de alto crescimento.
+- **Opinativo:** Escolhemos o stack que *funciona* (ex: Pydantic sobre dataclasses, FastAPI sobre Flask).
+
+> **"Amadores falam sobre algoritmos. Profissionais falam sobre logística (infraestrutura, custo, latência)."**
+
+---
+
+## 🚀 Como Começar
+
+1. **Clone o repositório:**
    ```bash
-   git clone https://github.com/yourusername/ai-engineer-roadmap.git
+   git clone https://github.com/seususuario/ai-engineer-roadmap.git
    cd ai-engineer-roadmap
    ```
 
-2. **Set up the environment (using `uv` or `poetry`):**
+2. **Configure o ambiente (usando `uv`):**
    ```bash
-   # We recommend uv for speed
+   # Recomendamos uv pela velocidade
    uv venv
-   source .venv/bin/activate
+   source .venv/bin/activate  # ou .venv\Scripts\activate no Windows
    uv pip install -r requirements.txt
    ```
 
-3. **Navigate to Block 1:**
+3. **Navegue para o Bloco 1:**
    ```bash
    cd 01-foundations
    ```
 
-## 🤝 Contributing
-We demand high standards. This is not a place for "hello world" scripts.
-Read our [Contribution Guidelines](./CONTRIBUTING.md) and [Philosophy](./PHILOSOPHY.md) before submitting a PR.
+## 🤝 Contribuindo
+Exigimos padrões altos. Este não é um lugar para scripts "hello world".
 
-## 📝 License
-MIT. Build cool stuff. Make money. Change the world.
+## 📝 Licença
+MIT. Construa coisas incríveis. Ganhe dinheiro. Mude o mundo.
