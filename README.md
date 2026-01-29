@@ -23,7 +23,7 @@ Ele foi desenhado para:
 ## 📚 A Jornada (O Sistema de Blocos)
 Seguimos uma progressão estrita. Não pule etapas.
 
-### [🔹 Bloco 1: Fundamentos Reais](./01-foundations)
+### [🔹 Bloco 1: Fundamentos Reais](./01-fundamentals)
 Onde tudo começa. Esqueça Jupyter Notebooks.
 - **Tópicos:** Python Assíncrono, FastAPI, Docker, `uv`, Pydantic, Engenharia de Software para IA.
 

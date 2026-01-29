@@ -16,49 +16,59 @@ Sistemas de IA são:
 
 ---
 
-## 📚 Ementa do Módulo
-
-### [Módulo 1: Profissão e Mercado](./01-ai-engineer-profession)
-- **Papel:** O que diferencia um AI Engineer de um ML Engineer e de um Backend Dev.
-- **Mercado:** O que as empresas realmente esperam (não é só fazer demos).
-- **Mindset:** Produto > Modelo.
-
-### [Módulo 2: Ambiente Profissional Moderno](./02-python-environment)
-- **Ferramentas:** `uv` (o novo padrão), `pyproject.toml`.
-- **Reproducibilidade:** Por que `pip freeze` não é suficiente.
-- **Docker:** Multi-stage builds para containers leves.
-
-### [Módulo 3: Git & Workflow Profissional](./03-git-workflow)
-- **Padrão:** Conventional Commits.
-- **CI/CD:** GitHub Actions para validar prompts e código (não só código).
-- **Branch Strategy:** Feature flags vs Long-lived branches.
-
-### [Módulo 4: Python para Engenheiros de IA](./04-python-for-ai)
-- **Async/Await:** Obrigatório para LLMs.
-- **Typing:** Pydantic e Type Hints rigorosos.
-- **Generators:** Streaming de tokens (Server-Sent Events).
-- **Resiliência:** `tenacity` para retries inteligentes.
-
-### [Módulo 5: FastAPI Foundations](./05-fastapi)
-- **Por que FastAPI:** O padrão industrial para servir ML.
-- **Async:** Tratando 1000 requests simultâneos.
-- **Dependency Injection:** Gerenciando conexões de banco e clientes OpenAI.
-
-### [Módulo 6: Pydantic v2](./06-pydantic-v2)
-- **Schema First:** Definindo a estrutura antes do prompt.
-- **Validação:** Garantindo que o LLM não quebre seu frontend.
-- **Field Validators:** Regras de negócio dentro do schema.
-
-### [Módulo 7: Mentalidade de Engenharia](./07-engineering-mindset)
-- **Sistemas:** Pensar em grafos, não em scripts.
-- **Observabilidade:** Se você não loga, não sabe o que aconteceu.
-- **Custo:** Token counting e orçamento.
+Vá para **[Módulo 1: A Profissão de AI Engineer & Mercado](./01-ai-engineer-profession)**.
 
 ---
 
-## 🧠 Mudanças Mentais Necessárias
-- **De Script para Sistema:** Seu notebook Jupyter não é produção. Ponto final.
-- **De Otimista para Defensivo:** A API da OpenAI vai cair. O modelo vai alucinar. Seu código deve sobreviver.
+## 📚 Ementa do Módulo
 
-## 🚀 Como começar
-Vá para **[Módulo 1: Profissão e Mercado](./01-ai-engineer-profession)**.
+### [Módulo 01: A Profissão de AI Engineer & Mercado](./01-ai-engineer-profession)
+- **O Papel:** A diferença entre AI Engineer, ML Engineer e Backend Dev.
+- **Mercado:** O que as empresas realmente esperam (Produto > Modelo).
+- **Habilidades:** O perfil "T-Shaped" e a mentalidade de engenharia.
+
+### [Módulo 02: Python Moderno para AI Engineers](./02-python-for-ai)
+- **Stack:** Python moderno, Tipagem estática, Gerenciamento de dependências (`uv`).
+- **Estrutura:** Blueprints de projetos escaláveis.
+- **Boas Práticas:** Clean Code aplicado a pipelines de dados.
+
+### [Módulo 03: APIs & Backend com FastAPI](./03-fastapi-backend)
+- **Core:** Async/Await, Dependency Injection, OpenAPI.
+- **Pydantic:** Contratos de dados rigorosos.
+- **Performance:** Lidando com concorrência em sistemas de IA.
+
+### [Módulo 04: Modelagem e Contratos de Dados](./04-data-modeling)
+- **Design:** JSON Schema, Validação e Serialização.
+- **Pydantic V2:** O coração da engenharia de IA moderna.
+- **Padronização:** Garantindo outputs estruturados de LLMs.
+
+### [Módulo 05: Bancos de Dados (SQL + Vetorial)](./05-databases)
+- **Híbrido:** Integrando PostgreSQL (SQL) com Vector DBs.
+- **Busca:** Conceitos de Embeddings, Distância de Cosseno e Metadata Filtering.
+- **Design:** Modelagem de dados para aplicações de IA.
+
+### [Módulo 06: Fundamentos de LLMs & GenAI](./06-llm-fundamentals)
+- **Conceitos:** Tokens, Context Windows, Temperature.
+- **Prompt Engineering:** Técnicas avançadas para desenvolvimento (não apenas chat).
+- **Tool Calling:** A base para agentes autônomos.
+
+### [Módulo 07: RAG (Retrieval-Augmented Generation)](./07-rag-fundamentals)
+- **Pipeline:** Ingestion -> Chunking -> Embedding -> Retrieval -> Generation.
+- **Estratégias:** Naive RAG vs Advanced RAG (noções).
+- **Grounding:** Reduzindo alucinações com contexto real.
+
+### [Módulo 08: Observabilidade & Avaliação de IA](./08-observability)
+- **Monitoramento:** Tracing de chamadas de LLM (LangSmith, Arize).
+- **Evals:** Como medir a qualidade das respostas (sem "olhômetro").
+- **Logs:** Estruturando logs para debugging de IA.
+
+### [Módulo 09: Deploy & Produção](./09-deploy-production)
+- **Containerização:** Dockerfies otimizados para Python/AI.
+- **Configuração:** 12-Factor App e Variáveis de Ambiente.
+- **Cloud:** Noções de deploy serverless vs containers (Cloud Run, ECS).
+
+---
+
+## 🚀 Como Começar
+Acesse os módulos sequencialmente. O conhecimento é cumulativo.
+Comece pelo **[Módulo 01: A Profissão de AI Engineer & Mercado](./01-ai-engineer-profession)**.
