@@ -53,43 +53,92 @@ Aqui entram as ferramentas específicas para construir a inteligência da aplica
 *O "cérebro" que conecta o modelo ao código.*
 
 - **LangChain:** O pioneiro. Excelente para prototipagem rápida e integrações amplas.
-  - *Docs:* [python.langchain.com](https://python.langchain.com/)
+  - *Docs:* [Langchain](https://python.langchain.com/)
 - **LangGraph:** A evolução para produção. Focado em **grafos de estado** e loops de controle. Ideal para agentes complexos e fluxos cíclicos.
-  - *Docs:* [langchain-ai.github.io/langgraph](https://langchain-ai.github.io/langgraph/)
+  - *Docs:* [Langgraph](https://langchain-ai.github.io/langgraph/)
 - **LlamaIndex:** O especialista em dados. Focado em ingestão, indexação e estratégias avançadas de RAG.
-  - *Docs:* [docs.llamaindex.ai](https://docs.llamaindex.ai/)
+  - *Docs:* [LlamaIndex](https://docs.llamaindex.ai/)
 
 ### 2. Frameworks de Agentes
 *Sistemas que agem, não apenas respondem.*
 
 - **LangGraph (Agentes):** Permite construir agentes com controle granular de estado e memória. O padrão para sistemas robustos.
 - **CrewAI:** Focado em orquestração de "equipes" de agentes com papéis definidos (Pesquisador, Escritor). Mais alto nível.
-  - *Docs:* [docs.crewai.com](https://docs.crewai.com/)
+  - *Docs:* [CrewAI](https://docs.crewai.com/)
 - **AutoGen (Microsoft):** Padrão conversacional entre múltiplos agentes. Ótimo para simulações complexas.
-  - *Docs:* [microsoft.github.io/autogen](https://microsoft.github.io/autogen/)
+  - *Docs:* [AutoGen](https://microsoft.github.io/autogen/)
+- **Agno:** Um framework para construir multi-agent systems que aprendem e melhoram a cada interação.
+  - *Docs:* [Agno](https://docs.agno.com/) 
 
 ### 3. Frameworks de RAG
 *Conectando dados proprietários.*
 
 - **LangChain/LlamaIndex:** Ambos oferecem pipelines completos de RAG.
 - **Docling:** Especialista em parsing de documentos complexos (PDFs com tabelas). Transforma arquivos em JSON/Markdown estruturado para RAG.
-  - *Docs:* [ds4sd.github.io/docling](https://docling-project.github.io/docling/)
+  - *Docs:* [Docling](https://docling-project.github.io/docling/)
 
 ### 4. Frameworks de Modelo & Inferência
 *Rodando o modelo (se você não usa API proprietária).*
 
 - **Hugging Face Transformers:** A biblioteca de fato para manipular modelos open-source.
-  - *Docs:* [huggingface.co/docs/transformers](https://huggingface.co/docs/transformers)
+  - *Docs:* [Transformers](https://huggingface.co/docs/transformers)
 - **vLLM:** Servidor de inferência focado em alto throughput e gerenciamento de memória (PagedAttention). Essencial para self-hosting.
-  - *Docs:* [docs.vllm.ai](https://docs.vllm.ai/)
+  - *Docs:* [vLLM](https://docs.vllm.ai/)
 - **Unsloth:** Acelerador de Fine-Tuning. Treina modelos (Llama, Mistral) até 5x mais rápido com menos memória.
-  - *Docs:* [github.com/unslothai/unsloth](https://github.com/unslothai/unsloth)
+  - *Docs:* [Unsloth](https://github.com/unslothai/unsloth)
 
-### 5. Ecossistema de Vetores
-*A memória de longo prazo.*
+---
 
-- **Qdrant / Weaviate / Milvus:** Bancos vetoriais dedicados para produção em escala.
-- **FAISS:** Biblioteca para busca vetorial local e eficiente (bom para datasets estáticos).
+### 5. Frameworks de Vector Store & Memória Semântica
+
+*A camada de memória de longo prazo dos sistemas de IA.*
+
+* **Qdrant:** Banco vetorial open-source focado em performance, filtros por metadata e uso em produção. Muito utilizado em sistemas RAG self-hosted.
+
+  * *Docs:* [Qdrant](https://qdrant.tech/documentation/)
+
+* **Weaviate:** Vector database com suporte nativo a busca híbrida (BM25 + vetores) e schema semântico. Popular em arquiteturas corporativas.
+
+  * *Docs:* [Weaviate](https://weaviate.io/developers/weaviate)
+
+* **Milvus:** Banco vetorial distribuído projetado para grandes volumes (milhões a bilhões de vetores). Indicado para workloads enterprise.
+
+  * *Docs:* [Milvus](https://milvus.io/docs/overview.md)
+
+* **Pinecone:** Vector database gerenciado (SaaS), com foco em simplicidade operacional, alta disponibilidade e escalabilidade automática.
+
+  * *Docs:* [Pinecone](https://docs.pinecone.io/)
+
+* **Chroma:** Vector store leve e simples, muito usado em protótipos, MVPs e ambientes locais.
+
+  * *Docs:* [Chroma](https://docs.trychroma.com/)
+
+* **FAISS:** Biblioteca de busca vetorial em memória desenvolvida pela Meta. Ideal para datasets estáticos e experimentação local.
+
+  * *Docs:* [FAISS](https://github.com/facebookresearch/faiss)
+
+---
+
+
+### 6. Frameworks de Observabilidade & Avaliação
+
+*Entendendo, medindo e depurando sistemas de IA em produção.*
+
+* **MLflow:** Plataforma de experimentação e rastreabilidade usada para versionar prompts, datasets, métricas e execuções de modelos. Base do LLMOps moderno.
+
+  * *Docs:* [MLflow](https://mlflow.org/docs/latest/index.html)
+
+* **LangSmith:** Ferramenta oficial de observabilidade do ecossistema LangChain. Permite tracing detalhado de chains, graphs, prompts, retrieval e avaliação com LLM-as-a-Judge.
+
+  * *Docs:* [LangSmith](https://docs.smith.langchain.com/)
+
+* **Langfuse:** Plataforma open-source e vendor-agnostic para observabilidade de aplicações com LLMs. Suporta tracing distribuído, versionamento de prompts, métricas de custo e feedback humano.
+
+  * *Docs:* [Langfuse](https://langfuse.com/docs)
+
+* **AgentOps:** Ferramenta focada em monitoramento e avaliação de agentes de IA, com tracking de decisões, execuções de ferramentas e falhas em fluxos multi-etapa.
+
+  * *Docs:* [AgentOps](https://docs.agentops.ai/)
 
 ---
 
