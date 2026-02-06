@@ -1,97 +1,82 @@
-# FastAPI for AI Applications
+# FastAPI para Aplicações de IA
 
-## What is FastAPI?
+## O que é FastAPI?
 
-[FastAPI](https://fastapi.tiangolo.com/) is a modern, high-performance web framework for building APIs with Python. For AI apps, it serves as the interface between your AI models and the outside world, allowing external systems to send data to your models and receive predictions or processing results. What makes FastAPI particularly appealing is its simplicity and elegance - it provides everything you need without unnecessary complexity.
+[FastAPI](https://fastapi.tiangolo.com/) é um framework web moderno e de alto desempenho para construir APIs com Python. Para aplicativos de IA, ele serve como a interface entre seus modelos de IA e o mundo exterior, permitindo que sistemas externos enviem dados para seus modelos e recebam previsões ou resultados de processamento. O que torna o FastAPI particularmente atraente é sua simplicidade e elegância - ele fornece tudo o que você precisa sem complexidade desnecessária.
 
-```mermaid
----
-config:
-  theme: neutral
----
-sequenceDiagram
-    participant App as Application
-    participant API as FastAPI Layer
-    participant LLM as AI/LLM Service
-    
-    App->>API: Send request with data
-    API->>API: Validate data
-    API->>LLM: Process with AI model
-    LLM->>API: Return results
-    API->>App: Deliver formatted response
-```
 
-### Why FastAPI for AI Engineering?
 
-1. **Performance**: Built on Starlette and Pydantic, FastAPI is fast and just works.
-2. **Automatic Documentation**: FastAPI automatically generates interactive API documentation (via Swagger UI and ReDoc) from your code and type annotations, making it easier for teams to collaborate.
-3. **Type Safety**: Leveraging Pydantic, FastAPI provides automatic request validation and clear error messages, reducing the likelihood of runtime errors.
-4. **Asynchronous Support**: Native support for async/await patterns allows your API to handle multiple requests efficiently while waiting for AI model responses.
-5. **WebSocket Support**: For streaming AI responses or building real-time applications, FastAPI provides first-class WebSocket support.
+### Por que FastAPI para Engenharia de IA?
 
-## Learn More
+1. **Desempenho**: Construído sobre Starlette e Pydantic, o FastAPI é rápido e simplesmente funciona.
+2. **Documentação Automática**: O FastAPI gera automaticamente documentação interativa da API (via Swagger UI e ReDoc) a partir do seu código e anotações de tipo, facilitando a colaboração entre equipes.
+3. **Segurança de Tipos**: Aproveitando o Pydantic, o FastAPI fornece validação automática de requisições e mensagens de erro claras, reduzindo a probabilidade de erros em tempo de execução.
+4. **Suporte Assíncrono**: O suporte nativo para padrões async/await permite que sua API lide com múltiplas requisições de forma eficiente enquanto espera pelas respostas do modelo de IA.
+5. **Suporte a WebSocket**: Para respostas de IA em streaming ou construção de aplicações em tempo real, o FastAPI oferece suporte de primeira classe a WebSocket.
 
-Beyond this README, [this tutorial](https://fastapi.tiangolo.com/tutorial/) shows you how to use FastAPI with most of its features, step by step. 
+## Saiba Mais
 
-## Quick Start
+Além deste README, [este tutorial](https://fastapi.tiangolo.com/tutorial/) mostra como usar o FastAPI com a maioria de seus recursos, passo a passo.
 
-1.  **Install dependencies**:
+## Início Rápido
+
+1.  **Instale as dependências**:
     ```bash
     uv sync
     ```
 
-2.  **Run the application**:
-    Run the following command from the root of the repository:
+2.  **Execute a aplicação**:
+    Execute o seguinte comando na raiz do repositório:
     ```bash
     uv run uvicorn main:app --app-dir 01-fundamentals/03-fastapi --reload
     ```
 
-3.  **Access your API**:
-    -   API endpoints: http://localhost:8000/docs
-    -   Interactive docs: http://localhost:8000/docs
+3.  **Acesse sua API**:
+    -   Endpoints da API: http://localhost:8000/docs
+    -   Docs Interativos: http://localhost:8000/docs
 
-### About Uvicorn
+### Sobre o Uvicorn
 
-Uvicorn is an ASGI server that actually runs your FastAPI application. While FastAPI defines your API structure and logic, Uvicorn is the server that handles HTTP connections and serves your application. 
+O Uvicorn é um servidor ASGI que realmente executa sua aplicação FastAPI. Enquanto o FastAPI define a estrutura e a lógica da sua API, o Uvicorn é o servidor que lida com conexões HTTP e serve sua aplicação.
 
-Think of FastAPI as the blueprint for your API, and Uvicorn as the engine that powers it.
+Pense no FastAPI como a planta da sua API, e no Uvicorn como o motor que a impulsiona.
 
-The command `uvicorn main:app --app-dir 01-fundamentals/03-fastapi --reload` means:
--   `main`: Use the file named `main.py`
--   `:app`: Look for a variable named `app` within that file
--   `--app-dir 01-fundamentals/03-fastapi`: Tells Uvicorn where to look for the application file, allowing it to handle imports correctly from the root.
--   `--reload`: Automatically restart the server when you change your code (useful during development)
+O comando `uvicorn main:app --app-dir 01-fundamentals/03-fastapi --reload` significa:
+-   `main`: Use o arquivo chamado `main.py`
+-   `:app`: Procure por uma variável chamada `app` dentro desse arquivo
+-   `--app-dir 01-fundamentals/03-fastapi`: Diz ao Uvicorn onde procurar o arquivo da aplicação, permitindo que ele lide com importações corretamente a partir da raiz.
+-   `--reload`: Reinicia automaticamente o servidor quando você altera seu código (útil durante o desenvolvimento)
 
-### Default Port
+### Porta Padrão
 
-By default, Uvicorn runs on port 8000. This means:
--   Your API will be accessible at `http://localhost:8000`
--   `localhost` refers to your own computer
--   `8000` is the "door" or port number through which requests can access your API
+Por padrão, o Uvicorn roda na porta 8000. Isso significa:
+-   Sua API estará acessível em `http://localhost:8000`
+-   `localhost` refere-se ao seu próprio computador
+-   `8000` é a "porta" ou número da porta pela qual as requisições podem acessar sua API
 
-You can change this with the `--port` flag if needed:
+Você pode alterar isso com a flag `--port` se necessário:
 ```bash
 uvicorn main:app --app-dir 01-fundamentals/03-fastapi --port 5000
 ```
 
-## Structure
+## Estrutura
 
-We have organized the application into modular files:
+Organizamos a aplicação em arquivos modulares:
 
--   `main.py`: Application entry point that creates the FastAPI app.
--   `router.py`: Routes incoming requests to the appropriate endpoint handlers.
--   `endpoint.py`: Contains the core logic for the AI integrations (OpenAI, LangChain).
--   `models.py`: Defines Pydantic data models for request validation.
+-   `main.py`: Ponto de entrada da aplicação que cria o app FastAPI.
+-   `router.py`: Roteia as requisições recebidas para os manipuladores de endpoint apropriados.
+-   `endpoint.py`: Contém a lógica central para as integrações de IA (OpenAI, LangChain).
+-   `models.py`: Define modelos de dados Pydantic para validação de requisições.
 
-This modular approach keeps your code organized as your AI application grows in complexity.
+Essa abordagem modular mantém seu código organizado à medida que sua aplicação de IA cresce em complexidade.
 
-> For comprehensive documentation, visit the [FastAPI official docs](https://fastapi.tiangolo.com/).
+> Para documentação completa, visite a [documentação oficial do FastAPI](https://fastapi.tiangolo.com/).
 
-## Code Walkthrough
+## Passo a Passo do Código
 
-Let's examine how our files work together to create a clean API for processing AI events.
+Vamos examinar como nossos arquivos funcionam juntos para criar uma API limpa para processamento de eventos de IA.
 
-### 1. `main.py` - Application Entry Point
+### 1. `main.py` - Ponto de Entrada da Aplicação
 
 ```python
 from fastapi import FastAPI
@@ -105,12 +90,12 @@ app = FastAPI(
 app.include_router(router)
 ```
 
-This file:
--   Creates the main `FastAPI` application instance.
--   Imports and includes our main `router`.
--   Serves as the entry point for Uvicorn.
+Este arquivo:
+-   Cria a instância principal da aplicação `FastAPI`.
+-   Importa e inclui nosso `router` principal.
+-   Serve como ponto de entrada para o Uvicorn.
 
-### 2. `router.py` - Request Routing
+### 2. `router.py` - Roteamento de Requisições
 
 ```python
 from fastapi import APIRouter
@@ -121,17 +106,17 @@ router = APIRouter()
 
 @router.post("/openai")
 async def endpoint_openai(request: GenerateRequest):
-    # Call the logic function
+    # Chama a função de lógica
     result = await generate_text_openai(request.prompt)
     return {"response": result}
 ```
 
-This file:
--   Creates an `APIRouter`.
--   Defines endpoints (e.g., `/openai`).
--   Connects the HTTP request to the logic in `endpoint.py`.
+Este arquivo:
+-   Cria um `APIRouter`.
+-   Define endpoints (ex: `/openai`).
+-   Conecta a requisição HTTP à lógica em `endpoint.py`.
 
-### 3. `endpoint.py` - Core Logic
+### 3. `endpoint.py` - Lógica Central
 
 ```python
 import os
@@ -142,16 +127,16 @@ async def generate_text_openai(prompt: str) -> str:
     Integração direta com SDK da OpenAI (Async).
     """
     client = AsyncOpenAI(api_key=os.getenv("OPENAI_API_KEY"))
-    # ... call API ...
+    # ... chama a API ...
     return response.choices[0].message.content
 ```
 
-This file:
--   Contains the "business logic" or "AI logic".
--   Interacts directly with external services like OpenAI.
--   Keeps the router clean of implementation details.
+Este arquivo:
+-   Contém a "lógica de negócios" ou "lógica de IA".
+-   Interage diretamente com serviços externos como OpenAI.
+-   Mantém o roteador limpo de detalhes de implementação.
 
-### 4. `models.py` - Data Validation
+### 4. `models.py` - Validação de Dados
 
 ```python
 from pydantic import BaseModel
@@ -162,68 +147,68 @@ class GenerateRequest(BaseModel):
     topic: Optional[str] = None
 ```
 
-This file:
--   Defines the structure of expected data using Pydantic.
--   Ensures that requests have the necessary fields (like `prompt`).
+Este arquivo:
+-   Define a estrutura dos dados esperados usando Pydantic.
+-   Garante que as requisições tenham os campos necessários (como `prompt`).
 
-## Sync vs. Async Endpoints in FastAPI
+## Endpoints Síncronos vs. Assíncronos no FastAPI
 
-FastAPI supports both synchronous and asynchronous request handlers.
+O FastAPI suporta manipuladores de requisição síncronos e assíncronos.
 
-### Synchronous Endpoints
+### Endpoints Síncronos
 
-Synchronous endpoints use standard Python functions and block the server while processing:
+Endpoints síncronos usam funções Python padrão e bloqueiam o servidor durante o processamento:
 
 ```python
 @router.post("/sync")
 def sync_endpoint(data: EventSchema):
-    # This blocks the server until completion
+    # Isso bloqueia o servidor até a conclusão
     result = process_data(data)
     return {"result": result}
 ```
 
-**When to use:** For quick operations that complete rapidly (under 1 second)
+**Quando usar:** Para operações rápidas que concluem rapidamente (menos de 1 segundo).
 
-### Asynchronous Endpoints
+### Endpoints Assíncronos
 
-Asynchronous endpoints use Python's `async`/`await` syntax and don't block the server:
+Endpoints assíncronos usam a sintaxe `async`/`await` do Python e não bloqueiam o servidor:
 
 ```python
 @router.post("/async")
 async def async_endpoint(data: EventSchema):
-    # This doesn't block the server
+    # Isso não bloqueia o servidor
     result = await async_process_data(data)
     return {"result": result}
 ```
 
-**When to use:** For operations that:
--   Involve I/O operations (API calls, database queries)
--   Take longer to process (complex AI inference)
--   Need to handle many concurrent requests
+**Quando usar:** Para operações que:
+-   Envolvem operações de E/S (chamadas de API, consultas ao banco de dados)
+-   Levam mais tempo para processar (inferência de IA complexa)
+-   Precisam lidar com muitas requisições simultâneas
 
-**In our module:** We use `async` definitions because we are calling external APIs (OpenAI) which are I/O bound.
+**Em nosso módulo:** Usamos definições `async` porque estamos chamando APIs externas (OpenAI) que são limitadas por E/S (I/O bound).
 
-## Understanding API Methods: GET vs POST
+## Entendendo Métodos de API: GET vs POST
 
-If you're new to APIs, think of the difference between GET and POST as similar to the difference between reading and writing.
+Se você é novo em APIs, pense na diferença entre GET e POST como similar à diferença entre ler e escrever.
 
--   **GET (Asking for Information)**: Used to retrieve information without changing anything.
--   **POST (Sending Information)**: Used to send data that needs to be processed. In our case, we use **POST** to send a prompt to the AI model.
+-   **GET (Pedindo Informação)**: Usado para recuperar informações sem alterar nada (ex: verificar status).
+-   **POST (Enviando Informação)**: Usado para enviar dados que precisam ser processados. No nosso caso, usamos **POST** para enviar um prompt para o modelo de IA.
 
-## Securing Your FastAPI Endpoint with Bearer Tokens
+## Protegendo seu Endpoint FastAPI com Tokens Bearer
 
-**Note:** The current implementation in this module is simplified and does not include authentication. However, security is critical for production AI APIs.
+**Nota:** A implementação atual neste módulo é simplificada e não inclui autenticação. No entanto, a segurança é crítica para APIs de IA em produção.
 
-Bearer token authentication is the recommended approach for modern APIs.
+A autenticação com token Bearer é a abordagem recomendada para APIs modernas.
 
-### Implementing Bearer Token Authentication (Conceptual)
+### Implementando Autenticação com Token Bearer (Conceitual)
 
 ```python
 from fastapi import Depends, HTTPException
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 
 security = HTTPBearer()
-API_TOKEN = "your-secret-token"
+API_TOKEN = "seu-token-secreto"
 
 @router.post("/openai")
 def handle_event(
@@ -231,8 +216,8 @@ def handle_event(
     credentials: HTTPAuthorizationCredentials = Depends(security)
 ):
     if credentials.credentials != API_TOKEN:
-        raise HTTPException(status_code=401, detail="Invalid token")
-    # Proceed...
+        raise HTTPException(status_code=401, detail="Token inválido")
+    # Prosseguir...
 ```
 
-For production applications, generally consider using tokens to control access to your AI resources!
+Para aplicações em produção, considere usar tokens para controlar o acesso aos seus recursos de IA!
