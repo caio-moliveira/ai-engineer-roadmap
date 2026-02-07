@@ -1,111 +1,136 @@
-# 📐 Modelagem de Dados com Pydantic: A Linguagem Franca da IA
+# Pydantic para Workflows com LLM (v2) 
 
-> **Mantra:** "Garbage In, Garbage Out. Mas em IA, Garbage In = Alucinação."
-> **Docs Oficiais:** [Pydantic](https://docs.pydantic.dev/) | [Instructor](https://github.com/jxnl/instructor)
-
-Em Engenharia de IA, Pydantic não é apenas uma biblioteca de validação. É o **protocolo de comunicação** entre seu sistema determinístico (Python) e o modelo probabilístico (LLM).
-
----
-
-## 1. Por que Pydantic é vital para IA?
-LLMs são geradores de texto. O `GPT-4` não "sabe" o que é um JSON, ele apenas prediz que depois de `{ "name": "` vem um nome.
-Se você pedir JSON puro em texto, ele pode retornar:
-- JSON inválido (vírgula faltando).
-- Tipos errados (string em vez de int).
-- Campos alucinados que você não pediu.
-
-**Pydantic resolve isso:**
-1.  **Define o Schema:** Diz ao LLM exatamente quais campos existem e seus tipos.
-2.  **Valida:** Se o LLM errar o tipo, o Pydantic lança erro.
-3.  **Corrige (Retry):** Frameworks avançados usam o erro do Pydantic para pedir ao LLM corrigir a resposta automaticamente.
+## Objetivo
+Ao final, você vai conseguir:
+1. Definir **schemas** como “contrato” para saída de LLM.
+2. Validar, normalizar e serializar dados com **Pydantic v2**.
+3. Implementar **retries com feedback de erro estruturado** (padrão ouro em produção).
+4. Usar tipos avançados (Enum, datetime, UUID, URLs, Decimal, IP) e **unions discriminadas** para respostas “uma de várias formas”.
+5. Configurar `.env` via **pydantic-settings**.
 
 ---
 
-## 2. Structured Outputs (O Conceito Chave)
-Ao invés de processar texto solto ("O cliente João comprou uma TV"), forçamos o LLM a "preencher" uma classe Pydantic.
-
-### Exemplo Real: Extração de Dados de Notas Fiscais (Invoice Parsing)
-Imagine receber um PDF bagunçado de uma nota fiscal.
-
-```python
-from pydantic import BaseModel, Field
-from typing import List, Optional
-from datetime import date
-
-class InvoiceItem(BaseModel):
-    description: str
-    quantity: int
-    unit_price: float
-    total_price: float
-
-class Invoice(BaseModel):
-    invoice_number: str = Field(..., description="O número oficial da nota, geralmente no topo.")
-    issue_date: date = Field(..., description="Data de emissão da nota.")
-    vendor_name: str
-    items: List[InvoiceItem]
-    tax_amount: Optional[float] = 0.0
-    final_total: float
-
-# O LLM agora "vê" essa estrutura e preenche os campos.
-```
-
----
-
-## 3. Na Prática: OpenAI Structured Outputs
-A OpenAI agora suporta Pydantic nativamente. Isso garante 100% de aderência ao schema (json_schema_strict).
-
-```python
-import openai
-
-client = openai.Client()
-
-completion = client.beta.chat.completions.parse(
-    model="gpt-4o-2024-08-06",
-    messages=[
-        {"role": "system", "content": "Extract the invoice data."},
-        {"role": "user", "content": "Nota fiscal 001, emitida hoje para a TechCorp. 2 mouses a $50 cada."}
-    ],
-    response_format=Invoice, # Passamos a CLASSE Pydantic, não um dict
-)
-
-invoice_data = completion.choices[0].message.parsed
-# invoice_data é uma INSTÂNCIA da classe Invoice real!
-print(invoice_data.items[0].unit_price) # 50.0 (Float real, não string)
-print(invoice_data.final_total) # 100.0
-```
-
----
-
-## 4. Validação como Regra de Negócio
-O Pydantic permite regras lógicas. Se o LLM alucinar um preço total que não bate com a soma dos itens, podemos pegar isso **antes** de salvar no banco.
-
-```python
-from pydantic import model_validator
-
-class Invoice(BaseModel):
-    ...
-    @model_validator(mode='after')
-    def check_math(self):
-        calculated = sum(item.total_price for item in self.items)
-        if abs(self.final_total - calculated) > 0.01:
-            raise ValueError(f"Total não bate! Soma: {calculated}, Nota: {self.final_total}")
-        return self
-```
-*Se o LLM errar a matemática, o Pydantic explode um erro, e podemos usar esse erro para pedir ao LLM corrigir (Pattern de Self-correction).*
-
----
-
-## 5. Instructor: O Canivete Suíço
-Para modelos que não suportam Structured Outputs nativo (ou Open Source via Ollama/vLLM), usamos a biblioteca `Instructor`.
+## 0) Setup recomendado
 
 ```bash
-uv pip install instructor
+pip install -U pydantic pydantic-settings
+# se for usar validação de e-mail:
+pip install "pydantic[email]"
 ```
-
-O Instructor faz "monkey patch" no cliente da OpenAI para adicionar `.response_model` em qualquer LLM.
 
 ---
 
-## ⏭️ Próximo Passo
-Agora que temos dados limpos e estruturados, precisamos guardá-los de forma eficiente para busca semântica.
-Vá para **[Módulo 05: Bancos de Dados (SQL + Vetorial)](../05-databases)**.
+## 1) Por que Pydantic é essencial com LLM?
+
+LLMs geram texto “fluente”, mas **não garantem estabilidade**: campo faltando, nome diferente, tipo errado, JSON inválido… Schema vira a “camada de confiabilidade” do pipeline.
+
+**Padrão mental**:
+> LLM escreve “rascunho” → Pydantic transforma em “dado de produção”.
+
+---
+
+## 2) Field constraints: required/optional/defaults/regex/ranges
+
+Veja exemplo em `01_basic_fields.py`.
+
+### Conceitos Chave:
+* **Obrigatório**: sem valor padrão (ou usando `Field(...)`)
+* **Opcional**: `T | None` / `Optional[T]`
+* **Default**: `field: T = valor`
+* **Default factory**: `default_factory=...` (cria valor em runtime, ex: timestamp, list nova etc.)
+* **Restrições**: `ge, gt, le, lt`, `min_length`, `max_length`, `pattern`/`regex`
+
+**Notas importantes para LLM:**
+* Campos opcionais são essenciais quando o texto não traz evidência (“não citado” vira `None`).
+* `pattern/regex` e ranges (`ge/le`) reduzem alucinações “fora do domínio” (ex: confiança > 1).
+
+---
+
+## 3) Pydantic v2: validação customizada
+
+Veja exemplo em `02_validators.py`.
+
+### Tipos de Validadores:
+1. **`@field_validator`**: Normalizar strings, limpar dados.
+2. **`@model_validator`**: Validação cruzada entre campos (ex: se prioridade alta, título deve conter etiqueta).
+
+---
+
+## 4) model_validate(), model_dump(), model_dump_json()
+
+Veja exemplo em `03_serialization.py`.
+
+No v2, os métodos “clarearam” os nomes:
+* `Model.model_validate(obj)` → valida e converte
+* `Model.model_validate_json(str)` → valida string JSON
+* `model_dump()` → converte para dict python
+* `model_dump_json()` → serializa para string JSON
+
+---
+
+## 5) Tipos ricos: Enums, datetime, UUID, IPs, URLs, Decimals
+
+Veja exemplo em `04_types.py`.
+
+Esses tipos são **muito úteis para “domar” categorias e identificadores** em saída de LLM.
+* `Decimal`: Evita bugs de float em dinheiro.
+* `HttpUrl`: Garante URLs válidas.
+* `Enum`: Restringe opções de texto (ex: "active", "inactive").
+
+---
+
+## 6) Discriminated unions (Union, Literal, Annotated)
+
+Veja exemplo em `05_unions.py`.
+
+LLM muitas vezes retorna **“um de vários formatos”** (ex: action pode ser “create_ticket” ou “ask_followup”).
+Use `Literal` como discriminador para o Pydantic saber qual classe instanciar.
+
+---
+
+## 7) BaseSettings (pydantic_settings) para .env
+
+Veja exemplo em `06_settings.py`.
+
+Para aplicações com LLM, você quase sempre tem senhas e configurações.
+Use `BaseSettings` para carregar de variáveis de ambiente (`.env`).
+
+---
+
+## 8) Error handling: mensagens estruturadas (ValidationError)
+
+Veja exemplo em `07_error_handling.py`.
+
+A sacada que mais eleva o nível em LLM pipelines é: **usar os erros estruturados do Pydantic para re-prompt**.
+Você transforma `e.errors()` em feedback objetivo pro modelo corrigir o JSON.
+
+---
+
+## 9) Pipeline completo: Extração estruturada com retry guiado por validação
+
+Veja exemplo em `08_pipeline.py`.
+
+O fluxo padrão ouro:
+1. LLM gera JSON.
+2. Pydantic valida.
+3. Se falhar: pega erro, adiciona ao prompt ("Corrija estes erros...") e tenta de novo.
+4. Sucesso: Retorna objeto tipado.
+
+---
+
+## 10) Exercícios (mão na massa)
+
+Veja `exercises.py` para praticar.
+
+### Exercício A — Extração de “dados de edital”
+Crie um model:
+* `orgao: str (min_length=3)`
+* `cargos: list[str] (min_items=1)`
+* `tem_cronograma: bool`
+* `paginas_referenciadas: list[int]` com `ge=1`
+
+### Exercício B — Union discriminada de “próxima ação”
+Modelos:
+* `kind="ask_user"` com `question`
+* `kind="extract_fields"` com `fields: list[str]`
+* `kind="final_answer"` com `answer`

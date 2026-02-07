@@ -12,5 +12,7 @@ dependencies = [
     "llama-index>=0.14.13",
     "llama-index-llms-openai>=0.6.18",
     "openai>=2.16.0",
+    "pydantic-settings>=2.12.0",
+    "pydantic[email]>=2.12.5",
     "python-dotenv>=1.2.1",
 ]
