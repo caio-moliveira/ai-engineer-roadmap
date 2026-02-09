@@ -27,30 +27,32 @@ Vá para **[Módulo 1: A Profissão de AI Engineer & Mercado](./01-ai-engineer-p
 - **Mercado:** O que as empresas realmente esperam (Produto > Modelo).
 - **Habilidades:** O perfil "T-Shaped" e a mentalidade de engenharia.
 
-### [Módulo 02: Python Moderno para AI Engineers](./02-python-for-ai)
+### [Módulo 02: Fundamentos de LLMs & GenAI](./02-llm-fundamentals)
+- **Conceitos:** Tokens, Context Windows, Temperature.
+- **Prompt Engineering:** Técnicas avançadas para desenvolvimento (não apenas chat).
+- **Tool Calling:** A base para agentes autônomos.
+
+### [Módulo 03: Python Moderno para AI Engineers](./03-python-for-ai)
 - **Stack:** Python moderno, Tipagem estática, Gerenciamento de dependências (`uv`).
 - **Estrutura:** Blueprints de projetos escaláveis.
 - **Boas Práticas:** Clean Code aplicado a pipelines de dados.
 
-### [Módulo 03: APIs & Backend com FastAPI](./03-fastapi-backend)
+### [Módulo 04: APIs & Backend com FastAPI](./04-fastapi-backend)
 - **Core:** Async/Await, Dependency Injection, OpenAPI.
 - **Pydantic:** Contratos de dados rigorosos.
 - **Performance:** Lidando com concorrência em sistemas de IA.
 
-### [Módulo 04: Modelagem e Contratos de Dados](./04-data-modeling)
+### [Módulo 05: Modelagem e Contratos de Dados](./05-data-modeling)
 - **Design:** JSON Schema, Validação e Serialização.
 - **Pydantic V2:** O coração da engenharia de IA moderna.
 - **Padronização:** Garantindo outputs estruturados de LLMs.
 
-### [Módulo 05: Bancos de Dados (SQL + Vetorial)](./05-databases)
+### [Módulo 06: Bancos de Dados (SQL + Vetorial)](./06-databases)
 - **Híbrido:** Integrando PostgreSQL (SQL) com Vector DBs.
 - **Busca:** Conceitos de Embeddings, Distância de Cosseno e Metadata Filtering.
 - **Design:** Modelagem de dados para aplicações de IA.
 
-### [Módulo 06: Fundamentos de LLMs & GenAI](./06-llm-fundamentals)
-- **Conceitos:** Tokens, Context Windows, Temperature.
-- **Prompt Engineering:** Técnicas avançadas para desenvolvimento (não apenas chat).
-- **Tool Calling:** A base para agentes autônomos.
+
 
 ---
 
