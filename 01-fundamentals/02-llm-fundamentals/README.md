@@ -1,442 +1,119 @@
-# 🤖 Módulo 06: Fundamentos de LLMs & GenAI
+# 🤖 Módulo 02: Fundamentos de LLMs & GenAI
 
-> **Goal:** Entender profundamente a matéria‑prima da nova computação.
->
-> Este módulo não ensina a *usar ferramentas*. Ele ensina a **pensar como um AI Engineer que trabalha com LLMs em produção**.
-
----
-
-## 📌 O que são LLMs, de verdade
-
-Large Language Models (LLMs) são **modelos probabilísticos autoregressivos** treinados para prever o próximo token com base em um histórico de tokens.
-
-Isso significa algo extremamente importante:
-
-> ❗ O modelo **não pensa, não raciocina e não entende**.
->
-> Ele calcula probabilidades condicionais extremamente bem.
-
-Tudo o que parece “inteligência” emerge de escala:
-
-* bilhões de parâmetros
-* trilhões de tokens
-* arquiteturas Transformer
-
-O papel do AI Engineer não é treinar isso.
-É **domar, controlar e orquestrar esse comportamento probabilístico**.
+> **Objetivo:** Compreender a "física" dos Large Language Models. Não apenas como usar, mas como funcionam, seus limites e como orquestrá-los em engenharia de software robusta.
+> 
+> **Leitura Obrigatória para:** Quem quer parar de "chutar prompts" e começar a construir sistemas determinísticos.
 
 ---
 
-## 🧠 A arquitetura mental correta
+## 📚 1. O que é um LLM? (Além do Hype)
 
-Antes de qualquer conceito técnico, guarde isto:
+Um **Large Language Model (LLM)** é, em sua essência, um **modelador estatístico de distribuição de tokens** treinado em uma quantidade massiva de texto. A arquitetura predominante hoje é o **Transformer** (apresentado pelo Google em 2017).
 
-> Um LLM é um *motor estatístico de linguagem com memória temporária limitada*.
+### O Conceito de "Autoregressive"
+O modelo não "pensa". Ele calcula a probabilidade do próximo *token* dado o histórico anterior.
+$$ P(w_t | w_{t-1}, w_{t-2}, ..., w_1) $$
 
-Ele:
+Isso significa que o modelo é **determinístico** na sua distribuição de probabilidades, mas **estocástico** na sua geração (dependendo da temperatura).
 
-* não possui estado persistente
-* não lembra de interações passadas
-* não sabe o que é verdade
-* não acessa bancos
-* não executa código
-
-Tudo isso **precisa ser construído ao redor dele**.
-
-Essa é a diferença entre:
-
-* *prompt engineer* ❌
-* *AI engineer* ✅
+> **Referência Clássica:** [Attention Is All You Need (Vaswani et al., 2017)](https://arxiv.org/abs/1706.03762) - O paper que criou a arquitetura Transformer.
 
 ---
 
-# 1️⃣ Tokenização — A Unidade Atômica
+## 🔠 2. Tokenização: A Unidade Atômica
 
-LLMs não trabalham com palavras.
-Eles trabalham com **tokens**.
+LLMs não leem "palavras". Eles leem **Tokens**.
+A maioria dos modelos modernos usa **BPE (Byte Pair Encoding)**.
 
-### O que é um token?
+*   **Inglês:** 1 palavra $\approx$ 1.3 tokens.
+*   **Português/Outros:** Pode ser menos eficiente (mais tokens por palavra).
+*   **Números:** `9.11` pode ser quebrado em `9`, `.`, `11` ou `9`, `.`, `1`, `1`. Isso explica por que LLMs erram matemática simples sem ferramentas.
 
-Um token é um fragmento estatístico de texto.
-Pode ser:
+### Por que importa?
+1.  **Custo:** Você paga por token (Input/Output).
+2.  **Context Window:** O limite de "memória" do modelo é em tokens.
+3.  **Performance:** "A strawberry tem quantos Rs?" O modelo vê tokens, não letras. Se "strawberry" for um token único `[STRAWBERRY]`, ele não "vê" os Rs internos sem quebrar a palavra.
 
-* uma palavra
-* parte de uma palavra
-* um número
-* um símbolo
-
-Exemplos:
-
-* "inteligência" → pode virar 3 ou 4 tokens
-* "9.11" pode gerar mais tokens que "9.9"
-
-Isso acontece porque o tokenizer aprende padrões estatísticos, não semânticos.
+> **Tool:** [OpenAI Tokenizer](https://platform.openai.com/tokenizer) - Visualize como seu texto vira números.
 
 ---
 
-### Por que isso importa?
+## 🧠 3. Context Window & "Attention"
 
-Porque **tudo em LLM é limitado por tokens**:
+A **Context Window** é a memória de curto prazo. Tudo que não está na janela de contexto **não existe** para o modelo naquele momento.
 
-* Context window
-* Custo
-* Latência
-* Performance
+Sim, modelos como Gemini 1.5 Pro suportam 1M+ tokens. Mas cuidado com o fenômeno **"Lost in the Middle"**: a performance de recuperação (recall) tende a ser melhor no início e no fim do prompt, e pior no meio.
 
-Um modelo com contexto de 128k tokens **não pensa melhor**.
-Ele apenas consegue **ver mais texto ao mesmo tempo**.
+> **Referência:** [Lost in the Middle: How Language Models Use Long Contexts (Liu et al., 2023)](https://arxiv.org/abs/2307.03172)
 
 ---
 
-### Input vs Output tokens
+## 🎛️ 4. Hiperparâmetros de Geração
 
-Isso é fundamental em produção:
+Você controla a "criatividade" do modelo ajustando como ele escolhe o próximo token dessa distribuição probabilística.
 
-* **Input tokens** → geralmente baratos
-* **Output tokens** → geralmente caros
+### Temperature (0.0 a 2.0)
+*   **Baixa (0.0 - 0.3):** Escolhe sempre os tokens mais prováveis. Mais determinístico, focado, bom para código e JSON.
+*   **Alta (0.7 - 1.5):** Nivela as probabilidades, permitindo que tokens menos óbvios sejam escolhidos. Mais criativo, mas propenso a alucinações.
 
-Por isso:
+### Top-P (Nucleus Sampling)
+Cortamos a cauda da distribuição.
+*   **Top-P = 0.9:** O modelo considera apenas os top tokens que somam 90% da probabilidade cumulativa. Elimina opções absurdas.
 
-* prompts longos custam
-* respostas longas custam muito mais
-
-AI Engineer bom otimiza:
-
-* contexto
-* tamanho de chunk
-* quantidade de documentos
-* verbosity da resposta
+> **Regra de Ouro:** Altere *Temperature* OU *Top-P*, geralmente não os dois simultaneamente.
 
 ---
 
-# 2️⃣ Context Window — A Memória Temporária
+## 🗣️ 5. Prompt Engineering (A Ciência, não a Arte)
 
-LLMs possuem apenas **memória de curto prazo**.
+Engenharia de Prompt não é sobre "pedir com educação". É sobre **condicionar a distribuição probabilística** para o resultado desejado.
 
-Essa memória é o *context window*.
+### 5.1 Zero-Shot vs Few-Shot
+*   **Zero-Shot:** Pedir sem exemplos. "Classifique este texto."
+*   **Few-Shot:** Dar exemplos input/output. É a técnica mais poderosa para melhorar performance sem treinar o modelo.
+    > "Language Models are Few-Shot Learners" (GPT-3 Paper).
 
-Tudo fora disso:
+### 5.2 Chain-of-Thought (CoT)
+Pedir para o modelo "pensar passo a passo". Isso força o modelo a gerar tokens de raciocínio *antes* da resposta final, aumentando a precisão em tarefas lógicas/matemáticas.
+> **Referência:** [Chain-of-Thought Prompting Elicits Reasoning in Large Language Models (Wei et al., 2022)](https://arxiv.org/abs/2201.11903)
 
-* não existe
-* não é lembrado
-* não influencia a resposta
-
-Por isso:
-
-* conversas longas degradam
-* RAG existe
-* agentes precisam resumir
-
-O modelo não “lembra”.
-Você precisa **reenviar o que importa**.
+### 5.3 System Prompts
+A "constituição" do seu agente. Define persona, limites e formato de resposta. Sempre separe instruções do sistema (persistentes) da entrada do usuário (variável).
 
 ---
 
-# 3️⃣ O Ciclo de Vida do Prompt
+## 🤖 6. Tool Calling & Agentes
 
-Prompt engineering não é escrever texto bonito.
+LLMs são cérebros "presos em uma caixa". Eles não têm relógio, não acessam a internet e não rodam código.
+**Tool Calling (Function Calling)** resolve isso.
 
-É **engenharia de contexto**.
+1.  Você descreve uma função (ex: `get_weather(city)`) em JSON Schema.
+2.  O LLM, se precisar, retorna um JSON pedindo para executar essa função.
+3.  Seu backend executa a função e devolve o resultado para o LLM.
+4.  O LLM formula a resposta final.
 
-Um prompt completo possui três camadas:
-
----
-
-## 3.1 System Prompt
-
-O system prompt define:
-
-* papel do modelo
-* comportamento
-* limites
-* regras
-
-Ele atua como uma **camada constitucional**.
-
-Exemplo conceitual:
-
-* você é um auditor
-* responda apenas com base no contexto
-* nunca invente informações
-
-Em produção, esse prompt deve ser:
-
-* versionado
-* testado
-* tratado como código
+Isso é a base dos **Agentes**: LLMs que podem *agir* no mundo.
+> **Referência:** [ReAct: Synergizing Reasoning and Acting in Language Models (Yao et al., 2023)](https://arxiv.org/abs/2210.03629)
 
 ---
 
-## 3.2 Few‑Shot Learning
+## 🛠️ 7. RAG vs Fine-Tuning
 
-Modelos aprendem melhor por exemplo do que por instrução.
+A dúvida clássica.
 
-Few‑shot é quando você mostra:
+| Feature | **RAG (Retrieval-Augmented Generation)** | **Fine-Tuning** |
+| :--- | :--- | :--- |
+| **Conhecimento** | Externo, dinâmico (banco vetorial). | Interno, estático (pesos do modelo). |
+| **Atualização** | Imediata (basta inserir no DB). | Lenta (precisa re-treinar). |
+| **Alucinação** | Baixa (ancorado em documentos). | Média/Alta (se não souber, inventa). |
+| **Uso Principal** | Dar acesso a dados privados/recentes. | Ensinar um *formato*, *estilo* ou *linguagem* nova. |
 
-> "Quando a entrada for assim, a saída esperada é assim."
-
-Isso é extremamente poderoso para:
-
-* formatos
-* classificação
-* padronização
-* tomada de decisão
-
-LLMs copiam padrões estatísticos.
-Few‑shot explora isso diretamente.
+> **Veredito:** 90% dos casos de uso de "dados da minha empresa" são resolvidos com RAG, não Fine-Tuning.
 
 ---
 
-## 3.3 User Prompt
-
-É a parte dinâmica.
-
-Nunca deve conter regras críticas.
-Nunca deve definir comportamento.
-
-Tudo que é importante deve estar no system prompt.
-
----
-
-# 4️⃣ Temperatura, Top‑P e Amostragem
-
-Esses parâmetros controlam **aleatoriedade**.
-
-* Temperature baixa → respostas determinísticas
-* Temperature alta → criatividade
-
-Em produção:
-
-* temperatura costuma ser baixa (0–0.3)
-* previsibilidade é mais importante que criatividade
-
-LLM corporativo ≠ chatbot criativo.
-
----
-
-# 5️⃣ Structured Outputs — Probabilístico → Determinístico
-
-LLMs são probabilísticos.
-Produção exige determinismo.
-
-A solução é **Structured Output**.
-
-Nunca confie em:
-
-* markdown
-* regex
-* parsing textual
-
-Sempre use:
-
-* JSON Schema
-* response_format
-* tool calling
-
-Isso transforma o LLM em um **gerador de objetos válidos**.
-
-Esse é um dos pilares mais importantes da engenharia moderna com LLMs.
-
----
-
-# 6️⃣ Tool Calling (Function Calling)
-
-Aqui ocorre a virada de chave.
-
-O LLM não executa ações.
-
-Mas ele pode:
-
-* decidir qual ação executar
-* estruturar os argumentos
-* delegar execução
-
-Fluxo real:
-
-1. Usuário pergunta algo
-2. LLM decide chamar uma função
-3. Retorna JSON estruturado
-4. Seu código executa
-5. Resultado volta ao LLM
-
-Isso cria **agentes reais**.
-
----
-
-### O LLM não age. Ele orquestra.
-
-Quem executa é:
-
-* Python
-* APIs
-* bancos
-* serviços
-
-O LLM apenas escolhe.
-
-Esse princípio é crítico.
-
----
-
-# 7️⃣ LLM ≠ Agente
-
-Um erro comum:
-
-> "Estou usando agentes porque uso LLM."
-
-Errado.
-
-Um agente possui:
-
-* objetivo
-* ferramentas
-* estado
-* loop de decisão
-
-O LLM é apenas o cérebro probabilístico.
-
-Frameworks como:
-
-* LangGraph
-* CrewAI
-* AutoGen
-
-existem para construir o **loop de controle**.
-
----
-
-# 8️⃣ Multimodalidade
-
-LLMs modernos operam com:
-
-* texto
-* imagem
-* áudio
-* vídeo
-
-Tudo vira embedding.
-
-Isso permite:
-
-* análise de documentos escaneados
-* interpretação de imagens
-* agentes visuais
-* pipelines multimodais
-
-Pensar só em texto hoje é limitar brutalmente o potencial do sistema.
-
----
-
-# 9️⃣ Fine‑Tuning vs RAG vs Prompt
-
-Essa decisão separa amadores de engenheiros.
-
-### Prompt Engineering
-
-* rápido
-* barato
-* flexível
-
-Ideal quando:
-
-* regras mudam
-* contexto é pequeno
-
----
-
-### RAG
-
-* injeta conhecimento externo
-* mantém modelo genérico
-* altamente escalável
-
-Ideal quando:
-
-* dados são privados
-* documentos mudam
-* auditoria é necessária
-
----
-
-### Fine‑Tuning
-
-* caro
-* rígido
-* difícil de versionar
-
-Só vale quando:
-
-* padrão é extremamente repetitivo
-* latência precisa ser mínima
-* prompt não resolve
-
-AI Engineer experiente evita fine‑tuning prematuro.
-
----
-
-# 🔟 Alucinação — Não é bug, é característica
-
-O modelo sempre tenta responder.
-
-Se não sabe, ele:
-
-* completa estatisticamente
-
-Isso gera hallucination.
-
-Soluções reais:
-
-* grounding
-* RAG
-* citações
-* validação
-* confiança mínima
-
-Nunca confie apenas no modelo.
-
----
-
-# 🧠 O papel real do AI Engineer
-
-O trabalho não é fazer o modelo falar.
-
-É:
-
-* controlar contexto
-* limitar comportamento
-* estruturar respostas
-* validar saídas
-* medir qualidade
-* reduzir custo
-* garantir confiabilidade
-
-O LLM é só um componente.
-
-O sistema é o produto.
-
----
-
-# ✅ Conclusão
-
-LLMs são a nova CPU.
-
-Mas uma CPU sozinha não resolve nada.
-
-O verdadeiro poder está em:
-
-* arquitetura
-* dados
-* controle
-* engenharia
-
-Dominar esses fundamentos é o que separa:
-
-* quem faz demo
-* de quem constrói sistemas de IA reais
-
----
-
-⏭️ **Próximo passo:**
-Sem memória externa, o LLM continua cego.
-
-Vá para **Módulo 08 — RAG (Retrieval‑Augmented Generation)**.
+## 🔗 Referências Essenciais
+
+*   [OpenAI Deep Learning (Andrej Karpathy)](https://www.youtube.com/watch?v=zjkBMFhNj_g) - Intro técnica obrigatória.
+*   [Anthropic's Prompt Engineering Guide](https://docs.anthropic.com/claude/docs/prompt-engineering) - Um dos melhores guias práticos.
+*   [Lilian Weng Blog (OpenAI)](https://lilianweng.github.io/) - Artigos profundos sobre Agentes e LLMs.
