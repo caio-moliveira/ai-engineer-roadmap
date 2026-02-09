@@ -27,7 +27,7 @@ Seguimos uma progressão estrita. Não pule etapas.
 Onde tudo começa. Esqueça Jupyter Notebooks.
 - **Tópicos:** Python Assíncrono, FastAPI, Docker, `uv`, Pydantic, Engenharia de Software para IA.
 
-### [🔹 Bloco 2: Sistemas RAG](./02-rag-systems)
+### [🔹 Bloco 2: Sistemas RAG](./02-rag)
 Retrieval Augmented Generation é o feijão com arroz da IA moderna.
 - **Tópicos:** Vector DBs (Qdrant), Retrievers Avançados, Reranking, Busca Híbrida, Observabilidade.
 
