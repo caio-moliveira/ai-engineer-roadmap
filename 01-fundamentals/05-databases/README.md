@@ -1,198 +1,104 @@
 # 🗄️ Módulo 05: Bancos de Dados (Relacional + Vetorial)
 
 > **Goal:** Onde a memória e o contexto semântico vivem.
-> **Ferramentas:** `PostgreSQL`, `Vector DBs` (ex: Qdrant / Chroma / pgvector), `SQLAlchemy`.
-
-## 1) O Novo Stack de Dados — Dois “cérebros” fundamentais
-
-Aplicações de IA modernas geralmente combinam:
-
-1. **Exato (SQL)** — Responder a consultas precisas (ex: “Quem é o cliente X?”) usando bancos como **PostgreSQL**.
-2. **Semântico (Vector)** — Responder a consultas por significado/conteúdo (ex: “Quais documentos falam sobre contrato jurídico?”) usando bancos vetoriais modernos.
-
-Isso permite construir sistemas *Retrieval-Augmented Generation (RAG)* confiáveis e escaláveis.
+> **Ferramentas:** `PostgreSQL`, `Vector DBs` (Qdrant), `SQLAlchemy`, `LangChain`.
 
 ---
 
-### 🧪 Exemplo 1 — SQL Agent com LangChain (Q&A sobre banco de dados)
+## 🚀 O Novo Stack de Dados: Exato vs Semântico
 
-**O que ele faz:** Usa um agente para interpretar uma pergunta em linguagem natural, gerar uma query SQL e retornar resultados diretamente do banco.
-Esse padrão é útil para **interfaces conversacionais que respondem usando dados estruturados existentes**.
+Aplicações de IA modernas combinam dois "cérebros":
 
-💡 No LangChain, esse fluxo é suportado por módulos como **SQLDatabaseToolkit** e agentes que orquestram chamadas do LLM para gerar e executar SQL de forma interativa. ([LangChain Docs][1])
+1.  **Exato (SQL)** — Consultas precisas e estruturas rígidas (ex: "Quantos produtos vendeu no mês X?"). Ideal para **fatos**.
+2.  **Semântico (Vector DB)** — Consultas por **significado e contexto** (ex: "Quais documentos falam sobre cláusulas abusivas?"). Ideal para **conhecimento**.
 
-**Conceito de uso (sem código executável):**
-
-```python
-# Conceitual
-from langchain.sql_database import SQLDatabase
-from langchain.agents import create_agent
-from langchain.llms import OpenAI
-
-# 1) Conecte ao banco de dados relacional
-db = SQLDatabase.from_uri("postgresql+asyncpg://user:pass@host/dbname")
-
-# 2) Crie um LLM com suporte para tool-calling
-llm = OpenAI(...)
-
-# 3) Crie um agente que entenda consultas em linguagem natural
-agent = create_agent(model=llm, tools=[db])
-
-# 4) O agente transforma perguntas em SQL internamente
-response = agent.run("Quais clientes compraram mais de 5 produtos este mês?")
-
-print(response)
-```
-
-Nesse padrão:
-
-* O agente **analisa a pergunta em NL**.
-* Converte em **SQL usando contexto do schema**.
-* Executa no banco e retorna resultados interpretados. ([LangChain Docs][1])
-
-Esse tipo de agente é poderoso para **interfaces de BI conversacional ou ferramentas de auto-atendimento de dados**.
+Combinar esses dois é o que chamamos de **SQL + RAG (Retrieval-Augmented Generation)**.
 
 ---
 
-### 🧪 Exemplo 2 — Busca semântica simples com LangChain
+## � O que é um Vector Database?
 
-**O que ele faz:** Inkjetia um pipeline básico de busca semântica usando:
+Um banco vetorial armazena dados como **Vectors (Embeddings)** em vez de (apenas) linhas e colunas.
 
-* embeddings (vetores)
-* um vetor store
-* um método de semelhança
-
-Esse padrão é típico de um *mini-RAG* onde você indexa textos com embeddings e recupera os documentos mais relevantes.
-
-💡 A documentação do LangChain explica esse pipeline como base de um “semantic search engine”. ([LangChain Docs][2])
-
-**Conceito de uso (snippet explicativo):**
-
-```python
-# Conceitual
-from langchain.embeddings import OpenAIEmbeddings
-from langchain.vectorstores import Chroma
-from langchain.llms import OpenAI
-
-# 1) Crie embeddings para seus textos
-embeddings = OpenAIEmbeddings()
-
-# 2) Armazene no vector store
-vector_store = Chroma.from_texts(
-    ["Contrato de aluguel 2024", "Acordo jurídico recente", "..."],
-    embeddings
-)
-
-# 3) Faça uma busca semântica
-results = vector_store.similarity_search("Acordo legal atual", k=3)
-
-for doc in results:
-    print(doc.page_content)
-```
-
-Nesse fluxo:
-
-* Cada texto vira um vetor usando um modelo de embeddings.
-* O vector store faz a **busca por similaridade semântica**.
-* Retorna os documentos mais relevantes para a query. ([LangChain Docs][2])
-
-Esse padrão é a base de muitas aplicações RAG: você primeiro encontra contexto semântico relevante e depois fornece isso ao LLM para gerar respostas ou sumarizações.
+*   **Embedding**: Uma lista de números (`[0.1, 0.9, -0.5...]`) que representa o significado de um texto, imagem ou áudio.
+*   **Busca Semântica**: Ao invés de `WHERE title = 'Java'`, fazemos "Encontre os vetores mais próximos (matematicamente) da pergunta do usuário".
+*   **Métrica de Distância**: Como calculamos "proximidade"? (Cosine Similarity é o padrão para textos).
 
 ---
 
-## 2) SQL não Morreu
+## 🎓 Curso Prático: Qdrant Fundamentals
 
-Bancos relacionais continuam sendo **o núcleo da maioria das aplicações empresariais**:
+Criamos uma série de scripts Python (`01` a `08`) para você aprender na prática, do zero ao avançado.
 
-* **Integridade de dados**, transações ACID e joins complexos
-* **Filtragem estruturada eficiente** (ex: data, status, categoria)
-* Integração com ORMs Python modernos como **SQLAlchemy (async)** e ferramentas de migração como **Alembic**
+### 📂 Estrutura do Curso
 
-Com PostgreSQL, você pode até combinar dados estruturados com vetores usando extensões como **pgvector**, reduzindo *moving parts* na arquitetura.
-
----
-
-## 3) O que é um Vector Database?
-
-Um **vector database** é um banco especializado para armazenar e consultar **vetores de alta dimensionalidade** (embeddings), permitindo **busca por similaridade** ao invés de correspondência exata. ([Medium][3])
-
-**Conceitos técnicos:**
-
-* **Embeddings:** vetores densos representando significado semântico
-* **ANN (Approx. Nearest Neighbor):** algoritmos como HNSW otimizam buscas
-* **Métricas de distância:** Cosine similarity, inner-product e Euclidean
-
-Vector DBs são fundamentais para RAG, memória conversacional e busca semântica de alta performance.
+| Arquivo | Tópico | O que você aprende |
+| :--- | :--- | :--- |
+| **[01_concepts.py](./01_concepts.py)** | **Conceitos** | O que é `Collection`, `Point`, `Vector` e `Payload` sem conectar no banco. |
+| **[02_setup_qdrant.py](./02_setup_qdrant.py)** | **Setup** | Conectar (`:memory:` vs Docker) e criar coleções definindo `VectorParams`. |
+| **[03_crud.py](./03_crud.py)** | **CRUD** | **Create** (Upsert), **Read** (Retrieve ID), **Update** (Payload), **Delete**. |
+| **[04_search.py](./04_search.py)** | **Busca** | A diferença entre pegar só IDs (`payload=False`) vs Objetos Completos. |
+| **[05_filtering.py](./05_filtering.py)** | **Filtros** | Cláusulas `Must`, `Should`, `MustNot` (a lógica booleana vetorial). |
+| **[06_indexing.py](./06_indexing.py)** | **Performance** | Criar `Payload Index` para acelerar filtros em metadados (Text, Int, Keyword). |
+| **[07_hybrid_search.py](./07_hybrid_search.py)** | **Híbrido (V1)** | Vetor + Keyword Match no Payload (ex: achar "celular" que tenha a palavra "X"). |
+| **[08_sparse_vs_dense.py](./08_sparse_vs_dense.py)** | **Híbrido (V2)** | **Dense** (Significado) vs **Sparse** (Keywords exatas/SPLADE). O estado da arte. |
 
 ---
 
-## 4) Principais Vector Databases
+## 🛠️ Deep Dive: Classes e Parâmetros do Qdrant
 
-Veja a seção anterior para tabela completa com links de documentação.
+Aqui explicamos o "porquê" de cada linha de código usada nos exemplos.
 
----
+### 1. `QdrantClient`
+O ponto de entrada.
+*   `QdrantClient(":memory:")`: Cria um banco temporário na RAM. Ótimo para testes unitários ou estudar.
+*   `QdrantClient(host="localhost", port=6333)`: Conecta em um container Docker real (produção).
+*   `QdrantClient(url="...", api_key="...")`: Conecta no Qdrant Cloud (seguro/gerenciado).
 
-## 5) PostgreSQL + pgvector — o melhor dos dois mundos
+### 2. `models.VectorParams` vs `SparseVectorParams`
+Definem a "física" do seu universo vetorial.
+*   `size`: **CRÍTICO**. Deve ser igual ao modelo de embedding (ex: OpenAI `text-embedding-3-small` = **1536**). Se errar, o banco rejeita inserções.
+*   `distance`:
+    *   `Distance.COSINE`: Padrão para NLP/Textos. Mede o ângulo (direção).
+    *   `Distance.DOT`: Produto escalar. Se os vetores forem normalizados, é igual ao Cosine mas mais rápido.
+    *   `Distance.EUCLID`: Distância "física" em linha reta. Raro para textos, comum para imagens/geo.
 
-Use PostgreSQL com extensão **pgvector** para armazenar vetores ao lado de metadados estruturados, permitindo filtros simultâneos e pesquisa semântica com SQL. Isso simplifica arquitetura e operações. (Links de docs foram listados acima)
+### 3. `models.PointStruct`
+A unidade atômica de dado (como uma "linha" no SQL).
+*   `id`: Pode ser Inteiro (`1, 2`) ou UUID (`"a1b2..."`). **É chave primária**. Se repetir, **sobrescreve**.
+*   `vector`: A lista de floats ou dicionário de vetores (para hybrid search).
+*   `payload`: JSON arbitrário (`dict`). Schemaless!
+    *   *Dica:* Use nomes consistentes (`snake_case`) para facilitar filtros depois.
 
----
+### 4. `models.Filter`
+A engine de query booleana.
+*   `must` (**AND**): A condição PRECISA ser verdadeira. Ex: `status="active"`.
+*   `must_not` (**NOT**): A condição NÃO pode ser verdadeira. Ex: `deleted=true`.
+*   `should` (**OR / Boost**):
+    *   Em **Filtros** (`query_filter`): Funciona como OR ("pelo menos um deve dar match").
+    *   Em **Score** (search params): Funciona como "Boost" (se tiver, aumenta o score, mas não é obrigatório).
 
-## 6) Padrão RAG: Hybrid Search e Reciprocal Rank Fusion (RRF)
-
-Combinar vetores + busca keyword/exata resulta em mecanismos de recuperação muito mais robustos. A técnica de **RRF** (Reciprocal Rank Fusion) une múltiplos rankings em um só, melhorando recall e precisão em buscas complexas.
-
----
-
-## 7) Conectando tudo — arquitetura típica de RAG
-
-Um pipeline moderno pode combinar:
-
-```
-User Query
-   ↓
-Embedding Model
-   ↓
-Vector DB
-   ↓
-Hybrid Results (vetorial + SQL)
-   ↓
-LLM para geração com contexto
-```
-
-Componentes típicos:
-
-* **FastAPI** para APIs
-* **Vector store** para semântica
-* **SQL (PostgreSQL)** para filtros/metadata
-* **Retrievers RAG** para pipeline
-
----
-
-## 8) Por que isso importa?
-
-Arquiteturas que combinam **SQL + semântica vetorial** são a base de sistemas de IA escaláveis, precisos e confiáveis em produção.
+### 5. `client.query_points(...)`
+A API moderna ("Universal Query") que substitui `search()` e `recommend()`.
+*   `query`: O vetor de busca.
+*   `query_filter`: Onde você passa o objeto `models.Filter`.
+*   `limit`: Top K (quantos vizinhos retornar).
+*   `with_payload`:
+    *   `True`: Retorna o JSON completo (mais lento/pesado).
+    *   `False`: Retorna só ID e Score (super rápido).
+    *   `['campo1', 'campo2']`: Projection (retorna só campos específicos).
 
 ---
 
-## 9) Referências de documentação
+## 🚦 Como Rodar
 
-* **LangChain SQL Agent docs:** [https://docs.langchain.com/oss/python/langchain/sql-agent](https://docs.langchain.com/oss/python/langchain/sql-agent) ([LangChain Docs][1])
-* **LangChain semantic search (knowledge base):** [https://docs.langchain.com/oss/python/langchain/knowledge-base](https://docs.langchain.com/oss/python/langchain/knowledge-base) ([LangChain Docs][2])
-* **LangChain agents:** [https://docs.langchain.com/oss/python/langchain/agents](https://docs.langchain.com/oss/python/langchain/agents) ([LangChain Docs][4])
+1.  **Instale o cliente:**
+    ```bash
+    pip install qdrant-client
+    ```
 
----
-
-Se quiser, posso agora gerar **um exemplo completo de código executável**, combinando:
-
-* FastAPI
-* PostgreSQL + pgvector
-* Qdrant ou Chroma
-* Pipeline RAG completo com LangChain
-
-Só me diga o **stack de vector DB que quer usar** (Qdrant, Chroma ou outro).
-
-[1]: https://docs.langchain.com/oss/python/langchain/sql-agent?utm_source=chatgpt.com "Build a SQL agent - Docs by LangChain"
-[2]: https://docs.langchain.com/oss/python/langchain/knowledge-base?utm_source=chatgpt.com "Build a semantic search engine with LangChain"
-[3]: https://medium.com/%40vineetchachondia/langchain-basics-part-4-vector-databases-deep-dive-where-your-knowledge-actually-lives-45fd58d7f8a2?utm_source=chatgpt.com "LangChain Basics Part 4 — Vector Databases Deep Dive"
-[4]: https://docs.langchain.com/oss/python/langchain/agents?utm_source=chatgpt.com "Agents - Docs by LangChain"
+2.  **Rode (exemplo):**
+    ```bash
+    python 01-fundamentals/05-databases/04_search.py
+    ```
+    *(Todos os scripts conectam em `:memory:` ou `localhost` e são auto-contidos).*

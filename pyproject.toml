@@ -15,4 +15,5 @@ dependencies = [
     "pydantic-settings>=2.12.0",
     "pydantic[email]>=2.12.5",
     "python-dotenv>=1.2.1",
+    "qdrant-client>=1.16.2",
 ]
