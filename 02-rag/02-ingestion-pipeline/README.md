@@ -1,4 +1,50 @@
-# 📄 Módulo 2: Ingestão de Dados & Pipelines de Documentos
+# 📥 Módulo 02: Ingestion Pipeline
+
+> **Goal:** "Garbage In, Garbage Out". Se o seu RAG falha, 80% das vezes a culpa é do Ingestion.
+> 
+> **Foco:** Transformar documentos não estruturados (PDF, HTML) em pedaços de texto semanticamente úteis (Chunks).
+
+---
+
+## 🛠️ O Pipeline de Ingestão
+
+Antes de embeddar e salvar no Qdrant, precisamos preparar os dados.
+
+1.  **Parsing (Extração):** Tira o texto do arquivo.
+2.  **Chunking (Divisão):** Quebra o texto em pedaços que cabem no contexto do LLM.
+
+### 📂 Scripts deste Módulo
+
+| Arquivo | Tópico | Descrição |
+| :--- | :--- | :--- |
+| **[01_text_extraction_pypdf.py](./01_text_extraction_pypdf.py)** | **Raw Text** | Extração simples e rápida com `pypdf`. Perde tabelas e layout. |
+| **[02_layout_parsing_docling.py](./02_layout_parsing_docling.py)** | **Layout Aware** | Extração inteligente com `Docling` (preserva tabelas e headers). |
+| **[03_chunking_recursive.py](./03_chunking_recursive.py)** | **Recursive** | O chunker padrão do LangChain. Bom para textos gerais. |
+| **[04_chunking_token.py](./04_chunking_token.py)** | **Token Limit** | Garante que o chunk respeita o limite do modelo (ex: OpenAI `tiktoken`). |
+| **[05_chunking_markdown.py](./05_chunking_markdown.py)** | **Structure** | Usa headers Markdown (#, ##) como fronteira semântica. O melhor para docs técnicos. |
+
+---
+
+## 🧠 Parsing: Texto "Burro" vs Layout "Inteligente"
+
+*   **Pypdf:** Só lê strings. Se tiver uma tabela com duas colunas, ele pode ler a linha 1 da col 1 e depois a linha 1 da col 2, misturando tudo.
+*   **Docling / Unstructured:** Entendem que aquilo é uma tabela. Convertem para Markdown ou JSON estruturado, preservando a relação entre os dados.
+
+> **Regra de Ouro:** Para contratos, relatórios financeiros e papers científicos, use Layout Parsing. Para e-mails ou textos simples, use extração básica.
+
+---
+
+## ✂️ Chunking Strategies
+
+Não existe "tamanho ideal de chunk". Existe o tamanho certo para sua pergunta.
+
+1.  **Chunks Pequenos (128-256 tokens):** Ótimos para perguntas precisas ("Qual a data do contrato?"). Perdem contexto amplo.
+2.  **Chunks Grandes (512-1024 tokens):** Ótimos para resumo ou perguntas gerais ("Sobre o que é o documento?"). Custa mais e pode confundir a busca (muito ruído).
+3.  **Semantic Chunking:** Quebra onde o assunto muda (avançado).
+4.  **Markdown/Structure Chunking:** Quebra por seção lógica (Introdução, Conclusão).
+
+---
+## Explicação do Módulo 2
 
 > **Goal:** Lixo entra, Lixo sai. Domine a arte de limpar dados.  
 > **Status:** A parte mais subestimada da IA.
@@ -16,7 +62,7 @@ PDFs são feitos para impressão, não para leitura.
 4.  **Layout Parsing (Unstructured.io / Microsoft Azure DI):** Detecta "Título", "Tabela", "Barra Lateral". A escolha profissional.
 
 ## 2. Filosofia de Chunking
-Você não pode enviar um livro de 100 páginas para o modelo de embedding (contexto limitado). Você deve "fatiar" (chunk).
+Você não pode enviar um livro de 100 páginas para o modelo de embedding (contexto limitado). Você deve "fatiar" (chunk). [Text splitter Langchain Docs](https://docs.langchain.com/oss/python/integrations/splitters)
 
 ### Estratégia A: Fixed Size (O jeito "ingênuo")
 - Dividir a cada 500 caracteres.

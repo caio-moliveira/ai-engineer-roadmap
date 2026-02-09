@@ -5,15 +5,19 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
+    "docling>=2.72.0",
     "fastapi>=0.128.0",
     "langchain>=1.2.9",
     "langchain-core>=1.2.9",
     "langchain-openai>=1.1.7",
+    "langchain-text-splitters>=1.1.0",
     "llama-index>=0.14.13",
     "llama-index-llms-openai>=0.6.18",
     "openai>=2.16.0",
     "pydantic-settings>=2.12.0",
     "pydantic[email]>=2.12.5",
+    "pypdf>=6.6.2",
     "python-dotenv>=1.2.1",
     "qdrant-client>=1.16.2",
+    "tiktoken>=0.12.0",
 ]
