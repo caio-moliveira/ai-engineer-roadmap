@@ -52,21 +52,6 @@ Vá para **[Módulo 1: A Profissão de AI Engineer & Mercado](./01-ai-engineer-p
 - **Prompt Engineering:** Técnicas avançadas para desenvolvimento (não apenas chat).
 - **Tool Calling:** A base para agentes autônomos.
 
-### [Módulo 07: RAG (Retrieval-Augmented Generation)](./07-rag-fundamentals)
-- **Pipeline:** Ingestion -> Chunking -> Embedding -> Retrieval -> Generation.
-- **Estratégias:** Naive RAG vs Advanced RAG (noções).
-- **Grounding:** Reduzindo alucinações com contexto real.
-
-### [Módulo 08: Observabilidade & Avaliação de IA](./08-observability)
-- **Monitoramento:** Tracing de chamadas de LLM (LangSmith, Arize).
-- **Evals:** Como medir a qualidade das respostas (sem "olhômetro").
-- **Logs:** Estruturando logs para debugging de IA.
-
-### [Módulo 09: Deploy & Produção](./09-deploy-production)
-- **Containerização:** Dockerfies otimizados para Python/AI.
-- **Configuração:** 12-Factor App e Variáveis de Ambiente.
-- **Cloud:** Noções de deploy serverless vs containers (Cloud Run, ECS).
-
 ---
 
 ## 🚀 Como Começar
