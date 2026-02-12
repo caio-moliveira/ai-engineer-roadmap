@@ -48,23 +48,6 @@ def main():
     print("\n--- Resultado (Markdown Estruturado) ---")
     print(markdown_output)
     
-    print("\n--- Por que isso é melhor para RAG? ---")
-    print("1. O Markdown preserva os headers (#, ##). Isso ajuda no 'MarkdownChunker'.")
-    print("2. Tabelas são convertidas para formato Markdown (| Col | Col |), mantendo a relação de dados.")
-    print("3. O Chunking semântico funciona muito melhor quando sabe onde começa e termina uma seção.")
-
-
-    
-    print("\n--- Simulação do Output (baseado no PDF) ---")
-    print("# Understanding Climate Change\n")
-    print("Climate change refers to significant changes in global temperature and weather patterns.\n")
-    print("## Causes of Climate Change\n")
-    print("The primary cause is the **Greenhouse Effect**.\n")
-    print("| Gas | Source | GWP (Global Warming Potential) |")
-    print("|---|---|---|")
-    print("| CO2 | Fossil Fuels | 1 |")
-    print("| Methane | Agriculture | 28 |\n")
-    print("> Figure 1: Global Temperature Anomaly (1880-2020)\n")
 
 if __name__ == "__main__":
     main()

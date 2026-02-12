@@ -19,5 +19,6 @@ dependencies = [
     "pypdf>=6.6.2",
     "python-dotenv>=1.2.1",
     "qdrant-client>=1.16.2",
+    "sentence-transformers>=5.2.2",
     "tiktoken>=0.12.0",
 ]

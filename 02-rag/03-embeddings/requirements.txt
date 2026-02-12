@@ -1,0 +1,7 @@
+openai
+sentence-transformers
+numpy
+matplotlib
+scikit-learn
+plotly
+python-dotenv
