@@ -21,9 +21,7 @@ def main():
     
     # 2. Lista de frases para transformar em vetores
     frases = [
-        "O gato subiu no telhado",
         "A inteligência artificial é fascinante",
-        "Eu gosto de pizza"
     ]
     
     # 3. Geração dos Embeddings

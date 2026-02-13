@@ -64,7 +64,7 @@ def main():
     plt.grid(True, linestyle='--', alpha=0.6)
     
     # Salvar em vez de mostrar (para evitar travar em ambientes headless)
-    output_file = "embeddings_visualization.png"
+    output_file = "02-rag/03-embeddings/05_embeddings_visualization.png"
     plt.savefig(output_file)
     print(f"Gráfico salvo como '{output_file}'. Abra para ver!")
     

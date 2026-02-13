@@ -76,6 +76,7 @@ Engenharia de Prompt não é sobre "pedir com educação". É sobre **condiciona
 ### 5.2 Chain-of-Thought (CoT)
 Pedir para o modelo "pensar passo a passo". Isso força o modelo a gerar tokens de raciocínio *antes* da resposta final, aumentando a precisão em tarefas lógicas/matemáticas.
 > **Referência:** [Chain-of-Thought Prompting Elicits Reasoning in Large Language Models (Wei et al., 2022)](https://arxiv.org/abs/2201.11903)
+> **Referência:** [Prompt Engineering Guide](https://www.promptingguide.ai/)
 
 ### 5.3 System Prompts
 A "constituição" do seu agente. Define persona, limites e formato de resposta. Sempre separe instruções do sistema (persistentes) da entrada do usuário (variável).
