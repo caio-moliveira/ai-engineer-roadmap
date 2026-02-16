@@ -1,4 +1,38 @@
-# 🏗️ Bloco 1: Fundamentos Reais
+<div align="center">
+    <img src="../assets/jornada.png" alt="Jornada de Dados" width="200"/>
+
+
+
+# **Bloco 1 — Fundamentos da Engenharia de IA**
+
+### Base técnica para construção de sistemas de IA probabilísticos, assíncronos e orientados a produção
+
+</div>
+
+<div align="center">
+
+[![Python](https://img.shields.io/badge/Python-3.11+-green?style=for-the-badge&logo=python)](https://www.python.org/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-Backend-009688?style=for-the-badge&logo=fastapi)](https://fastapi.tiangolo.com/)
+[![Pydantic](https://img.shields.io/badge/Pydantic-Data%20Validation-e92063?style=for-the-badge)](https://docs.pydantic.dev/)
+[![OpenAI](https://img.shields.io/badge/OpenAI-LLM%20API-lightgrey?style=for-the-badge&logo=openai)](https://platform.openai.com/docs)
+[![LangChain](https://img.shields.io/badge/LangChain-Orchestration-blueviolet?style=for-the-badge)](https://python.langchain.com/)
+[![LlamaIndex](https://img.shields.io/badge/LlamaIndex-RAG-blue?style=for-the-badge)](https://docs.llamaindex.ai/)
+[![Qdrant](https://img.shields.io/badge/Qdrant-Vector%20Database-red?style=for-the-badge)](https://qdrant.tech/)
+[![HuggingFace](https://img.shields.io/badge/HuggingFace-Transformers-yellow?style=for-the-badge&logo=huggingface)](https://huggingface.co/docs/transformers)
+[![uv](https://img.shields.io/badge/uv-Python%20Package%20Manager-black?style=for-the-badge)](https://github.com/astral-sh/uv)
+
+</div>
+
+---
+
+<div align="center">
+
+### Tecnologias e padrões utilizados ao longo do bloco
+
+Python moderno • APIs assíncronas • validação estruturada • LLM orchestration • RAG pipelines • bancos relacionais e vetoriais
+
+</div>
+
 
 > **Objetivo:** Estabelecer o padrão profissional.  
 > **Status:** Obrigatório.
