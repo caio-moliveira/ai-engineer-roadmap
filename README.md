@@ -56,25 +56,7 @@ Não ensinamos apenas ferramentas; ensinamos os padrões de design de software a
 </div>
 
 
-Perfeito 🙂 — vamos transformar seus **5 blocos** no mesmo padrão profissional do exemplo (escaneável, navegável, GitHub-friendly, orientado a curso real).
-Vou manter:
-
-✅ Links exatamente no padrão do seu repo 
-✅ Linguagem profissional de Engenharia de IA
-✅ Estrutura pronta para colar no README
-✅ Mesma filosofia Production-First que você usa nos seus projetos (RAG, Databricks, agentes etc.)
-
-Vou entregar **os 5 blocos completos já formatados em markdown**.
-
-Pode colar direto.
-
----
-
-# 🚀 BLOCO 1 — FUNDAMENTOS
-
-## 🧱 Bloco 1 — Fundamentos da Engenharia de IA
-
-📂 [https://github.com/seususuario/ai-engineer-roadmap/tree/main/01-fundamentals](https://github.com/seususuario/ai-engineer-roadmap/tree/main/01-fundamentals)
+## 🧱 [Bloco 1 — Fundamentos da Engenharia de IA](./01-fundamentals)
 
 A base necessária para construir aplicações modernas de IA em produção.
 
@@ -97,7 +79,7 @@ Este bloco ensina como desenvolver software quando o núcleo do sistema é proba
 | 01 | [Profissão AI Engineer](./01-fundamentals/01-ai-engineer-profession) | Mercado e papel profissional       |
 | 02 | [Fundamentos de LLMs](./01-fundamentals/02-llm-fundamentals)         | Tokenização, contexto e geração    |
 | 03 | [Python Moderno](./01-fundamentals/03-python-for-ai)                 | Ambiente, tipagem e arquitetura    |
-| 04 | [FastAPI Backend](./01-fundamentals/04-fastapi-backend)              | APIs assíncronas                   |
+| 04 | [FastAPI Backend](./01-fundamentals/04-fastapi)                      | APIs assíncronas                   |
 | 05 | [Modelagem de Dados](./01-fundamentals/05-data-modeling)             | JSON Schema e outputs estruturados |
 | 06 | [Bancos SQL + Vetoriais](./01-fundamentals/06-databases)             | Armazenamento híbrido              |
 
@@ -105,11 +87,7 @@ Este bloco ensina como desenvolver software quando o núcleo do sistema é proba
 
 ---
 
-# 🚀 BLOCO 2 — RAG
-
-## 📚 Bloco 2 — Sistemas RAG
-
-📂 [https://github.com/seususuario/ai-engineer-roadmap/tree/main/02-rag](https://github.com/seususuario/ai-engineer-roadmap/tree/main/02-rag)
+## 📚 [Bloco 2 — Sistemas RAG](./02-rag)
 
 Este bloco ensina como conectar modelos de IA a dados reais.
 
@@ -128,28 +106,23 @@ RAG em produção envolve ingestão robusta, busca híbrida, avaliação contín
 
 ### 📦 Módulos
 
-| #  | Módulo                                                   | Tema                    |
-| -- | -------------------------------------------------------- | ----------------------- |
-| 01 | [Fundamentos de RAG](./02-rag/01-rag-fundamentals)       | Arquitetura mental      |
-| 02 | [Ingestão e Pipelines](./02-rag/02-ingestion-pipeline)   | ETL para IA             |
-| 03 | [Embeddings](./02-rag/03-embeddings)                     | Representação semântica |
-| 04 | [Vector DBs](./02-rag/04-vector-dbs)                     | Indexação e performance |
-| 05 | [Retrieval Strategies](./02-rag/05-retrieval-strategies) | Hybrid + reranking      |
-| 06 | [LangChain LCEL](./02-rag/06-langchain-v1)               | Pipelines declarativos  |
-| 07 | [LangGraph RAG](./02-rag/07-langgraph)                   | Corrective RAG e loops  |
-| 08 | [LlamaIndex](./02-rag/08-llamaindex)                     | Indexação avançada      |
-| 09 | [Avaliação](./02-rag/09-evaluation)                      | RAGAS + tracing         |
-| 10 | [RAG em Produção](./02-rag/10-rag-production)            | Segurança e custos      |
+| #  | Módulo                                                               | Tema                    |
+| -- | -------------------------------------------------------------------- | ----------------------- |
+| 01 | [Fundamentos de RAG](./02-rag/01-rag-fundamentals)                   | Arquitetura mental      |
+| 02 | [Ingestão e Pipelines](./02-rag/02-ingestion-pipeline)               | ETL para IA             |
+| 03 | [Embeddings](./02-rag/03-embeddings)                                 | Representação semântica |
+| 04 | [Vector DBs](./02-rag/04-vector-dbs)                                 | Indexação e performance |
+| 05 | [Retrieval Strategies](./02-rag/05-retrievers)                       | Hybrid + reranking      |
+| 06 | [RAG Agents](./02-rag/06-rag-agent)                                  | LangChain vs LlamaIndex |
+| 07 | [Graph RAG](./02-rag/07-graph-rag)                                   | Knowledge Graphs        |
+| 08 | [Avaliação](./02-rag/08-evaluation)                                  | RAGAS + tracing         |
+| 09 | [RAG em Produção](./02-rag/10-rag-production)                        | Segurança e custos      |
 
 👉 Comece pelo módulo 01
 
 ---
 
-# 🚀 BLOCO 3 — AGENTES
-
-## 🤖 Bloco 3 — Sistemas de Agentes de IA
-
-📂 [https://github.com/seususuario/ai-engineer-roadmap/tree/main/03-ai-agents](https://github.com/seususuario/ai-engineer-roadmap/tree/main/03-ai-agents)
+## 🤖 [Bloco 3 — Sistemas de Agentes de IA](./03-ai-agents)
 
 Agentes são sistemas de software com autonomia controlada.
 
@@ -186,11 +159,7 @@ Este bloco ensina como projetar, orquestrar e operar agentes confiáveis em prod
 
 ---
 
-# 🚀 BLOCO 4 — INFRA + OCR
-
-## 🖥️ Bloco 4 — Infraestrutura, Modelos e OCR
-
-📂 [https://github.com/seususuario/ai-engineer-roadmap/tree/main/04-infra-ocr-models](https://github.com/seususuario/ai-engineer-roadmap/tree/main/04-infra-ocr-models)
+## 🖥️ [Bloco 4 — OCR](./04-infra-ocr-models)
 
 Aqui a engenharia encontra o hardware e os pipelines de documentos.
 
@@ -224,11 +193,7 @@ Este bloco ensina como rodar modelos localmente, otimizar inferência e construi
 
 ---
 
-# 🚀 BLOCO 5 — FINE-TUNING
-
-## 🧪 Bloco 5 — Fine-Tuning e Especialização de Modelos
-
-📂 [https://github.com/seususuario/ai-engineer-roadmap/tree/main/05-fine-tuning](https://github.com/seususuario/ai-engineer-roadmap/tree/main/05-fine-tuning)
+## 🧪 [Bloco 5 — Fine-Tuning e Especialização de Modelos](./05-fine-tuning)
 
 Este bloco ensina quando treinar modelos — e principalmente quando não treinar.
 

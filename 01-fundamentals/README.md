@@ -71,7 +71,7 @@ Vá para **[Módulo 1: A Profissão de AI Engineer & Mercado](./01-ai-engineer-p
 - **Estrutura:** Blueprints de projetos escaláveis.
 - **Boas Práticas:** Clean Code aplicado a pipelines de dados.
 
-### [Módulo 04: APIs & Backend com FastAPI](./04-fastapi-backend)
+### [Módulo 04: APIs & Backend com FastAPI](./04-fastapi)
 - **Core:** Async/Await, Dependency Injection, OpenAPI.
 - **Pydantic:** Contratos de dados rigorosos.
 - **Performance:** Lidando com concorrência em sistemas de IA.
