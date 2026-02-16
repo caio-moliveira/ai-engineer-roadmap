@@ -64,10 +64,10 @@ Este bloco ensina como desenvolver software quando o núcleo do sistema é proba
 
 ### 🎯 Você vai aprender
 
-✔ funcionamento operacional de LLMs
-✔ arquitetura Python para aplicações de IA
-✔ APIs assíncronas e serviços escaláveis
-✔ contratos estruturados de dados
+✔ funcionamento operacional de LLMs  
+✔ arquitetura Python para aplicações de IA  
+✔ APIs assíncronas e serviços escaláveis  
+✔ contratos estruturados de dados  
 ✔ integração SQL + Vector DB
 
 ---
@@ -83,8 +83,6 @@ Este bloco ensina como desenvolver software quando o núcleo do sistema é proba
 | 05 | [Modelagem de Dados](./01-fundamentals/05-data-modeling)             | JSON Schema e outputs estruturados |
 | 06 | [Bancos SQL + Vetoriais](./01-fundamentals/06-databases)             | Armazenamento híbrido              |
 
-👉 Comece pelo módulo 01
-
 ---
 
 ## 📚 [Bloco 2 — Sistemas RAG](./02-rag)
@@ -95,11 +93,11 @@ RAG em produção envolve ingestão robusta, busca híbrida, avaliação contín
 
 ### 🎯 Você vai aprender
 
-✔ pipeline completo de ingestão de documentos
-✔ chunking profissional e modelagem semântica
-✔ embeddings modernos e indexação vetorial
-✔ estratégias híbridas de retrieval
-✔ avaliação automática com RAGAS
+✔ pipeline completo de ingestão de documentos  
+✔ chunking profissional e modelagem semântica  
+✔ embeddings modernos e indexação vetorial  
+✔ estratégias híbridas de retrieval  
+✔ avaliação automática com RAGAS  
 ✔ deploy seguro e otimizado
 
 ---
@@ -118,8 +116,6 @@ RAG em produção envolve ingestão robusta, busca híbrida, avaliação contín
 | 08 | [Avaliação](./02-rag/08-evaluation)                                  | RAGAS + tracing         |
 | 09 | [RAG em Produção](./02-rag/10-rag-production)                        | Segurança e custos      |
 
-👉 Comece pelo módulo 01
-
 ---
 
 ## 🤖 [Bloco 3 — Sistemas de Agentes de IA](./03-ai-agents)
@@ -130,12 +126,12 @@ Este bloco ensina como projetar, orquestrar e operar agentes confiáveis em prod
 
 ### 🎯 Você vai aprender
 
-✔ diferença real entre workflow e agente
-✔ arquiteturas modernas de agentes
-✔ tool calling estruturado
-✔ grafos de estado com LangGraph
-✔ memória persistente
-✔ multi-agent design
+✔ diferença real entre workflow e agente  
+✔ arquiteturas modernas de agentes  
+✔ tool calling estruturado  
+✔ grafos de estado com LangGraph  
+✔ memória persistente  
+✔ multi-agent design  
 ✔ guardrails e segurança
 
 ---
@@ -155,7 +151,6 @@ Este bloco ensina como projetar, orquestrar e operar agentes confiáveis em prod
 | 09 | [Human-in-the-loop](./03-ai-agents/09-human-in-the-loop)     | Aprovação humana            |
 | 10 | [Produção](./03-ai-agents/10-agents-in-production)           | Observabilidade             |
 
-👉 Comece pelo módulo 01
 
 ---
 
@@ -167,11 +162,11 @@ Este bloco ensina como rodar modelos localmente, otimizar inferência e construi
 
 ### 🎯 Você vai aprender
 
-✔ decisão API vs Open Source
-✔ ecossistema Hugging Face real
-✔ inferência local e produção com vLLM
-✔ otimização de GPU e VRAM
-✔ fundamentos de OCR moderno
+✔ decisão API vs Open Source  
+✔ ecossistema Hugging Face real  
+✔ inferência local e produção com vLLM  
+✔ otimização de GPU e VRAM  
+✔ fundamentos de OCR moderno  
 ✔ pipelines document intelligence
 
 ---
@@ -189,7 +184,6 @@ Este bloco ensina como rodar modelos localmente, otimizar inferência e construi
 | 07 | [OCR Pipelines](./04-infra-ocr-models/07-ocr-pipelines)                 | Arquitetura completa  |
 | 08 | [Document Intelligence](./04-infra-ocr-models/08-document-intelligence) | Pipeline enterprise   |
 
-👉 Comece pelo módulo 01
 
 ---
 
@@ -199,11 +193,11 @@ Este bloco ensina quando treinar modelos — e principalmente quando não treina
 
 ### 🎯 Você vai aprender
 
-✔ diferença entre Fine-Tune e RAG
-✔ estratégias modernas de adaptação (LoRA, QLoRA)
-✔ preparação profissional de datasets
-✔ avaliação antes do treino
-✔ workflow completo com Unsloth
+✔ diferença entre Fine-Tune e RAG  
+✔ estratégias modernas de adaptação (LoRA, QLoRA)  
+✔ preparação profissional de datasets  
+✔ avaliação antes do treino  
+✔ workflow completo com Unsloth  
 ✔ deploy e manutenção
 
 ---
@@ -222,7 +216,6 @@ Este bloco ensina quando treinar modelos — e principalmente quando não treina
 | 08 | [Deploy](./05-fine-tuning/08-deploy-adapters)              | Adapters e merge    |
 | 09 | [Riscos](./05-fine-tuning/09-risks-maintenance)            | Forgetting          |
 | 10 | [Enterprise](./05-fine-tuning/10-enterprise-gov)           | Compliance          |
-
 
 ---
 
