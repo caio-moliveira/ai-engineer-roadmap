@@ -229,10 +229,10 @@ Este bloco ensina quando treinar modelos — e principalmente quando não treina
 
 2. **Configure o ambiente (usando `uv`):**
    ```bash
-   # Recomendamos uv pela velocidade
+   uv init
    uv venv
    source .venv/bin/activate  # ou .venv\Scripts\activate no Windows
-   uv pip install -r requirements.txt
+   uv sync
    ```
 
 3. **Navegue para o Bloco 1:**

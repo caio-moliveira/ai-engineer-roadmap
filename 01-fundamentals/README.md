@@ -34,60 +34,46 @@ Python moderno • APIs assíncronas • validação estruturada • LLM orchest
 </div>
 
 
-> **Objetivo:** Estabelecer o padrão profissional.  
-> **Status:** Obrigatório.
-
-## 🛑 Pare. Leia isto.
-Este não é um curso de "Python para Iniciantes".
-Este não é um curso de "Como usar o Git".
-Assumimos que você sabe codar.
-
-Aqui, vamos alinhar o que significa "Codar para Sistemas de IA".
-Sistemas de IA são:
-1.  **Probabilísticos:** O código deve lidar com falhas e incertezas.
-2.  **Assíncronos:** Modelos são lentos. Bloquear a main thread é crime.
-3.  **Caros:** Cada caractere custa dinheiro. Eficiência é vital.
+<div align="center">
+<img src="../assets/fundamentos.png" alt="Fundamentos" width="1000"/>
+</div>
 
 ---
-
-Vá para **[Módulo 1: A Profissão de AI Engineer & Mercado](./01-ai-engineer-profession)**.
-
----
-
 ## 📚 Ementa do Módulo
 
 ### [Módulo 01: A Profissão de AI Engineer & Mercado](./01-ai-engineer-profession)
-- **O Papel:** A diferença entre AI Engineer, ML Engineer e Backend Dev.
-- **Mercado:** O que as empresas realmente esperam (Produto > Modelo).
-- **Habilidades:** O perfil "T-Shaped" e a mentalidade de engenharia.
+- **O Papel:** A diferença entre AI Engineer, ML Engineer e Backend Dev. Foco em **Produto** e **Sistemas**.
+- **Os 3 Pilares:** Fluência em Foundation Models (Prompting, Structured Outputs), Arquitetura de Sistemas (RAG, Agentes) e Engenharia de Produção.
+- **Mindset:** Construção de software robusto em cima de componentes não-determinísticos.
 
 ### [Módulo 02: Fundamentos de LLMs & GenAI](./02-llm-fundamentals)
-- **Conceitos:** Tokens, Context Windows, Temperature.
-- **Prompt Engineering:** Técnicas avançadas para desenvolvimento (não apenas chat).
-- **Tool Calling:** A base para agentes autônomos.
+- **A "Física" dos LLMs:** Tokens, Context Window, Temperature, Top-P e o conceito de *Autoregressive*.
+- **Prompt Engineering:** Ciência, não arte. Zero-shot, Few-shot, Chain-of-Thought (CoT).
+- **Agentes & Tools:** Tool Calling como a base para agentes autônomos que interagem com o mundo.
+- **Estratégia:** Quando usar RAG vs Fine-tuning.
 
 ### [Módulo 03: Python Moderno para AI Engineers](./03-python-for-ai)
-- **Stack:** Python moderno, Tipagem estática, Gerenciamento de dependências (`uv`).
-- **Estrutura:** Blueprints de projetos escaláveis.
-- **Boas Práticas:** Clean Code aplicado a pipelines de dados.
+- **Stack de Engenharia:** Gerenciamento de dependências com `uv` e estrutura de monorepo.
+- **Bibliotecas Core:** Pydantic, HTTPX, AsyncIO, Tenacity para resiliência.
+- **Frameworks de IA:** Visão geral de LangChain, LangGraph, LlamaIndex e Agno.
+- **Observabilidade:** A importância de logs estruturados e tracing em sistemas estocásticos.
 
 ### [Módulo 04: APIs & Backend com FastAPI](./04-fastapi)
-- **Core:** Async/Await, Dependency Injection, OpenAPI.
-- **Pydantic:** Contratos de dados rigorosos.
-- **Performance:** Lidando com concorrência em sistemas de IA.
+- **Produção:** Construção de APIs assíncronas de alta performance para servir modelos e RAG.
+- **Design:** Injeção de dependência, validação com Pydantic e OpenAPI (Swagger).
+- **Integração:** Conectando OpenAI/LangChain via endpoints HTTP seguros e escaláveis.
 
-### [Módulo 05: Modelagem e Contratos de Dados](./05-data-modeling)
-- **Design:** JSON Schema, Validação e Serialização.
-- **Pydantic V2:** O coração da engenharia de IA moderna.
-- **Padronização:** Garantindo outputs estruturados de LLMs.
+### [Módulo 05: Modelagem e Contratos de Dados (Pydantic V2)](./05-data-modeling)
+- **Contratos de Dados:** Schemas rigorosos como a "camada de confiabilidade" para outputs de LLM.
+- **Features Avançadas:** Validadores customizados, Tipos Ricos (Enum, URL, UUID) e Unions Discriminadas.
+- **Pipeline de Extração:** Implementando retries automáticos com feedback de erro estruturado.
+- **Configuração:** Gerenciamento de variáveis de ambiente com `pydantic-settings`.
 
 ### [Módulo 06: Bancos de Dados (SQL + Vetorial)](./06-databases)
-- **Híbrido:** Integrando PostgreSQL (SQL) com Vector DBs.
-- **Busca:** Conceitos de Embeddings, Distância de Cosseno e Metadata Filtering.
-- **Design:** Modelagem de dados para aplicações de IA.
-
-
-
+- **Vector Databases:** Conceitos de Embeddings, Busca Semântica vs Busca Exata e `Payload`.
+- **Métricas:** Distância de Cosseno, Dot Product e indexação HNSW.
+- **Qdrant:** Setup e uso prático (Local em memória vs Docker em produção) com filtragem de metadados.
+- **Arquitetura Híbrida:** Quando integrar SQL (Postgres) com Vector DBs.
 ---
 
 ## 🚀 Como Começar
