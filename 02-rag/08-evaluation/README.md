@@ -1,53 +1,64 @@
-# 📉 Módulo 9: Avaliação & Observabilidade
+# 08 - Evaluation de RAG com RAGAS
 
-> **Goal:** Pare de Adivinhar. Comece a Medir.  
-> **Status:** A única forma de melhorar.
+## O que é Avaliação de RAG?
 
-## 1. O Problema do "Vibe Check"
-A maioria dos devs testa seu RAG fazendo 3 perguntas: "Oi", "O que é X?", "Tchau".
-Parece bom, então eles shippam.
-Aí um usuário pergunta "Compare X e Y" e o bot alucina.
+Avaliar um sistema RAG (Retrieval-Augmented Generation) é crucial para garantir que ele não apenas recupere os documentos certos, mas também gere respostas precisas e úteis baseadas neles.
 
-**Você não pode otimizar o que não pode medir.**
+Diferente de tarefas tradicionais de NLP, no RAG precisamos avaliar dois componentes principais independentente e em conjunto:
 
-## 2. RAGAS (RAG Assessment)
-O framework padrão da indústria para avaliar pipelines RAG sem labelling humano.
-Ele usa um "LLM Judge" (GPT-4) para dar nota ao seu sistema.
+1.  **Componente de Recuperação (Retriever):** "Eu encontrei os documentos certos?"
+2.  **Componente de Geração (Generator/LLM):** "Eu respondi a pergunta corretamente usando os documentos encontrados?"
 
-### Métricas Core
-1.  **Faithfulness:** A resposta derivou *apenas* do contexto? (Detecta Alucinação).
-2.  **Answer Relevance:** Ela realmente respondeu a pergunta do usuário?
-3.  **Context Precision:** O documento relevante estava no top 3?
-4.  **Context Recall:** Nós achamos *toda* a info relevante?
+Para isso, utilizamos frameworks como o **RAGAS** (RAG Assessment), que oferece métricas padronizadas para quantificar a qualidade do seu pipeline.
 
-## 3. Observabilidade (Langfuse / Arize)
-Você precisa ver o trace de cada execução.
+## Principais Métricas do RAGAS
 
-**O que logar:**
-- **Input/Output:** Texto completo.
-- **Latência:** Total vs. Retrieval vs. Geração.
-- **Token Count:** Input vs. Output (Custo).
-- **Metadata:** User ID, Session ID.
+O [RAGAS](https://docs.ragas.io/en/stable/tutorials/rag/) propõe métricas que cobrem diferentes aspectos do RAG. As quatro principais são:
 
-**Screenshots:** (Imagine um gráfico waterfall mostrando `Retriever (300ms)` -> `Reranker (500ms)` -> `LLM (2s)`).
+### 1. Faithfulness (Fidelidade)
+*   **O que mede:** Se a resposta gerada pode ser inferida **apenas** a partir do contexto recuperado.
+*   **Por que importa:** Evita alucinações. Garante que o modelo não está inventando informações que não estão nos documentos.
+*   **Pergunta chave:** "A resposta 'respeita' o contexto fornecido?"
 
-## 4. Continuous Eval (CI/CD for AI)
-Não avalie só uma vez. Avalie a cada commit.
+### 2. Answer Relevance (Relevância da Resposta)
+*   **O que mede:** O quão relevante a resposta gerada é para a **pergunta original** (prompt).
+*   **Por que importa:** Garante que o modelo não está tangenciando ou ignorando a pergunta do usuário.
+*   **Pergunta chave:** "A resposta ataca diretamente a dúvida do usuário?"
 
-**Pipeline:**
-1.  **Dataset:** Um "Golden Set" de 50 pares QA (`pergunta`, `ground_truth`).
-2.  **Run:** Pipeline processa todas as 50 perguntas.
-3.  **Score:** Ragas calcula as notas.
-4.  **Fail:** Se `Faithfulness < 0.8`, bloqueia o deploy.
+### 3. Context Precision (Precisão do Contexto)
+*   **O que mede:** A proporção de chunks **relevantes** dentre os chunks recuperados.
+*   **Por que importa:** (Avaliação do Retriever) Mede se estamos trazendo muito lixo junto com a informação útil.
+*   **Pergunta chave:** "Quanto do que eu recuperei é realmente útil?"
 
-## 🧠 Mental Model: "Testes Unitários vs. Evals"
-- **Unit Test:** `assert sum(1, 1) == 2`. Determinístico.
-- **Eval:** `assert similarity(actual, expected) > 0.9`. Probabilístico.
+### 4. Context Recall (Revocação do Contexto)
+*   **O que mede:** Se o contexto recuperado contém **toda** a informação necessária para responder a uma "Ground Truth" (resposta ideal esperada).
+*   **Por que importa:** (Avaliação do Retriever) Mede se deixamos passar alguma informação importante.
+*   **Nota:** Exige um dataset com `ground_truth` (respostas corretas esperadas).
 
-## ⚠️ Erros Comuns
-- **Eval com modelos fracos:** Não use GPT-3.5 para dar nota no GPT-4. O juiz deve ser mais esperto que o aluno. Use GPT-4o.
-- **Ignorar "Não sei":** As vezes "Não sei" é a resposta *correta*. Premie o modelo por admitir ignorância.
+---
 
-## ⏭️ Próximo Passo
-Temos um sistema medido. Vamos para o Deploy.
-Vá para **[Módulo 10: RAG em Produção](../10-rag-production)**.
+## Como Executar
+
+### Pré-requisitos
+
+Certifique-se de ter as dependências instaladas:
+
+```bash
+uv add ragas datasets langchain-openai langchain-qdrant qdrant-client
+```
+
+### Script de Avaliação
+
+O script `01_ragas_evaluation.py` demonstra como criar um dataset simples de perguntas e respostas geradas pelo nosso RAG e avaliá-las usando as métricas acima.
+
+**Nota:** O script reutiliza a função `load_and_index_pdf` do módulo `06-rag-agent` para subir o banco vetorial.
+
+```bash
+python 01_ragas_evaluation.py
+```
+
+Isso irá:
+1.  Carregar o PDF e indexar no Qdrant (se necessário).
+2.  Executar um mini-pipeline de RAG para 3 perguntas de exemplo sobre o documento.
+3.  Coletar: `question`, `answer`, `contexts`.
+4.  Executar a avaliação do RAGAS e exibir os scores.
