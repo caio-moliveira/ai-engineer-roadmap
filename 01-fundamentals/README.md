@@ -17,7 +17,6 @@
 [![OpenAI](https://img.shields.io/badge/OpenAI-LLM%20API-lightgrey?style=for-the-badge&logo=openai)](https://platform.openai.com/docs)
 [![LangChain](https://img.shields.io/badge/LangChain-Orchestration-blueviolet?style=for-the-badge)](https://python.langchain.com/)
 [![LlamaIndex](https://img.shields.io/badge/LlamaIndex-RAG-blue?style=for-the-badge)](https://docs.llamaindex.ai/)
-[![Qdrant](https://img.shields.io/badge/Qdrant-Vector%20Database-red?style=for-the-badge)](https://qdrant.tech/)
 [![HuggingFace](https://img.shields.io/badge/HuggingFace-Transformers-yellow?style=for-the-badge&logo=huggingface)](https://huggingface.co/docs/transformers)
 [![uv](https://img.shields.io/badge/uv-Python%20Package%20Manager-black?style=for-the-badge)](https://github.com/astral-sh/uv)
 

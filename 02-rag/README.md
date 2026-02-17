@@ -1,18 +1,38 @@
+<div align="center">
+    <img src="../assets/jornada.png" alt="Jornada de Dados" width="200"/>
+
 # 🔹 Bloco 2: Sistemas RAG (Retrieval-Augmented Generation)
 
 > **Objetivo:** Conectar LLMs aos seus dados privados.  
 > **Status:** A arquitetura mais comum em produção hoje.
 
-## 🛑 Pare. Leia isto.
-RAG não é apenas "jogar PDF no Vector DB".
-RAG em produção exige:
-1.  **Estratégia de Chunking:** Como quebrar o texto sem perder o sentido?
-2.  **Reranking:** Como filtrar os 100 documentos retornados para os 5 melhores?
-3.  **Avaliação:** Como saber se a resposta está certa sem ler tudo?
+<div align="center">
 
-Aqui vamos além do tutorial básico de "Chat with PDF".
+[![Python](https://img.shields.io/badge/Python-3.11+-green?style=for-the-badge&logo=python)](https://www.python.org/)
+[![OpenAI](https://img.shields.io/badge/OpenAI-LLM%20API-lightgrey?style=for-the-badge&logo=openai)](https://platform.openai.com/docs)
+[![Docling](https://img.shields.io/badge/Docling-Document%20Processing-darkgreen?style=for-the-badge)](https://github.com/docling-project/docling)
+[![LangChain](https://img.shields.io/badge/LangChain-Orchestration-blueviolet?style=for-the-badge)](https://python.langchain.com/)
+[![LlamaIndex](https://img.shields.io/badge/LlamaIndex-RAG-blue?style=for-the-badge)](https://docs.llamaindex.ai/)
+[![Qdrant](https://img.shields.io/badge/Qdrant-Vector%20Database-red?style=for-the-badge)](https://qdrant.tech/)
+[![HuggingFace](https://img.shields.io/badge/HuggingFace-Transformers-yellow?style=for-the-badge&logo=huggingface)](https://huggingface.co/docs/transformers)
+[![RAGAS](https://img.shields.io/badge/RAGAS-RAG%20Evaluation-purple?style=for-the-badge)](https://github.com/explodinggradients/ragas)
+[![uv](https://img.shields.io/badge/uv-Python%20Package%20Manager-black?style=for-the-badge)](https://github.com/astral-sh/uv)
+
 
 ---
+
+<div align="center">
+
+### Tecnologias e padrões utilizados ao longo do bloco
+
+Python moderno • APIs assíncronas • validação estruturada • LLM orchestration • RAG pipelines • bancos relacionais e vetoriais
+
+</div>
+
+
+<div align="center">
+<img src="../assets/rag.png" alt="RAG" width="1000"/>
+</div>
 
 ## 📚 Ementa do Módulo
 
