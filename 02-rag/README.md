@@ -56,7 +56,7 @@ Aqui vamos além do tutorial básico de "Chat with PDF".
 - **Tracing:** Visualizando cada passo com Langsmith/Langfuse.
 - **Golden Datasets:** Criando um conjunto de testes confiável.
 
-### [Módulo 10: RAG em Produção](./10-rag-production)
+### [Módulo 09: RAG em Produção](./09-rag-production)
 - **Otimização:** Cache Semântico, Streaming, Latência.
 - **Segurança:** Prompt Injection em RAG.
 - **Custos:** Estimando tokens de input/output em escala.

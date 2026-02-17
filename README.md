@@ -1,6 +1,8 @@
 <div align="center">
   <img src="./assets/jornada.png" alt="Jornada de Dados" width="200"/>
 
+[**Site Oficial**](https://suajornadadedados.com.br/) • [**Comunidade**](https://suajornadadedados.com.br/) • [**Documentação**](https://suajornadadedados.com.br/)
+
 # **Trilha Completa: Engenharia de IA**
 
 ### Construção profissional de sistemas de IA, RAGs e agentes em produção
@@ -9,45 +11,31 @@
 
 </div>
 
----
-
 <div align="center">
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
-[![Python: 3.13+](https://img.shields.io/badge/python-3.13+-blue.svg)](https://www.python.org/)
 
-[**Site Oficial**](https://suajornadadedados.com.br/) • [**Comunidade**](https://suajornadadedados.com.br/) • [**Documentação**](https://suajornadadedados.com.br/)
 </div>
 
 ---
 
-## 🚀 O Manifesto do Engenheiro de IA (Edição 2026)
+## 🚀 Introdução à Formação de Engenharia de IA
 
-O mercado de "Power Users" de chat saturou. Em 2026, a barreira de entrada não é mais saber o que é um prompt, mas sim como garantir **determinismo, segurança e custo-eficiência** em sistemas não-determinísticos.
+Bem-vindo ao curso definitivo para se tornar um **AI Engineer**. Este roadmap não é apenas uma coleção de tutoriais, mas um guia estruturado para transformar desenvolvedores de software em arquitetos de sistemas inteligentes.
 
-### 🎯 Onde você se posiciona?
-Diferente do **Cientista de Dados** (focado em *Training & Fine-tuning*) e do **ML Engineer** (focado em *Infrastructure & Serving*), o **AI Engineer** é o engenheiro de software especializado na composição de Modelos de Fundação.
+### 🎯 O que é um Engenheiro de IA?
+O Engenheiro de IA é o profissional que **transforma modelos probabilísticos em produtos determinísticos e confiáveis**. É o cara responsável por projetar, integrar e operar sistemas baseados em modelos de fundação.
+Sua missão não é criar inteligência do zero, mas **arquitetar o contexto, os dados, os fluxos e as validações** que tornam essa inteligência útil no mundo real.
 
-> **"Nossa missão não é criar inteligência bruta, mas arquitetar o contexto necessário para que ela seja útil."**
+Ao contrário do **Cientista de Dados**, que foca em análise estatística e treinamento de modelos, ou do **Engenheiro de Machine Learning**, que cuida da infraestrutura de treino e deploy de modelos, o Engenheiro de IA foca na **aplicação, composição e orquestração** de Modelos de Fundação (LLMs) para resolver problemas de negócio.
 
-### 💎 Pilares da Engenharia de IA Moderna
+> **"Nossa missão não é criar inteligência bruta, mas arquitetar o contexto necessário para que ela seja útil e aplicável."**
 
-Para mover o ponteiro em projetos reais, atacamos os três pilares que separam demos de produtos:
+### 🗺️ O Propósito deste Roadmap
+Este guia foi desenhado para cortar o ruído do "hype" e focar no que realmente importa para produção. Ele vai te guiar pelo entendimento profundo de:
 
-1.  **Fidelidade (Grounding):** Implementação de RAG (Retrieval-Augmented Generation) multicamadas para eliminar alucinações.
-2.  **Autonomia (Agency):** Evolução de fluxos lineares para grafos cíclicos com **LangGraph**, permitindo raciocínio complexo e correção de erros em tempo real.
-3.  **LLMOps & Observabilidade:** Se você não mede, você não gerencia. Utilizamos **Langfuse** e **Arize Phoenix** para rastreabilidade total de tokens, latência e custo.
-
----
-
-## 🛠️ O Tech Stack do Especialista
-Não ensinamos apenas ferramentas; ensinamos os padrões de design de software aplicados à IA:
-
-* **Linguagem & Base:** Python Pro (AsyncIO), Pydantic (Validação de Dados) e Docker.
-* **Vector Architecture:** Qdrant, Pinecone e ChromaDB para busca semântica e híbrida.
-* **Orquestração de Estado:** LangChain e LangGraph para fluxos de agentes com memória persistente.
-* **Engenharia de Prompt:** Chain-of-Thought, Few-shot prompting e técnicas de compressão de contexto.
-
+*   **Como um Engenheiro de IA trabalha:** O dia a dia de integrar, testar e monitorar sistemas baseados em LLMs.
+*   **Requisitos Reais:** Não basta saber fazer um prompt. Você precisa dominar Python assíncrono, APIs, Bancos Vetoriais e Arquitetura de Software.
+*   **Desafios da Profissão:** Lidar com alucinações, custos de inferência, latência e segurança de dados.
 ---
 
 ## 📚 A Trilha de Formação
@@ -113,8 +101,8 @@ RAG em produção envolve ingestão robusta, busca híbrida, avaliação contín
 | 05 | [Retrieval Strategies](./02-rag/05-retrievers)                       | Hybrid + reranking      |
 | 06 | [RAG Agents](./02-rag/06-rag-agent)                                  | LangChain vs LlamaIndex |
 | 07 | [Graph RAG](./02-rag/07-graph-rag)                                   | Knowledge Graphs        |
-| 08 | [Avaliação](./02-rag/08-evaluation)                                  | RAGAS + tracing         |
-| 09 | [RAG em Produção](./02-rag/10-rag-production)                        | Segurança e custos      |
+| 08 | [Evaluation](./02-rag/08-evaluation)                                  | RAGAS + tracing         |
+| 09 | [RAG em Produção](./02-rag/09-rag-production)                        | Segurança e custos      |
 
 ---
 
