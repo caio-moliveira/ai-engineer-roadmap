@@ -70,7 +70,7 @@ if __name__ == "__main__":
     print("\n=== Exemplo 1: Sucesso (Dados Completos) ===")
     data_valid = {
         "name": "  alice wonderland  ",  # Vai ser normalizado
-        "email": "[email protected]",
+        "email": "caio@gmail.com",
         "age": 30,
         "role": "admin",
         "website": "https://example.com/alice",
@@ -95,8 +95,9 @@ if __name__ == "__main__":
     print("\n=== Exemplo 2: Erro de Validação (Regra de Negócio) ===")
     data_invalid = {
         "name": "Bob Hacker",
-        "email": "[email protected]",
+        "email": "caio@gmail.com",
         "role": "admin",
+        "last_ip": "192.168.1.10"
         # Falta IP, o que deve gerar erro pela regra check_admin_security
     }
     

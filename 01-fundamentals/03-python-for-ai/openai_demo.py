@@ -48,7 +48,7 @@ def generate_text_chatcompletions() -> str:
         )
         
         # Retorna o conteúdo da primeira escolha
-        print(completion.choices[0].message.content)
+        print(completion)
     except Exception as e:
         print(f"Erro ao chamar OpenAI: {e}")
 

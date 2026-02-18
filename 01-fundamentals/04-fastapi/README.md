@@ -28,7 +28,7 @@ Além deste README, [este tutorial](https://fastapi.tiangolo.com/tutorial/) most
 2.  **Execute a aplicação**:
     Execute o seguinte comando na raiz do repositório:
     ```bash
-    uv run uvicorn main:app --app-dir 01-fundamentals/03-fastapi --reload
+    uv run uvicorn main:app --app-dir 01-fundamentals/04-fastapi --reload
     ```
 
 3.  **Acesse sua API**:
@@ -41,10 +41,10 @@ O Uvicorn é um servidor ASGI que realmente executa sua aplicação FastAPI. Enq
 
 Pense no FastAPI como a planta da sua API, e no Uvicorn como o motor que a impulsiona.
 
-O comando `uvicorn main:app --app-dir 01-fundamentals/03-fastapi --reload` significa:
+O comando `uvicorn main:app --app-dir 01-fundamentals/04-fastapi --reload` significa:
 -   `main`: Use o arquivo chamado `main.py`
 -   `:app`: Procure por uma variável chamada `app` dentro desse arquivo
--   `--app-dir 01-fundamentals/03-fastapi`: Diz ao Uvicorn onde procurar o arquivo da aplicação, permitindo que ele lide com importações corretamente a partir da raiz.
+-   `--app-dir 01-fundamentals/04-fastapi`: Diz ao Uvicorn onde procurar o arquivo da aplicação, permitindo que ele lide com importações corretamente a partir da raiz.
 -   `--reload`: Reinicia automaticamente o servidor quando você altera seu código (útil durante o desenvolvimento)
 
 ### Porta Padrão
@@ -56,7 +56,7 @@ Por padrão, o Uvicorn roda na porta 8000. Isso significa:
 
 Você pode alterar isso com a flag `--port` se necessário:
 ```bash
-uvicorn main:app --app-dir 01-fundamentals/03-fastapi --port 5000
+uvicorn main:app --app-dir 01-fundamentals/04-fastapi --port 5000
 ```
 
 ## Estrutura

@@ -25,7 +25,7 @@ async def generate_text_langchain(capital: str) -> str:
     agent = create_agent(
         model=llm,
         tools=[],
-        system_prompt="Você é um especialista em capitais do mundo. Traga as seguintes informações da capital:{capital}: população, país, moeda, lingua e uma curiosidade.",
+        system_prompt="Você é um especialista em capitais do mundo. Traga as informações da capital:{capital}",
         response_format=CapitalData
     )
 
