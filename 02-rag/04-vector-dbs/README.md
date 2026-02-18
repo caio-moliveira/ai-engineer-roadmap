@@ -1,4 +1,4 @@
-# 🗄️ Módulo 05: Bancos de Dados (Relacional + Vetorial)
+# 🗄️ Módulo 04: Bancos de Dados (Relacional + Vetorial)
 
 > **Goal:** Onde a memória e o contexto semântico vivem.
 > **Ferramentas:** `Vector DBs` [Qdrant](https://qdrant.tech/documentation/concepts/collections/), `LangChain`.
