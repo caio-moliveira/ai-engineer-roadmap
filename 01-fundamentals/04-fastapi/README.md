@@ -139,12 +139,9 @@ Este arquivo:
 ### 4. `models.py` - Validação de Dados
 
 ```python
-from pydantic import BaseModel
 from typing import Optional
 
-class GenerateRequest(BaseModel):
-    prompt: str
-    topic: Optional[str] = None
+    topic: str
 ```
 
 Este arquivo:

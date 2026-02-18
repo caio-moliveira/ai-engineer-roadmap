@@ -36,8 +36,8 @@ if __name__ == "__main__":
     print("--- Exemplo 1: Dados Completos ---")
     data_valid = {
         "name": "Alice",
-        "email": "caio@gmail.com",
-        "age": 30,
+        "email": "caio",
+        "age": 300,
         "role": "admin",
         "bio": "Engenheira de IA"
     }

@@ -62,7 +62,7 @@ def generate_text_langchain_messages() -> str:
 
 if __name__ == "__main__":
     # Teste simples
-    resultado = generate_text_langchain("Python")
-    print(resultado)
-    # resultado = generate_text_langchain_messages()
+    # resultado = generate_text_langchain("Python")
     # print(resultado)
+    resultado = generate_text_langchain_messages()
+    print(resultado)

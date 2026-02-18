@@ -54,8 +54,3 @@ if __name__ == "__main__":
     print(f"Balance (Decimal): {resource.balance} (tipo: {type(resource.balance)})")
     print(f"IP (IPv4): {resource.ip}")
 
-    print("\n--- Teste de Erro (Enum Inválido) ---")
-    try:
-        Resource.model_validate({**data, "status": "ativado"})
-    except Exception as e:
-        print(f"Erro capturado:\n{e}")

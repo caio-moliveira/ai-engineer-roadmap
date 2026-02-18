@@ -52,7 +52,8 @@ if __name__ == "__main__":
 
         print("\n--- Teste 2: Validação Cruzada (Erro) ---")
         # Isso vai falhar porque priority=5 exige [URGENTE] no título
-        t2 = Ticket(title="Erro simples", priority=5)
+        t2 = Ticket(title=" Erro simples", priority=5)
+        print(t2)
     except ValueError as e:
         print(f"Erro capturado: {e}")
 

@@ -12,7 +12,7 @@ async def endpoint_openai(request: GenerateRequest):
     Endpoint que usa a implementação pura da OpenAI.
     """
     try:
-        result = await generate_text_openai(request.prompt)
+        result = await generate_text_openai(request.capital)
         return {"response": result}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
@@ -21,13 +21,10 @@ async def endpoint_openai(request: GenerateRequest):
 async def endpoint_langchain(request: GenerateRequest):
     """
     Endpoint que usa LangChain. 
-    Se 'topic' for fornecido, usa o template de dica de produtividade.
-    Caso contrário, usa o prompt como tópico.
+    O 'topic' é usado para gerar dicas de produtividade.
     """
     try:
-        # Usa o topic se existir, senão usa o prompt como topic
-        topic_input = request.topic if request.topic else request.prompt
-        result = await generate_text_langchain(topic_input)
+        result = await generate_text_langchain(request.capital)
         return {"response": result}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))

@@ -117,20 +117,3 @@ O fluxo padrão ouro:
 4. Sucesso: Retorna objeto tipado.
 
 ---
-
-## 10) Exercícios (mão na massa)
-
-Veja `exercises.py` para praticar.
-
-### Exercício A — Extração de “dados de edital”
-Crie um model:
-* `orgao: str (min_length=3)`
-* `cargos: list[str] (min_items=1)`
-* `tem_cronograma: bool`
-* `paginas_referenciadas: list[int]` com `ge=1`
-
-### Exercício B — Union discriminada de “próxima ação”
-Modelos:
-* `kind="ask_user"` com `question`
-* `kind="extract_fields"` com `fields: list[str]`
-* `kind="final_answer"` com `answer`
