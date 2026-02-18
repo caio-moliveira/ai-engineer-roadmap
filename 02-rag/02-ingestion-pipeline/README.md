@@ -46,9 +46,6 @@ Não existe "tamanho ideal de chunk". Existe o tamanho certo para sua pergunta.
 ---
 ## Explicação do Módulo 2
 
-> **Goal:** Lixo entra, Lixo sai. Domine a arte de limpar dados.  
-> **Status:** A parte mais subestimada da IA.
-
 ## 1. O Documento é o Inimigo
 PDFs são feitos para impressão, não para leitura.
 - Eles têm cabeçalhos, rodapés, colunas múltiplas e imagens.
@@ -94,32 +91,14 @@ Exemplo: "Qual foi a receita em 2023?"
 - Use um LLM barato (GPT-4o-mini) durante a ingestão para extrair JSON:
   ```json
   {
-    "title": "Relatório Q3",
-    "year": 2023,
-    "department": "Vendas",
-    "summary": "Receita subiu 20%"
+    "titulo": "Relatório Q3",
+    "ano": 2023,
+    "departamento": "Vendas",
+    "resumo": "Receita subiu 20%"
   }
   ```
 
-## 4. Arquitetura Real de Pipeline
-Não escreva um script. Construa um pipeline.
 
-1.  **Trigger:** Usuário sobe arquivo.
-2.  **Queue:** Arquivo vai para Redis/SQS.
-3.  **Worker:**
-    - Detecta tipo (MIME).
-    - Parse (Unstructured).
-    - Extrai Metadados (LLM).
-    - Chunk (Recursive).
-    - Embed (OpenAI).
-    - Upsert (Qdrant).
-4.  **Status:** Notifica Usuário "Arquivo Pronto".
-
-## 🧠 Mental Model: "Fragmentação"
-Se você picotar um romance de mistério aleatoriamente, pode pegar um pedaço que diz:
-*"Ele fez isso."*
-Quem é "Ele"? O contexto foi perdido.
-**Overlap** ajuda (manter 50 chars do anterior), mas **Parent-Child** é a correção real.
 
 ## ⏭️ Próximo Passo
 Como transformamos texto em matemática?
