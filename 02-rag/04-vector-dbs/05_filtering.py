@@ -6,13 +6,11 @@ def main():
     collection_name = "filter_demo"
     
     # Setup - Idempotência
-    if client.collection_exists(collection_name):
-        client.delete_collection(collection_name)
-    
-    client.create_collection(
-        collection_name=collection_name,
-        vectors_config=models.VectorParams(size=2, distance=models.Distance.COSINE)
-    )
+    if not client.collection_exists(collection_name):  
+        client.create_collection(
+            collection_name=collection_name,
+            vectors_config=models.VectorParams(size=2, distance=models.Distance.COSINE)
+        )
     
     # Criando dados com payload rico para filtrar
     client.upsert(

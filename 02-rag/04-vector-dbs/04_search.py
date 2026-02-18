@@ -6,13 +6,11 @@ def main():
     collection_name = "search_demo"
     
     # Setup - Idempotência
-    if client.collection_exists(collection_name):
-        client.delete_collection(collection_name)
-        
-    client.create_collection(
-        collection_name=collection_name,
-        vectors_config=models.VectorParams(size=3, distance=models.Distance.COSINE)
-    )
+    if not client.collection_exists(collection_name):  
+        client.create_collection(
+            collection_name=collection_name,
+            vectors_config=models.VectorParams(size=3, distance=models.Distance.COSINE)
+        )
     
     # 1. Inserindo dados com Payload mais rico (descritivo)
     print("--- 1. Inserindo dados ---")
@@ -87,6 +85,7 @@ def main():
         print(f"ID: {point.id} | Score: {point.score:.4f}")
         print(f" -> Nome: {point.payload['nome']}")
         print(f" -> Bio:  {point.payload['bio']}")
+        print(f" -> Senioridade: {point.payload['senioridade']}")
 
 if __name__ == "__main__":
     main()

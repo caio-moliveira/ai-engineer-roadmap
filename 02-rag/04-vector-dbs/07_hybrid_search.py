@@ -5,13 +5,11 @@ def main():
     client = QdrantClient(host="localhost", port=6333)
     collection_name = "text_search_demo"
     
-    if client.collection_exists(collection_name):
-        client.delete_collection(collection_name)
-    
-    client.create_collection(
-        collection_name=collection_name,
-        vectors_config=models.VectorParams(size=2, distance=models.Distance.COSINE)
-    )
+    if not client.collection_exists(collection_name):  
+        client.create_collection(
+            collection_name=collection_name,
+            vectors_config=models.VectorParams(size=2, distance=models.Distance.COSINE)
+        )
     
     # Dados com texto longo
     client.upsert(

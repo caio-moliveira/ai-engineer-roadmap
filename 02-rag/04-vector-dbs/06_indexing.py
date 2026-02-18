@@ -5,13 +5,11 @@ def main():
 
     collection_name = "indexing_demo"
     
-    if client.collection_exists(collection_name):
-        client.delete_collection(collection_name)
-    
-    client.create_collection(
-        collection_name=collection_name,
-        vectors_config=models.VectorParams(size=2, distance=models.Distance.COSINE)
-    )
+    if not client.collection_exists(collection_name):  
+        client.create_collection(
+            collection_name=collection_name,
+            vectors_config=models.VectorParams(size=2, distance=models.Distance.COSINE)
+        )
     
     # Adicionar muitos pontos para fazer sentido ter index
     # (Em demo pequena não faz diferença de performance, mas o conceito é o que importa)

@@ -32,7 +32,7 @@ def main():
                 size=vector_size,
                 distance=distance_metric
             )},
-            sparse_vectors_config={'texto-sparse': SparseVectorParams(index=models.SparseIndexParams())}, # Híbrido
+            # sparse_vectors_config={'texto-sparse': SparseVectorParams(index=models.SparseIndexParams())}, # Híbrido
         )
 
     print(f"Coleção '{collection_name}' criada com sucesso!")
