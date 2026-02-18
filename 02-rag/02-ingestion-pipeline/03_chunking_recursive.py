@@ -29,24 +29,21 @@ def main():
         print(f"Erro: {e}")
         return
     
-    print("\n--- Texto Original (Preview) ---")
-    print(long_text[:200] + "...")
     
     # Configuração do Splitter
     # chunk_size: Tamanho alvo do chunk (em caracteres, por padrão).
     # chunk_overlap: Quanto do chunk anterior se repete no próximo (para manter continuidade).
     # separators: A ordem importa! Tenta quebrar por parágrafo, depois linha, depois espaço.
     splitter = RecursiveCharacterTextSplitter(
-        chunk_size=1000, # Aumentei um pouco pois o texto real é maior
-        chunk_overlap=200,
-        separators=["\n\n", "\n", " ", ""]
+        chunk_size=500, # Aumentei um pouco pois o texto real é maior
+        # separators=["\n\n", "\n", " ", ""]
     )
     
     chunks = splitter.split_text(long_text)
     
     print(f"\n--- Chunks Gerados ({len(chunks)}) ---")
     for i, chunk in enumerate(chunks[:3]): # Mostrando só os 3 primeiros
-        print(f"[{i}] len={len(chunk)}: {repr(chunk[:100])}...")
+        print(f"[{i}] len={len(chunk)}: {repr(chunk)}...")
         
     print(f"... e mais {len(chunks)-3} chunks.")
 

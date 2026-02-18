@@ -1,7 +1,7 @@
 # 🗄️ Módulo 05: Bancos de Dados (Relacional + Vetorial)
 
 > **Goal:** Onde a memória e o contexto semântico vivem.
-> **Ferramentas:** `PostgreSQL`, `Vector DBs` (Qdrant), `SQLAlchemy`, `LangChain`.
+> **Ferramentas:** `Vector DBs` [Qdrant](https://qdrant.tech/documentation/concepts/collections/), `LangChain`.
 
 ---
 

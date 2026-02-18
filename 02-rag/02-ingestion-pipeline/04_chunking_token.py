@@ -45,8 +45,8 @@ def main():
     # 2. Respeita o limite duro de tokens (X tokens max)
     splitter = RecursiveCharacterTextSplitter.from_tiktoken_encoder(
         model_name="gpt-4o",
-        chunk_size=1000, # Tokens! (aprox 4000 caracteres)
-        chunk_overlap=200
+        chunk_size=500, 
+        # chunk_overlap=200
     )
     
     
@@ -59,7 +59,7 @@ def main():
     for i, chunk in enumerate(chunks[:3]): # Mostrando só os 3 primeiros
         token_count = len(enc.encode(chunk))
         print(f"[{i}] Tokens={token_count} | Caracteres={len(chunk)}")
-        print(f"    Preview: {repr(chunk[:100])}...")
+        print(f"    Preview: {repr(chunk)}...")
         
     print(f"... e mais {len(chunks)-3} chunks.")
 

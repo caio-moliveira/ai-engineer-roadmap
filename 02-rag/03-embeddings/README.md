@@ -13,8 +13,6 @@ Nesta pasta, criamos 5 scripts para você entender embeddings do zero:
 | **`02_openai_embeddings.py`**       | Como gerar vetores usando a API da OpenAI (padrão de mercado). |
 | **`03_local_embeddings.py`**        | Como gerar vetores **de graça** e localmente com Open Source.   |
 | **`04_semantic_search_demo.py`**    | **A Mágica do RAG!** Criando um mini-buscador semântico.       |
-| **`05_visualizing_embeddings.py`**  | Visualizando o espaço de alta dimensão em um gráfico 2D.  |
-
 ---
 
 ## 🚀 Como Executar

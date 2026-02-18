@@ -16,7 +16,7 @@ def main():
     client = OpenAI(api_key=api_key)
     
     texto = "A inteligência artificial é fascinante"
-    modelo = "text-embedding-3-small" # Modelo padrão, equilibrado (Custo vs Qualidade)
+    modelo = "text-embedding-3-large" # 1536
     
     print(f"Gerando embedding para: '{texto}'")
     print(f"Usando modelo: {modelo}...")
@@ -36,7 +36,6 @@ def main():
     print(f"\nSucesso! Vetor gerado.")
     print(f"Dimensões do vetor: {dimensoes}") # Deve ser 1536 para text-embedding-3-small
     
-    print(f"\nOs primeiros 5 números do vetor:")
     print(embedding_vector)
     
     # Nota sobre Custo:
