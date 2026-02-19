@@ -67,16 +67,16 @@ def main():
 
     # 4. Executar
     # Exemplo 1: Pergunta sobre o PDF
-    query1 = "Quais são as principais causas das mudanças climáticas segundo o texto?"
-    print(f"\nUser: {query1}")
-    for event in agent_executor.stream({"messages": [("user", query1)]}, stream_mode="values"):
-        event["messages"][-1].pretty_print()
+    # query1 = "Quais são as principais causas das mudanças climáticas segundo o texto?"
+    # print(f"\nUser: {query1}")
+    # for event in agent_executor.stream({"messages": [("user", query1)]}, stream_mode="values"):
+    #     event["messages"][-1].pretty_print()
 
-    # Exemplo 2: Chitchat
-    query2 = "Oi, tudo bem?"
-    print(f"\nUser: {query2}")
-    for event in agent_executor.stream({"messages": [("user", query2)]}, stream_mode="values"):
-        event["messages"][-1].pretty_print()
+    # # Exemplo 2: Chitchat
+    # query2 = "Oi, tudo bem?"
+    # print(f"\nUser: {query2}")
+    # for event in agent_executor.stream({"messages": [("user", query2)]}, stream_mode="values"):
+    #     event["messages"][-1].pretty_print()
 
     # Exemplo 3: Pergunta fora do contexto (Fallback)
     query3 = "Qual é a cotação atual do Bitcoin?"
