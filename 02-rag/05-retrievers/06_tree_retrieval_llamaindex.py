@@ -8,18 +8,18 @@ load_dotenv()
 def main():
     print("--- 03. Tree Retrieval (LlamaIndex) ---")
     print("Objetivo: Demonstrar a recuperação hierárquica com Tree Index.\n")
-
+    PDF_PATH = "Understanding_Climate_Change.pdf"
     # 1. Configurações
     Settings.llm = OpenAI(model="gpt-4o-mini", temperature=0)
 
     # 2. Carregar Documentos
-    pdf_path = os.path.join(os.path.dirname(__file__), "data")
+    pdf_path = os.path.join(os.path.dirname(__file__), PDF_PATH)
     if not os.path.exists(pdf_path):
         print(f"Erro: Pasta '{pdf_path}' não encontrada.")
         return
 
     print("Carregando documentos...")
-    documents = SimpleDirectoryReader(pdf_path).load_data()
+    documents = SimpleDirectoryReader(input_files=[pdf_path]).load_data()
     # Usando subconjunto para agilizar a construção da árvore
     documents = documents[:10]
     print(f"Construindo árvore com {len(documents)} nós iniciais...")

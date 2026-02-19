@@ -9,17 +9,19 @@ def main():
     print("--- 02. Summary Retrieval (LlamaIndex) ---")
     print("Objetivo: Demonstrar o modo 'llm' onde o modelo seleciona o contexto.\n")
 
+    PDF_PATH = "Understanding_Climate_Change.pdf"
+
     # 1. Configurações
     Settings.llm = OpenAI(model="gpt-4o-mini", temperature=0)
 
     # 2. Carregar Documentos
-    pdf_path = os.path.join(os.path.dirname(__file__), "data")
+    pdf_path = os.path.join(os.path.dirname(__file__), PDF_PATH)
     if not os.path.exists(pdf_path):
         print(f"Erro: Pasta '{pdf_path}' não encontrada.")
         return
 
     print("Carregando documentos...")
-    documents = SimpleDirectoryReader(pdf_path).load_data()
+    documents = SimpleDirectoryReader(input_files=[pdf_path]).load_data()
     # Para demonstração, vamos usar apenas os primeiros 5 documentos para não estourar contexto/custo
     documents = documents[:5] 
     print(f"Usando {len(documents)} documentos para o índice de resumo.")

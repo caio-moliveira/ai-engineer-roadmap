@@ -120,7 +120,7 @@ def main():
 
     print(f"\nResultados encontrados: {len(docs)}")
     for i, doc in enumerate(docs):
-        print(f"\n[{i+1}] {doc.page_content[:150]}...")
+        print(f"\n[{i+1}] {doc.page_content}")
         print(f"    Metadata: {doc.metadata}")
     
 if __name__ == "__main__":
