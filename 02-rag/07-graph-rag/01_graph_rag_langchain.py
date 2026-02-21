@@ -1,8 +1,11 @@
 import os
+import networkx as nx
+import matplotlib.pyplot as plt
 from langchain_community.vectorstores import InMemoryVectorStore
 from langchain_core.documents import Document
 from langchain_openai import OpenAIEmbeddings
 from langchain_graph_retriever import GraphRetriever
+from langchain_graph_retriever.document_graph import create_graph
 from graph_retriever.strategies import Eager
 from dotenv import load_dotenv
 
@@ -22,7 +25,7 @@ def main():
         Document(
             id="python",
             page_content="Python é uma linguagem de programação de alto nível.",
-            metadata={"related_to": ["django", "pandas"]}
+            metadata={"related_to": ["django", "pandas", "machine_learning"]}
         ),
         Document(
             id="django",
@@ -37,12 +40,52 @@ def main():
         Document(
             id="web_development",
             page_content="Desenvolvimento Web envolve criar sites e aplicações para a internet.",
-            metadata={"related_to": ["django", "html", "css"]}
+            metadata={"related_to": ["html", "css", "javascript", "react"]}
         ),
         Document(
             id="data_science",
             page_content="Data Science é o estudo de dados para extrair insights significativos.",
-            metadata={"related_to": ["pandas", "machine_learning"]}
+            metadata={"related_to": ["pandas", "machine_learning", "deep_learning"]}
+        ),
+        Document(
+            id="html",
+            page_content="HTML é a linguagem de marcação padrão para criar páginas web.",
+            metadata={"related_to": ["web_development", "css", "javascript"]}
+        ),
+        Document(
+            id="css",
+            page_content="CSS é usado para estilizar elementos escritos usando HTML.",
+            metadata={"related_to": ["web_development", "html", "javascript"]}
+        ),
+        Document(
+            id="javascript",
+            page_content="JavaScript é uma linguagem de programação para web.",
+            metadata={"related_to": ["web_development", "html", "css", "react"]}
+        ),
+        Document(
+            id="react",
+            page_content="React é uma biblioteca JavaScript de código aberto com foco em criar interfaces de usuário.",
+            metadata={"related_to": ["web_development", "javascript"]}
+        ),
+        Document(
+            id="machine_learning",
+            page_content="Machine Learning foca no desenvolvimento de algoritmos que aprendem.",
+            metadata={"related_to": ["python", "data_science", "deep_learning"]}
+        ),
+        Document(
+            id="deep_learning",
+            page_content="Deep Learning é baseado em redes neurais artificiais com múltiplas camadas.",
+            metadata={"related_to": ["machine_learning", "data_science"]}
+        ),
+        Document(
+            id="sql",
+            page_content="SQL é uma linguagem para gerenciar banco de dados relacional.",
+            metadata={"related_to": ["python", "django", "pandas", "data_science", "database"]}
+        ),
+        Document(
+            id="database",
+            page_content="Um banco de dados é uma coleção organizada de dados.",
+            metadata={"related_to": ["sql"]}
         ),
     ]
 
@@ -65,7 +108,7 @@ def main():
         edges=[("related_to", "related_to")], # Conecta o valor de 'related_to' ao documento que tem esse ID?
         # A documentação simplificada sugere edges=[("habitat", "habitat")] para conectar valores iguais.
         # Mas para conectar doc A -> doc B, precisamos que doc A tenha link para doc B.
-        strategy=Eager(k=5, start_k=1, max_depth=2),
+        strategy=Eager(k=15, start_k=2, max_depth=3),
     )
     
     # Nota: A lib langchain-graph-retriever é recente e pode ter comportamentos específicos na definição de arestas.
@@ -90,6 +133,15 @@ def main():
         print(f"\n[ID: {doc.id}]")
         print(f"Conteúdo: {doc.page_content}")
         print(f"Relações: {doc.metadata.get('related_to')}")
+
+    print("\nGerando visualização do grafo...")
+    document_graph = create_graph(
+        documents=results,
+        edges=traversal_retriever.edges,
+    )
+
+    nx.draw(document_graph, with_labels=True)
+    plt.show()
 
 if __name__ == "__main__":
     main()
