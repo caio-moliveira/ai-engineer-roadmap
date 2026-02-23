@@ -22,7 +22,7 @@ def run_evaluation():
         print("Certifique-se de que o PDF existe no caminho esperado em 06-rag-agent/utils.py")
         return
 
-    retriever = vectorstore.as_retriever(search_kwargs={"k": 2})
+    retriever = vectorstore.as_retriever(search_kwargs={"k": 20})
     
     # Config
     llm_generator = ChatOpenAI(model="gpt-4o-mini", temperature=0)
@@ -40,7 +40,7 @@ def run_evaluation():
     ]
 
     ground_truths = [
-        "O texto menciona principalmente dióxido de carbono (CO2), metano e óxido nitroso.",
+        "O texto menciona principalmente dióxido de carbono (CO2), metano e óxido nitroso.", 
         "O aquecimento causa aumento do nível do mar, acidificação e impacto na vida marinha.",
         "O texto destaca a importância de transição para fontes como solar e eólica para reduzir emissões."
     ]
@@ -51,19 +51,36 @@ def run_evaluation():
     answers = []
     contexts = []
 
+    MOCK_WRONG_ANSWERS = True  # Mude para False para voltar a usar as respostas reais da IA
+
     for query in questions:
         # Recupera documentos
         docs = retriever.invoke(query)
         retrieved_texts = [doc.page_content for doc in docs]
         contexts.append(retrieved_texts)
 
-        # Gera resposta usando o LLM generator
-        messages = [
-            ("system", "Você é um assistente útil. Use o contexto abaixo para responder a pergunta."),
-            ("human", f"Contexto: {retrieved_texts}\n\nPergunta: {query}")
+        if not MOCK_WRONG_ANSWERS:
+            # Gera resposta real usando o LLM generator
+            messages = [
+                ("system", "Você é um assistente útil. Use o contexto abaixo para responder a pergunta."),
+                ("human", f"Contexto: {retrieved_texts}\n\nPergunta: {query}")
+            ]
+            ai_msg = llm_generator.invoke(messages)
+            answers.append(ai_msg.content)
+            
+            print(f"\nPergunta: {query}")
+            print(f"Resposta da IA: {ai_msg.content}")
+            
+    if MOCK_WRONG_ANSWERS:
+        # Força respostas totalmente desconexas e alucinadas
+        answers = [
+            "A receita de bolo de cenoura leva 3 ovos, farinha e muita cobertura de chocolate.",
+            "O maior problema nos oceanos modernos é que os pinguins estão roubando as pranchas de surf.",
+            "O texto diz que a energia mais recomendada é ligar baterias em hamsters girando rodelas."
         ]
-        ai_msg = llm_generator.invoke(messages)
-        answers.append(ai_msg.content)
+        print("\n[!] AVISO: Usando respostas MOCKADAS (totalmente erradas) para testar as métricas!")
+        for q, a in zip(questions, answers):
+            print(f"\nPergunta: {q}\nResposta Fake: {a}")
 
     # 4. Montar Dataset no formato HuggingFace/RAGAS
     data = {
