@@ -108,7 +108,7 @@ def main():
         edges=[("related_to", "related_to")], # Conecta o valor de 'related_to' ao documento que tem esse ID?
         # A documentação simplificada sugere edges=[("habitat", "habitat")] para conectar valores iguais.
         # Mas para conectar doc A -> doc B, precisamos que doc A tenha link para doc B.
-        strategy=Eager(k=15, start_k=2, max_depth=3),
+        strategy=Eager(k=5, start_k=2, max_depth=2),
     )
     
     # Nota: A lib langchain-graph-retriever é recente e pode ter comportamentos específicos na definição de arestas.
