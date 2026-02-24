@@ -1,11 +1,22 @@
 import logging
 from fastapi import FastAPI
-from fastapi.responses import JSONResponse
+from fastapi.middleware.cors import CORSMiddleware
 
 from src.models import AskRequest, AskResponse
-from src.agent_graph import run_agent
+from src.chat.chat import chat
+from src.routers import qdrant, chat as chat_router
 
 app = FastAPI(title="Agentic RAG Qdrant API", version="0.1.0")
+app.include_router(qdrant.router)
+app.include_router(chat_router.router)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 logger = logging.getLogger(__name__)
 
@@ -14,16 +25,18 @@ def healthcheck():
     return {"status": "ok"}
 
 @app.post("/ask", response_model=AskResponse)
-def ask_endpoint(req: AskRequest):
+async def ask_endpoint(req: AskRequest):
     try:
-        response = run_agent(
-            user_query=req.question,
-            session_id=req.session_id,
-            top_k=req.top_k,
-            collection_hint=req.collection_hint,
-            metadata_filters=req.metadata_filters
+        response_msg = await chat.gerar_resposta(
+            consulta=req.question,
+            collection_name=req.collection_name
         )
-        return response
+        
+        return AskResponse(
+            answer=response_msg.content,
+            collection_name=req.collection_name
+
+        )
     except Exception as e:
         logger.error(f"Error executing agent: {str(e)}", exc_info=True)
         return JSONResponse(status_code=503, content={"detail": f"Service unavailable: {str(e)}"})

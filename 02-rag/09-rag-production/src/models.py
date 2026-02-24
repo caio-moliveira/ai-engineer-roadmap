@@ -7,8 +7,12 @@ class AskRequest(BaseModel):
     question: str = Field(..., min_length=3)
     session_id: str = Field(default_factory=lambda: str(uuid.uuid4()))
     top_k: int = 3
-    collection_hint: Optional[Literal["produtos", "suporte", "atendimento_especializado"]] = None
+    collection_name: str
     metadata_filters: Optional[Dict[str, Any]] = None
+
+class DocumentMetadataExtraction(BaseModel):
+    classificacao: str = Field(description="Classificação do documento em no máximo 3 palavras.")
+    descricao: str = Field(description="Descrição resumida do documento em no máximo 2 frases.")
 
 class Chunk(BaseModel):
     text: str
@@ -17,8 +21,4 @@ class Chunk(BaseModel):
 
 class AskResponse(BaseModel):
     answer: str
-    route: Literal["produtos", "suporte", "atendimento_especializado", "unknown"]
-    used_collections: List[Literal["produtos", "suporte", "atendimento_especializado"]]
-    confidence: float
-    evidence: List[Chunk]
-    warnings: List[str] = []
+    collection_name: str

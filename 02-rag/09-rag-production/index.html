@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Qdrant RAG Chat</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-hover: #1d4ed8;
+            --bg-color: #f8fafc;
+            --panel-bg: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            gap: 20px;
+            height: 100vh;
+            box-sizing: border-box;
+        }
+
+        .panel {
+            background: var(--panel-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .config-panel {
+            flex: 1;
+            min-width: 300px;
+            max-width: 400px;
+            overflow-y: auto;
+        }
+
+        .chat-panel {
+            flex: 2;
+        }
+
+        h2 {
+            margin-top: 0;
+            margin-bottom: 20px;
+            font-size: 1.25rem;
+            color: var(--text-main);
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 6px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--text-main);
+        }
+
+        input[type="text"],
+        input[type="number"],
+        select,
+        input[type="file"] {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-family: inherit;
+        }
+
+        button {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            width: 100%;
+            transition: background-color 0.2s;
+        }
+
+        button:hover {
+            background-color: var(--primary-hover);
+        }
+
+        button:disabled {
+            background-color: var(--border);
+            cursor: not-allowed;
+            color: var(--text-muted);
+        }
+
+        .chat-history {
+            flex: 1;
+            overflow-y: auto;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 16px;
+            background: #f1f5f9;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .message {
+            max-width: 80%;
+            padding: 12px 16px;
+            border-radius: 8px;
+            line-height: 1.5;
+            word-wrap: break-word;
+        }
+
+        .user-message {
+            align-self: flex-end;
+            background-color: var(--primary);
+            color: white;
+            border-bottom-right-radius: 2px;
+        }
+
+        .bot-message {
+            align-self: flex-start;
+            background-color: white;
+            border: 1px solid var(--border);
+            border-bottom-left-radius: 2px;
+        }
+
+        .chat-input-area {
+            display: flex;
+            gap: 10px;
+        }
+
+        .chat-input-area input[type="text"] {
+            flex: 1;
+        }
+
+        .chat-input-area button {
+            width: auto;
+        }
+
+        .status-msg {
+            font-size: 0.875rem;
+            margin-top: 8px;
+            padding: 8px;
+            border-radius: 4px;
+            display: none;
+        }
+
+        .success {
+            background: #dcfce7;
+            color: #166534;
+            display: block;
+        }
+
+        .error {
+            background: #fee2e2;
+            color: #991b1b;
+            display: block;
+        }
+
+        hr {
+            border: 0;
+            border-top: 1px solid var(--border);
+            margin: 24px 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Panel 1: Configuration & Upload -->
+    <div class="panel config-panel">
+        <h2>Coleções Qdrant</h2>
+
+        <div class="form-group">
+            <label for="newCollectionName">Criar Coleção</label>
+            <div style="display: flex; gap: 8px;">
+                <input type="text" id="newCollectionName" placeholder="ex: base_teste">
+                <button onclick="createCollection()" style="width: auto;">Criar</button>
+            </div>
+            <div id="colStatus" class="status-msg"></div>
+        </div>
+
+        <hr>
+
+        <h2>Ingestão de Arquivo</h2>
+        <form id="uploadForm" onsubmit="uploadDocument(event)">
+            <div class="form-group">
+                <label for="uploadCollection">Coleção de Destino</label>
+                <input type="text" id="uploadCollection" required placeholder="Nome da coleção existente">
+            </div>
+
+            <div class="form-group">
+                <label for="fileInput">Arquivo (PDF/TXT)</label>
+                <input type="file" id="fileInput" required accept=".pdf,.txt">
+            </div>
+
+            <div style="display: flex; gap: 10px;">
+                <div class="form-group" style="flex: 1;">
+                    <label for="chunkSize">Chunk Size</label>
+                    <input type="number" id="chunkSize" value="1000" min="100">
+                </div>
+                <div class="form-group" style="flex: 1;">
+                    <label for="overlap">Overlap</label>
+                    <input type="number" id="overlap" value="100" min="0">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="splitterType">Splitter Type</label>
+                <select id="splitterType">
+                    <option value="recursive">Recursive Character</option>
+                    <option value="character">Character</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label style="display: flex; align-items: center; gap: 8px; font-weight: normal;">
+                    <input type="checkbox" id="useTiktoken" style="width:auto;"> Usar Tiktoken
+                </label>
+            </div>
+
+            <button type="submit" id="btnUpload">Processar e Ingerir</button>
+            <div id="uploadStatus" class="status-msg"></div>
+        </form>
+    </div>
+
+    <!-- Panel 2: Chat -->
+    <div class="panel chat-panel">
+        <h2>Chat RAG</h2>
+
+        <div class="form-group" style="display: flex; gap: 10px; align-items: center;">
+            <label for="chatCollection" style="margin: 0; white-space: nowrap;">Consultar Coleção:</label>
+            <input type="text" id="chatCollection" value="Fiscap_Edital_v1" style="width: 200px;">
+        </div>
+
+        <div class="chat-history" id="chatHistory">
+            <div class="message bot-message">Olá! Qual a sua dúvida sobre os documentos da sua base?</div>
+        </div>
+
+        <form class="chat-input-area" onsubmit="sendMessage(event)">
+            <input type="text" id="chatInput" placeholder="Digite sua pergunta..." autocomplete="off" required>
+            <button type="submit" id="btnSend">Enviar</button>
+        </form>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:8000';
+
+        // Historico em memoria
+        let chatContext = [];
+
+        // --- Qdrant Colecoes ---
+        async function createCollection() {
+            const name = document.getElementById('newCollectionName').value.trim();
+            const statusDiv = document.getElementById('colStatus');
+
+            if (!name) return;
+
+            try {
+                // Notando que o router de collections atual da aplicacao do usuario tem o prefixo /collections ou /qdrant/collection
+                // Seguindo file qdrant.py = router.post("/collection") -> prefixo "/qdrant" = "/qdrant/collection"
+                // Pelo teste recente do usuario estava "POST /qdrant/collection?collection_name=teste"
+                const res = await fetch(`${API_BASE}/qdrant/collection?collection_name=${encodeURIComponent(name)}`, {
+                    method: 'POST'
+                });
+                const data = await res.json();
+
+                if (res.ok) {
+                    statusDiv.className = 'status-msg success';
+                    statusDiv.innerHTML = data.message || `Coleção ${name} criada com sucesso.`;
+                    document.getElementById('uploadCollection').value = name;
+                    document.getElementById('chatCollection').value = name;
+                } else {
+                    statusDiv.className = 'status-msg error';
+                    statusDiv.innerHTML = data.detail || 'Erro ao criar coleção.';
+                }
+            } catch (err) {
+                statusDiv.className = 'status-msg error';
+                statusDiv.innerHTML = 'Erro de conexão.';
+            }
+        }
+
+        // --- Qdrant Ingestao ---
+        async function uploadDocument(e) {
+            e.preventDefault();
+
+            const colName = document.getElementById('uploadCollection').value.trim();
+            const fileInput = document.getElementById('fileInput').files[0];
+            const chunkSize = document.getElementById('chunkSize').value;
+            const overlap = document.getElementById('overlap').value;
+            const splitter = document.getElementById('splitterType').value;
+            const tiktoken = document.getElementById('useTiktoken').checked;
+            const statusDiv = document.getElementById('uploadStatus');
+            const btn = document.getElementById('btnUpload');
+
+            if (!colName || !fileInput) return;
+
+            btn.disabled = true;
+            btn.innerHTML = 'Processando (LLM + Embeddings)...';
+            statusDiv.className = 'status-msg';
+
+            const formData = new FormData();
+            formData.append("file", fileInput);
+            formData.append("chunk_size", chunkSize);
+            formData.append("overlap_chunk", overlap);
+            formData.append("splitter_type", splitter);
+            formData.append("use_tiktoken", tiktoken);
+
+            try {
+                // Utilizando router /qdrant/collection/{collection_name}/document
+                const res = await fetch(`${API_BASE}/qdrant/collection/${encodeURIComponent(colName)}/document`, {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const data = await res.json();
+
+                if (res.ok) {
+                    statusDiv.className = 'status-msg success';
+                    statusDiv.innerHTML = `Vetorizado! ${data.vector_count} chunks processados.`;
+                } else {
+                    statusDiv.className = 'status-msg error';
+                    statusDiv.innerHTML = data.detail || 'Erro na ingestão.';
+                }
+            } catch (err) {
+                statusDiv.className = 'status-msg error';
+                statusDiv.innerHTML = 'Falha na requisição.';
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = 'Processar e Ingerir';
+            }
+        }
+
+        // --- Chat UI ---
+        function appendMessage(text, isUser) {
+            const historyObj = document.getElementById('chatHistory');
+            const msgDiv = document.createElement('div');
+            msgDiv.className = `message ${isUser ? 'user-message' : 'bot-message'}`;
+
+            // Formatacao basica de markdown pra quebras de linha
+            msgDiv.innerHTML = text.replace(/\n/g, '<br>');
+            historyObj.appendChild(msgDiv);
+            historyObj.scrollTop = historyObj.scrollHeight;
+        }
+
+        // --- Chat Requisicao ---
+        async function sendMessage(e) {
+            e.preventDefault();
+
+            const inputField = document.getElementById('chatInput');
+            const query = inputField.value.trim();
+            const collectionName = document.getElementById('chatCollection').value.trim();
+            const btn = document.getElementById('btnSend');
+
+            if (!query) return;
+
+            appendMessage(query, true);
+            inputField.value = '';
+            btn.disabled = true;
+
+            const payload = {
+                "question": query,
+                "collection_name": collectionName
+            };
+
+            try {
+                // Endpoint /ask espera JSON baseado em Pydantic AskRequest
+                const res = await fetch(`${API_BASE}/ask`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(payload)
+                });
+
+                if (res.ok) {
+                    const data = await res.json();
+                    appendMessage(data.answer, false);
+
+                    // Adiciona no history basico
+                    chatContext.push({ "role": "user", "content": query });
+                    chatContext.push({ "role": "assistant", "content": data.answer });
+                } else {
+                    const errInfo = await res.json();
+                    appendMessage(`[Erro do servidor: ${errInfo.detail || res.status}]`, false);
+                }
+            } catch (err) {
+                appendMessage(`[Falha ao conectar com ${API_BASE}]`, false);
+            } finally {
+                btn.disabled = false;
+                inputField.focus();
+            }
+        }
+    </script>
+</body>
+
+</html>
