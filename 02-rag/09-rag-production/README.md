@@ -1,13 +1,13 @@
 # Agentic RAG com Qdrant & LangGraph (Produção)
 
-Este módulo representa o projeto final da nossa trilha de *Retrieval-Augmented Generation* (RAG). Aqui, elevamos o sistema RAG tradicional para uma arquitetura **Agentic RAG**, pronta para produção, que une a força de bancos de dados vetoriais locais (Qdrant), frameworks de agentes (LangGraph e LangChain), e uma API moderna (FastAPI).
+Este módulo representa o projeto final da nossa trilha de *Retrieval-Augmented Generation* (RAG). Aqui, elevamos o sistema RAG tradicional para uma arquitetura **Agentic RAG**, pronta para produção, que une a força de bancos de dados vetoriais locais ([Qdrant](https://qdrant.tech/documentation/)), frameworks de agentes ([LangGraph](https://langchain-ai.github.io/langgraph/) e [LangChain](https://python.langchain.com/)), e uma API moderna ([FastAPI](https://fastapi.tiangolo.com/)).
 
 ## 🎯 Objetivo Arquitetural
 
 No RAG Tradicional, o fluxo é fixo: o usuário pergunta, o sistema sempre busca no banco de dados vetorial, anexa o contexto e envia ao LLM.
 
 **No nosso projeto (Agentic RAG):** 
-Nós utilizamos o **LangGraph** para criar um Agente (LLM) que toma decisões. Através de *Tools* (ferramentas), o modelo decide proativamente:
+Nós utilizamos o **[LangGraph](https://langchain-ai.github.io/langgraph/)** para criar um Agente (LLM) que toma decisões. Através de *Tools* (ferramentas), o modelo decide proativamente:
 1. **Devo responder diretamente?** (Para bate-papo, saudações "Olá, bom dia").
 2. **Devo invocar a ferramenta de busca?** (Para perguntas técnicas ou sobre o acervo documental).
 
@@ -17,12 +17,12 @@ Isso resulta em um sistema mais inteligente, que não gasta tokens e tempo fazen
 
 O ecossistema que construímos envolve as seguintes tecnologias:
 
-*   **FastAPI**: Servidor web assíncrono hiper-rápido, provendo os endpoints da nossa aplicação Restful.
-*   **Qdrant**: Nosso Banco de Dados Vetorial *Open Source*. Estamos rodando o Qdrant via Docker localmente (porta 6333) para persistir nossos embeddings de alta dimensão.
-*   **LangChain & LangGraph**: Orquestração do agente. O `LangGraph` gerencia o Estado da nossa conversa (StateGraph) e o ciclo dinâmico contínuo entre invocações diretas ao LLM e o *ToolNode* (nossa ferramenta de busca).
-*   **OpenAI Embeddings (text-embedding-3-large)**: Criação de vetores para mapeamento semântico dos textos.
-*   **OpenAI LLM (gpt-4o-mini)**: O "Cérebro" do Agente, encarregado de interpretar requests e executar chamadas da ferramenta de retrieve.
-*   **Langfuse**: Plataforma de Observabilidade e Monitoramento de LLMs. Usado através de callbacks para traçar e analisar cada token gerado e tempo de inferência nas requisições.
+*   **[FastAPI](https://fastapi.tiangolo.com/)**: Servidor web assíncrono hiper-rápido, provendo os endpoints da nossa aplicação Restful.
+*   **[Qdrant](https://qdrant.tech/documentation/)**: Nosso Banco de Dados Vetorial *Open Source*. Estamos rodando o [Qdrant](https://qdrant.tech/documentation/) via [Docker](https://docs.docker.com/) localmente (porta 6333) para persistir nossos embeddings de alta dimensão.
+*   **[LangChain](https://python.langchain.com/) & [LangGraph](https://langchain-ai.github.io/langgraph/)**: Orquestração do agente. O `LangGraph` gerencia o Estado da nossa conversa (StateGraph) e o ciclo dinâmico contínuo entre invocações diretas ao LLM e o *ToolNode* (nossa ferramenta de busca).
+*   **[OpenAI Embeddings](https://platform.openai.com/docs/guides/embeddings) (text-embedding-3-large)**: Criação de vetores para mapeamento semântico dos textos.
+*   **[OpenAI LLM](https://platform.openai.com/docs/models) (gpt-4o-mini)**: O "Cérebro" do Agente, encarregado de interpretar requests e executar chamadas da ferramenta de retrieve.
+*   **[Langfuse](https://langfuse.com/docs)**: Plataforma de Observabilidade e Monitoramento de LLMs. Usado através de callbacks para traçar e analisar cada token gerado e tempo de inferência nas requisições.
 
 ## 🗂️ Estrutura do Projeto
 
@@ -64,21 +64,21 @@ Ao enviar um documento para o vetor, o sistema lê automaticamente a primeira p�
 * Isso entra como metadados enriquecidos no banco, facilitando filtros e aumentando contexto de leitura futura.
 
 ### 3. Agente com Tool Calling e Multi-Collections
-O chat mudou radicalmente nesta versão. Usamos a magia do `StateGraph` do LangGraph.
+O chat mudou radicalmente nesta versão. Usamos a magia do `StateGraph` do [LangGraph](https://langchain-ai.github.io/langgraph/).
 *   O estado gerencia a lista de mensagens (`messages`) e também o arquivo contextual (`file_context`).
-*   O Endpoints aceita no payload `collection_name`, passando dinamicamente essa variável na configuração de Runtime do LangGraph para a ferramenta `retrieve_documents`. Assim o usuário pesquisa na base que quiser sem reescrever código.
+*   O Endpoints aceita no payload `collection_name`, passando dinamicamente essa variável na configuração de Runtime do [LangGraph](https://langchain-ai.github.io/langgraph/) para a ferramenta `retrieve_documents`. Assim o usuário pesquisa na base que quiser sem reescrever código.
 *   **O Agente pensa:** Se a requisição requerer, o agente ativa a *tool*, varre o banco, junta o resultado retornado pela Tool, formata com citações ("Fonte: arquivo X, pág Y") e molda a resposta final.
 
-### 4. Observabilidade Real (Langfuse)
-As chamadas da Rota `/chat/ask` instanciam um `CallbackHandler()` do Langfuse especificamente e dinamicamente para aquela requisição, rotulando com Tags o nome da coleção acessada e atrelando tudo a `session_id`'s independentes.
+### 4. Observabilidade Real ([Langfuse](https://langfuse.com/docs))
+As chamadas da Rota `/chat/ask` instanciam um `CallbackHandler()` do [Langfuse](https://langfuse.com/docs) especificamente e dinamicamente para aquela requisição, rotulando com Tags o nome da coleção acessada.
 
 
 ## 🚀 Como Executar Localmente
 
 ### Pré-requisitos
-1.  **Docker**: Necessário para rodar o Qdrant local.
-2.  **uv** (ou pip): Gerenciador de dependências python moderno.
-3.  **Ambiente configurado**: Crie um arquivo `.env` na raiz da pasta `09-rag-production` baseado nas chaves pedidas. (OpenAI API e Langfuse)
+1.  **[Docker](https://docs.docker.com/)**: Necessário para rodar o [Qdrant](https://qdrant.tech/documentation/) local.
+2.  **[uv](https://docs.astral.sh/uv/)** (ou pip): Gerenciador de dependências python moderno.
+3.  **Ambiente configurado**: Crie um arquivo `.env` na raiz da pasta `09-rag-production` baseado nas chaves pedidas. (OpenAI API e [Langfuse](https://langfuse.com/docs))
 
 ### Passos:
 
@@ -94,7 +94,7 @@ As chamadas da Rota `/chat/ask` instanciam um `CallbackHandler()` do Langfuse es
     uv pip install pymupdf  # Garantir compatibilidade do processador PDF
     ```
 
-3.  **Rodar a aplicação FastAPI:**
+3.  **Rodar a aplicação [FastAPI](https://fastapi.tiangolo.com/):**
     ```bash
     uv run uvicorn main:app --host 0.0.0.0 --port 8000 --reload
     ```
