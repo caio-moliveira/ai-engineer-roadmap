@@ -25,8 +25,7 @@ class ChatResponse(BaseModel):
 @router.post("/chat/ask", response_model=ChatResponse, tags=["Chat"])
 async def ask_chat(
     query: str = Form(...),
-    collection_name: str = Form("Fiscap_Edital_v1"),
-    session_id: Optional[str] = Form(None),
+    collection_name: str = Form("teste"),
     file: Optional[UploadFile] = File(None),
     history: Optional[str] = Form(None),
     clear_history: bool = Form(False)
@@ -78,7 +77,6 @@ async def ask_chat(
             collection_name=collection_name,
             chat_history=chat_history,
             file_content=file_text_content,
-            session_id=session_id
         )
         
         return ChatResponse(response=response_message.content)

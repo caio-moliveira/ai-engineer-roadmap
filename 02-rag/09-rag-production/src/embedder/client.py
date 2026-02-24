@@ -61,16 +61,6 @@ class QdrantService:
         Note: This can be inefficient for very large collections if not optimized.
         For better performance, we'd use a payload index or a separate active documents set.
         """
-        # Using a scroll loop to get all points (simplified for this task)
-        # In a real efficient system, we might use group_by or facet search if available,
-        # or just maintain a separate list of documents.
-        # Since Qdrant group_by is available, let's try to use it if applicable,
-        # but scroll is the basic requirement request logic: "Use Qdrant’s scroll API"
-        
-        # However, "Use Qdrant’s scroll API to retrieve unique filenames" implies iterating.
-        # A more efficient way for "unique documents" is using the Group API (search_groups) 
-        # but the prompt specifically asked to "Use Qdrant’s scroll API".
-        # We will follow the prompt's logic suggestion but optimize with a set.
         
         unique_filenames = set()
         next_page_offset = None
