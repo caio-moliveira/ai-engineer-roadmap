@@ -23,20 +23,3 @@ logger = logging.getLogger(__name__)
 @app.get("/health")
 def healthcheck():
     return {"status": "ok"}
-
-@app.post("/ask", response_model=AskResponse)
-async def ask_endpoint(req: AskRequest):
-    try:
-        response_msg = await chat.gerar_resposta(
-            consulta=req.question,
-            collection_name=req.collection_name
-        )
-        
-        return AskResponse(
-            answer=response_msg.content,
-            collection_name=req.collection_name
-
-        )
-    except Exception as e:
-        logger.error(f"Error executing agent: {str(e)}", exc_info=True)
-        return JSONResponse(status_code=503, content={"detail": f"Service unavailable: {str(e)}"})

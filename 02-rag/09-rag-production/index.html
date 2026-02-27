@@ -374,28 +374,27 @@
             inputField.value = '';
             btn.disabled = true;
 
-            const payload = {
-                "question": query,
-                "collection_name": collectionName
-            };
+            const formData = new FormData();
+            formData.append("query", query);
+            formData.append("collection_name", collectionName);
+            if (chatContext.length > 0) {
+                formData.append("history", JSON.stringify(chatContext));
+            }
 
             try {
-                // Endpoint /ask espera JSON baseado em Pydantic AskRequest
-                const res = await fetch(`${API_BASE}/ask`, {
+                // Endpoint /chat/ask espera FormData
+                const res = await fetch(`${API_BASE}/chat/ask`, {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(payload)
+                    body: formData
                 });
 
                 if (res.ok) {
                     const data = await res.json();
-                    appendMessage(data.answer, false);
+                    appendMessage(data.response, false);
 
                     // Adiciona no history basico
                     chatContext.push({ "role": "user", "content": query });
-                    chatContext.push({ "role": "assistant", "content": data.answer });
+                    chatContext.push({ "role": "assistant", "content": data.response });
                 } else {
                     const errInfo = await res.json();
                     appendMessage(`[Erro do servidor: ${errInfo.detail || res.status}]`, false);

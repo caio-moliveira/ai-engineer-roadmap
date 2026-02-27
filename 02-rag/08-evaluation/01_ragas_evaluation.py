@@ -22,7 +22,7 @@ def run_evaluation():
         print("Certifique-se de que o PDF existe no caminho esperado em 06-rag-agent/utils.py")
         return
 
-    retriever = vectorstore.as_retriever(search_kwargs={"k": 20})
+    retriever = vectorstore.as_retriever(search_kwargs={"k": 30})
     
     # Config
     llm_generator = ChatOpenAI(model="gpt-4o-mini", temperature=0)
