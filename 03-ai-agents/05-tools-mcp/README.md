@@ -1,4 +1,4 @@
-# 🔌 Módulo 6: MCP (Model Context Protocol)
+# 🔌 Módulo 5: Ferramentas e MCP
 
 > **Goal:** O "USB-C" das aplicações de IA.  
 > **Status:** O novo padrão industrial (Anthropic).
@@ -24,4 +24,4 @@ O MCP é como o Driver Genérico de Impressora. O Word (Agente) manda imprimir, 
 
 ## ⏭️ Próximo Passo
 Um agente é bom. Vários agentes são melhores?
-Vá para **[Módulo 7: Multi-Agent Systems](../07-multi-agent-systems)**.
+Vá para **[Módulo 6: Multi-Agent Systems](../06-multi-agents)**.

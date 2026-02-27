@@ -1,4 +1,4 @@
-# 👥 Módulo 7: Single-Agent vs Multi-Agent
+# 👥 Módulo 6: Multi-Agent Systems
 
 > **Goal:** Saber quando *não* usar multi-agentes.  
 > **Status:** Use com moderação.
@@ -38,4 +38,4 @@ Se você criar 10 agentes especialistas que não se falam direito, terá um sist
 
 ## ⏭️ Próximo Passo
 Como impedir que eles façam besteira?
-Vá para **[Módulo 8: Avaliação e Segurança](../08-safety-evals)**.
+Vá para **[Módulo 7: Deep Agents (Segurança e Guardrails)](../07-deep-agents)**.

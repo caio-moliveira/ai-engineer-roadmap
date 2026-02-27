@@ -1,4 +1,4 @@
-# 🛡️ Módulo 8: Avaliação, Guardrails e Segurança
+# 🛡️ Módulo 7: Deep Agents (Segurança e Guardrails)
 
 > **Goal:** Evitar que o estagiário delete o banco de dados.  
 > **Status:** Obrigatório em Produção.
@@ -33,4 +33,4 @@ Se o agente tentar sair da cerca, o sistema corta a energia (interrompe a execu�
 
 ## ⏭️ Próximo Passo
 E se precisarmos de um humano?
-Vá para **[Módulo 9: Human-in-the-Loop](../09-human-in-the-loop)**.
+Vá para **[Módulo 8: Human-in-the-Loop](../08-human-in-the-loop)**.

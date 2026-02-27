@@ -1,7 +1,7 @@
-# 🦜🔗 Módulo 3: LangChain v1 para Agentes
+# 🦜🔗 Módulo 2: Criando seu primeiro Agente
 
-> **Goal:** Tools e Function Calling.  
-> **Status:** O mecanismo de interação.
+> **Goal:** Tool Calling e Controle.  
+> **Status:** O mecanismo de interação usando LangChain v1.
 
 ## 1. Tool Calling (Function Calling)
 Modelos modernos (GPT-4o, Claude 3.5) foram treinados para retornar JSON estruturado quando solicitados.
@@ -50,5 +50,5 @@ Seu código deve:
 Pense no `bind_tools` como se estivesse definindo uma API REST que o modelo pode chamar. A qualidade da sua "Documentação de API" (Schemas e Docstrings) determina o sucesso do cliente (o Modelo).
 
 ## ⏭️ Próximo Passo
-Como orquestrar esses chamados?
-Vá para **[Módulo 4: LangGraph](../04-langgraph-orchestration)**.
+Como orquestrar esses chamados em fluxo contínuo?
+Vá para **[Módulo 3: LangGraph e Orquestração](../03-langgraph-orchestration)**.

@@ -33,8 +33,11 @@ Python moderno • APIs assíncronas • validação estruturada • LLM orchest
 <div align="center">
 <img src="../assets/rag.png" alt="RAG" width="1000"/>
 </div>
+</div>
+</div>
 
 ## 📚 Ementa do Módulo
+
 
 ### [Módulo 1: Fundamentos de RAG e Modelos Mentais](./01-rag-fundamentals)
 - **Definição:** RAG = Busca (Retrieval) + Geração (Generation).
