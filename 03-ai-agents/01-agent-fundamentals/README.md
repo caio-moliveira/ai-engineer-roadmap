@@ -1,214 +1,179 @@
-# 🤖 Módulo 1: Fundamentos de Agentes e Arquiteturas
+# Módulo 1: Fundamentos de Agentes de IA
 
-> **Objetivo do módulo:** estabelecer uma definição operacional de “agente” e o que muda na engenharia do sistema quando um LLM passa a **controlar o fluxo** via **tools** e **loops**, e explorar os Padrões de Design para Raciocínio (Arquiteturas).  
-> **Pré-requisito:** conceitos básicos de LLM, prompt, RAG/workflows, APIs.
+## Objetivos de aprendizagem
+Ao final deste módulo, você será capaz de:
 
----
-
-## 1) Definição operacional: o que é um Agente?
-
-Em Engenharia de Software, “agente” não é um personagem autônomo — é uma **arquitetura**.
-
-**Definição (prática):**  
-Um **Agente de IA** é um sistema em que um **LLM atua como policy/controller**, decidindo **qual ação executar a seguir** (ou se deve responder), com base em estado, objetivos e observações do ambiente.
-
-Na prática, isso significa:
-
-- O LLM não é só “gerador de texto” → ele é o **componente que escolhe passos**.
-- O sistema possui **ações externas** (tools) que alteram o mundo: buscar, chamar APIs, executar código, editar arquivos, consultar banco, etc.
-- A execução ocorre em um **loop controlado** (com guardrails).
-
-> **Atalho mental:** agente = **LLM (controlador) + Tools (ações) + Loop (controle)**
+- Definir **agentes** do ponto de vista clássico (sensores/atuadores) e moderno (LLM + tools + loop).
+- Diferenciar **LLM puro**, **RAG** e **Agentes**, e entender o papel de *Agentic RAG* sem confundir conceitos.
+- Identificar os **componentes essenciais** de um agente: objetivo, estado, ferramentas, memória, planejamento e controle.
+- Reconhecer padrões fundamentais (ReAct, Tool Use, Reflexão, Memória/Comportamento).
+- Medir qualidade com métricas práticas (sucesso, eficiência de passos, custo, latência, incidentes de segurança).
+- Aplicar checklists de **segurança** e **confiabilidade** desde o design.
 
 ---
 
-## 2) Agente vs. Workflow (ex.: RAG)
+## 1. O que é um agente de IA
 
-A diferença central não é “usar LLM”, e sim **quem controla o fluxo**.
+Em 2026, “Agente de IA” virou um termo bem prático (e às vezes meio “marketing”), mas dá pra definir assim:
 
-### 2.1 Workflow (RAG / pipeline determinístico)
-Fluxo **hardcoded**: você define a sequência e o LLM só “preenche” o texto.
+Um agente de IA é um sistema que usa um modelo (geralmente um LLM) para cumprir tarefas por você com algum grau de autonomia — planejando passos, usando ferramentas (APIs, apps, web, banco de dados), acompanhando estado/memória e executando ações — tudo dentro de regras e permissões.
 
-Exemplo típico:
-`Input → Retrieval → (Contexto) → LLM → Output`
+### 1.1 Objetivo e política
+- **Objetivo**: “o que queremos” (definição de sucesso)
+- **Política**: “como escolhemos ações dado o estado”
+  - pode ser um prompt + regras + heurísticas + roteamento
+  - em produção, frequentemente envolve *guardrails* e *governança*
 
-Características:
-- Controle previsível (bom para produção)
-- Falhas mais fáceis de reproduzir
-- Menos flexível quando há muitas rotas/decisões
+### 1.2 Estado (State)
+- histórico (mensagens / observações)
+- variáveis de execução (passos, tentativas, custo, tempo, ferramentas usadas)
+- sinais de parada (done / failed / escalate)
 
-### 2.2 Agente (controle pelo modelo)
-Fluxo **decidido dinamicamente**: o LLM escolhe *o que fazer agora*.
+### 1.3 Ferramentas (Tools)
+- APIs (search, DB, e-mail, calendário, ERP)
+- execução de código (sandbox)
+- recuperação (vector search / BM25)
+- ações transacionais (criar ticket, PR, atualizar CRM)
 
-Exemplo típico:
-`Input → LLM decide → Tool → Observação → LLM decide → … → Output`
+> Regra de ouro: **tools com o menor privilégio possível**.
 
-Características:
-- Flexibilidade para tarefas multi-etapas e interativas
-- Maior risco operacional (loops, custos, instabilidade)
-- Exige engenharia de **controle, observabilidade e avaliação**
+### 1.4 Memória
+- **Curta (working)**: contexto recente + últimos passos
+- **Longa (persistente)**: fatos do usuário, preferências, documentos
+- **Episódica**: “o que aconteceu em execuções anteriores” (para aprender por tentativa e erro)
 
----
-
-## 3) O “spectrum” de autonomia (por que isso importa)
-
-Nem todo “agente” precisa ser autônomo. Em produção, autonomia é uma **variável de risco**.
-
-1. **Router (baixa autonomia / baixo risco)**  
-   - Decide entre caminhos conhecidos (A/B/N).  
-   - Útil para roteamento: “RAG vs SQL vs FAQ”.
-
-2. **State Machine / Graph (autonomia moderada / risco moderado)**  
-   - O fluxo é um **grafo explícito**, mas o modelo decide **transições** e **loops**.  
-   - Aqui entra muito bem o **LangGraph**: você define nós/arestas/estado e coloca limites.
-
-3. **Fully Autonomous (alta autonomia / alto risco)**  
-   - Planeja, executa, replaneja, cria subtarefas e decide tudo.  
-   - Bom para protótipo/pesquisa; difícil de estabilizar sem muita instrumentação.
-
-**Regra de ouro (engenharia):** dê o **mínimo** de autonomia que resolve o problema.  
-Autonomia aumenta: **custo (tokens), variância, risco e dificuldade de QA**.
+### 1.5 Planejamento e controle
+- decomposição (subtarefas) - multi-agent ou deep-agent
+- seleção de ferramenta
+- verificação (checks / validators)
+- replanejamento
+- limites (max_steps, budget, timeouts)
+- fallback / escalonamento (human-in-the-loop)
 
 ---
 
-## 4) A virada “LLM + Tools” (2022–2024): como “agentes” se consolidaram
+## 2. Agente vs LLM puro vs RAG
 
-Essa fase marca quando o mercado percebe que “agente” não é só prompt — é **LLM como controlador + ferramentas externas**.
+### LLM “puro” (chat)
+**Entrada → resposta** (normalmente em um passo, sem ações no mundo, sem verificação externa obrigatória).
 
-### Marcos conceituais (o que cada um adiciona ao design)
-- **MRKL (2022):** blueprint neuro-simbólico modular → LLM orquestra módulos externos (conhecimento, ferramentas, raciocínio discreto).  
-  **Impacto:** arquitetura modular e roteamento explícito.
+Bom para:
+- redação, explicações, brainstorm
+- respostas *sem necessidade* de ação/execução
 
-- **ReAct (2022/2023):** padrão *Reasoning + Acting* → alterna raciocínio e ações (consultas, APIs).  
-  **Impacto:** reduz alucinação e melhora tarefas interativas (via observação).
+### RAG (arquitetura)
+RAG combina:
+- **memória paramétrica** (pesos do modelo) +
+- **memória não-paramétrica** (base recuperável)
 
-- **Toolformer (2023):** mostra aprendizado (supervisionado/auto-gerado) de **quando** chamar tools e **como** incorporar respostas.  
-  **Impacto:** “tool use” deixa de ser artesanal.
+A ideia central é: **recuperar evidência antes de gerar**.
 
-- **Reflexion (2023):** melhora iterativa sem fine-tuning usando **feedback em linguagem** e “memória episódica”.  
-  **Impacto:** introduz o loop “tentar → refletir → tentar melhor” com memória.
+Bom para:
+- perguntas sobre documentos/KB
+- grounding e citações
+- reduzir alucinação em perguntas baseadas em fonte
 
-- **AutoGPT / wave open-source (2023):** populariza autonomia e loops (planejar → executar → avaliar), mas expõe riscos:  
-  **loops infinitos**, custo alto, instabilidade, tool errors.
+### Agentes (arquitetura)
+Agentes são sobre **ação e decisão multi-etapas** (não só recuperar contexto). Eles:
+- escolhem qual ferramenta usar
+- replanejam quando algo falha
+- mantêm estado e memória
+- impõem limites e políticas
 
-**Conclusão dessa fase:** agente = **loop + tools + decisões**, e não um “prompt mágico”.
+**Uma distinção didática excelente (e anti-hype):**
+- **Workflows**: caminhos pré-definidos no código (fluxo fixo, decisões “hardcoded”)  
+- **Agents**: o modelo decide dinamicamente o caminho e o uso de ferramentas (fluxo adaptativo)
 
----
-
-## 5) Agentes hoje (2024–2026): menos hype, mais engenharia
-
-A tendência recente é mover do “autônomo por autônomo” para **agentic systems controlados**:
-
-- **Interfaces de ação bem definidas**
-- **Observabilidade**
-- **Avaliação/benchmarks**
-- **Guardrails e limites operacionais**
-
-### Exemplo de tese importante: Agent-Computer Interface (ACI)
-Sistemas como **SWE-agent (2024)** colocam foco no “como o agente opera o ambiente”:
-- navegar repositórios
-- editar arquivos
-- rodar testes
-- abrir PRs
-
-**Tese:** a interface (ACI) muda performance tanto quanto o modelo/prompt.
+> ✅ Mensagem-chave: **RAG pode ser uma ferramenta dentro de um agente** (*Agentic RAG*), mas **agente ≠ RAG**.
 
 ---
 
-## 6) Componentes de um agente “de verdade” (arquitetura mínima em produção)
+## 3. Padrões fundamentais (o “currículo mínimo”)
 
-Um agente robusto geralmente separa responsabilidades:
+### Padrão A — ReAct (Reason + Act)
+**O que é:** intercala raciocínio e ações em loop, melhorando capacidade e interpretabilidade.  
+**Por que ensinar:** é o padrão base de agente moderno.
 
-### 6.1 Planejamento e roteamento
-- decomposição (subtarefas)
-- seleção de estratégia
-- roteamento para ferramentas / especialistas
+**Lab sugerido**
+- Tools: `search()` e `calculator()`
+- Tarefa: “Encontre 3 métricas de qualidade de retrieval e calcule um score composto”
+- Avaliar: nº de chamadas, acerto final, custo estimado
 
-### 6.2 Tool use (ações)
-- ferramentas com contratos estáveis (schema, erros, timeouts)
-- validação de entradas/saídas (tipagem / JSON schema)
-- retries controlados
-
-### 6.3 Memória (quando faz sentido)
-- **curto prazo** (estado da execução)
-- **episódica** (tentativas, falhas, reflexões)
-- **vetorial** (conhecimento recuperável)
-
-### 6.4 Controle e segurança (guardrails)
-- limites de iteração
-- orçamento de tokens/custo
-- timeouts
-- validação de output (ex.: checagens, testes, regras)
-- políticas de acesso a tools (allowlist)
-
-> **Checklist de produção:** Sem guardrails + observabilidade, “agente” vira demo instável.
+Paper: **ReAct: Synergizing Reasoning and Acting in Language Models** (Yao et al.)  
+- https://arxiv.org/abs/2210.03629
 
 ---
 
-## 7) Por que agentes falham em produção (e como pensar como engenheiro)
+### Padrão B — Tool Use como capacidade (Toolformer / MRKL)
+**Toolformer**
+- Mostra como modelos podem aprender **quando** chamar ferramentas e **como** usar resultados.
 
-Falhas comuns:
+Paper: **Toolformer: Language Models Can Teach Themselves to Use Tools** (Schick et al.)  
+- https://arxiv.org/abs/2302.04761
 
-1. **Loops infinitos / thrashing**  
-   - repete a mesma ferramenta/estratégia sem convergir  
-   → mitigar com limites, detecção de repetição, políticas de fallback.
+**MRKL**
+- Reforça a visão de arquitetura **modular**: LLM + módulos externos (conhecimento e raciocínio discreto).
+- Ótimo para ensinar que “agente” é **engenharia de sistemas**, não só prompt.
 
-2. **Tools frágeis / contratos inconsistentes**  
-   - API retorna 500, muda payload, não tem timeout  
-   → mitigar com wrappers, schemas, versionamento, testes, circuit breaker.
-
-3. **Estado/memória mal projetados**  
-   - o agente “esquece”, contradiz, perde contexto operacional  
-   → mitigar com state explícito (ex.: LangGraph), memória episódica útil, e logs.
+Paper: **MRKL Systems: A modular, neuro-symbolic architecture...** (Karpas et al.)  
+- https://arxiv.org/abs/2205.00445
 
 ---
 
-## 🧠 Mental model: “o estagiário inteligente (com API access)”
-Trate o agente como alguém competente, mas sem contexto e sem bom senso por padrão:
-- Sem instruções e ferramentas claras → decisões ruins
-- Com contratos claros + limites + observabilidade → excelente executor
+### Padrão C — Reflexão e melhoria sem fine-tuning (Reflexion)
+**O que é:** usa feedback do ambiente e guarda “reflexões” em memória episódica para melhorar a política em tentativas futuras.
+
+**Lab sugerido**
+- Rodar o agente 3 vezes no mesmo tipo de tarefa (ex.: “gerar SQL seguro”)
+- Guardar erros → escrever “reflexão” → reexecutar
+- Comparar taxa de sucesso e número de tool calls
+
+Paper: **Reflexion: Language Agents with Verbal Reinforcement Learning** (Shinn et al.)  
+- https://arxiv.org/abs/2303.11366
 
 ---
 
-## 8) Arquiteturas de Agentes (Padrões de Design para Raciocínio)
+### Padrão D — Agentes com memória e comportamento (Generative Agents)
+**O que é:** arquitetura com registro de experiências, síntese de reflexões e recuperação dinâmica para planejar comportamento.
 
-### 8.1 ReAct (Reason + Act)
-O padrão clássico (2023).
-- **Loop:**
-  1. **Thought:** "O usuário pediu o clima em SP."
-  2. **Action:** `get_weather("Sao Paulo")`
-  3. **Observation:** "25 graus, encoberto."
-  4. **Thought:** "Tenho a resposta."
-  5. **Answer:** "Está 25 graus."
-- **Problema:** Simples demais. Se falhar, tendencia a alucinar.
+**Por que ensinar:** consolida memória como componente arquitetural (e não “chat history”).
 
-### 8.2 Plan-and-Solve (Planner)
-Para tarefas complexas ("Crie um app React").
-- **Passo 1 (Planner):** O agente quebra o problema em steps.
-- **Passo 2 (Executor):** Outro agente executa cada passo da lista.
-- **Vantagem:** Menos perda de contexto. Foco em uma tarefa por vez.
-
-### 8.3 Reflection (Self-Correction)
-O segredo da alta performance.
-- O agente gera um output.
-- O agente **Critica** o próprio output ("Isso está correto? Falta algo?").
-- O agente **Refina** a resposta.
-> **Dica de Produção:** Adicionar um passo de Reflexão melhora a precisão em ~30%, mas dobra o custo.
-
-### 8.4 Tool-Augmented RAG
-A arquitetura mais comum em empresas.
-- O Agente tem acesso a uma Tool de `Retriever`.
-- Ele decide *quando* pesquisar no Vector DB.
-- Diferente do RAG tradicional, ele pode pesquisar múltiplas vezes ou refinar a busca.
-
-## 🧠 Mental Model Expandido: "System 1 vs System 2"
-- **LLM Padrão (Chat):** System 1 (Rápido, Intuitivo, Propenso a Erro).
-- **Agente com Reflexão:** System 2 (Lento, Deliberativo, Preciso).
-
-Use arquiteturas complexas apenas quando System 1 não for suficiente.
+Paper: **Generative Agents: Interactive Simulacra of Human Behavior** (Park et al.)  
+- https://arxiv.org/abs/2304.03442
 
 ---
 
-## ⏭️ Próximo passo
-**Criando seu primeiro Agente:** Tool Calling, Structured Output e Controle usando LangChain.  
-Ir para: `../02-my-first-agent`
+## 4. Avaliação: como saber se o agente presta
+
+Você precisa ensinar avaliação **desde o começo** (e não depois que a demo “funciona”).
+
+### 4.1 Benchmarks
+- **AgentBench: Evaluating LLMs as Agents**  
+  https://arxiv.org/abs/2308.03688
+
+### 4.2 Métricas práticas (produção)
+- **Task success rate** (sucesso final)
+- **Step efficiency** (passos / tool calls)
+- **Cost** (tokens + ferramentas pagas)
+- **Latency**
+- **Safety incidents** (ações indevidas)
+- **Robustez** (variação com prompts/inputs adversariais)
+
+
+---
+
+## 5. Segurança e confiabilidade (da demo ao produto)
+
+### 5.1 Prompt injection é risco central
+Prompt injection não é “SQL injection para LLMs”. É um risco estrutural em sistemas que misturam **dados + instruções**, frequentemente com padrão de vulnerabilidade tipo **confused deputy**.
+
+Leituras:
+- OWASP GenAI Security Project — **LLM Top 10 / Prompt Injection**  
+  https://genai.owasp.org/llmrisk/llm01-prompt-injection/
+- NCSC (UK) — “Prompt injection is not SQL injection (it may be worse)”  
+  https://www.ncsc.gov.uk/blog-post/prompt-injection-is-not-sql-injection
+
+
+---
+
+➡️ Avance para o próximo módulo: **Criando seu primeiro agente**.
