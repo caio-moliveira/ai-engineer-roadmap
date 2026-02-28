@@ -1,5 +1,5 @@
 from fastapi import APIRouter, UploadFile, File, Form, HTTPException, status
-from typing import Literal
+from typing import Literal, List
 
 from src.embedder.client import QdrantService
 from src.embedder.processor import DocumentProcessor
@@ -26,7 +26,7 @@ async def delete_collection(collection_name: str):
 @router.post("/collection/{collection_name}/document")
 async def insert_document(
     collection_name: str,
-    file: UploadFile = File(...),
+    files: List[UploadFile] = File(...),
     chunk_size: int = Form(1000),
     overlap_chunk: int = Form(100),
     splitter_type: Literal["recursive", "character"] = Form("recursive"),
@@ -35,25 +35,58 @@ async def insert_document(
     if not await qdrant_service.collection_exists(collection_name):
         raise HTTPException(status_code=404, detail="Collection not found")
 
-    file_content = await file.read()
-    filename = file.filename
+    results = []
 
-    logger.info(f"Processing '{filename}' for collection '{collection_name}' with {splitter_type} splitter (chunk:{chunk_size}/overlap:{overlap_chunk}/tiktoken:{use_tiktoken})")
+    for file in files:
+        filename = file.filename
 
-    try:
-        points = doc_processor.process_document(
-            file_content=file_content, 
-            filename=filename,
-            chunk_size=chunk_size,
-            overlap_chunk=overlap_chunk,
-            splitter_type=splitter_type,
-            use_tiktoken=use_tiktoken
-        )
-        await qdrant_service.upsert_vectors(collection_name, points)
-        return {"status": "success", "message": f"Document '{filename}' successfully ingested vectors.", "vector_count": len(points)}
-    except Exception as e:
-        logger.error(f"Error ingesting document '{filename}': {e}")
-        raise HTTPException(status_code=500, detail=str(e))
+        if await qdrant_service.document_exists(collection_name, filename):
+            logger.info(f"Document '{filename}' already exists in '{collection_name}'. Skipping.")
+            results.append({
+                "filename": filename,
+                "status": "skipped",
+                "message": "Document already exists in the collection."
+            })
+            continue
+
+        file_content = await file.read()
+
+        logger.info(f"Processing '{filename}' for collection '{collection_name}' with {splitter_type} splitter (chunk:{chunk_size}/overlap:{overlap_chunk}/tiktoken:{use_tiktoken})")
+
+        try:
+            points = doc_processor.process_document(
+                file_content=file_content, 
+                filename=filename,
+                chunk_size=chunk_size,
+                overlap_chunk=overlap_chunk,
+                splitter_type=splitter_type,
+                use_tiktoken=use_tiktoken
+            )
+            
+            if not points:
+                results.append({
+                    "filename": filename,
+                    "status": "skipped",
+                    "message": "No text could be extracted from the document."
+                })
+                continue
+
+            await qdrant_service.upsert_vectors(collection_name, points)
+            results.append({
+                "filename": filename,
+                "status": "success",
+                "message": "Document successfully ingested.",
+                "vector_count": len(points)
+            })
+        except Exception as e:
+            logger.error(f"Error ingesting document '{filename}': {e}")
+            results.append({
+                "filename": filename,
+                "status": "error",
+                "message": str(e)
+            })
+
+    return {"status": "completed", "results": results}
 
 @router.put("/collection/{collection_name}/document/{filename}")
 async def update_document(

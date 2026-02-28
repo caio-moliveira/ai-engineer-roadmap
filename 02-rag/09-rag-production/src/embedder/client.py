@@ -86,6 +86,26 @@ class QdrantService:
                 
         return list(unique_filenames)
 
+    async def document_exists(self, collection_name: str, filename: str) -> bool:
+        """Checks if a document with the given filename already exists in the collection."""
+        try:
+            count_result = await self.client.count(
+                collection_name=collection_name,
+                count_filter=models.Filter(
+                    must=[
+                        models.FieldCondition(
+                            key="metadata.nome_arquivo",
+                            match=models.MatchValue(value=filename)
+                        )
+                    ]
+                ),
+                exact=True
+            )
+            return count_result.count > 0
+        except Exception as e:
+            logger.error(f"Failed to check if document '{filename}' exists in '{collection_name}': {e}")
+            return False
+
     async def delete_document(self, collection_name: str, filename: str):
         """Deletes all points matching the filename."""
         await self.client.delete(
