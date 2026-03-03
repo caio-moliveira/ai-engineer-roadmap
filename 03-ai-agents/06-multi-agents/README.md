@@ -1,41 +1,62 @@
-# 👥 Módulo 6: Multi-Agent Systems
+# 🤖 Módulo 7: Trabalhando com Multi-Agentes
 
-> **Goal:** Saber quando *não* usar multi-agentes.  
-> **Status:** Use com moderação.
+> **Goal:** Dividir para Conquistar.  
+> **Status:** A Fronteira atual da IA Generativa (State of the Art).
 
-## 1. O Hype vs A Realidade
-Demos de Multi-Agentes são lindas. Swarms resolvendo problemas complexos.
-Na prática:
-- **Latência:** Multiplica por N agentes.
-- **Custo:** Multiplica por N agentes.
-- **Debug:** Fica exponencialmente mais difícil entender quem errou.
+Agentes individuais (single-agents) sofrem do problema do "Generalista": Se você fornecer a eles 30 ferramentas, 5 prompts gigantes e dezenas de restrições de formatação, a LLM colapsará, dividindo sua atenção ("Attention Mechanism") por todos esses tópicos, o que gera alucinações severas e quebra de regras.
 
-> **Regra:** Se um agente consegue fazer, use um agente. Só use Multi-Agente se as ferramentas ou contextos forem incompatíveis (ex: um Coder Agent precisa de acesso a arquivos locais, um Research Agent precisa de acesso à Web, e por segurança você quer isolá-los).
+Neste módulo prático, demonstramos as três melhores abordagens homologadas pela LangChain em `create_agent` para fragmentar cérebros gigantes em cérebros atômicos perfeitos.
 
-## 2. Padrões de Orquestração
+---
 
-### Supervisor (O Chefe)
-Um LLM central decide quem trabalha.
-- "Coder, escreva o script."
-- "Reviewer, valide o script."
-- O Supervisor roteia o estado.
+## 📚 Índice de Scripts Práticos
 
-### Hierárquico (Manager -> Tech Lead -> Dev)
-Estrutura de árvore. Útil para decompor problemas grandes.
+Todos os códigos rodam nativamente (Console/Terminal). Para executá-los, acesse a pasta `python/` e garanta possuir o `.env` gerado nos módulos passados.
 
-### Joint Collaboration (Mesa Redonda)
-Agentes conversam entre si e passam o bastão.
-- Mais caótico, mas pode gerar soluções criativas.
+1. **[Mestre & Trabalhadores (Subagents pattern)](#1-mestre-e-trabalhadores-subagents-pattern)** -> `python/01_subagents.py`
+2. **[Habilidades Dinâmicas (Skills pattern)](#2-habilidades-dinâmicas-skills-pattern)** -> `python/02_skills.py`
+3. **[Roteadores Inteligentes (Router pattern)](#3-roteadores-inteligentes-router-pattern)** -> `python/03_router.py`
 
-## 3. A Falácia da Comunicação
-LLMs conversando com LLMs em inglês é ineficiente.
-Eles devem trocar **Estado Estruturado (JSON)**, não texto.
-LangGraph facilita isso compartilhando o `State`.
+---
 
-## 🧠 Mental Model: "A Lei de Conway"
-O design do sistema reflete a estrutura de comunicação.
-Se você criar 10 agentes especialistas que não se falam direito, terá um sistema fragmentado e burocrático.
+## 1. Mestre e Trabalhadores (Subagents Pattern)
 
-## ⏭️ Próximo Passo
-Como impedir que eles façam besteira?
-Vá para **[Módulo 7: Deep Agents (Segurança e Guardrails)](../07-deep-agents)**.
+A arquitetura mais robusta e complexa no LangGraph. Ideal para tarefas multifacetadas (como um *Wedding Planner* que tem que cuidar de Voos, Buffet e Músicas).
+
+- **Supervisor**: Um agente inteligente (GPT-4) que não faz o trabalho braçal. Ele delega.
+- **Worker Agents**: Agentes menores (GPT-3.5/Mini) com "prompts de túnel" e focados 100% num assunto, empacotados pelo decorator `@tool` para serem invocados pelo Supervisor.
+
+No script `01_subagents.py`, você verá o supervisor repassar a coleta de informações aos subordinados através da abstração do `ToolRuntime`, alterando silenciosamente a `AgentState` no final usando `Command(update={...})`.
+
+---
+
+## 2. Habilidades Dinâmicas (Skills Pattern)
+
+Também conhecido como **Progressive Disclosure**. E se um Agente que gera códigos não precisasse decorar a sintaxe inteira do banco de dados na largada?
+
+No script `02_skills.py`, o Agente tem *UMA ÚNICA TOOL* (`load_skill`). Ao ser instado a escrever um contrato, ele percebe sua lacuna e invoca `load_skill("review_legal_doc")`.
+Essa Tool dinamicamente injeta um `{"role": "system"}` pesado e gigantesco na Memória dele em runtime através do objeto LangGraph `Command(update={"messages": [...]})`. 
+
+**Vantagem:** Economiza **riosos** dólares de Tokens de API por ocultar Prompts até a hora exata da necessidade.
+
+---
+
+## 3. Roteadores Inteligentes (Router Pattern)
+
+Usar LLM como "Manager" (vide Subagents) pra decidir quem deve responder uma pergunta é custoso em tempo e dinheiro. Por que não ter uma função leve separando a demanda inicial?
+
+No script `03_router.py`, demonstramos o uso dos novos tipos do LangGraph:
+- **`Command(goto='agente')`**: O nó avalia a palavra chave (Ex: 'erro'/'tech') e finaliza sua execução jogando o controle de forma estática para o Agente Certo (não passa por invocação de `tools` do Supervisor).
+- **`Send('node', args)`**: Para inputs multi-respostas. O router cria N eixos paralelos independentes (Ex: Mandando atuar o agente de Suporte de Carga e o de Restituição Financeira SIMULTANEAMENTE).
+
+---
+
+## 🧠 Mental Model Combinado
+
+Hoje, a escalabilidade máxima dos Agentes pede:
+1. **Router** frontal e enxuto na beira da sua API que tria o pedido.
+2. Encaminhamento via `goto` para o grupo de **Subagents** certos (Squads).
+3. E nos cérebros de cada Subagent trabalhador, um banco de **Skills** que se auto-carregam apenas em momentos chave de alta complexidade.
+
+## ⏭️ Parabéns! Fim desta Trilha Core.
+Sua base como Engenheiro de Ferramentas / Agents orchestration em Langgraph está sólida de ponta a ponta.
