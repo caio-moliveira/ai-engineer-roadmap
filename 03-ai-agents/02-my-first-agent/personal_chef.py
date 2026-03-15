@@ -26,7 +26,7 @@ Você é um chef pessoal.
 O usuário fornecerá uma lista de ingredientes que sobraram em casa.
 
 Sua tarefa é:
-1. Usar a ferramenta de busca na web quando necessário.
+1. Usar a ferramenta de busca na web 'tavily_search_tool' para buscar as receitas.
 2. Encontrar receitas compatíveis com os ingredientes disponíveis.
 3. Sugerir receitas simples e realistas.
 4. Responder sempre no formato estruturado solicitado.
@@ -52,3 +52,14 @@ for step in agent.stream(
     stream_mode="values",
 ):
     step["messages"][-1].pretty_print()
+
+
+# ============================================================================
+# response_structured = agent.invoke(
+#     {"messages": [question]}
+# )
+
+# print("Output do Agente:")
+# result = response_structured["messages"][-1].content
+# pprint(result)
+

@@ -62,10 +62,57 @@ Seu código deve cuidar da mecânica:
 
 **LangGraph faz isso automaticamente debaixo dos panos com o construtor `ToolNode`.**
 
+## 5. Output Estruturado (Response Format)
+
+Em muitos casos, você não quer que o agente responda apenas em texto livre, mas sim em um formato que seu sistema possa processar (como JSON ou um objeto Pydantic). A LangChain facilita isso através do parâmetro `response_format`.
+
+### Exemplo: Agente com Schema Pydantic
+Defina o seu contrato de dados e passe-o para o construtor do agente.
+
+```python
+from pydantic import BaseModel
+from typing import List
+
+class Recipe(BaseModel):
+    nome: str
+    ingredientes: List[str]
+    instrucoes: str
+
+agent = create_agent(
+    model="gpt-5-nano",
+    system_prompt="Você é um chef pessoal...",
+    response_format=Recipe
+)
+```
+
+## 6. Integração Prática de Tools (Exemplo Real)
+
+Vimos como o agente pode usar ferramentas externas para expandir suas capacidades. No nosso exemplo de `personal_chef.py`, usamos o `TavilySearch` para permitir que o agente busque receitas em tempo real.
+
+### Como a busca funciona no fluxo:
+1. **O Usuário pergunta**: "Tenho frango e batata, o que fazer?"
+2. **O Agente avalia**: Percebe que precisa de informações externas.
+3. **Chamada de Tool**: O Agente invoca o `TavilySearch`.
+4. **Raciocínio**: O Agente processa os resultados da busca.
+5. **Output Estruturado**: O Agente formata a resposta final de acordo com o `Recipe` schema.
+
+```python
+from langchain_tavily import TavilySearch
+
+tavily_search_tool = TavilySearch(max_results=5)
+
+agent = create_agent(
+    model="gpt-5-nano",
+    tools=[tavily_search_tool],
+    system_prompt=system_prompt,
+    response_format=Recipe
+)
+```
+
 ## ⚠️ Erros Comuns
+- **Instruções Ambíguas:** No `system_prompt`, se você disser "forneça instruções se solicitado", o agente pode retornar campos vazios no seu schema estruturado se a pergunta for genérica. Seja **mandatário** nas instruções do prompt para garantir que os campos do Pydantic sejam sempre preenchidos.
 - **Docstrings Ruins:** O modelo lê a docstring (`""""""`) da definição de função para saber *quando* e *pra que* usá-la. Seja extremamente e puramente descritivo ao nomear.
-- **Tools demais:** Não acople 50 tools para um único agente. Ele vai se confundir na rota correta das escolhas. Mantenha < 10 por agente (requeira roteamento modular ou Multi-Agent).
-- **Falta de Tipagem:** Se você não tipar os argumentos e validá-los pelo schema, o LLM via regra vai acabar alucinando e inserindo parâmetros inválidos ou errados, quebrando a function em produção.
+- **Falta de Tipagem:** Se você não tipar os argumentos e validá-los pelo schema, o LLM via regra vai acabar alucinando parâmetros errados.
 
 ## 🧠 Mental Model: "A API do Modelo"
 Pense no `bind_tools` como se estivesse definindo uma API REST onde o LLM é o cliente e suas tools são os endpoints. A qualidade da sua "Documentação da API" (Schemas e Docstrings) determina diretamente o sucesso e confiabilidade do invocador (o Modelo).
