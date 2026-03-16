@@ -128,16 +128,15 @@ Este bloco ensina como projetar, orquestrar e operar agentes confiáveis em prod
 
 | #  | Módulo                                                       | Tema                        |
 | -- | ------------------------------------------------------------ | --------------------------- |
-| 01 | [O que são agentes](./03-ai-agents/01-agent-definitions)     | Definição real              |
-| 02 | [Arquiteturas](./03-ai-agents/02-agent-architectures)        | Patterns ReAct / Reflection |
-| 03 | [LangChain Agents](./03-ai-agents/03-langchain-agents)       | Tool calling                |
-| 04 | [LangGraph](./03-ai-agents/04-langgraph-orchestration)       | Orquestração real           |
-| 05 | [Memory Systems](./03-ai-agents/05-memory-systems)           | Persistência                |
-| 06 | [MCP Protocol](./03-ai-agents/06-mcp-protocol)               | Integrações modernas        |
-| 07 | [Multi-Agent Systems](./03-ai-agents/07-multi-agent-systems) | Delegação e supervisão      |
-| 08 | [Safety & Eval](./03-ai-agents/08-safety-evals)              | Guardrails                  |
-| 09 | [Human-in-the-loop](./03-ai-agents/09-human-in-the-loop)     | Aprovação humana            |
-| 10 | [Produção](./03-ai-agents/10-agents-in-production)           | Observabilidade             |
+| 01 | [Fundamentos](./03-ai-agents/01-agent-fundamentals)          | O que são agentes           |
+| 02 | [Meu Primeiro Agente de IA](./03-ai-agents/02-my-first-agent)| Primeiros passos            |
+| 03 | [LangGraph](./03-ai-agents/03-langgraph-orchestration)      | Orquestração real           |
+| 04 | [Memory Systems](./03-ai-agents/04-memory-systems)           | Persistência                |
+| 05 | [Tools/MCP](./03-ai-agents/05-tools-mcp)                     | Integrações modernas        |
+| 06 | [Multi-Agent Systems](./03-ai-agents/06-multi-agents)        | Delegação e supervisão      |
+| 07 | [Deep-Agent](./03-ai-agents/07-deep-agents)                  | O que há por debaixo do capô |
+| 08 | [Human-in-the-loop](./03-ai-agents/08-human-in-the-loop)      | Aprovação humana            |
+| 09 | [Agentes de IA em Produção](./03-ai-agents/09-agents-in-production)| Projeto Final             |
 
 
 ---
@@ -163,14 +162,13 @@ Este bloco ensina como rodar modelos localmente, otimizar inferência e construi
 
 | #  | Módulo                                                                  | Tema                  |
 | -- | ----------------------------------------------------------------------- | --------------------- |
-| 01 | [Model Ecosystem](./04-infra-ocr-models/01-model-ecosystem)             | Estratégia de modelos |
-| 02 | [Hugging Face](./04-infra-ocr-models/02-hugging-face)                   | Formatos e pipelines  |
-| 03 | [Ollama](./04-infra-ocr-models/03-ollama)                               | Desenvolvimento local |
-| 04 | [vLLM](./04-infra-ocr-models/04-vllm)                                   | Inferência produção   |
-| 05 | [Hardware Performance](./04-infra-ocr-models/05-hardware-performance)   | Economia real         |
-| 06 | [OCR Fundamentals](./04-infra-ocr-models/06-ocr-fundamentals)           | Layout + texto        |
-| 07 | [OCR Pipelines](./04-infra-ocr-models/07-ocr-pipelines)                 | Arquitetura completa  |
-| 08 | [Document Intelligence](./04-infra-ocr-models/08-document-intelligence) | Pipeline enterprise   |
+| 01 | [OCR Fundamentals](./04-infra-ocr-models/01-ocr-fundamentals)           | Layout + texto        |
+| 02 | [OCR Pipelines](./04-infra-ocr-models/02-ocr-pipelines)                 | Arquitetura completa  |
+| 03 | [Document Intelligence](./04-infra-ocr-models/03-document-intelligence) | Pipeline enterprise   |
+| 04 | [Hugging Face](./04-infra-ocr-models/04-hugging-face)                   | Formatos e pipelines  |
+| 05 | [Ollama](./04-infra-ocr-models/05-ollama)                               | Desenvolvimento local |
+| 06 | [vLLM](./04-infra-ocr-models/06-vllm)                                   | Inferência produção   |
+| 07 | [Hardware Performance](./04-infra-ocr-models/07-hardware-performance)   | Economia real         |
 
 
 ---
@@ -192,18 +190,13 @@ Este bloco ensina quando treinar modelos — e principalmente quando não treina
 
 ### 📦 Módulos
 
-| #  | Módulo                                                     | Tema                |
-| -- | ---------------------------------------------------------- | ------------------- |
-| 01 | [Conceitos](./05-fine-tuning/01-finetuning-concepts)       | O que é fine-tune   |
-| 02 | [RAG vs Fine-Tune](./05-fine-tuning/02-rag-vs-finetuning)  | Matriz de decisão   |
-| 03 | [Tipos de adaptação](./05-fine-tuning/03-adaptation-types) | LoRA, PEFT          |
-| 04 | [Preparação de dados](./05-fine-tuning/04-data-prep)       | Dataset engineering |
-| 05 | [Avaliação](./05-fine-tuning/05-evaluation)                | Baselines           |
-| 06 | [Unsloth](./05-fine-tuning/06-unsloth)                     | Workflow real       |
-| 07 | [Training Ops](./05-fine-tuning/07-training-ops)           | Infra e custos      |
-| 08 | [Deploy](./05-fine-tuning/08-deploy-adapters)              | Adapters e merge    |
-| 09 | [Riscos](./05-fine-tuning/09-risks-maintenance)            | Forgetting          |
-| 10 | [Enterprise](./05-fine-tuning/10-enterprise-gov)           | Compliance          |
+| #  | Módulo                                                               | Tema                        |
+| -- | -------------------------------------------------------------------- | --------------------------- |
+| 01 | [Fundamentos de Fine-Tuning](./05-fine-tuning/01-fine-tuning-fundamentals) | Conceitos e Adaptação       |
+| 02 | [Unsloth](./05-fine-tuning/02-unsloth)                               | Workflow real               |
+| 03 | [Meu Primeiro LLM](./05-fine-tuning/03-my-first-llm)                 | Dataset, Treino e Avaliação |
+| 04 | [Deploy do Modelo](./05-fine-tuning/04-model-deploy)                 | Adapters e Merge            |
+| 05 | [Fine-Tuning em Produção](./05-fine-tuning/05-fine-tuning-production)| Ops e Governança            |
 
 ---
 
