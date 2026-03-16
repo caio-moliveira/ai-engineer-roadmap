@@ -1,58 +1,80 @@
 import operator
-from typing import Annotated, List, Literal, TypedDict
+from typing import Annotated, List, TypedDict
+from langchain_openai import ChatOpenAI
+from langchain_core.messages import BaseMessage, HumanMessage
 from langgraph.graph import END, START, StateGraph
-from langgraph.types import Command
-# 1. Puxando e inicializando a Memoria Simples
-from langgraph.checkpoint.memory import InMemorySaver
+from langgraph.checkpoint.memory import MemorySaver
+from langgraph.graph.message import add_messages
+from dotenv import load_dotenv
 
+# 1. Configuração Inicial
+load_dotenv()
+llm = ChatOpenAI(model="gpt-4o-mini", temperature=0)
+
+# 2. Definindo o Estado (Somente Mensagens)
 class State(TypedDict):
-    nlist: Annotated[List[str], operator.add]
+    messages: Annotated[List[BaseMessage], add_messages]
 
-def node_a(state: State) -> Command[Literal["b", "c", END]]:
-    select = state["nlist"][-1]
-    if select == "b": next_node = "b"
-    elif select == "c": next_node = "c"
-    else: next_node = END
+# 3. Criando o Nó do Agente
+def chatbot(state: State) -> dict:
+    """Nó simples que envia o histórico completo para o LLM."""
 
-    return Command(
-        update=State(nlist=[select]),
-        goto=next_node
-    )
+    resposta = llm.invoke(state["messages"])
+    return {"messages": [resposta]}
 
-def node_b(state: State) -> State: return State(nlist=["B"])
-def node_c(state: State) -> State: return State(nlist=["C"])
-
-# Builder normal
+# 4. Construindo o Grafo com Persistência
 builder = StateGraph(State)
-builder.add_node("a", node_a)
-builder.add_node("b", node_b)
-builder.add_node("c", node_c)
+builder.add_node("chatbot", chatbot)
 
-builder.add_edge(START, "a")
-builder.add_edge("b", END)
-builder.add_edge("c", END)
+builder.add_edge(START, "chatbot")
+builder.add_edge("chatbot", END)
 
-# 2. Compilando com checkpointer para Memória
-memory = InMemorySaver()
+# O MemorySaver() é o checkpointer em memória
+memory = MemorySaver()
 graph = builder.compile(checkpointer=memory)
 
-# 3. Loop com config (Injetando thread_id)
+# 5. Loop de Conversa Interativa no Terminal
 if __name__ == "__main__":
-    # Configuração que atrela os históricos a um ID exclusivo
-    config = {"configurable": {"thread_id": "thread-1"}}
-    
-    print("--- Memória Ativa ---")
-    print("Sempre que você rodar esse loop, ele lembrará das iterações passadas.\n")
-    
+    print("="*60)
+    print("        CHAT SIMPLES COM MEMÓRIA (LANGGRAPH)")
+    print("="*60)
+    print("O histórico será salvo automaticamente entre as perguntas.")
+    print("Digite 'sair' para encerrar.\n")
+
+    # O thread_id identifica unicamente esta conversa no banco de memória
+    config = {"configurable": {"thread_id": "conversa-1"}}
+
     while True:
-        user = input('\nDigite "b", "c", ou "q" para sair: ')
-        input_state = State(nlist=[user])
+        user_input = input("Você: ")
         
-        # Obrigatório passar `config` quando o checkpointer está instanciado no `compile()`
-        result = graph.invoke(input_state, config)
-        
-        print(f"Estado final ACUMULADO:\n{result['nlist']}")
-        
-        if result['nlist'][-1] == "q" or user.lower() == "q":
-            print("Encerrando!")
+        if user_input.lower() in ["sair", "exit", "quit"]:
+            # Antes de sair, buscamos o estado final para imprimir o histórico
+            estado_atual = graph.get_state(config)
+            historico = estado_atual.values.get("messages", [])
+            
+            print("\n" + "="*60)
+            print("        HISTÓRICO COMPLETO DA CONVERSA (ESTRUTURADO)")
+            print("="*60)
+            for msg in historico:
+                classe_nome = msg.__class__.__name__
+                print(f"[{classe_nome}]: {msg.content}")
+            
+            print("\n" + "="*60)
+            print("        HISTÓRICO BRUTO (OBJETOS REAIS)")
+            print("="*60)
+            for msg in historico:
+                print(msg)
+            
+            print("="*60)
+            print("Até logo!")
             break
+
+        # Ao invocar, o LangGraph busca as mensagens anteriores do 'conversa-1'
+        # e as concatena com a nova HumanMessage.
+        resultado = graph.invoke(
+            {"messages": [HumanMessage(content=user_input)]}, 
+            config
+        )
+        
+        # A resposta final será a última mensagem do histórico atualizado
+        print(f"Assistente: {resultado['messages'][-1].content}\n")

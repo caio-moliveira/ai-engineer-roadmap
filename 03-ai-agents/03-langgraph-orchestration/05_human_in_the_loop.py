@@ -1,83 +1,117 @@
 import operator
-from typing import Annotated, List, Literal, TypedDict
+from typing import Annotated, List, Literal, TypedDict, Optional
 from langgraph.graph import END, START, StateGraph
 from langgraph.types import Command, interrupt
 from langgraph.checkpoint.memory import InMemorySaver
 
+# 1. Definindo o Estado da Transação
 class State(TypedDict):
-    nlist: Annotated[List[str], operator.add]
+    cliente: str
+    valor: float
+    status: str
+    logs: Annotated[List[str], operator.add]
 
-def node_a(state: State) -> Command[Literal["b", "c", END]]:
-    print("-> Entrando no nó 'a'")
-    select = state["nlist"][-1]
+# 2. Nó de Verificação Inicial
+def verificar_transferencia(state: State) -> Command[Literal["processar_direto", "aguardar_aprovacao"]]:
+    valor = state["valor"]
+    cliente = state["cliente"]
     
-    # Condições Seguras
-    if select == "b": next_node = "b"
-    elif select == "c": next_node = "c"
-    elif select == "q": next_node = END
+    print(f"\n[SISTEMA] Verificando transferência de R$ {valor:.2f} para {cliente}...")
     
-    # Sinal de Alerta! HITL Necessário
+    # Regra de Negócio: Acima de R$ 5.000,00 exige aprovação humana
+    if valor > 5000:
+        print("[ALERTA] Valor alto detectado! Encaminhando para revisão do gerente.")
+        return Command(
+            update={"logs": [f"Transferência de {valor} para {cliente} aguardando aprovação."]},
+            goto="aguardar_aprovacao"
+        )
     else:
-        # AQUI O GRAFO PAUSA!
-        admin_response = interrupt(f"Input Inesperado! Recebi a letra: '{select}'. Como prosseguir?")
-        
-        print(f"-> [O admin respondeu com a ordem: {admin_response} ]")
-        
-        if admin_response == "continue":
-            next_node = "b"
-        else:
-            next_node = END
-            select = "q"
-            
-    return Command(
-        update=State(nlist=[select]),
-        goto=next_node
+        print("[OK] Valor dentro dos limites. Processando automaticamente.")
+        return Command(
+            update={"logs": [f"Transferência de {valor} para {cliente} processada automaticamente."]},
+            goto="processar_direto"
+        )
+
+# 3. Nó de Aguardar Aprovação (Onde ocorre o HITL)
+def aguardar_aprovacao(state: State):
+
+    decisao = interrupt(
+        f"SOLICITAÇÃO DE APROVAÇÃO: Transferência de R$ {state['valor']:.2f} para {state['cliente']}."
     )
+    
+    # Após o 'resume', a execução continua aqui
+    if decisao.lower() == "aprovar":
+        print("\n[GERENTE] Transferência APROVADA!")
+        return {
+            "status": "Aprovado",
+            "logs": ["Gerente aprovou a transação."]
+        }
+    else:
+        print("\n[GERENTE] Transferência REJEITADA!")
+        return {
+            "status": "Rejeitado",
+            "logs": ["Gerente rejeitou a transação."]
+        }
 
-def node_b(state: State) -> State: return State(nlist=["B"])
-def node_c(state: State) -> State: return State(nlist=["C"])
+# 4. Nó de Processamento Direto
+def processar_direto(state: State):
+    return {
+        "status": "Finalizado Automaticamente",
+        "logs": ["Transação concluída sem necessidade de aprovação."]
+    }
 
-# Builder normal
+# 5. Construindo o Grafo
 builder = StateGraph(State)
-builder.add_node("a", node_a)
-builder.add_node("b", node_b)
-builder.add_node("c", node_c)
-builder.add_edge(START, "a")
-builder.add_edge("b", END)
-builder.add_edge("c", END)
+builder.add_node("verificar", verificar_transferencia)
+builder.add_node("aguardar_aprovacao", aguardar_aprovacao)
+builder.add_node("processar_direto", processar_direto)
 
-# Checkpoint OBRIGATÓRIO p/ a pausa!
+builder.add_edge(START, "verificar")
+builder.add_edge("processar_direto", END)
+builder.add_edge("aguardar_aprovacao", END)
+
+# Checkpointer é essencial para manter o estado durante a pausa do HITL
 memory = InMemorySaver()
 graph = builder.compile(checkpointer=memory)
 
+# 6. Execução Interativa no Terminal
 if __name__ == "__main__":
-    config = {"configurable": {"thread_id": "thread-2"}}
-    print("--- Human in the Loop ---")
-    print("Trilhas Seguras: 'b', 'c', e 'q'")
-    print("Qualquer outra letra chamará a MODERAÇÃO!")
+    print("="*60)
+    print("        SISTEMA BANCÁRIO (HUMAN-IN-THE-LOOP)")
+    print("="*60)
     
-    while True:
-        user = input('\nDigite uma letra: ')
-        input_state = State(nlist=[user])
+    nome = input("Nome do Cliente: ")
+    quantia = float(input("Valor da Transferência (R$): "))
+    
+    # Thread ID isola cada transação
+    config = {"configurable": {"thread_id": "transfer-123"}}
+    
+    # Iniciando a execução
+    resultado = graph.invoke(
+        {"cliente": nome, "valor": quantia, "status": "pendente", "logs": []}, 
+        config
+    )
+    
+    # Loop de HITL: Verifica se há interrupções pendentes
+    while "__interrupt__" in resultado:
+        interrupcao = resultado["__interrupt__"][-1]
+        print(f"\n>>> [PAUSA DO SISTEMA] <<<")
+        print(f"Mensagem: {interrupcao.value}")
         
-        # 1. Primeira Execução do Input
-        result = graph.invoke(input_state, config)
+        # Simulação da ação do Gerente
+        acao = input("\nGerente, tome uma decisão (aprovar/rejeitar): ")
         
-        # 2. Descobrindo Se Pausou via Interrupt (A Letra Misteriosa Ativou a flag)
-        if '__interrupt__' in result:
-            print(f"\n[!] SISTEMA INTERROMPIDO [!]")
-            msg_da_funcao = result['__interrupt__'][-1].value
-            print(f"Motivo: {msg_da_funcao}")
-            
-            # 3. Interação do Admin Visual!
-            decisao_humana = input(f"\nAtenção Admin => Digite 'continue' ou 'rejeitar': ")
+        # Retomando o grafo de onde parou usando Command(resume)
+        resultado = graph.invoke(Command(resume=acao), config)
 
-            # 4. Desbloqueando a função "node_a"
-            human_response = Command(resume=decisao_humana)
-            result = graph.invoke(human_response, config) # Invocando Pela Segunda Vez
-            
-        print(f"Estado Final Atualizado: {result['nlist']}")
-        
-        if result['nlist'][-1] == "q":
-            print("-> Encerrando!")
-            break
+    # Resultado Final
+    print("\n" + "="*60)
+    print("        STATUS FINAL DA TRANSAÇÃO")
+    print("="*60)
+    print(f"Cliente: {resultado['cliente']}")
+    print(f"Valor: R$ {resultado['valor']:.2f}")
+    print(f"Status: {resultado['status']}")
+    print("\nHistórico de Logs:")
+    for log in resultado["logs"]:
+        print(f" - {log}")
+    print("="*60)
