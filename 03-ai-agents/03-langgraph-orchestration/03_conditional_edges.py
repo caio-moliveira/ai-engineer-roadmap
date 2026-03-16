@@ -81,10 +81,12 @@ def router(state: State) -> Literal["especialista", "marketing", "suporte"]:
 # 6. Montagem do Grafo
 builder = StateGraph(State)
 
+#inicializando os nós
 builder.add_node("analisar", node_analise_roteamento)
 builder.add_node("especialista", node_especialista_tech)
 builder.add_node("marketing", node_marketing)
 builder.add_node("suporte", node_suporte_geral)
+
 
 builder.add_edge(START, "analisar")
 

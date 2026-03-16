@@ -70,10 +70,12 @@ def node_conclusao(state: State) -> dict:
 # 5. Construindo o Grafo
 builder = StateGraph(State)
 
+#inicializando os nós
 builder.add_node("sanitizar", node_sanitizacao)
 builder.add_node("analisar_llm", node_analise_llm)
 builder.add_node("concluir", node_conclusao)
 
+#construção do fluxo
 builder.add_edge(START, "sanitizar")
 builder.add_edge("sanitizar", "analisar_llm")
 builder.add_edge("analisar_llm", "concluir")

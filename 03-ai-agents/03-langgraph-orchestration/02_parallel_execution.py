@@ -89,13 +89,14 @@ def node_agregador(state: State) -> dict:
 # 5. Montagem do Grafo
 builder = StateGraph(State)
 
+#inicializando os nós
 builder.add_node("sanitizar", node_sanitizacao)
 builder.add_node("sentimento", node_sentimento)
 builder.add_node("categoria", node_categorizacao)
 builder.add_node("urgencia", node_urgencia)
 builder.add_node("agregador", node_agregador)
 
-# Fluxo
+#construção do fluxo
 builder.add_edge(START, "sanitizar")
 
 # FAN-OUT: Sanitização abre para 3 nós em paralelo
