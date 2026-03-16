@@ -1,19 +1,50 @@
+<div align="center">
+    <img src="../assets/jornada.png" alt="Jornada de Dados" width="200"/>
+
 # 🔹 Bloco 5: Fine-Tuning e Melhora de Modelo
 
 > **Objetivo:** Saber quando treinar — e principalmente quando NÃO treinar.  
 > **Status:** A última milha da especialização.
 
-## 🛑 Pare. Leia isto.
-Fine-Tuning não resolve alucinação.
-Fine-Tuning não adiciona conhecimento factual novo de forma confiável.
-Fine-Tuning não é mágica.
+<p align="center">
+  <a href="https://www.python.org/">
+    <img alt="Python" src="https://img.shields.io/badge/Python-3.13%2B-3776AB?style=for-the-badge&logo=python&logoColor=white" />
+  </a>
+  <a href="https://huggingface.co/docs/transformers">
+    <img alt="Hugging Face Transformers" src="https://img.shields.io/badge/HuggingFace-Transformers-FFD21E?style=for-the-badge&logo=huggingface&logoColor=000000" />
+  </a>
+  <a href="https://huggingface.co/docs/trl">
+    <img alt="TRL" src="https://img.shields.io/badge/TRL-RLHF%20%26%20SFT-FFD21E?style=for-the-badge&logo=huggingface&logoColor=000000" />
+  </a>
+  <a href="https://github.com/unslothai/unsloth">
+    <img alt="Unsloth" src="https://img.shields.io/badge/Unsloth-Fast%20Fine--Tuning-10B981?style=for-the-badge" />
+  </a>
+  <a href="https://huggingface.co/Qwen">
+    <img alt="Qwen" src="https://img.shields.io/badge/Qwen-Open%20LLMs-F97316?style=for-the-badge" />
+  </a>
+  <a href="https://github.com/astral-sh/uv">
+    <img alt="uv" src="https://img.shields.io/badge/uv-Python%20Package%20Manager-111111?style=for-the-badge&logo=astral&logoColor=white" />
+  </a>
+</p>
 
-Se você está aqui porque "o RAG não funcionou", volte para o Bloco 2.
-Fine-Tuning é para **Forma**, **Estilo**, **Comportamento** e **Eficiência**, não para fatos.
+<div align="center">
 
-Este bloco vai te ensinar a responsabilidade de "tocar nos pesos" do modelo.
+### Tecnologias e padrões utilizados ao longo do módulo
 
----
+fine-tuning de LLMs • dataset curation • SFT (Supervised Fine-Tuning)  
+LoRA / QLoRA • treinamento eficiente em GPU  
+preparação e formatação de datasets • avaliação de modelos  
+deploy e inferência otimizada
+
+</div>
+
+
+<div align="center">
+<img src="../assets/fine-tunning.png" alt="Fine-Tuning" width="1000"/>
+</div>
+
+</div>
+</div>
 
 ## 📚 Ementa do Módulo
 
