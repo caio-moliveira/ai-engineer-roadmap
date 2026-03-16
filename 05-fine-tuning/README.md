@@ -17,55 +17,29 @@ Este bloco vai te ensinar a responsabilidade de "tocar nos pesos" do modelo.
 
 ## 📚 Ementa do Módulo
 
-### [Módulo 1: O que é Fine-Tuning (Realmente)](./01-finetuning-concepts)
+### [Módulo 1: Fundamentos de Fine-Tuning](./01-fine-tuning-fundamentals)
 - **Realidade:** Adaptação de pesos vs Injeção de Conhecimento.
-- **Mito:** "Vou treinar o modelo nos meus PDFs para ele saber sobre minha empresa." (Spoiler: Não vai funcionar).
-- **Fato:** Fine-Tuning ensina o modelo a FALAR como um médico, não a SER um médico.
+- **Matriz de Decisão:** Fine-Tuning vs RAG vs Prompting.
+- **Tipos de Adaptação:** LoRA, QLoRA, PEFT e Full Fine-Tuning.
 
-### [Módulo 2: Fine-Tuning vs RAG vs Prompting](./02-rag-vs-finetuning)
-- **Matriz de Decisão:** O framework definitivo para escolher a abordagem.
-- **RAG:** Para fatos novos e dinâmicos.
-- **Fine-Tuning:** Para estilo consistente e redução de latência/custo.
-- **Prompting:** Onde você deve gastar 90% do seu tempo inicial.
-
-### [Módulo 3: Tipos de Adaptação](./03-adaptation-types)
-- **Full Fine-Tuning:** Por que você quase nunca vai fazer isso.
-- **PEFT / LoRA:** Como treinar modelos gigantes com pouco VRAM.
-- **Instruction Tuning:** Ensinando o modelo a seguir ordens.
-- **Likelihood Training (DPO/ORPO):** Ensinando o modelo o que você prefere.
-
-### [Módulo 4: Dados são o Modelo](./04-data-prep)
-- **A Verdade:** O modelo é apenas um espelho dos seus dados.
-- **Qualidade > Quantidade:** 100 exemplos perfeitos valem mais que 10.000 exemplos ruins.
-- **Instruction Datasets:** Como formatar seus dados corretamente.
-
-### [Módulo 5: Avaliação antes do Treino](./05-evaluation)
-- **Regra:** Se você não consegue medir, não treine.
-- **Baselines:** Como saber se o treino piorou o modelo (Catastrophic Forgetting).
-- **LLM-as-a-Judge:** Usando GPT-4 para dar nota no seu Llama-3 finetunado.
-
-### [Módulo 6: Unsloth (Prático)](./06-unsloth)
+### [Módulo 2: Unsloth](./02-unsloth)
 - **A Ferramenta:** Por que Unsloth é o padrão ouro hoje.
 - **Eficiência:** Treinando 2x mais rápido com 70% menos memória.
 - **Workflow:** Do notebook para o GGUF/LoRA Adapter.
 
-### [Módulo 7: Infra de Treino & Custo Real](./07-training-ops)
-- **Hardware:** Quanto de VRAM você realmente precisa.
-- **Spot Instances:** Economizando 70% na AWS/RunPod.
-- **Custo Oculto:** O tempo de engenharia para limpar dados vs o custo de GPU.
+### [Módulo 3: Meu Primeiro LLM — Dataset, Preparação, Treinamento dos dados](./03-my-first-llm)
+- **Dados são o Modelo:** Qualidade > Quantidade. Instruction Datasets.
+- **Preparação:** Como formatar seus dados corretamente.
+- **Avaliação:** Baselines e LLM-as-a-Judge (GPT-4 como juiz).
 
-### [Módulo 8: Deploy & Inferência Pós-Treino](./08-deploy-adapters)
-- **Adapters:** Como carregar LoRA adapters no vLLM sem duplicar o modelo base.
+### [Módulo 4: Deploy do Modelo](./04-model-deploy)
+- **Adapters:** Como carregar LoRA adapters no vLLM.
 - **Merge:** Quando fundir os pesos (Mergekit) e quando carregar dinamicamente.
-- **Drift:** Monitorando se o modelo "desaprendeu" coisas importantes.
 
-### [Módulo 9: Riscos & Manutenção](./09-risks-maintenance)
-- **Catastrophic Forgetting:** O modelo ficou ótimo em SQL, mas esqueceu como falar inglês.
-- **Manutenção:** Modelo treinado é modelo "congelado". Como atualizar?
-
-### [Módulo 10: Enterprise & Gov](./10-enterprise-gov)
-- **Compliance:** Quando o Fine-Tuning é obrigatório por lei (On-premise total).
-- **Privacidade:** Garantindo que dados sensíveis não vazem.
+### [Módulo 5: Fine-Tuning em Produção](./05-fine-tuning-production)
+- **Ops:** Infraestrutura de treino, Spot Instances e custos reais.
+- **Riscos:** Catastrophic Forgetting e manutenção de modelos "congelados".
+- **Enterprise:** Compliance, Governança e Privacidade.
 
 ---
 
@@ -84,7 +58,7 @@ Este bloco vai te ensinar a responsabilidade de "tocar nos pesos" do modelo.
 - **Você provavelmente não precisa de Fine-Tuning:** Sério. RAG + Few-Shot Prompting resolve 95% dos casos.
 
 ## 🚀 Como começar
-Vá para **[Módulo 1: O que é Fine-Tuning (Realmente)](./01-finetuning-concepts)**.
+Vá para **[Módulo 1: Fundamentos de Fine-Tuning](./01-fine-tuning-fundamentals)**.
 
 
 ### 6. Inference optimization
