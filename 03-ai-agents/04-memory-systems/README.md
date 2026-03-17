@@ -1,111 +1,64 @@
-# 🧠 Módulo 5: Sistemas de Memória
+# 🧠 Módulo 4: Sistemas de Memória (LangGraph)
 
-> **Goal:** Dar aos agentes a capacidade de lembrar do passado.  
-> **Status:** Crucial para chatbots e fluxos assíncronos.
+Este módulo é um guia técnico e prático sobre como implementar sistemas de memória avançados utilizando o ecossistema **LangGraph** e **LangChain**.
 
-Sem memória, cada interação com um LLM é como o filme "Como se Fosse a Primeira Vez". A revolução dos assistentes ocorreu quando percebemos que poderíamos injetar o histórico da conversa no prompt de cada nova requisição.
-
-Neste módulo, demonstramos como implementar sistemas de memória usando ferramentas modernas focadas em **LangGraph** e **LangChain**, além de introduzir a recepção de inputs multimodais.
+Diferente de sistemas básicos de chat, aqui exploramos a separação entre memória de curto prazo (conversacional) e memória de longo prazo (conhecimento persistente do usuário).
 
 ---
 
-## 📚 Índice de Scripts Práticos
+## 📂 Visão Geral dos Scripts
 
-Todos os códigos rodam nativamente. Para executá-los, acesse a pasta e garanta ter o `.env` devidamente preenchido.
+Os arquivos abaixo foram desenvolvidos de forma modular e didática. Cada um pode ser executado individualmente para demonstrar um conceito específico.
 
-1. **[Conceitos Básicos de Memória](#1-conceitos-básicos-de-memória)** -> `python/01_memory_basics.py`
-2. **[Mensagens Multimodais (Texto, Imagem, Áudio)](#2-mensagens-multimodais)** -> `python/02_multimodal_messages.py`
+### 1. Memória de Curto Prazo (`short_term.py`)
+Focada em **Checkpoints** e **Threads**. É a memória que permite ao agente lembrar o que foi dito na interação anterior dentro da mesma conversa.
+- **Conceito Chave**: `thread_id`.
+- **Implementação**: Usa `MemorySaver` para persistência em memória durante o desenvolvimento.
+- **Como rodar**: `uv run short_term.py`
 
----
+### 2. Memória de Longo Prazo (`long_term.py`)
+Demonstra o uso de **Stores** do LangGraph para persistir informações que transcendem uma única "sessão" ou "thread".
+- **Conceito Chave**: `Store`, namespaces (ex: `("memories", user_id)`).
+- **Uso**: Salvar preferências, fatos aprendidos e perfil do usuário.
+- **Como rodar**: `uv run long_term.py`
 
-## 1. Conceitos Básicos de Memória
+### 3. Persistência com PostgreSQL (`postgres_memory.py`)
+Guia de configuração para levar a memória de curto e longo prazo para produção usando um banco de dados relacional.
+- **Componentes**: `PostgresSaver` (Checkpoints) e `PostgresStore` (Long-term).
+- **Setup**: Requer uma instância de Postgres (ex: via Docker).
+- **Como rodar**: `uv run postgres_memory.py`
 
-No script `python/01_memory_basics.py`, nós ilustramos a diferença brutal entre um agente ingênuo e um agente persistente.
+### 4. Persistência com Redis (`redis_memory.py`)
+Focado em alta performance para checkpoints de curto prazo.
+- **Componente**: `RedisSaver`.
+- **Vantagem**: Baixíssima latência para recuperação de estado em sistemas de alta escala.
+- **Como rodar**: `uv run redis_memory.py`
 
-### O Agente Amnésico
-Quando instanciamos um agente puramente reativo, ele responde apenas à mensagem atual na lista. Informações ditas há dois minutos são perdidas.
-
-```python
-from langgraph.prebuilt import create_react_agent
-from langchain_openai import ChatOpenAI
-
-model = ChatOpenAI(model="gpt-4o-mini")
-agent = create_react_agent(model, tools=[])
-
-# O agente não lembrará desta mensagem na próxima rodada
-agent.invoke({"messages": [{"role": "user", "content": "Meu nome é Caio."}]})
-```
-
-### O Agente Memorável (LangGraph Checkpointers)
-Para dotar o agente com memória de curto/longo prazo de maneira stateful, englobamos o uso de `checkpointers` providos pelo ecossistema LangGraph (ex: `InMemorySaver`, `SqliteSaver`, `PostgresSaver`).
-
-E é vital compreender o conceito do `thread_id`. Ele funciona como o ID do chat!
-
-```python
-from langgraph.checkpoint.memory import InMemorySaver
-
-memory = InMemorySaver()
-
-# Adiciona-se o checkpointer ao agente
-agent = create_react_agent(model, tools=[], checkpointer=memory)
-
-# É OBRIGATÓRIO invocar atrelando a um ID de Thread para salvar/pesquisar
-config = {"configurable": {"thread_id": "usuario_caio_sessao_01"}}
-
-# O checkpointer intercepta essa call, guarda e sempre resgata no futuro
-agent.invoke({"messages": [mensagem_do_usuario]}, config)
-```
+### 5. Busca Semântica em Memória (`semantic_memory.py`)
+Implementa o conceito de **Memory-RAG**. Em vez de buscar por palavras exatas, o agente busca memórias por relevância semântica (vetorial).
+- **Funcionamento**: Utiliza o método `asearch` do Store com suporte a embeddings.
+- **Como rodar**: `uv run semantic_memory.py`
 
 ---
 
-## 2. Mensagens Multimodais
+## 🛠️ Requisitos Técnicos
 
-Com o surgimento de modelos Vision e Áudio nativos como o `GPT-4o`, LLMs não se limitam mais a Strings. No script `python/02_multimodal_messages.py` abordamos o envio de dicionários complexos contendo o campo `type`.
+- **Python 3.11+**
+- **Variáveis de Ambiente**:
+  - `OPENAI_API_KEY`: Necessária para os demos com LLM.
+  - `POSTGRES_URL` (opcional): Para rodar o demo de Postgres.
+  - `REDIS_URL` (opcional): Para rodar o demo de Redis.
 
-### Input de Imagem (`image_url`)
-Para enviarmos imagens locais num script backend (`.py`), abrimos em bytes e convertemos para `Base64`.
+## 🎓 Conceitos Fundamentais
 
-```python
-import base64
-from langchain_core.messages import HumanMessage
+> [!IMPORTANT]
+> **Checkpoints (Short-Term)**: São automáticos. O LangGraph salva o snapshot de todo o estado toda vez que o grafo avança. É vinculado a um `thread_id`.
 
-# Leitura raw
-with open("grafico.png", "rb") as f:
-    img_b64 = base64.b64encode(f.read()).decode("utf-8")
+> [!TIP]
+> **Store (Long-Term)**: É manual e explícito. Você decide o que vale a pena "aprender" e salvar para o futuro do usuário, independente de qual thread ele está usando.
 
-# Injeção multimodal via dict content
-msg = HumanMessage(content=[
-    {"type": "text", "text": "Analise esta imagem:"},
-    {
-        "type": "image_url", 
-        "image_url": {"url": f"data:image/png;base64,{img_b64}"}
-    }
-])
-
-agent.invoke({"messages": [msg]})
-```
-
-### Input de Áudio (`input_audio`)
-*(Específico para modelos capacitados como `gpt-4o-audio-preview`)*
-
-De maneira análoga à imagem, encodamos o buffer gravado ou salvo localmente.
-
-```python
-# Requer Base64 do .Wav
-msg = HumanMessage(content=[
-    {"type": "text", "text": "Transcreva este áudio:"},
-    {
-        "type": "input_audio", 
-        "input_audio": {"data": aud_b64, "format": "wav"}
-    }
-])
-```
-
-## 🧠 Mental Model
-
-- Memorizar é puramente **"Anexar Histórico antigo para processar na próxima Call"**. Frameworks como LangGraph `checkpointers` automatizam esse estresse cuidando dos bancos SQL ou memória Cache nos bastidores e separando isso por ID de clientes (`thread_id`).
-- Inputs multimodais exigem empacotamento. Em vez de uma `string` pura, envia-se uma `lista de blocos` tipados.
+---
 
 ## ⏭️ Próximo Passo
-Com Agentes inteligentes e memórias funcionais... É hora de dar "Mãos e Pernas" para eles trabalharem no mundo real.
-Vá para **[Módulo 6: Tools & MCP](../05-tools-mcp)**.
+Com memórias funcionais, seus agentes agora têm "passado". O próximo passo é dar a eles a capacidade de agir no mundo real.
+Vá para **[Módulo 5: Tools & MCP](../05-tools-mcp)**.
