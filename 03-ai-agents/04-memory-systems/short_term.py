@@ -58,25 +58,30 @@ async def main():
     memory = MemorySaver()
     graph = workflow.compile(checkpointer=memory)
     
-    # Identificador único da conversa
-    thread_id = "usuario_exemplo_1"
+    # Identificador do usuário para a thread
+    thread_id = input("\n👤 Digite seu Thread ID (ex: caio): ").strip() or "default_user"
     config = {"configurable": {"thread_id": thread_id}}
     
-    # Primeira interação
-    print(f"\n[Thread: {thread_id}] Usuário: Oi, meu nome é Caio.")
-    input1 = {"messages": [HumanMessage(content="Oi, meu nome é Caio.")]}
-    async for event in graph.astream(input1, config):
-        for node, values in event.items():
-            if "messages" in values:
-                print(f"Bot: {values['messages'][-1].content}")
+    print(f"\n💬 Chat Iniciado (Thread: {thread_id})! Digite 'sair' para encerrar.")
+    
+    while True:
+        user_input = input("\nVocê: ").strip()
+        if user_input.lower() in ["sair", "exit", "quit"]:
+            print(f"👋 Até logo!")
+            break
+        
+        if not user_input:
+            continue
 
-    # Segunda interação (O bot deve lembrar o nome devido à memória de thread)
-    print(f"\n[Thread: {thread_id}] Usuário: Qual é o meu nome?")
-    input2 = {"messages": [HumanMessage(content="Qual é o meu nome?")]}
-    async for event in graph.astream(input2, config):
-        for node, values in event.items():
-            if "messages" in values:
-                print(f"Bot: {values['messages'][-1].content}")
+        input_data = {"messages": [HumanMessage(content=user_input)]}
+        
+        async for event in graph.astream(input_data, config):
+            for node, values in event.items():
+                if "messages" in values:
+                    # Pegamos a última mensagem (que deve ser do AI)
+                    last_msg = values["messages"][-1]
+                    if isinstance(last_msg, AIMessage):
+                        print(f"Bot: {last_msg.content}")
 
 if __name__ == "__main__":
     asyncio.run(main())
