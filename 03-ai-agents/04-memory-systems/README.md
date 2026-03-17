@@ -1,64 +1,85 @@
 # 🧠 Módulo 4: Sistemas de Memória (LangGraph)
 
-Este módulo é um guia técnico e prático sobre como implementar sistemas de memória avançados utilizando o ecossistema **LangGraph** e **LangChain**.
-
-Diferente de sistemas básicos de chat, aqui exploramos a separação entre memória de curto prazo (conversacional) e memória de longo prazo (conhecimento persistente do usuário).
+Este módulo explora a implementação de sistemas de memória avançados no **LangGraph**, dividindo-os em memória de curto prazo (thread-specific) e memória de longo prazo (conhecimento persistente).
 
 ---
 
 ## 📂 Visão Geral dos Scripts
 
-Os arquivos abaixo foram desenvolvidos de forma modular e didática. Cada um pode ser executado individualmente para demonstrar um conceito específico.
+O módulo foi simplificado para focar em três pilares fundamentais da memória:
 
 ### 1. Memória de Curto Prazo (`short_term.py`)
-Focada em **Checkpoints** e **Threads**. É a memória que permite ao agente lembrar o que foi dito na interação anterior dentro da mesma conversa.
+Focada em **Checkpoints** e **Threads**. Permite que o agente mantenha o contexto de uma conversa específica.
 - **Conceito Chave**: `thread_id`.
-- **Implementação**: Usa `MemorySaver` para persistência em memória durante o desenvolvimento.
-- **Como rodar**: `uv run short_term.py`
+- **Implementação**: Uso de `MemorySaver` para persistência efêmera em memória.
 
 ### 2. Memória de Longo Prazo (`long_term.py`)
-Demonstra o uso de **Stores** do LangGraph para persistir informações que transcendem uma única "sessão" ou "thread".
-- **Conceito Chave**: `Store`, namespaces (ex: `("memories", user_id)`).
-- **Uso**: Salvar preferências, fatos aprendidos e perfil do usuário.
-- **Como rodar**: `uv run long_term.py`
+Utiliza o conceito de **Store** do LangGraph para persistir informações que transcendem uma única sessão (ex: preferências do usuário).
+- **Conceito Chave**: `Store`, namespaces.
+- **Uso**: Salvar fatos aprendidos sobre o usuário.
 
-### 3. Persistência com PostgreSQL (`postgres_memory.py`)
-Guia de configuração para levar a memória de curto e longo prazo para produção usando um banco de dados relacional.
-- **Componentes**: `PostgresSaver` (Checkpoints) e `PostgresStore` (Long-term).
-- **Setup**: Requer uma instância de Postgres (ex: via Docker).
-- **Como rodar**: `uv run postgres_memory.py`
-
-### 4. Persistência com Redis (`redis_memory.py`)
-Focado em alta performance para checkpoints de curto prazo.
-- **Componente**: `RedisSaver`.
-- **Vantagem**: Baixíssima latência para recuperação de estado em sistemas de alta escala.
-- **Como rodar**: `uv run redis_memory.py`
-
-### 5. Busca Semântica em Memória (`semantic_memory.py`)
-Implementa o conceito de **Memory-RAG**. Em vez de buscar por palavras exatas, o agente busca memórias por relevância semântica (vetorial).
-- **Funcionamento**: Utiliza o método `asearch` do Store com suporte a embeddings.
-- **Como rodar**: `uv run semantic_memory.py`
+### 3. Persistência Externa (`persisted_memory.py`)
+Demonstra como conectar seu agente a bancos de dados robustos para produção, utilizando **Redis** e **PostgreSQL**.
+- **Redis**: Ideal para alta performance em checkpoints de curto prazo.
+- **PostgreSQL**: Excelente para persistência relacional de longo prazo e estados complexos.
 
 ---
 
-## 🛠️ Requisitos Técnicos
+## 🛠️ Infraestrutura e Setup
 
-- **Python 3.11+**
-- **Variáveis de Ambiente**:
-  - `OPENAI_API_KEY`: Necessária para os demos com LLM.
-  - `POSTGRES_URL` (opcional): Para rodar o demo de Postgres.
-  - `REDIS_URL` (opcional): Para rodar o demo de Redis.
+Para utilizar persistência externa, você precisará configurar os seguintes serviços:
+
+### 🚀 Redis (Docker)
+Recomendamos o uso do `redis-stack-server` para ter acesso completo às funcionalidades.
+- **Imagem**: `redis/redis-stack-server:latest`
+- **Porta Padrão**: `6379`
+- **URL de Conexão**: `redis://localhost:6379`
+- **Docker Command**:
+  ```bash
+  docker run -d --name redis-stack -p 6379:6379 -p 8001:8001 redis/redis-stack-server:latest
+  ```
+
+### 🐘 PostgreSQL (Supabase)
+Para o Postgres, utilizamos o **Supabase** como provedor Cloud.
+1. Crie um projeto no [Supabase](https://supabase.com/).
+2. Obtenha a **Connection String** nas configurações de Database.
+3. Com a URL em mãos, o LangGraph consegue criar as tabelas necessárias automaticamente.
+
+---
+
+## 📦 Dependências e Imports
+
+Para utilizar esses provedores, você deve instalar os pacotes específicos via **uv**:
+
+```bash
+# Para Redis
+uv add langgraph-checkpoint-redis
+
+# Para PostgreSQL
+uv add langgraph-checkpoint-postgres
+```
+
+### Imports Necessários
+No seu código Python, utilize os seguintes imports para os Savers:
+
+```python
+from langgraph.checkpoint.redis import RedisSaver
+from langgraph.checkpoint.postgres import PostgresSaver
+```
+
+---
+
+## 🔗 Documentação Útil
+
+- [LangGraph Persistence Documentation](https://langchain-ai.github.io/langgraph/how-tos/persistence/)
+- [Redis Stack Image - Docker Hub](https://hub.docker.com/r/redis/redis-stack-server)
+- [Supabase Database Docs](https://supabase.com/docs/guides/database)
+- [LangGraph Redis Saver Guide](https://langchain-ai.github.io/langgraph/how-tos/persistence_redis/)
+
+---
 
 ## 🎓 Conceitos Fundamentais
 
 > [!IMPORTANT]
-> **Checkpoints (Short-Term)**: São automáticos. O LangGraph salva o snapshot de todo o estado toda vez que o grafo avança. É vinculado a um `thread_id`.
-
-> [!TIP]
-> **Store (Long-Term)**: É manual e explícito. Você decide o que vale a pena "aprender" e salvar para o futuro do usuário, independente de qual thread ele está usando.
-
----
-
-## ⏭️ Próximo Passo
-Com memórias funcionais, seus agentes agora têm "passado". O próximo passo é dar a eles a capacidade de agir no mundo real.
-Vá para **[Módulo 5: Tools & MCP](../05-tools-mcp)**.
+> **Checkpoints (Short-Term)**: São automáticos e vinculados a um `thread_id`. Capturam o estado completo do grafo.
+> **Store (Long-Term)**: É uma escrita explícita (`store.put`) para persistir conhecimentos gerais do usuário entre diferentes threads.

@@ -3,7 +3,8 @@ import asyncio
 import operator
 from typing import Annotated, List, TypedDict
 
-from langgraph.checkpoint.redis.aio import AsyncRedisSaver
+from langgraph.checkpoint.redis import RedisSaver
+from langgraph.checkpoint.postgres import PostgresSaver 
 from langgraph.graph import StateGraph, START, END
 from langchain_openai import ChatOpenAI
 from langchain_core.messages import BaseMessage, HumanMessage, AIMessage
@@ -16,16 +17,17 @@ class State(TypedDict):
     messages: Annotated[List[BaseMessage], operator.add]
 
 # 2. Nó do Chatbot
-async def chatbot_node(state: State):
+def chatbot_node(state: State):
     llm = ChatOpenAI(model="gpt-4o-mini")
-    response = await llm.ainvoke(state["messages"])
+    response = llm.invoke(state["messages"])
     return {"messages": [response]}
 
-async def main():
+def main():
     print("--- 🚀 Chat Interativo com Memória Redis ---")
     
     # Configuração da conexão Redis
-    url = os.getenv("REDIS_URL", "redis://localhost:6379")
+    redis_url = os.getenv("REDIS_URL", "redis://localhost:6379")
+    postgres_url = os.getenv("POSTGRES_URL", "postgresql://postgres:Trakinas123!@db.gbezckvxqyrpvtlqisrj.supabase.co:5432/postgres")
     
     # 3. Montagem do Grafo
     workflow = StateGraph(State)
@@ -34,9 +36,9 @@ async def main():
     workflow.add_edge("agent", END)
 
     try:
-        # Conforme a documentação oficial, usamos AsyncRedisSaver dentro de um context manager assíncrono
-        async with AsyncRedisSaver.from_conn_string(url) as saver:
-            # Opcional: await saver.asetup() se necessário para inicializar o DB
+        #with PostgresSaver.from_conn_string(postgres_url) as saver:
+        with RedisSaver.from_conn_string(redis_url) as saver:
+            saver.setup() #se necessário para inicializar o DB
             
             graph = workflow.compile(checkpointer=saver)
             
@@ -45,7 +47,7 @@ async def main():
             config = {"configurable": {"thread_id": user_id}}
             
             # 5. Recuperação de Histórico Prévio
-            state = await graph.aget_state(config)
+            state = graph.get_state(config)
             history = state.values.get("messages", [])
             
             if history:
@@ -71,7 +73,7 @@ async def main():
                 input_data = {"messages": [HumanMessage(content=user_input)]}
                 
                 # Execução com persistência automática no Redis via thread_id
-                async for event in graph.astream(input_data, config, stream_mode="values"):
+                for event in graph.stream(input_data, config, stream_mode="values"):
                     # No modo "values", pegamos a última mensagem do estado atualizado
                     if "messages" in event:
                         last_msg = event["messages"][-1]
