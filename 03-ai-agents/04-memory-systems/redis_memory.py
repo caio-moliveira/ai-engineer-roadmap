@@ -1,7 +1,7 @@
 import os
 import asyncio
 import operator
-from typing import Annotated, List, Dict, Any
+from typing import Annotated, List, TypedDict
 
 from langgraph.checkpoint.redis.aio import AsyncRedisSaver
 from langgraph.graph import StateGraph, START, END
@@ -12,7 +12,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # 1. Definição do Estado
-class State(Dict):
+class State(TypedDict):
     messages: Annotated[List[BaseMessage], operator.add]
 
 # 2. Nó do Chatbot
