@@ -1,122 +1,105 @@
-# 🛠️ Módulo 6: Tools & MCP (Model Context Protocol)
+# Módulo 05: Tools & Model Context Protocol (MCP)
 
-> **Goal:** Dar "Mãos" para seu Agente atuar no mundo externo.  
-> **Status:** O padrão ouro (MCP) recém-lançado que substitui integrações dolorosas.
+Este módulo foca na integração de capacidades externas aos agentes de IA. Nossa trilha evolui desde o uso de ferramentas básicas locais (Tools) até a adoção completa do **[Model Context Protocol (MCP)](https://modelcontextprotocol.io/introduction)**.
 
-Se no módulo passado demos memórias aos agentes, neste nós os ensinaremos a agir. Agentes sem ferramentas são limitados a conversar; com ferramentas, eles podem formatar HDDs, consultar bancos SQL, navegar em viagens ou enviar e-mails.
-
-Disponibilizamos scripts práticos consolidados na pasta `/python` simulando fluxos backend corporativos com o recém-lançado framework oficial `create_agent` pareado com `MultiServerMCPClient`.
+O MCP é um padrão aberto introduzido pela Anthropic que padroniza como os modelos de IA se conectam a fontes de dados e sistemas externos. Ele fornece uma arquitetura universal (Servidor/Cliente) que elimina a necessidade de integrações sob medida para cada fonte de dados.
 
 ---
 
-## 📚 Índice de Scripts Práticos
+## 🎯 Objetivo de Aprendizado
 
-Todos os scripts são construídos sobre o core do LangChain e formatados para execução nativa via console.
-
-1. **[Ferramentas Nativas em Python (`@tool`)](#1-ferramentas-nativas-em-python)** -> `python/01_custom_tools.py`
-2. **[Contexto de Execução Oculto (Runtime Context)](#2-injeção-de-contexto-no-runtime)** -> `python/02_runtime_context.py`
-3. **[MCP: Servidor Local via Subprocessos](#3-mcp-servidor-local-via-stdio)** -> `python/03_mcp_local_server.py`
-4. **[MCP: Servidores Globais e APIs REST](#4-mcp-servidores-remotos-e-online-api)** -> `python/04_mcp_remote.py`
+Ao longo desta trilha prática baseada no cenário de uma **Agência de Viagens Corporativa**, o aluno irá aprender:
+1. Como criar ferramentas (Tools) simples e locais.
+2. Como conectar ferramentas a APIs RESTful externas de forma autônoma.
+3. A arquitetura de um Servidor MCP e seus 3 blocos construtivos: Tools, Resources e Prompts.
+4. Como expor e consumir capacidades ativas via MCP (Tool).
+5. Como injetar dados estáticos via MCP para Engenharia de Contexto (Resource).
+6. Como padronizar a geração utilizando templates do MCP (Prompt).
+7. Como criar um Agente Orquestrador em LangGraph unindo todas essas capacidades de forma sequencial com **Human-in-the-Loop (HITL)**.
 
 ---
 
-## 1. Ferramentas Nativas em Python
+## 🏗️ Arquitetura e Padrões (Langchain & Langgraph)
 
-Ferramentas (Tools) são pedaços de código convencionais com uma "casca" que permite que a LLM saiba exatamente para que servem e **quando chamá-las**. A casca é o decorator `@tool`. Não subestime a docstring (o texto dentro de `"""`), a inteligência do agente depende 100% da clareza dessa explicação.
+Todo o código segue estritamente os padrões mais recentes da [documentação oficial da Langchain](https://python.langchain.com/docs/modules/agents/) e utiliza as versões adaptadoras oficiais (`langchain-mcp-adapters`):
 
-```python
-from langchain.agents import create_agent
-from langchain_core.tools import tool
+- Criação de agentes utilizando `create_agent` e construtores primários em conjunto com o `ChatPromptTemplate`.
+- Orquestração de grafos determinísticos orientada a estado transacional utilizando `langgraph.graph.StateGraph`.
+- Inserção de controles interativos para pausar/retomar o fluxo assíncrono para aprovação humana usando a arquitetura de `interrupt`.
+- Cliente Universal do MCP (`MultiServerMCPClient`) lidando com subprocessos e sub-roteamento `stdio`.
+- Servidores MCP limpos instanciados em Python usando `FastMCP`.
 
-@tool
-def calculadora(x: float, y: float) -> float:
-    """Soma dois números. Útil para matemática."""
-    return x + y
+---
 
-# Bind das ferramentas ao agente é absurdamente simples
-agent = create_agent(model="gpt-4o", tools=[calculadora])
+## 📂 Estrutura das Aulas (Scripts)
+
+O módulo foi desenhado progressivamente. Cada aula isolada adiciona uma camada ou ensina um pilar do framework antes de amalgamá-los ao final.
+
+### Fundamentos de Tools
+- **[`aula01_simple_tool.py`](./aula01_simple_tool.py)**
+  - **Cenário:** Cálculo de Orçamento Básico.
+  - **Mecânica:** Criação local de uma `@tool` (função encadeada puramente em código Python) e sua exposição para orquestração de um Agente nativo via LLM.
+
+- **[`aula02_api_tool.py`](./aula02_api_tool.py)**
+  - **Cenário:** Consulta de Clima (API Open-Meteo) e Curiosidades (API Wikipedia).
+  - **Mecânica:** O Agente resolve de forma autônoma parâmetros brutos vindos do humano e realiza o acionamento de múltiplas ferramentas HTTP externas de forma transparente.
+
+### Fundamentos do Protocolo MCP
+O MCP divide tecnologicamente o que a IA consome em 3 conceitos que os clientes podem buscar sob demanda:
+1. **Prompts:** Geração de mensagens pré-formatadas. O LLM as usa para iniciar fluxos com boas práticas de negócio enclausuradas.
+2. **Resources (Recursos):** Entrega de dados estáticos/passivos. O Cliente puxa bytes/textos do MCP antes de sequer conversar com o LLM (Ex: Injeção de políticas no System Prompt).
+3. **Tools (Ferramentas):** Funções e ações executáveis. O LLM as descobre dinamicamente e dita ativamente os parâmetros e o momento exato de acioná-las.
+
+- **[`03_mcp_server.py`](./03_mcp_server.py)**
+  - **Papel:** O cérebro hospedeiro (Backend) da Agência de Viagens. Ele registra a Política Internacional (`@mcp.resource`), o Prompt Corporativo de Vendas (`@mcp.prompt`) e o Emissor de Itinerário Oficial (`@mcp.tool`). Exposto localmente com dependência mínima.
+
+- **[`04_mcp_as_tool.py`](./04_mcp_as_tool.py)**
+  - **Papel:** Cliente consumindo a emissão de roteiro (`create_itinerary`).
+  - **Mecânica:** O adaptador lê as ferramentas do MCP (`.get_tools()`) e as converte silenciosamente para classes-filhas amigáveis nativas do Langchain, permitindo chamadas orgânicas do Agente.
+
+- **[`05_mcp_as_resource.py`](./05_mcp_as_resource.py)**
+  - **Papel:** Cliente adotando RAG passivo e Engenharia de Contexto ("Dicas de Viagem").
+  - **Mecânica:** Demonstra o pilar passivo do protocolo: O cliente solicita bytes cru do Resource (`.get_resources()`) antes do modelo gerar texto, injetando as diretrizes puras como context window primária do LLM.
+  
+- **[`06_mcp_as_prompt.py`](./06_mcp_as_prompt.py)**
+  - **Papel:** Cliente recuperando template pronto (`itinerary_planner`) baseado em custom arguments.
+  - **Mecânica:** Comprova o pilar instrucional fechado, solicitando via argumento flexível a mensagem estrita que o LLM deverá acatar sem desvios, centralizando no Servidor MCP todo o controle de qualidade do prompting.
+
+### A Orquestração Mestra
+- **[`07_mcp_human_in_the_loop.py`](./07_mcp_human_in_the_loop.py)**
+  - **Papel:** Agente Final Completo unindo todas as camadas sob o motor do LangGraph.
+  - **O Fluxo Determinístico (DAG):** Em formato de Pipeline e Grafo de Estados (`StateGraph`), ele transita sequencialmente por:
+    1. Importar budget de *01* e métricas turísticas de *02*.
+    2. Puxar Resouces (política de governança) de *05* no servidor MCP.
+    3. Trazer Prompt Corporativo formatado do MCP de *06* e injetar com o LLM.
+    4. Validar formato chamando a MCP Tool de *04* sob demanda.
+    5. **Aprovação Humana (HITL - Human In The Loop)**: Interrompe a compilação do LangGraph via `interrupt()`, envia a carga ao console para averiguação final do gerente da agência.
+    6. Se e somente se o usuário digitar "yes" no console, o checkpoint é liberado, gravando de forma permanente um artefato do mundo real (`roteiro_aprovado.md`).
+
+---
+
+## 🚀 Repositório e Setup
+
+1. Configure e instale seu ambiente com o gerador de projeto padrão (`uv`), garantindo os suportes adaptadores exigidos pela stack:
+```bash
+uv pip install mcp fastmcp langchain-mcp-adapters langchain-openai langgraph
+```
+
+2. As credenciais (`OPENAI_API_KEY`, etc) devem ser expostas conforme .env raiz.
+
+## 💻 Como Executar
+
+O fluxo de aprendizado é individual. Exemplo rodando a orquestração mestra final 07 (que instanciará o Servidor 03 como subprocesso em stdio por baixo dos panos):
+
+```bash
+uv run .\03-ai-agents\05-tools-mcp\07_mcp_human_in_the_loop.py
 ```
 
 ---
 
-## 2. Injeção de Contexto no Runtime
-
-Às vezes, uma feramenta precisa de algo "sigiloso" (ID do usuário no Backend, token de sessão, contexto relacional) que a IA nunca vai gerar e você não quer que ela tente deduzir.
-
-Em nossa abstraction do *Langgraph*, nós englobamos parâmetros via `ToolRuntime` e injetamos o `context_schema` que foi montado no server no momento da `invoke()`.
-
-```python
-from langchain.tools import tool, ToolRuntime
-
-# A LLM NUNCA precisa adivinhar essa propriedade 'runtime', e a Tool ascessará o contexto!
-@tool
-def resgatar_saldo(runtime: ToolRuntime) -> str:
-    """Busca o saldo do usuário logado"""
-    id_backend = runtime.context.user_id 
-    # [Busca no SQL por esse ID...]
-    return f"O saldo é R$ 1..."
-
-# Agente blindado: Invocado passando a configuração local da sessão!
-agent = create_agent(model="gpt-4", tools=[resgatar_saldo], context_schema=UserContext)
-agent.invoke(..., context=UserContext(user_id="U-123"))
-```
-
----
-
-## 3. O Fim das Tools Nativas e Nascimento do MCP (Model Context Protocol)
-
-Definir Tools Python manuais numa base monolítica é exaustivo (você precisa re-codar a API do Google Calendar toda vez).
-O **MCP (Model Context Protocol)** - iniciativa pioneira open source desenvolvida pela Anthropic, converteu o pareamento de Tools para um conceito *Micro-serviços*.
-
-Servidores MCP publicam Ferramentas, Prompts e Recursos numa linguagem universal. O Agente simplesmente se "conecta" e pergunta `get_tools()`.
-
-### MCP: Servidor Local (via STDIO)
-Abordado no script `03_mcp_local_server.py`. O Langchain executa um script Python vizinho como um binário isolado. Toda comunicação JSON bate como input e output standard (`stdio`). Suporta abstrações assíncronas de sub-processos.
-
-```python
-from langchain_mcp_adapters.client import MultiServerMCPClient
-
-# O Server está atrelado a um binário do Python fora da memoria atual
-client = MultiServerMCPClient({
-    "database_server": {
-        "transport": "stdio",
-        "command": "python",
-        "args": ["../servidor_sql.py"]
-    }
-})
-
-tools = await client.get_tools()
-```
-
-### 4. MCP: Servidores Remotos e Online API
-Abordado no script `04_mcp_remote.py`. 
-
-Se sua VM/SO tiver a package `uvx` ou `npx` instaladas, você engabela as ferramentas oficiais da nuvem sem escrever **nenhuma** `@tool`. Você não programa a lógica da calculadora de voos, você APENAS ASSINA um Server Sent Events via `streamable_http`.
-
-```python
-client = MultiServerMCPClient({
-    # Assinando serviços MCP remotos HTTPS Restful 
-    "travel_server": {
-        "transport": "streamable_http",
-        "url": "https://mcp.kiwi.com"
-    }
-})
-
-tools = await client.get_tools()
-agent = create_agent(model="gpt-4o", tools=tools)
-
-# O agente consultará a Kiwi remotamente, trará as passagens via MCP e devolverá no prompt!
-await agent.ainvoke({"messages": [...]})
-```
-
-## 🧠 Mental Model Combinado
-
-Hoje, os Agentes em Produção seguem o tríplice pilar:
-1. **Controle e Loop de Atos**: `LangGraph` dita com quem o node fala, e o `interrupt()` provém o aval Humano.
-2. **Histórico Vivo**: `checkpointer` (Memórias Sqlite/Postgres/MemorySaver) provêm retenção de diálogos.
-3. **Sensores Livres**: Ferramentas empacotadas no padrão micro-serviços `MCP`, não poluindo código core.
-
-## ⏭️ Próximo Passo
-Dominados os Agentes Unitários e Ferramentais Atômicos, está na hora de subir na pirâmide da gestão corporativa. Pelo que você viu em `MultiServerMCPClient`, um agente lida com vários MCPs.
-Mas o que acontece quando **Agentes** de dezenas de especialidades viram *Ferramentas* uns dos outros?
-Vá para **[Módulo 7: Sistemas Multi-Agentes](../06-multi-agents)**.
+## 📖 Referências Documentais
+* [Introdução Oficial ao Protocolo MCP](https://modelcontextprotocol.io/introduction)
+* [FastMCP - Documentação para Ferramentas Livres](https://gofastmcp.com/getting-started/welcome)
+* [Langchain MCP Adapters](https://docs.langchain.com/oss/python/langchain/mcp)
+* [Langchain Tools](https://docs.langchain.com/oss/python/langchain/tools)
+* [LangGraph - Controle de Fluxo Iterativo e Arquitetura HITL](https://langchain-ai.github.io/langgraph/concepts/human_in_the_loop/)

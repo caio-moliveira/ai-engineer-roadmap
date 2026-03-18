@@ -51,7 +51,7 @@ def main():
             history = state.values.get("messages", [])
             
             if history:
-                print(f"\n📜 Histórico recuperado de Redis ({len(history)} mensagens):")
+                print(f"\n📜 Histórico recuperado de Postgres ({len(history)} mensagens):")
                 for msg in history:
                     pfx = "Usuário" if isinstance(msg, HumanMessage) else "Bot"
                     name = "Eu" if isinstance(msg, HumanMessage) else "Bot"
