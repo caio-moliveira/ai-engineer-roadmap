@@ -13,7 +13,6 @@ def get_weather(city: str) -> str:
     """Busca a temperatura atual de uma cidade turística usando mock fidedigno baseado em localização."""
     print(f"\n[API 1] Buscando clima para: {city}...")
     
-    # Mockando coordenadas para cidades turísticas famosas para simplificar o roteamento da API Open-Meteo
     locations = {
         "paris": {"lat": 48.8566, "lon": 2.3522},
         "londres": {"lat": 51.5074, "lon": -0.1278},

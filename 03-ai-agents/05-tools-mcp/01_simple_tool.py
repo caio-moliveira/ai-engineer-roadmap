@@ -25,7 +25,7 @@ def calculate_budget(days: int, origin: str, destination: str, date_start: str, 
     # Simulação de um processo determinístico simples
     base_flight_cost = 2500.0 if origin != destination else 0.0
     if "paris" in destination.lower() or "londres" in destination.lower():
-        base_flight_cost += 3000.0 # Passagem internacional
+        base_flight_cost += 3000.0
         cost_per_day = 800.0
     elif "buenos aires" in destination.lower():
         base_flight_cost += 1000.0

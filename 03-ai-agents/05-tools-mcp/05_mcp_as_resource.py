@@ -29,7 +29,6 @@ async def main():
         }
     )
             
-    # Lê o resource
     target_uri = "travel://info/international"
     blobs = await client.get_resources("Travel_MCP", uris=[target_uri])
     policy_text = blobs[0].as_string()

@@ -86,7 +86,6 @@ async def main():
             arguments={"destination": state["destination"], "days": str(state["days"]), "profile": state["profile"]}
         )
         
-        # Aqui, p_result já é uma lista preenchida (ex: [SystemMessage]).
         contexto = f"Orçamento: {state['budget']}\nClima: {state['weather']}\nTurismo: {state['tourist']}\nPolítica/Segurança: {state['policy']}"
         p_result.append(HumanMessage(content=f"Crie um roteiro descritivo integrando os dados colhidos do contexto:\n{contexto}"))
         
@@ -113,7 +112,6 @@ async def main():
         print(state["final_itinerary"].strip())
         print("=================================================================\n")
         
-        # Isso suspende a execução e salva o nó na memória.
         decision = interrupt("O Humano precisa aprovar este roteiro para salvá-lo.")
         
         print(f"\n[Aprovação Final da Diretoria]: Resposta recebida -> '{decision}'")

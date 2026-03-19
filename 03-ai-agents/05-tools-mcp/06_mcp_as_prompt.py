@@ -29,7 +29,6 @@ async def main():
     )
             
     prompt_name = "itinerary_planner"
-    # As variáveis solicitadas que compõem a regra corporativa
     args = {
         "destination": "Paris", 
         "days": "7", 

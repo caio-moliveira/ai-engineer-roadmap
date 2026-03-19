@@ -19,8 +19,6 @@ async def main():
     
     server_script = os.path.join(os.path.dirname(__file__), "03_mcp_server.py")
     
-    # O MultiServerMCPClient gerencia as conexões de múltiplos servidores de forma asynche
-    # via StdioServerParameters ou HTTP. O construtor context manager lidará com sub-processos.
         
     print("Conectando ao Travel_MCP Server... (Subprocess)")
     # Inicia e amarra um servidor stdio dinamicamente
@@ -34,7 +32,6 @@ async def main():
         }
     )
         
-    # Puxando só as tools
     langchain_tools = await client.get_tools()
     print(f"[{len(langchain_tools)} Tools Descobertas e Adaptadas]")
     for t in langchain_tools:
@@ -44,7 +41,6 @@ async def main():
     llm = ChatOpenAI(model="gpt-4o-mini", temperature=0)
     agent = create_agent(llm, langchain_tools)
         
-    # Input isolado conforme pedido
     raw_input = """O cliente pediu 7 dias em Paris, visitando a Torre Eiffel, o Arco do Triunfo, a Catedral de Notre-Dame, o Louvre, o Musée d'Orsay, o Jardim de Luxemburgo e o Jardim das Tulherias.
     A viagem será do dia 10 ao dia 17 de Maio. Use a tool create_itinerary para criar o roteiro corporativo."""
     print(f"Usuário Manual: '{raw_input}'\n")
