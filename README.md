@@ -133,9 +133,9 @@ Este bloco ensina como projetar, orquestrar e operar agentes confiáveis em prod
 | 03 | [LangGraph](./03-ai-agents/03-langgraph-orchestration)      | Orquestração real           |
 | 04 | [Memory Systems](./03-ai-agents/04-memory-systems)           | Persistência                |
 | 05 | [Tools/MCP](./03-ai-agents/05-tools-mcp)                     | Integrações modernas        |
-| 06 | [Multi-Agent Systems](./03-ai-agents/06-multi-agents)        | Delegação e supervisão      |
-| 07 | [Deep-Agent](./03-ai-agents/07-deep-agents)                  | O que há por debaixo do capô |
-| 08 | [Human-in-the-loop](./03-ai-agents/08-human-in-the-loop)      | Aprovação humana            |
+| 06 | [Human-in-the-loop](./03-ai-agents/06-human-in-the-loop)      | Aprovação humana            |
+| 07 | [Multi-Agent Systems](./03-ai-agents/07-multi-agents)        | Delegação e supervisão      |
+| 08 | [Deep-Agent](./03-ai-agents/08-deep-agents)                  | O que há por debaixo do capô |
 | 09 | [Agentes de IA em Produção](./03-ai-agents/09-agents-in-production)| Projeto Final             |
 
 

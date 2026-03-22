@@ -80,20 +80,20 @@ avaliação (regressão, tarefas, checks de saída) • human-in-the-loop
 - **O Novo Padrão:** Padronizando como IAs se conectam a dados com o Model Context Protocol (MCP).
 - **Desacoplamento:** Trocando o modelo sem quebrar a integração com as ferramentas.
 
-### [Módulo 6: Multi-Agent Systems](./06-multi-agents)
+### [Módulo 6: Human-in-the-Loop](./06-human-in-the-loop)
+- **Aprovação:** O agente *propõe* uma ação, o humano *aprova*.
+- **Interrupção:** Como pausar o grafo e esperar input do usuário.
+- **Auditoria:** Rastreamento humano de execuções perigosas.
+
+### [Módulo 7: Multi-Agent Systems](./07-multi-agents)
 - **O Mito:** "Mais agentes = Melhor". (Geralmente é mentira).
 - **Padrões de Delegação:** Supervisor, Hierárquico e Colaborativo.
 - **Custo:** Como sistemas multi-agente multiplicam latência e tokens.
 
-### [Módulo 7: Deep Agents](./07-deep-agents)
+### [Módulo 8: Deep Agents](./08-deep-agents)
 - **Perigos:** Loops infinitos, Alucinação de Tools, Prompt Injection.
 - **Guardrails:** Colocando cercas elétricas em volta do agente.
 - **Avaliação:** Como medir a eficácia das trajetórias de agentes.
-
-### [Módulo 8: Human-in-the-Loop](./08-human-in-the-loop)
-- **Aprovação:** O agente *propõe* uma ação, o humano *aprova*.
-- **Interrupção:** Como pausar o grafo e esperar input do usuário.
-- **Auditoria:** Rastreamento humano de execuções perigosas.
 
 ### [Módulo 9: Agentes em Produção](./09-agents-in-production)
 - **Observabilidade:** Rastreando o pensamento do agente passo-a-passo (Langfuse).
