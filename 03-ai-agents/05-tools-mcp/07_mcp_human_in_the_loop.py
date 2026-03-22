@@ -166,7 +166,7 @@ async def main():
         "days": 7,
         "date_start": "10-05-2024",
         "date_end": "17-05-2024",
-        "profile": "Casal jovem focado em cultura e boa gastronomia"
+        "profile": "Solteiro buscando conhecer pontos turísticos e gastronomia"
     }
     
     print("\nDisparando Agente e alimentando o Data Pipeline...\n")

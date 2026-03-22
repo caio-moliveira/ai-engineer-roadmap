@@ -49,8 +49,8 @@ async def main():
         {"messages": [HumanMessage(content=raw_input)]}
     )
 
-    print("\n[Resposta Final do LLM RAW]:")   
-    pprint.pprint(response) 
+    # print("\n[Resposta Final do LLM RAW]:")   
+    # pprint.pprint(response) 
     print("\n[Resposta Final do LLM]:")
     print(response["messages"][-1].content)
 
