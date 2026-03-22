@@ -1,0 +1,60 @@
+{
+  "version": 1,
+  "skills": {
+    "deep-agents-core": {
+      "source": "langchain-ai/langchain-skills",
+      "sourceType": "github",
+      "computedHash": "f82c2219a3e3b91f04165a395ced7ab75ec3b8e3d82c0f5684c53eec746c35c7"
+    },
+    "deep-agents-memory": {
+      "source": "langchain-ai/langchain-skills",
+      "sourceType": "github",
+      "computedHash": "c4fccc7409e8b80bb5f6dbf18b677ea55b7ab8515cb734f3141205ceccb8c2ee"
+    },
+    "deep-agents-orchestration": {
+      "source": "langchain-ai/langchain-skills",
+      "sourceType": "github",
+      "computedHash": "fb3a558ec0c485ae813e23140cd2ff7df7b8e00b6538eea760816fa78546180e"
+    },
+    "framework-selection": {
+      "source": "langchain-ai/langchain-skills",
+      "sourceType": "github",
+      "computedHash": "6cae8c25368173e2d72818c4a29dfdfcca7b51ad9b720454daa2b984d4f24e3c"
+    },
+    "langchain-dependencies": {
+      "source": "langchain-ai/langchain-skills",
+      "sourceType": "github",
+      "computedHash": "c0f6bdbf1d896c2d913984ec151d30c1d1ed53fdaa94495fc37495726bf946a1"
+    },
+    "langchain-fundamentals": {
+      "source": "langchain-ai/langchain-skills",
+      "sourceType": "github",
+      "computedHash": "7f23a1fb935bb09221a7fb4e50d484abbe3ba93767de832b1904cf9101ff1fe2"
+    },
+    "langchain-middleware": {
+      "source": "langchain-ai/langchain-skills",
+      "sourceType": "github",
+      "computedHash": "be362ccdfaefac1b8d8b89eb5b806648f5ba8b125f548f6262588e0199b63ffe"
+    },
+    "langchain-rag": {
+      "source": "langchain-ai/langchain-skills",
+      "sourceType": "github",
+      "computedHash": "25f569409285938fcb078ed2d14893f7d620131a28107f7a5c16f48b40bee24a"
+    },
+    "langgraph-fundamentals": {
+      "source": "langchain-ai/langchain-skills",
+      "sourceType": "github",
+      "computedHash": "43a226ecc442ba6d6091eea39cf587a7583fa532e73db58259e35b1393c31418"
+    },
+    "langgraph-human-in-the-loop": {
+      "source": "langchain-ai/langchain-skills",
+      "sourceType": "github",
+      "computedHash": "084b2c75d68a0000e665005372b010651c444247dc7e5ed340c4bc022b85e680"
+    },
+    "langgraph-persistence": {
+      "source": "langchain-ai/langchain-skills",
+      "sourceType": "github",
+      "computedHash": "41777ec7edc4504e45564917459202021245f3cdf90157e4a65dd6641cd0c1d7"
+    }
+  }
+}
