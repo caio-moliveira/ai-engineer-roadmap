@@ -3,6 +3,7 @@ from langchain.agents.middleware import SummarizationMiddleware
 from langchain_core.messages import HumanMessage, AIMessage, ToolMessage
 from langchain.tools import tool
 from dotenv import load_dotenv
+import pprint
 
 load_dotenv()
 
@@ -93,39 +94,41 @@ def main():
     resposta = agent.invoke({"messages": historia_antiga})
     final_messages = resposta["messages"]
 
+    pprint.pprint(final_messages)
+
     # ===============================================
     # 4. Inspecionando o "Depois"
     # ===============================================
-    print("="*70)
-    print(f"✨ HISTÓRICO RESULTANTE (Total Comprimido: {len(final_messages)} mensagens)")
-    print("="*70)
+    # print("="*70)
+    # print(f"✨ HISTÓRICO RESULTANTE (Total Comprimido: {len(final_messages)} mensagens)")
+    # print("="*70)
     
-    for i, msg in enumerate(final_messages):
-        # Em LangChain, type(msg).__name__ ajuda a sabermos quem falou
-        role_type = type(msg).__name__
+    # for i, msg in enumerate(final_messages):
+    #     # Em LangChain, type(msg).__name__ ajuda a sabermos quem falou
+    #     role_type = type(msg).__name__
         
-        # Formataremos bonito para você ver a mágica do Resumo:
-        if role_type == "HumanMessage" and "Here is a summary" in msg.content:
-            texto_traduzido = msg.content.replace("Here is a summary of the conversation to date:", "AQUI ESTÁ UM RESUMO GERADO PARA ALIVIAR A MEMÓRIA:")
-            print(f"\n[{i}] 🗜️ RESUMO INJETADO PELO MIDDLEWARE:")
-            print(f"    {texto_traduzido.strip()}")
+    #     # Formataremos bonito para você ver a mágica do Resumo:
+    #     if role_type == "HumanMessage" and "Here is a summary" in msg.content:
+    #         texto_traduzido = msg.content.replace("Here is a summary of the conversation to date:", "AQUI ESTÁ UM RESUMO GERADO PARA ALIVIAR A MEMÓRIA:")
+    #         print(f"\n[{i}] 🗜️ RESUMO INJETADO PELO MIDDLEWARE:")
+    #         print(f"    {texto_traduzido.strip()}")
             
-        elif role_type == "HumanMessage":
-            print(f"\n[{i}] 👤 VOCÊ (USER):")
-            print(f"    {msg.content}")
+    #     elif role_type == "HumanMessage":
+    #         print(f"\n[{i}] 👤 VOCÊ (USER):")
+    #         print(f"    {msg.content}")
             
-        elif role_type == "AIMessage":
-            print(f"\n[{i}] 🤖 AGENTE DE SUPORTE (AI):")
-            # Pode ser texto ou ToolCall
-            if msg.content:
-                print(f"    {msg.content}")
-            if hasattr(msg, "tool_calls") and msg.tool_calls:
-                for tc in msg.tool_calls:
-                    print(f"    [Decidiu usar a Ferramenta: {tc['name']} -> {tc['args']}]")
+    #     elif role_type == "AIMessage":
+    #         print(f"\n[{i}] 🤖 AGENTE DE SUPORTE (AI):")
+    #         # Pode ser texto ou ToolCall
+    #         if msg.content:
+    #             print(f"    {msg.content}")
+    #         if hasattr(msg, "tool_calls") and msg.tool_calls:
+    #             for tc in msg.tool_calls:
+    #                 print(f"    [Decidiu usar a Ferramenta: {tc['name']} -> {tc['args']}]")
                     
-        elif role_type == "ToolMessage":
-            print(f"\n[{i}] 🛠️ SISTEMA INTERNO (Resultado da Tool - Invisível ao User):")
-            print(f"    {msg.content}")
+    #     elif role_type == "ToolMessage":
+    #         print(f"\n[{i}] 🛠️ SISTEMA INTERNO (Resultado da Tool - Invisível ao User):")
+    #         print(f"    {msg.content}")
 
 
 if __name__ == "__main__":

@@ -1,7 +1,7 @@
 <div align="center">
   <img src="./assets/jornada.png" alt="Jornada de Dados" width="200"/>
 
-[**Site Oficial**](https://suajornadadedados.com.br/) • [**Comunidade**](https://suajornadadedados.com.br/) • [**Documentação**](https://suajornadadedados.com.br/)
+[**Site Oficial**](https://suajornadadedados.com.br/trilhas/engenharia-de-ia) • [**Comunidade**](https://suajornadadedados.com.br/) • [**Documentação**](https://suajornadadedados.com.br/)
 
 # **Trilha Completa: Engenharia de IA**
 
