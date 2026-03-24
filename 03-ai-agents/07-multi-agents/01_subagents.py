@@ -5,6 +5,7 @@ from langchain.agents import create_agent, AgentState
 from langchain.tools import tool, ToolRuntime
 from langchain.messages import HumanMessage, ToolMessage
 from langgraph.types import Command
+import pprint
 
 load_dotenv()
 
@@ -27,7 +28,8 @@ class WeddingState(AgentState):
 @tool
 def web_search_mock(query: str) -> str:
     """Busca simulada na web"""
-    print(f"   [🔍 Tool Subagente Executada] -> {query}")
+    print("\n[web_search_mock]")
+    print({"query": query})
     return f"Resultados para '{query}': Excelentes opções encontradas."
 
 # Subagente 1: Viagens
@@ -57,10 +59,13 @@ def search_flights(runtime: ToolRuntime) -> str:
     origin = runtime.state.get("origin", "Desconhecida")
     destination = runtime.state.get("destination", "Desconhecido")
     
-    print("\n[🤖 Delegando para Travel Agent...]")
     response = travel_agent.invoke({
         "messages": [HumanMessage(content=f"Ache voos de {origin} para {destination}")]
     })
+    
+    print("\n[travel_agent]")
+    pprint.pprint(response)
+    
     return response['messages'][-1].content
 
 @tool
@@ -69,17 +74,21 @@ def search_venues(runtime: ToolRuntime) -> str:
     destination = runtime.state.get("destination", "Desconhecido")
     capacity = runtime.state.get("guest_count", "0")
     
-    print("\n[🏰 Delegando para Venue Agent...]")
     response = venue_agent.invoke({
         "messages": [HumanMessage(content=f"Ache locais em {destination} para {capacity} pessoas")]
     })
+    
+    print("\n[venue_agent]")
+    pprint.pprint(response)
+    
     return response['messages'][-1].content
 
 @tool
 def update_wedding_state(origin: str, destination: str, guest_count: str, runtime: ToolRuntime) -> str:
     """Use ONLY when you extract the origin, destination, and guest_count from the user."""
     # O objeto Command(update={...}) altera o estado da Thread!
-    print(f"\n[💾 Atualizando State Global: {origin} -> {destination} para {guest_count} pessoas]")
+    print("\n[update_wedding_state]")
+    print({"origin": origin, "destination": destination, "guest_count": guest_count})
     return Command(
         update={
             "origin": origin,
@@ -107,22 +116,16 @@ supervisor_agent = create_agent(
 
 
 def test_subagents():
-    print("\n" + "="*50)
-    print(" INICIANDO PADRÃO SUBAGENTS (Supervisão)")
-    print("="*50)
-    
     # Execução
     question = "Oi! Sou de São Paulo. Quero casar em Paris e levar 50 convidados."
-    print(f"\n[Usuário]: {question}\n")
+    print(f"\nQUERY: {question}")
     
     response = supervisor_agent.invoke(
         {"messages": [HumanMessage(content=question)]}
     )
     
-    print(f"\n[Coordenador (Supervisor)]: \n{response['messages'][-1].content}\n")
+    print("\n[supervisor_agent]")
+    pprint.pprint(response)
 
 if __name__ == "__main__":
-    if not os.getenv("OPENAI_API_KEY"):
-        print("AVISO: Variável de ambiente OPENAI_API_KEY ausente.")
-    else:
-        test_subagents()
+    test_subagents()

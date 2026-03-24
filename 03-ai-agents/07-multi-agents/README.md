@@ -14,8 +14,7 @@ Neste módulo prático, demonstramos as três melhores abordagens homologadas pe
 Todos os códigos rodam nativamente (Console/Terminal). Para executá-los, acesse a pasta `python/` e garanta possuir o `.env` gerado nos módulos passados.
 
 1. **[Mestre & Trabalhadores (Subagents pattern)](#1-mestre-e-trabalhadores-subagents-pattern)** -> `python/01_subagents.py`
-2. **[Habilidades Dinâmicas (Skills pattern)](#2-habilidades-dinâmicas-skills-pattern)** -> `python/02_skills.py`
-3. **[Roteadores Inteligentes (Router pattern)](#3-roteadores-inteligentes-router-pattern)** -> `python/03_router.py`
+2. **[Roteadores Inteligentes (Router pattern)](#3-roteadores-inteligentes-router-pattern)** -> `python/02_router.py`
 
 ---
 
@@ -30,18 +29,7 @@ No script `01_subagents.py`, você verá o supervisor repassar a coleta de infor
 
 ---
 
-## 2. Habilidades Dinâmicas (Skills Pattern)
-
-Também conhecido como **Progressive Disclosure**. E se um Agente que gera códigos não precisasse decorar a sintaxe inteira do banco de dados na largada?
-
-No script `02_skills.py`, o Agente tem *UMA ÚNICA TOOL* (`load_skill`). Ao ser instado a escrever um contrato, ele percebe sua lacuna e invoca `load_skill("review_legal_doc")`.
-Essa Tool dinamicamente injeta um `{"role": "system"}` pesado e gigantesco na Memória dele em runtime através do objeto LangGraph `Command(update={"messages": [...]})`. 
-
-**Vantagem:** Economiza **riosos** dólares de Tokens de API por ocultar Prompts até a hora exata da necessidade.
-
----
-
-## 3. Roteadores Inteligentes (Router Pattern)
+## 2. Roteadores Inteligentes (Router Pattern)
 
 Usar LLM como "Manager" (vide Subagents) pra decidir quem deve responder uma pergunta é custoso em tempo e dinheiro. Por que não ter uma função leve separando a demanda inicial?
 
@@ -56,7 +44,6 @@ No script `03_router.py`, demonstramos o uso dos novos tipos do LangGraph:
 Hoje, a escalabilidade máxima dos Agentes pede:
 1. **Router** frontal e enxuto na beira da sua API que tria o pedido.
 2. Encaminhamento via `goto` para o grupo de **Subagents** certos (Squads).
-3. E nos cérebros de cada Subagent trabalhador, um banco de **Skills** que se auto-carregam apenas em momentos chave de alta complexidade.
 
 ## ⏭️ Parabéns! Fim desta Trilha Core.
 Sua base como Engenheiro de Ferramentas / Agents orchestration em Langgraph está sólida de ponta a ponta.
