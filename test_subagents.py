@@ -12,16 +12,14 @@ import pprint
 
 load_dotenv()
 
+tavily_tool = TavilySearchResults(max_results=3)
+
 class WeddingState(AgentState):
     origin: str
     destination: str
     guest_count: str
     genre: str
 
-
-tavily_tool = TavilySearchResults(max_results=3)
-
-# Subagente 1: Viagens
 travel_agent = create_agent(
     model="gpt-4o-mini",
     tools=[tavily_tool],
@@ -29,7 +27,6 @@ travel_agent = create_agent(
     Ache o melhor voo usando a ferramenta de busca considerando a origem e destino."""
 )
 
-# Subagente 2: Espaços/Locais
 venue_agent = create_agent(
     model="gpt-4o-mini",
     tools=[tavily_tool],
@@ -37,17 +34,15 @@ venue_agent = create_agent(
     Encontre o melhor local usando a ferramenta de busca dado o número de convidados e o destino."""
 )
 
-
 @tool
 def search_flights(origin: str, destination: str) -> str:
     """Aciona o subagente de Viagens para buscar voos considerando a origem e destino do casamento."""
     response = travel_agent.invoke({
         "messages": [HumanMessage(content=f"Ache voos de {origin} para {destination}")]
     })
-    
     print("\n[travel_agent]")
     pprint.pprint(response)
-    
+    # The response is a dict with the conversation messages
     return response['messages'][-1].content
 
 @tool
@@ -56,16 +51,13 @@ def search_venues(destination: str, capacity: str) -> str:
     response = venue_agent.invoke({
         "messages": [HumanMessage(content=f"Ache locais em {destination} para {capacity} pessoas")]
     })
-    
     print("\n[venue_agent]")
     pprint.pprint(response)
-    
     return response['messages'][-1].content
 
 @tool
 def update_wedding_state(origin: str, destination: str, guest_count: str, tool_call_id: Annotated[str, InjectedToolCallId]) -> Command:
     """Use ONLY when you extract the origin, destination, and guest_count from the user."""
-    # O objeto Command(update={...}) altera o estado da Thread!
     print("\n[update_wedding_state]")
     print({"origin": origin, "destination": destination, "guest_count": guest_count})
     return Command(
@@ -76,7 +68,6 @@ def update_wedding_state(origin: str, destination: str, guest_count: str, tool_c
             "messages": [ToolMessage("State updated successfully", tool_call_id=tool_call_id)]
         }
     )
-
 
 supervisor_agent = create_agent(
     model="gpt-4o",
@@ -91,7 +82,6 @@ supervisor_agent = create_agent(
 )
 
 def test_subagents():
-    # Execução
     question = "Oi! Sou de São Paulo. Quero casar em Paris e levar 50 convidados."
     print(f"\nQUERY: {question}")
     
