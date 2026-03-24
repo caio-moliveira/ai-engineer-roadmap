@@ -5,7 +5,7 @@ from langchain.agents import create_agent, AgentState
 from langchain.tools import tool
 from langchain.messages import HumanMessage, ToolMessage
 from langgraph.types import Command
-from langchain_community.tools.tavily_search import TavilySearchResults
+from langchain_tavily import TavilySearch
 from langchain_core.tools import InjectedToolCallId
 from typing_extensions import Annotated
 import pprint
@@ -19,7 +19,7 @@ class WeddingState(AgentState):
     genre: str
 
 
-tavily_tool = TavilySearchResults(max_results=3)
+tavily_tool = TavilySearch(max_results=3)
 
 # Subagente 1: Viagens
 travel_agent = create_agent(

@@ -11,21 +11,21 @@ Neste módulo prático, demonstramos as três melhores abordagens homologadas pe
 
 ## 📚 Índice de Scripts Práticos
 
-Todos os códigos rodam nativamente (Console/Terminal). Para executá-los, acesse a pasta `python/` e garanta possuir o `.env` gerado nos módulos passados.
+Todos os códigos rodam nativamente (Console/Terminal). Certifique-se de possuir a API Key do Tavily (TAVILY_API_KEY) e da LLM configuradas no seu arquivo `.env` na raiz do projeto.
 
-1. **[Mestre & Trabalhadores (Subagents pattern)](#1-mestre-e-trabalhadores-subagents-pattern)** -> `python/01_subagents.py`
-2. **[Roteadores Inteligentes (Router pattern)](#3-roteadores-inteligentes-router-pattern)** -> `python/02_router.py`
+1. **[Mestre e Trabalhadores (Subagents Pattern)](#1-mestre-e-trabalhadores-subagents-pattern)** -> `01_subagents.py`
+2. **[Roteadores Inteligentes (Router Pattern)](#2-roteadores-inteligentes-router-pattern)** -> `02_router.py`
 
 ---
 
 ## 1. Mestre e Trabalhadores (Subagents Pattern)
 
-A arquitetura mais robusta e complexa no LangGraph. Ideal para tarefas multifacetadas (como um *Wedding Planner* que tem que cuidar de Voos, Buffet e Músicas).
+Padrão arquitetural consolidado na documentação do LangChain ("Multi-agent Network" e "Supervisor"). Ideal para tarefas multifacetadas (ex: um *Wedding Planner* que precisa cuidar de Voos, Locais e Músicas simultaneamente).
 
-- **Supervisor**: Um agente inteligente (GPT-4) que não faz o trabalho braçal. Ele delega.
-- **Worker Agents**: Agentes menores (GPT-3.5/Mini) com "prompts de túnel" e focados 100% num assunto, empacotados pelo decorator `@tool` para serem invocados pelo Supervisor.
+- **Supervisor**: Um agente orquestrador avançado (Ex: GPT-4o) que não executa o trabalho braçal, apenas planeja e delega responsabilidades. Em sua essência, funciona invocando subagentes como se fossem `tools` tradicionais, extraindo os parâmetros necessários do estado/conversa e repassando-os de forma pura.
+- **Worker Agents / Subagents**: Agentes menores (Ex: GPT-4o-mini) com "prompts de túnel" focados 100% em uma única especialidade. Cada um possui ferramentas próprias para atuar, como pesquisa web real (via API do **Tavily Search**).
 
-No script `01_subagents.py`, você verá o supervisor repassar a coleta de informações aos subordinados através da abstração do `ToolRuntime`, alterando silenciosamente a `AgentState` no final usando `Command(update={...})`.
+No script `01_subagents.py`, moldado às melhores práticas do LangGraph, removemos o acoplamento do `ToolRuntime`. Os **Worker Agents** (envolvidos pelo decorator `@tool`) recebem inputs primitivos como `origin` e `destination` puramente repassados pelo **Supervisor**, resultando em um design altamente interoperável e modular. O controle da memória e finalização segue com um update centralizado através do objeto `Command(update={...})` e resolvido via `InjectedToolCallId`.
 
 ---
 
