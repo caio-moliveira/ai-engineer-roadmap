@@ -90,7 +90,7 @@ supervisor_agent = create_agent(
     """
 )
 
-def test_subagents():
+def my_subagents():
     # Execução
     question = "Oi! Sou de São Paulo. Quero casar em Paris e levar 50 convidados."
     print(f"\nQUERY: {question}")
@@ -103,4 +103,4 @@ def test_subagents():
     pprint.pprint(response)
 
 if __name__ == "__main__":
-    test_subagents()
+    my_subagents()
