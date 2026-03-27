@@ -92,7 +92,7 @@ supervisor_agent = create_agent(
 
 def my_subagents():
     # Execução
-    question = "Oi! Sou de São Paulo. Quero casar em Paris e levar 50 convidados."
+    question = "Oi! Sou de São Paulo. Quero casar em Montes Claros-MG e levar 50 convidados."
     print(f"\nQUERY: {question}")
     
     response = supervisor_agent.invoke(

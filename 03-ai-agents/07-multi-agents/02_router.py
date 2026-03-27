@@ -450,6 +450,7 @@ def build_router_workflow():
         .add_node("technical_node", technical_node)
         .add_node("general_node", general_node)
         .add_node("synthesize", synthesize_results)
+
         .add_edge(START, "classify")
         .add_conditional_edges(
             "classify",
@@ -491,7 +492,13 @@ if __name__ == "__main__":
     app = build_router_workflow()
 
     exemplos = [
-        "Preciso de reembolso porque fui cobrado em duplicidade.",
+        # "Preciso de reembolso porque fui cobrado em duplicidade.",
+        "Estou recebendo erro 500 ao tentar fazer upload de arquivos. Não gostei do produto e quero reembolso",
+        # "Como configuro a autenticação OAuth 2.0 para integrar com meu sistema?",
+        # "Quais são os limites de uso do plano Pro?",
+        # "Como faço para resetar minha senha?",
+        # "Onde encontro a documentação da API?",
+        # "Como configuro a autenticação OAuth 2.0 para integrar com meu sistema?",
     ]
 
     for pergunta in exemplos:

@@ -7,6 +7,7 @@ requires-python = ">=3.13"
 dependencies = [
     "datasets>=4.5.0",
     "ddgs>=9.10.0",
+    "deepagents>=0.4.12",
     "docling>=2.72.0",
     "duckduckgo-search>=8.1.1",
     "faiss-cpu>=1.13.2",
