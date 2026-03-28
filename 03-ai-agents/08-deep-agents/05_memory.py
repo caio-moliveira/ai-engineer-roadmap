@@ -39,8 +39,11 @@ from deepagents import create_deep_agent
 from deepagents.backends import CompositeBackend, StateBackend, StoreBackend, FilesystemBackend
 from langgraph.store.memory import InMemoryStore
 from langgraph.checkpoint.memory import MemorySaver
+from langfuse.langchain import CallbackHandler
 
 load_dotenv()
+
+langfuse_handler = CallbackHandler()
 
 CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
 
@@ -145,7 +148,7 @@ def sessao_primeiro_contato():
     print("  Thread: 'vendas-acme-sessao-1'")
     print("  O agente vai registrar o perfil em /memorias/\n")
 
-    config = {"configurable": {"thread_id": "vendas-acme-sessao-1"}}
+    config = {"configurable": {"thread_id": "vendas-acme-sessao-1"}, "callbacks": [langfuse_handler]}
 
     # Turn 1: Apresentação do prospect
     msg1 = (
@@ -195,7 +198,7 @@ def sessao_retomada_contato():
     print("  O agente nao tem historico de mensagens, mas tem /memorias/\n")
 
     # Thread completamente diferente — sem memória de conversa
-    config = {"configurable": {"thread_id": "vendas-acme-sessao-2-nova"}}
+    config = {"configurable": {"thread_id": "vendas-acme-sessao-2-nova"}, "callbacks": [langfuse_handler]}
 
     msg = (
         "Vou falar com a Acme Logística amanhã para a demo. "
@@ -225,7 +228,7 @@ def demo_agents_md():
     print("=" * 65)
     print("  O agente deve saber quem é a TechVentures sem que informemos.\n")
 
-    config = {"configurable": {"thread_id": "agents-md-test-sessao"}}
+    config = {"configurable": {"thread_id": "agents-md-test-sessao"}, "callbacks": [langfuse_handler]}
 
     result = agente_vendas.invoke(
         {

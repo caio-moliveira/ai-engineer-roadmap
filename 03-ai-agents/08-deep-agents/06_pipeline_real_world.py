@@ -36,8 +36,11 @@ from deepagents.backends import CompositeBackend, StateBackend, StoreBackend
 from langgraph.checkpoint.memory import MemorySaver
 from langgraph.store.memory import InMemoryStore
 from langgraph.types import Command
+from langfuse.langchain import CallbackHandler
 
 load_dotenv()
+
+langfuse_handler = CallbackHandler()
 
 # ---------------------------------------------------------------------------
 # 1. INFRAESTRUTURA DE PERSISTÊNCIA
@@ -301,7 +304,7 @@ def executar_pipeline(tema: str, formato: str = "Post LinkedIn"):
     """
     # thread_id único por produção — mantém o estado de toda a execução
     thread_id = f"producao-{tema[:25].lower().replace(' ', '-').replace('/', '')}"
-    config = {"configurable": {"thread_id": thread_id}}
+    config = {"configurable": {"thread_id": thread_id}, "callbacks": [langfuse_handler]}
 
     print("=" * 65)
     print("  PIPELINE DE CONTEUDO B2B — Deep Agents")
@@ -426,7 +429,7 @@ def verificar_biblioteca():
     Demonstra que o StoreBackend persiste além do thread_id.
     """
     # Thread completamente diferente — sem memória de conversa anterior
-    config = {"configurable": {"thread_id": "verificacao-biblioteca-session"}}
+    config = {"configurable": {"thread_id": "verificacao-biblioteca-session"}, "callbacks": [langfuse_handler]}
 
     print("=" * 65)
     print("  VERIFICACAO DA BIBLIOTECA (nova sessao)")

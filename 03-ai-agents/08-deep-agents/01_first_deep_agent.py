@@ -21,9 +21,12 @@ import os
 from dotenv import load_dotenv
 from langchain.tools import tool
 from deepagents import create_deep_agent
-import pprint   
+from langfuse.langchain import CallbackHandler
+import pprint
 
 load_dotenv()
+
+langfuse_handler = CallbackHandler()
 
 # ---------------------------------------------------------------------------
 # 1. BANCO DE DADOS SIMULADO
@@ -59,12 +62,6 @@ _base_conhecimento = {
         "via Services.msc. Se não resolver, abra um ticket para visita presencial."
     ),
 }
-
-
-# ---------------------------------------------------------------------------
-# 2. FERRAMENTAS DO DOMÍNIO (SIMULADAS)
-#    O agente chama essas tools automaticamente quando precisar.
-# ---------------------------------------------------------------------------
 
 @tool
 def buscar_solucao_conhecida(problema: str) -> str:
@@ -149,20 +146,10 @@ def listar_tickets_usuario(usuario: str) -> str:
     return f"[TICKETS DE {usuario.upper()}]\n" + "\n".join(linhas)
 
 
-# ---------------------------------------------------------------------------
-# 3. CRIAÇÃO DO DEEP AGENT
-#
-#    create_deep_agent() entrega automaticamente:
-#    - MemoryCheckpointer (persistência de conversa por thread_id)
-#    - StateBackend (filesystem virtual por thread — rascunhos em memória)
-#    - Ferramentas embutidas: ls, read_file, write_file, edit_file, glob, grep
-#    - TodoListMiddleware (planejamento de tarefas multi-step)
-#
-#    Você só precisa fornecer: model, suas tools e o system_prompt.
-# ---------------------------------------------------------------------------
 
+# DEEP AGENT
 agente_helpdesk = create_deep_agent(
-    model="gpt-4o-mini",    # Modelo econômico — suficiente para suporte L1
+    model="gpt-4o-mini",    
     tools=[
         buscar_solucao_conhecida,
         abrir_ticket,
@@ -192,91 +179,22 @@ agente_helpdesk = create_deep_agent(
     """,
 )
 
-# ---------------------------------------------------------------------------
-# 4. LOOP DE CONVERSA MULTI-TURN
-#
-#    O thread_id é o identificador da sessão/usuário.
-#    O Deep Agent mantém todo o histórico de mensagens automaticamente.
-#    Mude o thread_id para simular um usuário diferente (sem memória compartilhada).
-# ---------------------------------------------------------------------------
-
-def run_helpdesk():
-    """Executa o agente em modo interativo no terminal."""
-
-    # Cada usuário tem seu próprio thread_id — a conversa é isolada por usuário
-    THREAD_ID = "colaborador-ana-lima"
-    config = {"configurable": {"thread_id": THREAD_ID}}
-
-    print("=" * 60)
-    print("  HELP DESK DE TI — Powered by Deep Agents (LangChain)")
-    print("=" * 60)
-    print(f"  Sessao: {THREAD_ID}")
-    print("  Digite 'sair' para encerrar.\n")
-
-    while True:
-        try:
-            user_input = input("Voce: ").strip()
-        except (EOFError, KeyboardInterrupt):
-            print("\n\nAtendimento encerrado.")
-            break
-
-        if not user_input:
-            continue
-        if user_input.lower() in ("sair", "exit", "quit"):
-            print("\nAtendimento encerrado. Ate logo!")
-            break
-
-        # O agente recebe a mensagem e mantém o histórico automaticamente
-        # graças ao thread_id passado no config
-        response = agente_helpdesk.invoke(
-            {"messages": [{"role": "user", "content": user_input}]},
-            config=config,
-        )
-
-        # A última mensagem é sempre a resposta do agente
-        reply = response["messages"][-1].content
-        print(f"\nAgente: {reply}\n")
-
-        # Exibe o plano de tarefas se o agente usou o TodoListMiddleware
-        todos = response.get("todos", [])
-        if todos:
-            print("[Plano de tarefas do agente]")
-            icons = {"completed": "[OK]", "in_progress": "[>>]", "pending": "[ ]"}
-            for t in todos:
-                print(f"  {icons.get(t['status'], '[ ]')} {t['content']}")
-            print()
-
-
-# ---------------------------------------------------------------------------
-# 5. DEMONSTRAÇÃO AUTOMATIZADA (sem input manual)
-#    Útil para testes e demonstrações em sala de aula.
-# ---------------------------------------------------------------------------
 
 def run_demo():
     """Executa uma conversa pré-definida para fins de demonstração."""
 
-    config = {"configurable": {"thread_id": "demo-carlos-mendes"}}
+    config = {"configurable": {"thread_id": "demo-carlos-mendes"}, "callbacks": [langfuse_handler]}
 
     conversas = "Oi, minha VPN não conecta desde hoje de manhã. Preciso acessar o sistema interno urgente. Poderia abrir um ticket?"
 
-
-
-
     response = agente_helpdesk.invoke(
-        {"messages": [{"role": "user", "content": conversas[0]}]},
-        config=config,  # mesmo config = mesma sessao/memória
+        {"messages": [{"role": "user", "content": conversas}]},
+        config=config,  
     )
 
     pprint.pprint(response)
 
 
 
-
-# ---------------------------------------------------------------------------
-# PONTO DE ENTRADA
-# ---------------------------------------------------------------------------
-
 if __name__ == "__main__":
-    # Comente/descomente conforme o modo desejado:
-    run_demo()          # Demonstração automática (sem input manual)
-    # run_helpdesk()    # Modo interativo (requer input no terminal)
+    run_demo()          

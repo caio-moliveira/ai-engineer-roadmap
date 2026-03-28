@@ -30,15 +30,15 @@ from deepagents import create_deep_agent
 from deepagents.backends import CompositeBackend, StateBackend, StoreBackend, FilesystemBackend
 from langgraph.store.memory import InMemoryStore
 from langgraph.checkpoint.memory import MemorySaver
+from langfuse.langchain import CallbackHandler
 
 load_dotenv()
+
+langfuse_handler = CallbackHandler()
 
 # Diretório deste arquivo — usado pelo FilesystemBackend
 CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
 
-# ---------------------------------------------------------------------------
-# 1. FERRAMENTAS DO DOMÍNIO: Triagem de Currículos
-# ---------------------------------------------------------------------------
 
 @tool
 def analisar_curriculo(nome: str, experiencia_anos: int, habilidades: str, cargo_desejado: str) -> str:
@@ -107,7 +107,7 @@ def demo_state_backend():
         # Sem backend= → StateBackend é o padrão
     )
 
-    config_thread_1 = {"configurable": {"thread_id": "triagem-sessao-manha"}}
+    config_thread_1 = {"configurable": {"thread_id": "triagem-sessao-manha"}, "callbacks": [langfuse_handler]}
 
     result = agente.invoke(
         {
@@ -129,7 +129,7 @@ def demo_state_backend():
     print(result["messages"][-1].content)
 
     # Nova thread — o arquivo /triagem/Ana Lima.txt não existe aqui
-    config_thread_2 = {"configurable": {"thread_id": "triagem-sessao-tarde"}}
+    config_thread_2 = {"configurable": {"thread_id": "triagem-sessao-tarde"}, "callbacks": [langfuse_handler]}
 
     result2 = agente.invoke(
         {
@@ -180,7 +180,7 @@ def demo_filesystem_backend():
         backend=FilesystemBackend(root_dir=CURRENT_DIR, virtual_mode=True),
     )
 
-    config = {"configurable": {"thread_id": "rh-disk-session-001"}}
+    config = {"configurable": {"thread_id": "rh-disk-session-001"}, "callbacks": [langfuse_handler]}
 
     result = agente.invoke(
         {
@@ -230,7 +230,6 @@ def demo_store_backend():
     print("  Arquivos sobrevivem a troca de thread_id.")
     print("  Thread 'manha' escreve → thread 'tarde' le.\n")
 
-    # O Store é compartilhado — é o "banco de dados" dos arquivos
     store_rh = InMemoryStore()
     # Em produção: store_rh = PostgresStore(connection_string="postgresql://...")
 
@@ -248,7 +247,7 @@ def demo_store_backend():
     )
 
     # SESSÃO 1 (manhã): Triagem inicial
-    config_manha = {"configurable": {"thread_id": "rh-store-manha"}}
+    config_manha = {"configurable": {"thread_id": "rh-store-manha"}, "callbacks": [langfuse_handler]}
     result_manha = agente.invoke(
         {
             "messages": [
@@ -268,7 +267,7 @@ def demo_store_backend():
     print("[Sessao 'manha'] Candidato avaliado e salvo.")
 
     # SESSÃO 2 (tarde): Thread completamente diferente — mas acessa o mesmo Store
-    config_tarde = {"configurable": {"thread_id": "rh-store-tarde-nova-sessao"}}
+    config_tarde = {"configurable": {"thread_id": "rh-store-tarde-nova-sessao"}, "callbacks": [langfuse_handler]}
     result_tarde = agente.invoke(
         {
             "messages": [
@@ -334,7 +333,7 @@ def demo_composite_backend():
         store=store_aprovados,
     )
 
-    config_1 = {"configurable": {"thread_id": "rh-composite-sessao-1"}}
+    config_1 = {"configurable": {"thread_id": "rh-composite-sessao-1"}, "callbacks": [langfuse_handler]}
 
     result = agente.invoke(
         {
@@ -355,7 +354,7 @@ def demo_composite_backend():
     print(result["messages"][-1].content)
 
     # Sessão 2: Apenas aprovados são visíveis (StoreBackend)
-    config_2 = {"configurable": {"thread_id": "rh-composite-sessao-2-nova"}}
+    config_2 = {"configurable": {"thread_id": "rh-composite-sessao-2-nova"}, "callbacks": [langfuse_handler]}
     result2 = agente.invoke(
         {
             "messages": [

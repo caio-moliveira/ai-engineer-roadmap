@@ -39,8 +39,11 @@ from dotenv import load_dotenv
 from deepagents import create_deep_agent
 from deepagents.backends import FilesystemBackend
 from langgraph.checkpoint.memory import MemorySaver
+from langfuse.langchain import CallbackHandler
 
 load_dotenv()
+
+langfuse_handler = CallbackHandler()
 
 # Diretório base deste arquivo — skills ficam em ./skills/ relativo a este arquivo
 CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -112,7 +115,7 @@ def demo_skill_analise_financeira():
     print("=" * 65)
     print("  Esperado: agente carrega skill 'analise-financeira'\n")
 
-    config = {"configurable": {"thread_id": "exec-skill-financeiro-001"}}
+    config = {"configurable": {"thread_id": "exec-skill-financeiro-001"}, "callbacks": [langfuse_handler]}
 
     proposta = """
     Proposta recebida: Sistema de BI e Analytics
@@ -156,7 +159,7 @@ def demo_skill_email_executivo():
     print("=" * 65)
     print("  Esperado: agente carrega skill 'email-executivo'\n")
 
-    config = {"configurable": {"thread_id": "exec-skill-email-001"}}
+    config = {"configurable": {"thread_id": "exec-skill-email-001"}, "callbacks": [langfuse_handler]}
 
     result = assistente_executivo.invoke(
         {
@@ -190,7 +193,7 @@ def demo_skills_combinadas():
     print("=" * 65)
     print("  Esperado: agente carrega ambas as skills\n")
 
-    config = {"configurable": {"thread_id": "exec-skill-combinado-001"}}
+    config = {"configurable": {"thread_id": "exec-skill-combinado-001"}, "callbacks": [langfuse_handler]}
 
     proposta_completa = """
     Proposta: Plataforma de Gestão de Projetos SaaS

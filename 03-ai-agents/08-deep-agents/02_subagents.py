@@ -23,16 +23,11 @@ import pprint
 from dotenv import load_dotenv
 from langchain.tools import tool
 from deepagents import create_deep_agent
+from langfuse.langchain import CallbackHandler
 
 load_dotenv()
 
-
-# ---------------------------------------------------------------------------
-# 1. FERRAMENTAS ESPECIALIZADAS POR DOMÍNIO
-#
-#    Cada subagente só tem acesso às tools do seu domínio.
-#    Isso evita que o agente financeiro mexa em cláusulas jurídicas e vice-versa.
-# ---------------------------------------------------------------------------
+langfuse_handler = CallbackHandler()
 
 @tool
 def calcular_viabilidade_financeira(
@@ -101,7 +96,6 @@ def verificar_riscos_contratuais(clausulas_texto: str) -> str:
     Analisa texto de cláusulas contratuais e identifica riscos jurídicos e operacionais.
     Retorna lista de pontos de atenção e recomendações.
     """
-    # Simulação de análise jurídica. Em produção: RAG em base de contratos ou LLM especializado.
     riscos_identificados = []
     alertas_alto = []
 
@@ -129,16 +123,7 @@ def verificar_riscos_contratuais(clausulas_texto: str) -> str:
     return resultado
 
 
-# ---------------------------------------------------------------------------
-# 2. DEFINIÇÃO DOS SUBAGENTES
-#
-#    A "mágica" acontece aqui: ao invés de criar StateGraph + nodes + edges
-#    manualmente (como nos módulos 4-6), declaramos os subagentes como dicts.
-#    O Deep Agents cria as threads secundárias automaticamente.
-#
-#    REGRA DE OURO: Subagentes são STATELESS — cada chamada via task() é
-#    uma nova conversa. Passe TODAS as informações necessárias na instrução.
-# ---------------------------------------------------------------------------
+
 
 subagentes_proposta = [
     {
@@ -149,7 +134,7 @@ subagentes_proposta = [
             "Calcula ROI, payback, viabilidade e busca benchmarks de mercado. "
             "Salva o parecer financeiro em /analises/financeiro.md"
         ),
-        "model": "gpt-4o-mini",   # Análise numérica não exige o modelo mais caro
+        "model": "gpt-4o-mini",  
         "system_prompt": """
             Você é um Analista Financeiro Sênior especializado em avaliação de propostas B2B.
 
@@ -194,7 +179,7 @@ subagentes_proposta = [
             "Redige a resposta formal da empresa ao fornecedor com base nos pareceres "
             "financeiro e jurídico. Tom executivo, direto e profissional."
         ),
-        "model": "gpt-4o",        # Escrita executiva exige qualidade — vale o custo
+        "model": "gpt-4o",        
         "system_prompt": """
             Você é o Redator de Comunicações Executivas da empresa.
 
@@ -208,22 +193,14 @@ subagentes_proposta = [
             3. Tom: profissional, respeitoso e direto. Máximo 3 parágrafos.
             4. Salve a resposta em /analises/resposta_email.md e retorne o texto completo.
         """,
-        "tools": [],   # Usa apenas ferramentas de filesystem embutidas (read_file, write_file)
+        "tools": [],  
     },
 ]
-
-
-# ---------------------------------------------------------------------------
-# 3. AGENTE ORQUESTRADOR
-#
-#    O agente principal conhece todos os subagentes e delega via task().
-#    Ele não executa as análises — coordena quem executa.
-# ---------------------------------------------------------------------------
 
 agente_propostas = create_deep_agent(
     name="gestor-propostas-comerciais",
     model="gpt-4o",
-    tools=[],   # Sem tools próprias — delega tudo aos subagentes
+    tools=[],  
     subagents=subagentes_proposta,
     system_prompt="""
     Você é o Gestor de Propostas Comerciais da empresa. Sua função é COORDENAR, não executar.
@@ -248,10 +225,7 @@ agente_propostas = create_deep_agent(
 )
 
 
-# ---------------------------------------------------------------------------
-# 4. EXECUÇÃO E DEMONSTRAÇÃO
-# ---------------------------------------------------------------------------
-
+#MOCK
 PROPOSTA_EXEMPLO = """
 PROPOSTA COMERCIAL — Sistema de Gestão ERP Cloud
 
@@ -282,7 +256,7 @@ CLÁUSULAS RELEVANTES:
 
 
 def analisar_proposta():
-    config = {"configurable": {"thread_id": "proposta-techsoft-marco-2025"}}
+    config = {"configurable": {"thread_id": "proposta-techsoft-marco-2025"}, "callbacks": [langfuse_handler]}
 
     print("=" * 65)
     print("  GESTOR DE PROPOSTAS COMERCIAIS — Deep Agents")
