@@ -1,0 +1,340 @@
+{
+  "title": "Jornada de Dados — Engenheiro de IA",
+  "subtitle": "Da base probabilística ao sistema operável: RAG, agentes, OCR e especialização com governança",
+  "author": "Jornada de Dados — Engenheiro de IA",
+  "course": "Jornada de Dados — Engenheiro de IA",
+  "brand": {
+    "source": "/artifacts/visual_style_guide.json",
+    "theme": {
+      "colors": {
+        "primary": "#1B2A4A",
+        "secondary": "#00C2CB",
+        "accent": "#00C2CB",
+        "text": "#FFFFFF"
+      },
+      "typography": {
+        "heading_font": "Inter, Manrope, or IBM Plex Sans (sans-serif)",
+        "body_font": "Inter, Manrope, or IBM Plex Sans (sans-serif)"
+      },
+      "brand_voice_hook": "Profissional, orientada a resultados e prática (ênfase em projetos reais, pipelines/ETLs e evolução do básico ao avançado)."
+    }
+  },
+  "slides": [
+    {
+      "id": "slide_1_capa",
+      "type": "title_slide",
+      "title": "Trilha Completa: Engenharia de IA",
+      "subtitle": "Transforme modelos em sistemas confiáveis — uma Jornada de Dados (do conceito ao deploy)",
+      "objective": "Abrir com um gancho comercial conectando engenharia aplicada à Jornada de Dados.",
+      "bullets": [
+        "Sistemas de IA, RAG e agentes em produção",
+        "Arquitetura, orquestração, observabilidade e deploy",
+        "De desenvolvedor → AI Engineer"
+      ],
+      "main_message": "Uma formação prática para transformar modelos em produtos confiáveis.",
+      "speaker_notes": "Gancho: 'Se você já tentou usar LLMs e sentiu que não ficou confiável, isso não é falta de criatividade — é engenharia. Nesta Jornada de Dados, você aprende a operar sistemas de IA: do contrato à validação, da busca à avaliação, e do protótipo ao deploy.'",
+      "theme_hooks": {
+        "palette": "primary/secondary/accent",
+        "font_pairing": "heading/body: Inter/Manrope/IBM Plex Sans",
+        "visual_hint": "Topo com faixa primária (#1B2A4A) e destaque em ciano (#00C2CB); bullets com ícones minimalistas." 
+      },
+      "source": {
+        "course_slide_id": 1,
+        "source_readmes": ["/repo/README.md"]
+      }
+    },
+
+    {
+      "id": "slide_2_about_me",
+      "type": "sobre_mim",
+      "title": "Sobre você (e sobre como pensar como AI Engineer)",
+      "objective": "Contextualizar a trajetória e o foco em confiabilidade, avaliação e produção.",
+      "bullets": [
+        "Você vai construir sistemas de IA que funcionam no mundo real",
+        "Structured outputs + guardrails para reduzir fragilidade",
+        "RAG com avaliação/observabilidade para manter qualidade contínua",
+        "Agentes orquestrados com memória, ferramentas e human-in-the-loop"
+      ],
+      "main_message": "Eu trago uma mentalidade de engenharia: qualidade, custo e governança.",
+      "speaker_notes": "Posicione: 'O objetivo não é só aprender componentes — é saber decidir e operar. Aqui a gente conecta probabilístico com software confiável: contratos, validação, métricas, tracing/evals.'",
+      "theme_hooks": {
+        "palette": "secondary/accent em destaque",
+        "visual_hint": "Use um 'callout' em ciano para 1 frase principal; restante em texto branco/escuro com alto contraste."
+      },
+      "placeholders": [
+        {
+          "field": "CV/experiência pessoal",
+          "status": "placeholder",
+          "reason": "about_me_slide.json ausente no repositório; usando fallback de narrativa/competências."
+        }
+      ],
+      "source": {
+        "fallback_used": true,
+        "source_artifact": "/repo/03-ai-agents/09-agents-in-production/artifacts/about_me_fallback.json"
+      }
+    },
+
+    {
+      "id": "slide_3_course_intro",
+      "type": "course_intro",
+      "title": "Quem é o AI Engineer e o que você vai construir",
+      "objective": "Definir o papel do AI Engineer e explicar como a trilha reduz o hype e foca em produção.",
+      "bullets": [
+        "AI Engineer: arquiteta contexto, dados, fluxos e validações para LLMs",
+        "Transformar probabilístico → determinístico e confiável",
+        "Domínios práticos: Python assíncrono, APIs, dados, Vector DB, observabilidade",
+        "Desafios reais: alucinações, custos, latência e segurança"
+      ],
+      "main_message": "Você não aprende só a promptar: aprende a operar sistemas de IA.",
+      "speaker_notes": "Encadeamento com o bloco 'sobre mim': 'Se você quer confiabilidade, você precisa de contratos e operação. Nesta trilha, cada etapa responde: o que entra, como valida, como mede e como coloca em produção.'",
+      "theme_hooks": {
+        "visual_hint": "Quebra em 2 colunas: 'O papel' (esquerda) e 'O que você constrói' (direita), com destaque em #00C2CB." 
+      },
+      "source": {
+        "course_slide_id": 3
+      }
+    },
+
+    {
+      "id": "slide_4_b1_intro",
+      "type": "bloco_intro",
+      "title": "Bloco 1 — Fundamentos: engenharia para sistemas probabilísticos",
+      "objective": "Situar o Bloco 1 e mostrar as competências técnicas-base para produção.",
+      "bullets": [
+        "Base técnica para sistemas probabilísticos, assíncronos e orientados a produção",
+        "Contratos estruturados para outputs de LLM (Pydantic/JSON Schema)",
+        "APIs assíncronas e integração com RAG/Modelos",
+        "Armazenamento híbrido: SQL + Vector DB"
+      ],
+      "main_message": "Fundamentos de software robusto com núcleo probabilístico e dependências externas.",
+      "speaker_notes": "Gancho de encadeamento: 'Como AI Engineer, você começa garantindo confiabilidade por contrato. Aqui você aprende a tratar outputs como dados válidos — não como texto solto.'",
+      "theme_hooks": {
+        "visual_hint": "Topo com número do bloco em ciano e checklist de 'contrato → validação → integração'."
+      },
+      "source": {
+        "course_slide_id": 4
+      }
+    },
+    {
+      "id": "slide_5_b1_content",
+      "type": "content",
+      "title": "Bloco 1 — O que aprender (síntese por competências)",
+      "objective": "Consolidar os principais temas do Bloco 1 em um plano executável.",
+      "bullets": [
+        "Papel profissional e mindset de produto/sistemas",
+        "Física dos LLMs + estratégias (quando RAG vs fine-tuning)",
+        "Python moderno: tipagem, AsyncIO, resiliência (retries)",
+        "FastAPI: contratos, validação e OpenAPI",
+        "Modelagem e contratos de dados: schemas, validadores e parsing com retries",
+        "Databases: embeddings, métricas (cosseno/dot) e arquitetura híbrida SQL+Vetorial"
+      ],
+      "main_message": "Você cria a “infra de confiabilidade” para sustentar LLMs em produção.",
+      "speaker_notes": "Feche o bloco conectando com o próximo: 'Agora que você sabe criar contratos e APIs confiáveis, vamos conectar os LLMs aos seus dados privados com RAG.'",
+      "theme_hooks": {
+        "visual_hint": "Use barras de progresso ou badges por competência (tipagem/async/contracts/data)."
+      },
+      "source": {
+        "course_slide_id": 5
+      }
+    },
+
+    {
+      "id": "slide_6_b2_intro",
+      "type": "bloco_intro",
+      "title": "Bloco 2 — RAG: conectar LLMs a dados privados",
+      "objective": "Definir RAG e preparar o aluno para ingestion, retrieval, avaliação e deploy.",
+      "bullets": [
+        "Objetivo: conectar LLMs aos seus dados privados",
+        "Arquitetura mais comum em produção",
+        "Pipeline: Ingestão → Store → Retrieve → Generate",
+        "Avaliação e observabilidade como parte do sistema"
+      ],
+      "main_message": "RAG é um sistema: dados, busca, geração e validação contínuas.",
+      "speaker_notes": "Encadeamento: 'Do contrato/validação (Bloco 1) para o sistema completo: RAG é onde a qualidade passa a ser mensurável. Avaliação e tracing entram como requisitos.'",
+      "theme_hooks": {
+        "visual_hint": "Desenho de pipeline com setas e nós; nós de 'Retrieve' e 'Generate' com destaque #00C2CB."
+      },
+      "source": {
+        "course_slide_id": 6
+      }
+    },
+    {
+      "id": "slide_7_b2_content",
+      "type": "content",
+      "title": "Bloco 2 — O que aprender (síntese por pipeline)",
+      "objective": "Resumir os componentes técnicos do Bloco 2 em categorias de arquitetura.",
+      "bullets": [
+        "Ingestão/ETL e chunking (fixed/recursive/semantic) + metadados",
+        "Embeddings (modelos OpenAI vs open-source) e suporte a multimodalidade linguística",
+        "Vector DBs (Qdrant/pgvector) e indexação (HNSW) com tradeoffs",
+        "Retrieval: hybrid search, reranking e query expansion",
+        "RAG Agents e Graph RAG: busca orientada a ferramentas e conhecimento estruturado",
+        "Avaliação (RAGAS/faithfulness) + tracing + produção (segurança/custos)"
+      ],
+      "main_message": "Você aprende a operar qualidade de resposta com avaliação e monitoramento.",
+      "speaker_notes": "Fechamento do bloco: 'Quando você conecta dados privados com avaliação, abre espaço para o próximo salto: agentes. Eles não só respondem — eles planejam, chamam tools e verificam.'",
+      "theme_hooks": {
+        "visual_hint": "Organize por etapas (Ingest → Store → Retrieve → Generate) com subtítulos em ciano." 
+      },
+      "source": {
+        "course_slide_id": 7
+      }
+    },
+
+    {
+      "id": "slide_8_b3_intro",
+      "type": "bloco_intro",
+      "title": "Bloco 3 — Agentes de IA: raciocinar, decidir e agir",
+      "objective": "Introduzir o conceito de agente e orientar para orquestração e segurança em produção.",
+      "bullets": [
+        "Agentes têm autonomia controlada",
+        "Fronteira da Engenharia de IA (2026)",
+        "Ferramentas + state machines (grafos) + guardrails",
+        "Observabilidade e human-in-the-loop"
+      ],
+      "main_message": "Agentes são sistemas: fluxo, memória, ferramentas, aprovações e métricas.",
+      "speaker_notes": "Encadeamento com a outcome do bloco anterior: 'Você já sabe como medir qualidade no RAG. Agora vamos transformar essa qualidade em decisão: agentes com guardrails, loops e auditoria.'",
+      "theme_hooks": {
+        "visual_hint": "Figura de grafo/loop em estilo minimal; destaque nos 'guardrails' em #00C2CB."
+      },
+      "source": {
+        "course_slide_id": 8
+      }
+    },
+    {
+      "id": "slide_9_b3_content",
+      "type": "content",
+      "title": "Bloco 3 — O que aprender (síntese por design)",
+      "objective": "Organizar as competências do Bloco 3 em uma visão de arquitetura de agentes.",
+      "bullets": [
+        "Workflow vs agente (loop de raciocínio) + padrões (ReAct/Plan-Solve/Reflection)",
+        "Tool calling com schemas e structured outputs",
+        "LangGraph: grafos de estado, loops, retries e persistência",
+        "Memória: curto vs longo prazo (persistência e Vector DB)",
+        "Integrações via MCP e desacoplamento modelo↔ferramenta",
+        "Human-in-the-loop: aprovação, interrupção e auditoria",
+        "Multi-agents: delegação e custo",
+        "Guardrails e avaliação de trajetórias",
+        "Produção: versionamento, deploy e monitoramento (tracing/métricas)"
+      ],
+      "main_message": "Você controla autonomia e mede eficácia para colocar agentes no mundo real.",
+      "speaker_notes": "Transição: 'Com agentes, você precisa que tudo responda rápido e com custo controlado. Por isso o próximo bloco entra em performance, OCR e infra.'",
+      "theme_hooks": {
+        "visual_hint": "Checklist 'Autonomia controlada' → 'Eficácia medida' → 'Produção observável'."
+      },
+      "source": {
+        "course_slide_id": 9
+      }
+    },
+
+    {
+      "id": "slide_10_b4_intro",
+      "type": "bloco_intro",
+      "title": "Bloco 4 — Infra, OCR e modelos: inferência eficiente e confiável",
+      "objective": "Mostrar por que OCR e inferência local/produção exigem engenharia real de pipeline e performance.",
+      "bullets": [
+        "Rodar modelos eficiente, barata e confiavelmente",
+        "Onde engenharia de software encontra “metal”",
+        "OCR moderno: layout/tabelas/estrutura, não só texto",
+        "Performance: GPU (VRAM), throughput e unit economics"
+      ],
+      "main_message": "Pipeline > modelo: você constrói sistemas que funcionam sob carga.",
+      "speaker_notes": "Encadeamento: 'Agora que você consegue orquestrar agentes, o desafio vira operação: throughput, fila, latência e custo. Performance e OCR entram para tornar o sistema completo.'",
+      "theme_hooks": {
+        "visual_hint": "Use diagramas simples 'queue → worker → serving'; destaque em ciano no gargalo/performance."
+      },
+      "source": {
+        "course_slide_id": 10
+      }
+    },
+    {
+      "id": "slide_11_b4_content",
+      "type": "content",
+      "title": "Bloco 4 — O que aprender (síntese de infra + OCR)",
+      "objective": "Consolidar competências em OCR/document intelligence e inferência em produção.",
+      "bullets": [
+        "OCR Fundamentals: layout, ruído, métricas (CER/WER) e limitações",
+        "OCR Pipelines: pré/pós-processamento, chunking e tradeoffs custo/qualidade/velocidade",
+        "Document Intelligence: fila, idempotência, retries e monitoramento de falhas",
+        "Hugging Face na prática: formatos/quantização (FP16/INT8/GGUF/AWQ) e Transformers/tokenizers",
+        "Ollama para prototipar e workflow local→staging",
+        "vLLM: continuous batching/paged attention e serving via OpenAI-compatible API",
+        "Hardware & Performance: VRAM, quantização e economia de tokens"
+      ],
+      "main_message": "Você transforma OCR e VLMs em produtos com custo e latência previsíveis.",
+      "speaker_notes": "Fechamento: 'Quando performance e custo ficam previsíveis, você decide se vale especializar. O próximo bloco entra em fine-tuning com consciência de custo e governança.'",
+      "theme_hooks": {
+        "visual_hint": "Gráfico de 'custo/latência/qualidade' em três eixos ou bullets com ícones (GPU/queue/cost)."
+      },
+      "source": {
+        "course_slide_id": 11
+      }
+    },
+
+    {
+      "id": "slide_12_b5_intro",
+      "type": "bloco_intro",
+      "title": "Bloco 5 — Fine-Tuning: especialização com consciência de custo",
+      "objective": "Introduzir quando treinar e como evitar over-engineering (RAG/prompting vs fine-tuning).",
+      "bullets": [
+        "Objetivo: saber quando treinar — e principalmente quando NÃO treinar",
+        "Especialização como “última milha”",
+        "Técnicas: LoRA/QLoRA e preparação de datasets",
+        "Deploy, riscos e governança"
+      ],
+      "main_message": "Fine-tuning é decisão de engenharia: qualidade, custo e manutenção.",
+      "speaker_notes": "Encadeamento com o resultado do bloco 4: 'Com operação e performance bem resolvidas, o fine-tuning deixa de ser 'hype' e vira engenharia de produto: quando vale, como medir e como governar.'",
+      "theme_hooks": {
+        "visual_hint": "Use matriz 'RAG vs Fine-tuning' como âncora visual; destaque #00C2CB na regra 'quando NÃO treinar'."
+      },
+      "source": {
+        "course_slide_id": 12
+      }
+    },
+    {
+      "id": "slide_13_b5_content",
+      "type": "content",
+      "title": "Bloco 5 — O que aprender (síntese de ciclo completo)",
+      "objective": "Resumir o ciclo end-to-end de fine-tuning e como avaliar antes de deploy.",
+      "bullets": [
+        "Fine-tuning vs RAG/prompting: matriz de decisão",
+        "Tipos de adaptação: PEFT, LoRA, QLoRA e full fine-tuning",
+        "Unsloth: workflow eficiente (notebook→GGUF/adapter)",
+        "Dataset engineering: instruction datasets + formatação",
+        "Avaliação: baselines e LLM-as-a-Judge (ex.: GPT-4 como juiz)",
+        "Deploy: adapters no vLLM, merge (quando e por quê)",
+        "Produção: ops/custos, riscos (catastrophic forgetting) e compliance"
+      ],
+      "main_message": "Você aprende a projetar especialização com métricas, avaliação e governança.",
+      "speaker_notes": "Feche conectando com o 'sistema operável': 'Especializar é o último passo. Antes disso, você garante contratos, pipeline e avaliação. No fim, o que importa é operar bem.'",
+      "theme_hooks": {
+        "visual_hint": "Fluxo do ciclo: Decidir → Preparar dataset → Treinar/adaptar → Avaliar → Deploy → Governar."
+      },
+      "source": {
+        "course_slide_id": 13
+      }
+    },
+
+    {
+      "id": "slide_14_conclusao",
+      "type": "conclusao",
+      "title": "Fechamento: do conceito ao sistema operável",
+      "objective": "Consolidar como os blocos se conectam para construir soluções de IA em produção.",
+      "bullets": [
+        "Fundamentos: contratos, APIs e dados (confiabilidade base)",
+        "RAG: pipeline completo + avaliação/observabilidade",
+        "Agentes: orquestração, memória, ferramentas e guardrails",
+        "OCR/Infra: performance, filas, serving e unit economics",
+        "Fine-tuning: decisão, adaptação eficiente e governança"
+      ],
+      "main_message": "Você termina capaz de projetar e operar sistemas de IA completos.",
+      "speaker_notes": "Takeaways (3–5): 1) Confiabilidade vem de contratos e validação. 2) Qualidade precisa de avaliação e tracing desde o início. 3) Autonomia requer guardrails e human-in-the-loop. 4) Performance/custo são parte do design. 5) Fine-tuning é decisão de engenharia com governança.",
+      "theme_hooks": {
+        "visual_hint": "Resumo em 5 cards alinhados; use ciano apenas em 'palavras âncora' (contratos, avaliação, guardrails, performance, governança)."
+      },
+      "source": {
+        "course_slide_id": 14
+      }
+    }
+  ]
+}

@@ -199,8 +199,8 @@ def demo_filesystem_backend():
         config=config,
     )
     print("[FilesystemBackend] Resposta do agente:")
-    print(result["messages"][-1].content)
-
+    # print(result["messages"][-1].content)
+    pprint.pprint(result)
     # Verifica se o arquivo foi criado no disco
     output_path = os.path.join(CURRENT_DIR, "output_rh")
     if os.path.exists(output_path):
@@ -265,6 +265,7 @@ def demo_store_backend():
         config=config_manha,
     )
     print("[Sessao 'manha'] Candidato avaliado e salvo.")
+    pprint.pprint(result_manha)
 
     # SESSÃO 2 (tarde): Thread completamente diferente — mas acessa o mesmo Store
     config_tarde = {"configurable": {"thread_id": "rh-store-tarde-nova-sessao"}, "callbacks": [langfuse_handler]}
@@ -280,7 +281,8 @@ def demo_store_backend():
         config=config_tarde,
     )
     print("[Sessao 'tarde' — thread diferente] Lendo banco de candidatos:")
-    print(result_tarde["messages"][-1].content)
+    # print(result_tarde["messages"][-1].content)
+    pprint.pprint(result_tarde)
     print("\n  OBSERVE: a sessao 'tarde' leu dados gravados pela sessao 'manha'.")
     print("  Isso e o StoreBackend: persistencia alem do thread_id.\n")
 
@@ -382,5 +384,5 @@ if __name__ == "__main__":
 
     #demo_state_backend()       # Demo 1: StateBackend (padrão)
     #demo_filesystem_backend()  # Demo 2: FilesystemBackend (cria arquivos reais em disco)
-    #demo_store_backend()       # Demo 3: StoreBackend (cross-thread)
-    demo_composite_backend()   # Demo 4: CompositeBackend (híbrido)
+    demo_store_backend()       # Demo 3: StoreBackend (cross-thread)
+    #demo_composite_backend()   # Demo 4: CompositeBackend (híbrido)

@@ -1,0 +1,123 @@
+{
+  "tree": {
+    "repo_root": "/repo",
+    "top_level": [
+      "/repo/01-fundamentals",
+      "/repo/02-rag",
+      "/repo/03-ai-agents",
+      "/repo/04-infra-ocr-models",
+      "/repo/05-fine-tuning",
+      "/repo/README.md",
+      "/repo/assets",
+      "/repo/pyproject.toml",
+      "/repo/skills-lock.json",
+      "/repo/uv.lock",
+      "/repo/.agents",
+      "/repo/.claude",
+      "/repo/.env",
+      "/repo/.gitignore",
+      "/repo/.python-version",
+      "/repo/.venv",
+      "/repo/.git"
+    ],
+    "course_blocks": [
+      {
+        "block": "01-fundamentals",
+        "modules": [
+          "01-ai-engineer-profession",
+          "02-llm-fundamentals",
+          "03-python-for-ai",
+          "04-fastapi",
+          "05-data-modeling",
+          "06-databases"
+        ]
+      },
+      {
+        "block": "02-rag",
+        "modules": [
+          "01-rag-fundamentals",
+          "02-ingestion-pipeline",
+          "03-embeddings",
+          "04-vector-dbs",
+          "05-retrievers",
+          "06-rag-agent",
+          "07-graph-rag",
+          "08-evaluation",
+          "09-rag-production"
+        ]
+      },
+      {
+        "block": "03-ai-agents",
+        "modules": [
+          "01-agent-fundamentals",
+          "02-my-first-agent",
+          "03-langgraph-orchestration",
+          "04-memory-systems",
+          "05-tools-mcp",
+          "06-human-in-the-loop",
+          "07-multi-agents",
+          "08-deep-agents",
+          "09-agents-in-production"
+        ]
+      },
+      {
+        "block": "04-infra-ocr-models",
+        "modules": [
+          "01-ocr-fundamentals",
+          "02-ocr-pipelines",
+          "03-document-intelligence",
+          "04-hugging-face",
+          "05-ollama",
+          "06-vllm",
+          "07-hardware-performance"
+        ]
+      },
+      {
+        "block": "05-fine-tuning",
+        "modules": [
+          "01-fine-tuning-fundamentals",
+          "02-unsloth",
+          "03-my-first-llm",
+          "04-model-deploy",
+          "05-fine-tuning-production"
+        ],
+        "nested_modules": {
+          "01-fine-tuning-fundamentals": [
+            "02-rag-vs-finetuning",
+            "03-adaptation-types"
+          ],
+          "03-my-first-llm": [
+            "05-evaluation"
+          ],
+          "05-fine-tuning-production": [
+            "09-risks-maintenance",
+            "10-enterprise-gov"
+          ]
+        }
+      }
+    ]
+  },
+  "course_structure": {
+    "root_readme": "/repo/README.md",
+    "blocks": [
+      "01-fundamentals",
+      "02-rag",
+      "03-ai-agents",
+      "04-infra-ocr-models",
+      "05-fine-tuning"
+    ]
+  },
+  "stats": {
+    "readme_files_found_by_glob": 60,
+    "course_block_count": 5,
+    "course_module_counts": {
+      "01-fundamentals": 6,
+      "02-rag": 9,
+      "03-ai-agents": 9,
+      "04-infra-ocr-models": 7,
+      "05-fine-tuning": 5
+    },
+    "has_artifacts_dir_in_repo": false,
+    "note": "README glob under /repo/**/README* likely includes READMEs under /repo/.venv (third-party packages)."
+  }
+}

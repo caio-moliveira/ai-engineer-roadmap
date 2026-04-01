@@ -1,0 +1,214 @@
+[
+  {
+    "id": 1,
+    "type": "capa",
+    "title": "Trilha Completa: Engenharia de IA",
+    "objective": "Apresentar a jornada e o foco em engenharia de sistemas de IA em produção.",
+    "bullets": [
+      "Construção profissional de sistemas de IA, RAG e agentes em produção",
+      "Arquitetura, orquestração, observabilidade e deploy",
+      "De desenvolvedor → AI Engineer"
+    ],
+    "main_message": "Uma formação prática para transformar modelos em produtos confiáveis.",
+    "source_readmes": ["/repo/README.md"]
+  },
+  {
+    "id": 2,
+    "type": "sobre_mim",
+    "title": "",
+    "objective": "",
+    "bullets": [],
+    "main_message": "",
+    "source_readmes": []
+  },
+  {
+    "id": 3,
+    "type": "course_intro",
+    "title": "Quem é o AI Engineer e o que você vai construir",
+    "objective": "Definir o papel do AI Engineer e explicar como a trilha reduz o hype e foca em produção.",
+    "bullets": [
+      "AI Engineer: arquiteta contexto, dados, fluxos e validações para LLMs",
+      "Transformar probabilístico → determinístico e confiável",
+      "Domínios práticos: Python assíncrono, APIs, dados, Vector DB, observabilidade",
+      "Desafios reais: alucinações, custos, latência e segurança"
+    ],
+    "main_message": "Você não aprende só a promptar: aprende a operar sistemas de IA.",
+    "source_readmes": ["/repo/README.md"]
+  },
+
+  {
+    "id": 4,
+    "type": "bloco_intro",
+    "title": "Bloco 1 — Fundamentos: engenharia para sistemas probabilísticos",
+    "objective": "Situar o Bloco 1 e mostrar as competências técnicas-base para produção.",
+    "bullets": [
+      "Base técnica para sistemas probabilísticos, assíncronos e orientados a produção",
+      "Contratos estruturados para outputs de LLM (Pydantic/JSON Schema)",
+      "APIs assíncronas e integração com RAG/Modelos",
+      "Armazenamento híbrido: SQL + Vector DB"
+    ],
+    "main_message": "Fundamentos de software robusto com núcleo probabilístico e dependências externas.",
+    "source_readmes": ["/repo/01-fundamentals/README.md"]
+  },
+  {
+    "id": 5,
+    "type": "content",
+    "title": "Bloco 1 — O que aprender (síntese por competências)",
+    "objective": "Consolidar os principais temas do Bloco 1 em um plano executável.",
+    "bullets": [
+      "Papel profissional e mindset de produto/sistemas",
+      "Física dos LLMs + estratégias (quando RAG vs fine-tuning)",
+      "Python moderno: tipagem, AsyncIO, resiliência (retries)",
+      "FastAPI: contratos, validação e OpenAPI",
+      "Modelagem e contratos de dados: schemas, validadores e parsing com retries",
+      "Databases: embeddings, métricas (cosseno/dot) e arquitetura híbrida SQL+Vetorial"
+    ],
+    "main_message": "Você cria a “infra de confiabilidade” para sustentar LLMs em produção.",
+    "source_readmes": ["/repo/01-fundamentals/README.md"]
+  },
+
+  {
+    "id": 6,
+    "type": "bloco_intro",
+    "title": "Bloco 2 — RAG: conectar LLMs a dados privados",
+    "objective": "Definir RAG e preparar o aluno para ingestion, retrieval, avaliação e deploy.",
+    "bullets": [
+      "Objetivo: conectar LLMs aos seus dados privados",
+      "Arquitetura mais comum em produção",
+      "Pipeline: Ingestão → Store → Retrieve → Generate",
+      "Avaliação e observabilidade como parte do sistema"
+    ],
+    "main_message": "RAG é um sistema: dados, busca, geração e validação contínuas.",
+    "source_readmes": ["/repo/02-rag/README.md"]
+  },
+  {
+    "id": 7,
+    "type": "content",
+    "title": "Bloco 2 — O que aprender (síntese por pipeline)",
+    "objective": "Resumir os componentes técnicos do Bloco 2 em categorias de arquitetura.",
+    "bullets": [
+      "Ingestão/ETL e chunking (fixed/recursive/semantic) + metadados",
+      "Embeddings (modelos OpenAI vs open-source) e suporte a multimodalidade linguística",
+      "Vector DBs (Qdrant/pgvector) e indexação (HNSW) com tradeoffs",
+      "Retrieval: hybrid search, reranking e query expansion",
+      "RAG Agents e Graph RAG: busca orientada a ferramentas e conhecimento estruturado",
+      "Avaliação (RAGAS/faithfulness) + tracing + produção (segurança/custos)"
+    ],
+    "main_message": "Você aprende a operar qualidade de resposta com avaliação e monitoramento.",
+    "source_readmes": ["/repo/02-rag/README.md"]
+  },
+
+  {
+    "id": 8,
+    "type": "bloco_intro",
+    "title": "Bloco 3 — Agentes de IA: raciocinar, decidir e agir",
+    "objective": "Introduzir o conceito de agente e orientar para orquestração e segurança em produção.",
+    "bullets": [
+      "Agentes têm autonomia controlada",
+      "Fronteira da Engenharia de IA (2026)",
+      "Ferramentas + state machines (grafos) + guardrails",
+      "Observabilidade e human-in-the-loop"
+    ],
+    "main_message": "Agentes são sistemas: fluxo, memória, ferramentas, aprovações e métricas.",
+    "source_readmes": ["/repo/03-ai-agents/README.md"]
+  },
+  {
+    "id": 9,
+    "type": "content",
+    "title": "Bloco 3 — O que aprender (síntese por design)",
+    "objective": "Organizar as competências do Bloco 3 em uma visão de arquitetura de agentes.",
+    "bullets": [
+      "Workflow vs agente (loop de raciocínio) + padrões (ReAct/Plan-Solve/Reflection)",
+      "Tool calling com schemas e structured outputs",
+      "LangGraph: grafos de estado, loops, retries e persistência",
+      "Memória: curto vs longo prazo (persistência e Vector DB)",
+      "Integrações via MCP e desacoplamento modelo↔ferramenta",
+      "Human-in-the-loop: aprovação, interrupção e auditoria",
+      "Multi-agents: delegação e custo",
+      "Guardrails e avaliação de trajetórias",
+      "Produção: versionamento, deploy e monitoramento (tracing/métricas)"
+    ],
+    "main_message": "Você controla autonomia e mede eficácia para colocar agentes no mundo real.",
+    "source_readmes": ["/repo/03-ai-agents/README.md"]
+  },
+
+  {
+    "id": 10,
+    "type": "bloco_intro",
+    "title": "Bloco 4 — Infra, OCR e modelos: inferência eficiente e confiável",
+    "objective": "Mostrar por que OCR e inferência local/produção exigem engenharia real de pipeline e performance.",
+    "bullets": [
+      "Rodar modelos eficiente, barata e confiavelmente",
+      "Onde engenharia de software encontra “metal”",
+      "OCR moderno: layout/tabelas/estrutura, não só texto",
+      "Performance: GPU (VRAM), throughput e unit economics"
+    ],
+    "main_message": "Pipeline > modelo: você constrói sistemas que funcionam sob carga.",
+    "source_readmes": ["/repo/04-infra-ocr-models/README.md"]
+  },
+  {
+    "id": 11,
+    "type": "content",
+    "title": "Bloco 4 — O que aprender (síntese de infra + OCR)",
+    "objective": "Consolidar competências em OCR/document intelligence e inferência em produção.",
+    "bullets": [
+      "OCR Fundamentals: layout, ruído, métricas (CER/WER) e limitações",
+      "OCR Pipelines: pré/pós-processamento, chunking e tradeoffs custo/qualidade/velocidade",
+      "Document Intelligence: fila, idempotência, retries e monitoramento de falhas",
+      "Hugging Face na prática: formatos/quantização (FP16/INT8/GGUF/AWQ) e Transformers/tokenizers",
+      "Ollama para prototipar e workflow local→staging",
+      "vLLM: continuous batching/paged attention e serving via OpenAI-compatible API",
+      "Hardware & Performance: VRAM, quantização e economia de tokens"
+    ],
+    "main_message": "Você transforma OCR e VLMs em produtos com custo e latência previsíveis.",
+    "source_readmes": ["/repo/04-infra-ocr-models/README.md"]
+  },
+
+  {
+    "id": 12,
+    "type": "bloco_intro",
+    "title": "Bloco 5 — Fine-Tuning: especialização com consciência de custo",
+    "objective": "Introduzir quando treinar e como evitar over-engineering (RAG/prompting vs fine-tuning).",
+    "bullets": [
+      "Objetivo: saber quando treinar — e principalmente quando NÃO treinar",
+      "Especialização como “última milha”",
+      "Técnicas: LoRA/QLoRA e preparação de datasets",
+      "Deploy, riscos e governança"
+    ],
+    "main_message": "Fine-tuning é decisão de engenharia: qualidade, custo e manutenção.",
+    "source_readmes": ["/repo/05-fine-tuning/README.md"]
+  },
+  {
+    "id": 13,
+    "type": "content",
+    "title": "Bloco 5 — O que aprender (síntese de ciclo completo)",
+    "objective": "Resumir o ciclo end-to-end de fine-tuning e como avaliar antes de deploy.",
+    "bullets": [
+      "Fine-tuning vs RAG/prompting: matriz de decisão",
+      "Tipos de adaptação: PEFT, LoRA, QLoRA e full fine-tuning",
+      "Unsloth: workflow eficiente (notebook→GGUF/adapter)",
+      "Dataset engineering: instruction datasets + formatação",
+      "Avaliação: baselines e LLM-as-a-Judge (ex.: GPT-4 como juiz)",
+      "Deploy: adapters no vLLM, merge (quando e por quê)",
+      "Produção: ops/custos, riscos (catastrophic forgetting) e compliance"
+    ],
+    "main_message": "Você aprende a projetar especialização com métricas, avaliação e governança.",
+    "source_readmes": ["/repo/05-fine-tuning/README.md"]
+  },
+
+  {
+    "id": 14,
+    "type": "conclusao",
+    "title": "Fechamento: do conceito ao sistema operável",
+    "objective": "Consolidar como os blocos se conectam para construir soluções de IA em produção.",
+    "bullets": [
+      "Fundamentos: contratos, APIs e dados (confiabilidade base)",
+      "RAG: pipeline completo + avaliação/observabilidade",
+      "Agentes: orquestração, memória, ferramentas e guardrails",
+      "OCR/Infra: performance, filas, serving e unit economics",
+      "Fine-tuning: decisão, adaptação eficiente e governança"
+    ],
+    "main_message": "Você termina capaz de projetar e operar sistemas de IA completos.",
+    "source_readmes": ["/repo/README.md","/repo/01-fundamentals/README.md","/repo/02-rag/README.md","/repo/03-ai-agents/README.md","/repo/04-infra-ocr-models/README.md","/repo/05-fine-tuning/README.md"]
+  }
+]

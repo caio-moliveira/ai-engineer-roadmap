@@ -110,10 +110,6 @@ def demo_skill_analise_financeira():
     Cenário 1: O CEO recebe uma proposta e quer análise financeira.
     O agente deve carregar a skill 'analise-financeira' automaticamente.
     """
-    print("=" * 65)
-    print("  SKILL DEMO 1: Análise Financeira")
-    print("=" * 65)
-    print("  Esperado: agente carrega skill 'analise-financeira'\n")
 
     config = {"configurable": {"thread_id": "exec-skill-financeiro-001"}, "callbacks": [langfuse_handler]}
 
@@ -226,8 +222,8 @@ def demo_skills_combinadas():
     )
 
     print("[ASSISTENTE]")
-    print(result["messages"][-1].content)
-
+    # print(result["messages"][-1].content)
+    pprint.pprint(result)
     # Exibe o plano de tarefas (TodoListMiddleware)
     todos = result.get("todos", [])
     if todos:

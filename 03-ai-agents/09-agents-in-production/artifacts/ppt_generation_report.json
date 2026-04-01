@@ -1,0 +1,13 @@
+{
+  "status": "success",
+  "summary": "Generated presentation_final.pptx",
+  "artifacts_generated": ["/artifacts/ppt_generation_report.json"],
+  "errors": [],
+  "input_artifacts": {
+    "presentation_master_spec": "/artifacts/presentation_master_spec.json",
+    "visual_style_guide": "/artifacts/visual_style_guide.json"
+  },
+  "output": {
+    "pptx_path": "/artifacts/presentation_final.pptx"
+  }
+}

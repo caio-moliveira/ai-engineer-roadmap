@@ -256,10 +256,10 @@ def demo_agents_md():
 
 if __name__ == "__main__":
     # DEMO 1: AGENTS.md — contexto sempre presente
-    demo_agents_md()
+    #demo_agents_md()
 
     # DEMO 2 e 3: Memória cross-session via StoreBackend
     # Rode sessao_primeiro_contato() primeiro, depois sessao_retomada_contato()
     # para ver o agente "lembrar" entre threads diferentes.
-    # sessao_primeiro_contato()
-    # sessao_retomada_contato()
+    sessao_primeiro_contato()
+    sessao_retomada_contato()

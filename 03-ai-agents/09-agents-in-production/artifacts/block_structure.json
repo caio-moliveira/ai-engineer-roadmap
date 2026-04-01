@@ -1,0 +1,75 @@
+{
+  "blocks": [
+    {
+      "id": 1,
+      "key": "fundamentals",
+      "title": "Fundamentos da Engenharia de IA",
+      "module_list": [
+        {"id": 1, "title": "A Profissão de AI Engineer & Mercado", "readme": "/repo/01-fundamentals/01-ai-engineer-profession/README.md"},
+        {"id": 2, "title": "Fundamentos de LLMs & GenAI", "readme": "/repo/01-fundamentals/02-llm-fundamentals/README.md"},
+        {"id": 3, "title": "Python Moderno para AI Engineers", "readme": "/repo/01-fundamentals/03-python-for-ai/README.md"},
+        {"id": 4, "title": "APIs & Backend com FastAPI", "readme": "/repo/01-fundamentals/04-fastapi/README.md"},
+        {"id": 5, "title": "Modelagem e Contratos de Dados (Pydantic V2)", "readme": "/repo/01-fundamentals/05-data-modeling/README.md"},
+        {"id": 6, "title": "Bancos de Dados (SQL + Vetorial)", "readme": "/repo/01-fundamentals/06-databases/README.md"}
+      ]
+    },
+    {
+      "id": 2,
+      "key": "rag",
+      "title": "Sistemas RAG (Retrieval-Augmented Generation)",
+      "module_list": [
+        {"id": 1, "title": "Fundamentos de RAG e Modelos Mentais", "readme": "/repo/02-rag/01-rag-fundamentals/README.md"},
+        {"id": 2, "title": "Ingestão de Dados e Pipelines", "readme": "/repo/02-rag/02-ingestion-pipeline/README.md"},
+        {"id": 3, "title": "Embeddings (Visão Moderna)", "readme": "/repo/02-rag/03-embeddings/README.md"},
+        {"id": 4, "title": "Vetor Databases (Vector DBs)", "readme": "/repo/02-rag/04-vector-dbs/README.md"},
+        {"id": 5, "title": "Estratégias de Retrieval", "readme": "/repo/02-rag/05-retrievers/README.md"},
+        {"id": 6, "title": "RAG Agents", "readme": "/repo/02-rag/06-rag-agent/README.md"},
+        {"id": 7, "title": "Graph RAG", "readme": "/repo/02-rag/07-graph-rag/README.md"},
+        {"id": 8, "title": "Avaliação e Observabilidade", "readme": "/repo/02-rag/08-evaluation/README.md"},
+        {"id": 9, "title": "RAG em Produção", "readme": "/repo/02-rag/09-rag-production/README.md"}
+      ]
+    },
+    {
+      "id": 3,
+      "key": "ai_agents",
+      "title": "Agentes de IA & Sistemas Inteligentes",
+      "module_list": [
+        {"id": 1, "title": "Fundamentos de Agentes e Arquiteturas", "readme": "/repo/03-ai-agents/01-agent-fundamentals/README.md"},
+        {"id": 2, "title": "Criando seu primeiro Agente", "readme": "/repo/03-ai-agents/02-my-first-agent/README.md"},
+        {"id": 3, "title": "LangGraph e Orquestração", "readme": "/repo/03-ai-agents/03-langgraph-orchestration/README.md"},
+        {"id": 4, "title": "Sistemas de Memória", "readme": "/repo/03-ai-agents/04-memory-systems/README.md"},
+        {"id": 5, "title": "Ferramentas e MCP", "readme": "/repo/03-ai-agents/05-tools-mcp/README.md"},
+        {"id": 6, "title": "Human-in-the-Loop", "readme": "/repo/03-ai-agents/06-human-in-the-loop/README.md"},
+        {"id": 7, "title": "Multi-Agent Systems", "readme": "/repo/03-ai-agents/07-multi-agents/README.md"},
+        {"id": 8, "title": "Deep Agents", "readme": "/repo/03-ai-agents/08-deep-agents/README.md"},
+        {"id": 9, "title": "Agentes em Produção", "readme": "/repo/03-ai-agents/09-agents-in-production/README.md"}
+      ]
+    },
+    {
+      "id": 4,
+      "key": "ocr",
+      "title": "Infra, OCR e Modelos (Inferência em Produção)",
+      "module_list": [
+        {"id": 1, "title": "OCR Fundamentals", "readme": "/repo/04-infra-ocr-models/01-ocr-fundamentals/README.md"},
+        {"id": 2, "title": "OCR Pipelines", "readme": "/repo/04-infra-ocr-models/02-ocr-pipelines/README.md"},
+        {"id": 3, "title": "Document Intelligence", "readme": "/repo/04-infra-ocr-models/03-document-intelligence/README.md"},
+        {"id": 4, "title": "Hugging Face", "readme": "/repo/04-infra-ocr-models/04-hugging-face/README.md"},
+        {"id": 5, "title": "Ollama", "readme": "/repo/04-infra-ocr-models/05-ollama/README.md"},
+        {"id": 6, "title": "vLLM", "readme": "/repo/04-infra-ocr-models/06-vllm/README.md"},
+        {"id": 7, "title": "Hardware & Performance", "readme": "/repo/04-infra-ocr-models/07-hardware-performance/README.md"}
+      ]
+    },
+    {
+      "id": 5,
+      "key": "fine_tuning",
+      "title": "Fine-Tuning e Especialização de Modelos",
+      "module_list": [
+        {"id": 1, "title": "Fundamentos de Fine-Tuning", "readme": "/repo/05-fine-tuning/01-fine-tuning-fundamentals/README.md"},
+        {"id": 2, "title": "Unsloth", "readme": "/repo/05-fine-tuning/02-unsloth/README.md"},
+        {"id": 3, "title": "Meu Primeiro LLM (Dataset, Treino, Avaliação)", "readme": "/repo/05-fine-tuning/03-my-first-llm/README.md"},
+        {"id": 4, "title": "Deploy do Modelo", "readme": "/repo/05-fine-tuning/04-model-deploy/README.md"},
+        {"id": 5, "title": "Fine-Tuning em Produção", "readme": "/repo/05-fine-tuning/05-fine-tuning-production/README.md"}
+      ]
+    }
+  ]
+}
