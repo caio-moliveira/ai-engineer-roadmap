@@ -2,23 +2,28 @@ from __future__ import annotations
 
 import json
 import os
+import sys
 from pathlib import Path
 
 from deepagents import create_deep_agent
 from deepagents.backends import CompositeBackend, FilesystemBackend
 from dotenv import load_dotenv
+from langchain.chat_models import init_chat_model
 from langchain.tools import tool
+from langchain_core.rate_limiters import InMemoryRateLimiter
 from langgraph.checkpoint.memory import MemorySaver
 from langgraph.store.memory import InMemoryStore
 from langfuse.langchain import CallbackHandler
 from tavily import TavilyClient
-
-
+from langchain.agents.middleware import ModelFallbackMiddleware
 
 load_dotenv()
 
 tavily_client = TavilyClient(api_key=os.environ["TAVILY_API_KEY"])
 langfuse_handler = CallbackHandler()
+
+_SKILLS_SCRIPTS = os.path.join(os.path.dirname(os.path.abspath(__file__)), "skills", "powerpoint", "scripts")
+
 
 @tool
 def tavily_search(query: str) -> str:
@@ -26,11 +31,34 @@ def tavily_search(query: str) -> str:
     results = tavily_client.search(query, max_results=5)
     return json.dumps(results, ensure_ascii=False)
 
+
+@tool
+def build_pptx(spec_file: str, output_file: str) -> str:
+    """Generate a .pptx file from a presentation spec JSON.
+    Brand colors must be embedded in spec_file under the 'brand' key.
+
+    Args:
+        spec_file: Absolute path to presentation_spec.json
+        output_file: Absolute path for the output .pptx file
+    """
+    if _SKILLS_SCRIPTS not in sys.path:
+        sys.path.insert(0, _SKILLS_SCRIPTS)
+    from generate_from_spec import generate_ppt_from_spec
+    return generate_ppt_from_spec(spec_file, output_file)
+
 CURRENT_DIR   = os.path.dirname(os.path.abspath(__file__))
 REPO_PATH     = r"E:\job-work\ai-engineer-roadmap"
 CV_DIR        = os.path.join(CURRENT_DIR, "docs")
 ARTIFACTS_DIR = os.path.join(CURRENT_DIR, "artifacts")
 
+# Shared rate-limited model — all agents go through the same token bucket.
+# 0.5 req/s = 30 req/min. At ~3 000 tokens/req → ~90 k TPM (well under the 200 k limit).
+# _rate_limiter = InMemoryRateLimiter(
+#     requests_per_second=0.5,
+#     check_every_n_seconds=0.05,
+#     max_bucket_size=2,
+# )
+# _model = init_chat_model("openai:gpt-5.4-nano", rate_limiter=_rate_limiter)
 
 
 # ── Subagent definitions ─────────────────────────────────────────────────────
@@ -39,43 +67,62 @@ REPO_SCANNER = {
     "name": "repo-scanner",
     "description": "Catalog the AI engineer roadmap repository structure and locate all README files.",
     "model": "openai:gpt-5.4-nano",
-    "system_prompt": f"""You are the Repo Scanner Agent. Your only job: catalog structure — do NOT interpret content.
+    "system_prompt": """You are the Repo Scanner Agent. Your only job: catalog README files — do NOT interpret content.
 
+IMPORTANT: Only scan the exact directories listed below. Never glob the full /repo/ tree.
+Never read inside .venv, node_modules, __pycache__, or any directory whose name starts with a dot.
 
-1. Use `ls` on "/repo/" to explore the repository structure, then use `glob` or `read_file` to find all README files under "/repo/".
-2. Write three artifacts with `write_file`:
-   /artifacts/repo_tree_summary.json   — {{tree, course_structure, stats}} from the scan result
-   /artifacts/readme_paths.json        — the readme_paths array from the scan result
-   /artifacts/course_file_catalog.json — flat list of all files as {{relative_path, absolute_path}}
+Run `glob` with pattern "**/README.md" on each of these directories individually:
+  /repo/01-fundamentals/
+  /repo/02-rag/
+  /repo/03-ai-agents/
+  /repo/04-infra-ocr-models/
+  /repo/05-fine-tuning/
 
-3. Return exactly:
-{{"status":"success","artifacts_generated":["/artifacts/repo_tree_summary.json","/artifacts/readme_paths.json","/artifacts/course_file_catalog.json"],"errors":[]}}
+Also include /repo/README.md directly (root README).
 
-4. Do not edit any README file.
+Collect all found paths into a list. Write ONE artifact with `write_file`:
+
+/artifacts/repo_catalog.json:
+{
+  "readme_paths": ["/repo/README.md", "/repo/01-fundamentals/README.md", ...],
+  "stats": {"total_readmes": N}
+}
+
+Return: {"status":"success","artifacts_generated":["/artifacts/repo_catalog.json"],"errors":[]}
 """,
     "tools": [],
 }
 
 BRAND_RESEARCHER = {
     "name": "brand-researcher",
-    "description": "Search the web for Jornada de Dados brand identity, colours, and positioning.",
+    "description": "Search the web for Jornada de Dados brand identity and produce a brand guide.",
     "model": "openai:gpt-5.4-nano",
-    "system_prompt": """You are the Brand Research Agent. Use the tavily_search search tool to gather brand information.
+    "system_prompt": """You are the Brand Research Agent.
 
-Run these three searches:
+Run these searches with `tavily_search`:
 1. "Jornada de Dados identidade visual cores logo"
-2. "Jornada de Dados plataforma curso engenheiro de dados IA"
-3. "Jornada de Dados Luciano Galvão posicionamento marca"
+2. "Jornada de Dados Luciano Galvão posicionamento marca engenheiro IA"
 
-Extract: primary/secondary colours (hex when possible), typography hints, brand voice, logo references.
+Extract: primary colour, accent colour, text colour (hex), brand voice.
+If search yields no hex values, use defaults: primary #1B2A4A, accent #00C2CB, text #FFFFFF.
 
-Write with `write_file`:
-  /artifacts/brand_research.md       — markdown with all raw findings
-  /artifacts/visual_style_guide.json — {"primary_color":"#hex","secondary_color":"#hex","accent_color":"#hex","text_color":"#hex","heading_font":"...","body_font":"...","brand_voice":"..."}
+Write ONE artifact with `write_file`:
 
-If search is unavailable, use defaults (primary: #1B2A4A, accent: #00C2CB, text: #FFFFFF) and add a warning.
+/artifacts/brand_guide.md — use this exact structure:
+```
+# Brand Guide: Jornada de Dados
 
-Return: {"status":"success","artifacts_generated":["/artifacts/brand_research.md","/artifacts/visual_style_guide.json"],"errors":[],"warnings":[]}
+## Pesquisa
+<2-3 paragraphs summarising findings>
+
+## Estilo Visual
+```json
+{"primary_color":"#hex","accent_color":"#hex","text_color":"#hex","brand_voice":"<one sentence>"}
+```
+```
+
+Return: {"status":"success","artifacts_generated":["/artifacts/brand_guide.md"],"errors":[],"warnings":[]}
 """,
     "tools": [tavily_search],
 }
@@ -86,111 +133,138 @@ CV_READER = {
     "model": "openai:gpt-5.4-nano",
     "system_prompt": """You are the CV Reader Agent.
 
-1. Call `read_file` with path="/docs/CaioMachado-AI-p.docx".
-2. From the returned text, extract:
+1. Call `read_file` with path="/docs/CaioMachado-AI-p.md".
+2. Extract:
    - Full name and current role/title
    - 3–4 key professional experiences or positions
    - Main technical skills and specialties
-   - A concise positioning statement
+   - A concise one-sentence positioning statement
+   - Why this person teaches this AI engineering course
 
-3. Write with `write_file`:
+3. Write ONE artifact with `write_file`:
 
-/artifacts/about_me_slide.json:
-{{"id":2,"type":"sobre_mim","title":"Sobre Mim","bio":"<one-sentence positioning>","bullets":["<exp 1>","<exp 2>","<skills>","<community/teaching>"],"main_message":"<why I teach this course>"}}
+/artifacts/about_me.md — use this exact structure:
+```
+# Sobre Mim: <Full Name>
+**Cargo**: <current role>
+**Bio**: <one-sentence positioning>
 
-/artifacts/about_me_bio_short.md — 3–4 line markdown bio.
+## Destaques
+- <experience 1>
+- <experience 2>
+- <key technical skills>
+- <community / teaching highlight>
 
-Return: {{"status":"success","artifacts_generated":["/artifacts/about_me_slide.json","/artifacts/about_me_bio_short.md"],"errors":[]}}
+## Mensagem Principal
+<why I teach this course — 1-2 sentences>
+```
+
+Return: {"status":"success","artifacts_generated":["/artifacts/about_me.md"],"errors":[]}
 """,
     "tools": [],
 }
 
 README_STRUCTURER = {
     "name": "readme-structurer",
-    "description": "Parse course README files one block at a time and produce the slide content outline.",
+    "description": "Read course READMEs and produce an ordered slide outline.",
     "model": "openai:gpt-5.4-nano",
-    "system_prompt": """You are the README Content Structuring Agent.
+    "system_prompt": """You are the README Structuring Agent.
 
-CRITICAL: Load and process ONE block at a time — never read all READMEs simultaneously.
+CRITICAL: process one block at a time — never read all READMEs simultaneously.
 
-1. `read_file` → /artifacts/readme_paths.json
-2. Group entries by top-level block directory (first path segment).
-3. For each block (process sequentially):
-   a. `read_file` for each README in the block.
-   b. Extract: theme, learning objectives, key concepts, main technologies.
-4. Map content to the fixed slide order:
-   capa → sobre_mim (leave empty) → course_intro → bloco_intro×N → content_slides → conclusao
+1. `read_file` → /artifacts/repo_catalog.json  (get readme_paths)
+2. `read_file` → /artifacts/about_me.md
+3. `read_file` → /artifacts/brand_guide.md
+4. For each README path (sequentially): `read_file` and extract theme, key concepts, main technologies.
 
-5. We have 5 blocks of classes: Fundamentals, RAG, AI Agents, OCR and Fine-Tunning. I need a slide for introduction of the block and another slide with the classes for that block.
+Build the slide outline following this fixed order:
+  - Slide 1  : type "capa"        — course title + subtitle
+  - Slide 2  : type "sobre_mim"   — instructor (pull from about_me.md)
+  - Slide 3  : type "course_intro"— what the course covers
+  - Slides 4-5 per block: type "bloco_intro" (block overview) + type "content" (list of lessons)
+    Blocks: 01-llm-fundamentals, 02-rag, 03-ai-agents, 04-ocr, 05-fine-tuning
+  - Last slide: type "conclusao"  — next steps / call to action
 
-6. Do not create one slide for each class. Make it concise
+Rules:
+  - One slide per block introduction, one slide per block lessons. DO NOT create one slide per lesson.
+  - The slide for block lessons should be a list of all lessons of that block.
 
-Per-slide schema:
-{"id": N, "type": "capa|sobre_mim|content|bloco_intro|conclusao", "title": "...", "objective": "...", "bullets": ["..."], "main_message": "...", "source_readmes": ["path"]}
+Write ONE artifact with `write_file`:
 
-Write with `write_file`:
-  /artifacts/block_structure.json       — blocks with module and lesson lists
-  /artifacts/course_slides_content.json — ordered array of all slide objects
-  /artifacts/slide_bullets_draft.md     — human-readable markdown preview
+/artifacts/slide_outline.json — array of slide objects:
+[
+  {"id":1,"type":"capa","title":"...","subtitle":"..."},
+  {"id":2,"type":"sobre_mim","title":"Sobre Mim","source":"/artifacts/about_me.md"},
+  {"id":3,"type":"course_intro","title":"...","bullets":["..."]},
+  {"id":4,"type":"bloco_intro","title":"Bloco 1: ...","objective":"...","bullets":["..."],"source_readmes":["..."]},
+  {"id":5,"type":"content","title":"Aulas — Bloco 1","bullets":["..."],"source_readmes":["..."]},
+  ...
+  {"id":N,"type":"conclusao","title":"...","bullets":["..."],"main_message":"..."}
+]
 
-Return: {"status":"success","artifacts_generated":["/artifacts/block_structure.json","/artifacts/course_slides_content.json","/artifacts/slide_bullets_draft.md"],"errors":[]}
+Return: {"status":"success","artifacts_generated":["/artifacts/slide_outline.json"],"errors":[]}
 """,
     "tools": [],
 }
 
 NARRATIVE_BUILDER = {
     "name": "narrative-builder",
-    "description": "Merge course content, brand data, and CV bio into the final master presentation spec.",
+    "description": "Build the final presentation spec with full slide content and brand colours embedded.",
     "model": "openai:gpt-5.4-nano",
-    "system_prompt": """You are the Presentation Narrative Agent.
+    "system_prompt": """You are the Narrative Builder Agent.
 
-1. Use `read_file` to load all four source artifacts:
-   - /artifacts/course_slides_content.json
-   - /artifacts/about_me_slide.json
-   - /artifacts/brand_research.md
-   - /artifacts/visual_style_guide.json
+1. `read_file` → /artifacts/slide_outline.json
+2. `read_file` → /artifacts/about_me.md
+3. `read_file` → /artifacts/brand_guide.md
+   — parse the JSON block inside the "## Estilo Visual" section to extract brand colours.
 
-2. Build the final slides array:
-   - Insert the about_me slide at position 2 (after capa).
-   - Title slide: add a commercial hook referencing Jornada de Dados.
-   - Each bloco_intro: reference the previous block's key outcome.
-   - Conclusao: 3–5 key takeaways spanning all blocks.
+4. For each slide in the outline, write polished final content:
+   - capa: compelling subtitle referencing Jornada de Dados
+   - sobre_mim: fill from about_me.md (bio, bullets, main_message)
+   - bloco_intro: add a hook sentence connecting to the previous block's outcome
+   - conclusao: 3–5 actionable takeaways spanning all blocks
+   - The slides with the block lessons should be a list of all lessons of that block.
 
-3. Write with `write_file`:
-   /artifacts/presentation_master_spec.json:
-   {"title":"...","subtitle":"...","author":"...","course":"Jornada de Dados — Engenheiro de IA","brand":{"source":"visual_style_guide.json"},"slides":[...]}
+5. Write ONE artifact with `write_file`:
 
-   /artifacts/slide_order_lock.json — ordered list of slide IDs
+/artifacts/presentation_spec.json:
+{
+  "title": "Jornada de Dados — Engenheiro de IA",
+  "subtitle": "...",
+  "author": "<name from about_me.md>",
+  "course": "Jornada de Dados — Engenheiro de IA",
+  "aspect_ratio": "16:9",
+  "brand": {
+    "primary_color": "#hex",
+    "accent_color": "#hex",
+    "text_color": "#hex"
+  },
+  "slides": [ <full slide objects with id, type, title, subtitle?, bio?, bullets, objective?, main_message> ]
+}
 
-Return: {"status":"success","artifacts_generated":["/artifacts/presentation_master_spec.json","/artifacts/slide_order_lock.json"],"errors":[]}
+CRITICAL: For "sobre_mim" slides, "bio" MUST be a plain string (one sentence from the **Bio** line in about_me.md). NEVER set "bio" to a dict or nested object.
+
+Return: {"status":"success","artifacts_generated":["/artifacts/presentation_spec.json"],"errors":[]}
 """,
     "tools": [],
 }
 
 PPT_BUILDER = {
     "name": "ppt-builder",
-    "description": "Render the master spec into a .pptx file using the 'powerpoint' skill.",
+    "description": "Render presentation_spec.json into a .pptx file using the build_pptx tool.",
     "model": "openai:gpt-5.4-nano",
-    "system_prompt": """You are the PowerPoint Builder Agent. Render content only — do NOT modify it.
+    "system_prompt": f"""You are the PowerPoint Builder Agent. Render content only — do NOT modify it.
 
-1. Use `read_file` to confirm /artifacts/presentation_master_spec.json exists and is valid JSON.
-2. Use `read_file` to confirm /artifacts/visual_style_guide.json exists.
-3. Run the following command exactly using `execute_command`:
+1. `read_file` → /artifacts/presentation_spec.json  (confirm it exists and has a "slides" array)
+2. Call the `build_pptx` tool with:
+   - spec_file   = "{ARTIFACTS_DIR}/presentation_spec.json"
+   - output_file = "{ARTIFACTS_DIR}/presentation_final.pptx"
+3. The tool returns a string starting with "Successfully generated" on success or "Error:" on failure.
+   - On error: report failure immediately with the error message.
 
-   python /skills/powerpoint/scripts/generate_from_spec.py \
-     --spec-file /artifacts/presentation_master_spec.json \
-     --style-file /artifacts/visual_style_guide.json \
-     --output-file /artifacts/presentation_final.pptx
-
-4. Check the command output. It must start with "Successfully generated".
-   - If it starts with "Error:", report failure with the error message.
-5. Use `write_file` to save /artifacts/ppt_generation_report.json:
-   {"status":"success","output_file":"/artifacts/presentation_final.pptx","slide_count":<N>,"command_output":"<output from step 3>"}
-
-Return: {"status":"success","summary":"Generated presentation_final.pptx","artifacts_generated":["/artifacts/presentation_final.pptx","/artifacts/ppt_generation_report.json"],"errors":[]}
+Return: {{"status":"success","summary":"Generated presentation_final.pptx","artifacts_generated":["/artifacts/presentation_final.pptx"],"errors":[]}}
 """,
-    "tools": [],
-    "skills": ["/skills/powerpoint/"],
+    "tools": [build_pptx],
 }
 
 
@@ -203,35 +277,35 @@ supervisor = create_deep_agent(
     model="openai:gpt-5.4-nano",
     system_prompt=f"""You are the Presentation Pipeline Supervisor.
 
-Goal: produce a PowerPoint for "Jornada de Dados — Engenheiro de IA" using:
-  Repository : {REPO_PATH}
-  CV         : {CV_DIR}
-  Brand      : web search "Jornada de Dados"
+Goal: produce a PowerPoint for "Jornada de Dados — Engenheiro de IA".
+Inputs: Repository at {REPO_PATH} | CV at {CV_DIR} | Brand via web search
 
-Execution plan — follow this phase order STRICTLY. Run one task at a time and wait for it to complete before starting the next.
+STRICTLY follow this phase order. Run ONE task at a time and wait for "status":"success" before proceeding.
 
-Phase 1 (run sequentially — one at a time):
-  task(agent="repo-scanner",     instruction="Scan the repository at {REPO_PATH} and write all catalog artifacts.")
-  task(agent="brand-researcher", instruction="Research Jornada de Dados brand identity and write brand artifacts.")
-  task(agent="cv-reader",        instruction="Read the CV at {CV_DIR} and write the about_me artifacts.")
+Phase 1 — gather raw inputs (sequentially):
+  task(agent="repo-scanner",     instruction="Scan /repo/ and write /artifacts/repo_catalog.json.")
+  task(agent="brand-researcher", instruction="Research Jornada de Dados brand and write /artifacts/brand_guide.md.")
+  task(agent="cv-reader",        instruction="Read /docs/CaioMachado-AI-p.md and write /artifacts/about_me.md.")
 
-Phase 2 (after Phase 1):
-  task(agent="readme-structurer", instruction="Read /artifacts/readme_paths.json and structure all course README files into slide content.")
+Phase 2 — structure slides:
+  task(agent="readme-structurer", instruction="Read /artifacts/repo_catalog.json, /artifacts/about_me.md and /artifacts/brand_guide.md, then read each README and write /artifacts/slide_outline.json.")
 
-Phase 3 (after Phase 2):
-  task(agent="narrative-builder", instruction="Merge all artifacts into the final presentation_master_spec.json.")
+Phase 3 — write final content:
+  task(agent="narrative-builder", instruction="Read /artifacts/slide_outline.json, /artifacts/about_me.md and /artifacts/brand_guide.md, then write /artifacts/presentation_spec.json with full slide content and brand colours embedded.")
 
-Phase 4 (after Phase 3):
-  task(agent="ppt-builder", instruction="Build the final PPTX from presentation_master_spec.json.")
+Phase 4 — render PPTX:
+  task(agent="ppt-builder", instruction="Read /artifacts/presentation_spec.json and call build_pptx to generate /artifacts/presentation_final.pptx.")
 
-After each task check the returned status field:
-  - "success" → proceed to next phase.
-  - "error"   → retry once with a corrected instruction, then report failure if it persists.
-  - "warning" → log and continue.
-
+On error: retry once with a corrected instruction. Report failure if it persists.
 On full pipeline success, report the output path of presentation_final.pptx.
 """,
     tools=[],
+    middleware=[
+        ModelFallbackMiddleware(
+            "gpt-5.1-mini",
+            "gpt-4.1-mini",
+        ),
+    ],
     subagents=[
         REPO_SCANNER,
         BRAND_RESEARCHER,
@@ -252,10 +326,92 @@ On full pipeline success, report the output path of presentation_final.pptx.
 )
 
 
+# ── Streaming display ────────────────────────────────────────────────────────
+
+# ANSI colours
+_C = {
+    "reset":     "\033[0m",
+    "bold":      "\033[1m",
+    "supervisor":"\033[1;35m",   # bold magenta
+    "subagent":  "\033[1;36m",   # bold cyan
+    "tool_call": "\033[33m",     # yellow
+    "tool_result":"\033[32m",    # green
+    "dim":       "\033[2m",      # dim
+}
+
+_AGENT_NAMES = {
+    "repo-scanner", "brand-researcher", "cv-reader",
+    "readme-structurer", "narrative-builder", "ppt-builder",
+}
+
+
+def _label(checkpoint_ns: str, _node: str) -> str:
+    """Derive a human-readable [agent/node] label from LangGraph metadata."""
+    # checkpoint_ns looks like "repo-scanner:abc123|model" for subagents
+    for name in _AGENT_NAMES:
+        if name in checkpoint_ns:
+            return name
+    return "supervisor"
+
+
+def stream_pipeline(input_messages: list, config: dict) -> None:
+    from langchain_core.messages import AIMessageChunk, ToolMessage
+
+    current_label = None
+
+    for chunk, metadata in supervisor.stream(
+        {"messages": input_messages},
+        config=config,
+        stream_mode="messages",
+    ):
+        ns   = metadata.get("langgraph_checkpoint_ns", "")
+        node = metadata.get("langgraph_node", "")
+        label = _label(ns, node)
+
+        # ── Label header when agent changes ──────────────────────────
+        if label != current_label:
+            print()  # blank line between agents
+            color = _C["subagent"] if label in _AGENT_NAMES else _C["supervisor"]
+            print(f"{color}[{label}]{_C['reset']} ", end="", flush=True)
+            current_label = label
+
+        # ── AI message chunks (streamed text + tool calls) ────────────
+        if isinstance(chunk, AIMessageChunk):
+            # Streamed text
+            text = ""
+            if isinstance(chunk.content, str):
+                text = chunk.content
+            elif isinstance(chunk.content, list):
+                for part in chunk.content:
+                    if isinstance(part, dict) and part.get("type") == "text":
+                        text += part.get("text", "")
+            if text:
+                print(text, end="", flush=True)
+
+            # Tool-call name (first chunk that carries the name)
+            for tc in chunk.tool_call_chunks or []:
+                if tc.get("name"):
+                    print(
+                        f"\n  {_C['tool_call']}→ {tc['name']}{_C['reset']}",
+                        end="", flush=True,
+                    )
+
+        # ── Tool results ──────────────────────────────────────────────
+        elif isinstance(chunk, ToolMessage):
+            preview = str(chunk.content)
+            if len(preview) > 500:
+                preview = preview[:500] + "…"
+            print(
+                f"\n  {_C['tool_result']}← {preview}{_C['reset']}",
+                flush=True,
+            )
+
+    print("\n")
+
+
 # ── Entry point ──────────────────────────────────────────────────────────────
 
 if __name__ == "__main__":
-    import pprint
     import uuid
 
     thread_id = f"presentation-{uuid.uuid4().hex[:8]}"
@@ -267,21 +423,16 @@ if __name__ == "__main__":
     print(f"Starting pipeline  (thread: {thread_id})")
     print(f"Artifacts will be written to: {ARTIFACTS_DIR}\n")
 
-    result = supervisor.invoke(
-        {
-            "messages": [
-                {
-                    "role": "user",
-                    "content": (
-                        "Generate a complete PowerPoint presentation for the "
-                        "'Jornada de Dados — Engenheiro de IA' course. "
-                        "Run the full pipeline following the phase order defined in your instructions."
-                    ),
-                }
-            ]
-        },
+    stream_pipeline(
+        input_messages=[
+            {
+                "role": "user",
+                "content": (
+                    "Generate a complete PowerPoint presentation for the "
+                    "'Jornada de Dados — Engenheiro de IA' course. "
+                    "Run the full pipeline following the phase order defined in your instructions."
+                ),
+            }
+        ],
         config=config,
     )
-
-
-    pprint.pprint(result)

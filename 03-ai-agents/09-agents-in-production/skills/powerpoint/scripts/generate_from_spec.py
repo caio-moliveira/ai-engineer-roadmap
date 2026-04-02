@@ -72,6 +72,8 @@ def add_bullet_slide(prs, slide_data: dict, style: dict):
     elif slide_type == "sobre_mim":
         add_text_box(slide, title, 0.5, 0.3, 12.3, 0.7, 28, bold=True, color=accent)
         bio = slide_data.get("bio", "")
+        if isinstance(bio, dict):
+            bio = bio.get("bio") or bio.get("cargo") or ""
         if bio:
             add_text_box(slide, bio, 0.5, 1.2, 12.3, 0.6, 16, color=text_color)
         y = 2.1
@@ -142,20 +144,14 @@ def generate_ppt_from_spec(spec_file: str, output_file: str, style_file: str | N
     with open(spec_file, "r", encoding="utf-8") as f:
         spec = json.load(f)
 
+    # Priority: explicit style_file > inline brand in spec > defaults
     style = {}
     if style_file and Path(style_file).exists():
         with open(style_file, "r", encoding="utf-8") as f:
             style = json.load(f)
-    elif spec.get("brand"):
-        # Try to load from spec's brand reference
-        brand_ref = spec["brand"].get("source", "")
-        if brand_ref:
-            candidate = Path(spec_file).parent / brand_ref
-            if candidate.exists():
-                with open(candidate, "r", encoding="utf-8") as f:
-                    style = json.load(f)
+    elif isinstance(spec.get("brand"), dict) and "primary_color" in spec["brand"]:
+        style = spec["brand"]
 
-    # Fallback style
     style.setdefault("primary_color", "#1B2A4A")
     style.setdefault("accent_color", "#00C2CB")
     style.setdefault("text_color", "#FFFFFF")

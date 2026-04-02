@@ -46,8 +46,9 @@
     "/repo/05-fine-tuning/04-model-deploy/README.md",
     "/repo/05-fine-tuning/05-fine-tuning-production/README.md",
     "/repo/05-fine-tuning/05-fine-tuning-production/09-risks-maintenance/README.md",
-    "/repo/05-fine-tuning/05-fine-tuning-production/10-enterprise-gov/README.md",
-    "/repo/05-fine-tuning/01-fine-tuning-fundamentals/README.md"
+    "/repo/05-fine-tuning/05-fine-tuning-production/10-enterprise-gov/README.md"
   ],
-  "note": "README files under /repo were located via a recursive README glob; results may include non-course READMEs under tooling/site-packages.")
+  "stats": {
+    "total_readmes": 43
+  }
 }

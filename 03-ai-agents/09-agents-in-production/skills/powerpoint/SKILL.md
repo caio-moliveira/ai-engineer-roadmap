@@ -1,13 +1,108 @@
 ---
 name: ppt-generation
-description: Use this skill when the user requests to generate, create, or make presentations (PPT/PPTX). Creates visually rich slides by generating images for each slide and composing them into a PowerPoint file.
+description: Use this skill when you need to generate a .pptx file from a presentation spec JSON. Composes slides with brand colours, text content, and speaker notes into a PowerPoint file using the build_pptx tool.
 ---
 
 # PPT Generation Skill
 
 ## Overview
 
-This skill generates professional PowerPoint presentations by creating AI-generated images for each slide and composing them into a PPTX file. The workflow includes planning the presentation structure with a consistent visual style, generating slide images sequentially (using the previous slide as a reference for style consistency), and assembling them into a final presentation.
+This skill generates a PowerPoint presentation from a `presentation_spec.json` file using the `build_pptx` tool.
+
+## Workflow (Local Environment)
+
+> **Important**: This environment uses `FilesystemBackend` — there is no `execute` tool.
+> Use the `build_pptx` Python tool directly instead of bash commands.
+
+### Step 1: Confirm the spec file exists
+```
+read_file("/artifacts/presentation_spec.json")
+```
+Verify it has a `slides` array and a `brand` object with `primary_color`, `accent_color`, `text_color`.
+
+### Step 2: Call the build_pptx tool
+```
+build_pptx(
+    spec_file  = "<ARTIFACTS_DIR>/presentation_spec.json",
+    output_file= "<ARTIFACTS_DIR>/presentation_final.pptx"
+)
+```
+Replace `<ARTIFACTS_DIR>` with the absolute path shown in your instructions.
+
+### Step 3: Verify output
+The tool returns a string starting with `"Successfully generated"`.
+If it starts with `"Error:"`, report the error immediately.
+
+---
+
+## presentation_spec.json Schema
+
+```json
+{
+  "title": "...",
+  "subtitle": "...",
+  "author": "...",
+  "aspect_ratio": "16:9",
+  "brand": {
+    "primary_color": "#1B2A4A",
+    "accent_color":  "#00C2CB",
+    "text_color":    "#FFFFFF"
+  },
+  "slides": [
+    {
+      "id": 1,
+      "type": "capa",
+      "title": "...",
+      "subtitle": "...",
+      "main_message": "..."
+    },
+    {
+      "id": 2,
+      "type": "sobre_mim",
+      "title": "Sobre Mim",
+      "bio": "...",
+      "bullets": ["..."],
+      "main_message": "..."
+    },
+    {
+      "id": 3,
+      "type": "bloco_intro",
+      "title": "...",
+      "objective": "...",
+      "bullets": ["..."],
+      "main_message": "..."
+    },
+    {
+      "id": 4,
+      "type": "content",
+      "title": "...",
+      "bullets": ["..."]
+    },
+    {
+      "id": 5,
+      "type": "conclusao",
+      "title": "...",
+      "bullets": ["..."],
+      "main_message": "..."
+    }
+  ]
+}
+```
+
+## Slide Types
+
+| type | Purpose |
+|------|---------|
+| `capa` | Title slide — large centered title + subtitle |
+| `sobre_mim` | Instructor bio — bio sentence + bullets |
+| `course_intro` | Course overview |
+| `bloco_intro` | Block introduction with accent bar |
+| `content` | Lesson list for a block |
+| `conclusao` | Closing slide with takeaways |
+
+---
+
+## Legacy Image-Based Workflow
 
 ## Core Capabilities
 
