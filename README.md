@@ -141,7 +141,7 @@ Este bloco ensina como projetar, orquestrar e operar agentes confiáveis em prod
 
 ---
 
-## 🖥️ [Bloco 4 — OCR](./04-infra-ocr-models)
+## 🖥️ [Bloco 4 — OCR](./04-ocr)
 
 Aqui a engenharia encontra o hardware e os pipelines de documentos.
 
@@ -162,13 +162,12 @@ Este bloco ensina como rodar modelos localmente, otimizar inferência e construi
 
 | #  | Módulo                                                                  | Tema                  |
 | -- | ----------------------------------------------------------------------- | --------------------- |
-| 01 | [OCR Fundamentals](./04-infra-ocr-models/01-ocr-fundamentals)           | Layout + texto        |
-| 02 | [OCR Pipelines](./04-infra-ocr-models/02-ocr-pipelines)                 | Arquitetura completa  |
-| 03 | [Document Intelligence](./04-infra-ocr-models/03-document-intelligence) | Pipeline enterprise   |
-| 04 | [Hugging Face](./04-infra-ocr-models/04-hugging-face)                   | Formatos e pipelines  |
-| 05 | [Ollama](./04-infra-ocr-models/05-ollama)                               | Desenvolvimento local |
-| 06 | [vLLM](./04-infra-ocr-models/06-vllm)                                   | Inferência produção   |
-| 07 | [Hardware Performance](./04-infra-ocr-models/07-hardware-performance)   | Economia real         |
+| 01 | [OCR Fundamentals](./04-ocr/01-ocr-fundamentals)           | Layout + texto        |
+| 02 | [OCR Pipelines](./04-ocr/02-ocr-pipelines)                 | Pipeline completo  |
+| 03 | [Document Intelligence](./04-ocr/03-document-intelligence) | Document Intelligence   |
+| 04 | [Hugging Face](./04-ocr/04-vlm-multimodals)                   | VLMs especializados e multimodais  |
+| 05 | [Ollama](./04-ocr/05-serving-frameworks)                               | Frameworks de serving |
+| 06 | [vLLM](./04-ocr/06-final-project)                                   | Projeto Final   |
 
 
 ---
