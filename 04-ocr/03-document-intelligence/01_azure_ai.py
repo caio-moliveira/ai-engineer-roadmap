@@ -1,56 +1,47 @@
-import io
-import time
-import httpx
-from fastapi import APIRouter, UploadFile, File, HTTPException
-from fastapi.responses import JSONResponse
-from typing import Literal
+import os
 from azure.core.credentials import AzureKeyCredential
 from azure.ai.documentintelligence import DocumentIntelligenceClient
-from azure.core.exceptions import HttpResponseError
+from azure.ai.documentintelligence.models import AnalyzeDocumentRequest, DocumentContentFormat, AnalyzeResult
+from dotenv import load_dotenv
 
-from module.config.settings import settings
-from module.database import save_task_result
+load_dotenv()
 
 
-router = APIRouter(prefix='/api/v1/azure', tags=['Azure Proxy'])
-
-@router.post("/convert")
-async def analyze_read(file: UploadFile = File(...)):
-    # Validação básica de extensão
-    if not file.filename.endswith('.pdf'):
-        raise HTTPException(status_code=400, detail="O arquivo deve ser um PDF.")
-
-    client = DocumentIntelligenceClient(endpoint=settings.AZURE_ENDPOINT, credential=AzureKeyCredential(settings.AZURE_KEY))
-    start_time = time.perf_counter()
+def analyze_read(file_path: str):    
+    client = DocumentIntelligenceClient(
+        endpoint=os.getenv("AI_SERVICE_ENDPOINT"),
+        credential=AzureKeyCredential(os.getenv("AI_SERVICE_KEY"))
+    )
 
     try:
-        # Lendo o conteúdo do upload diretamente para a memória
-        content_bytes = await file.read()
-        
-        # O SDK aceita bytes diretamente no parâmetro 'body'
-        poller = client.begin_analyze_document(
-            "prebuilt-read",
-            body=content_bytes,
-            content_type="application/pdf"
-        )
-        result = poller.result()
-        execution_time = time.perf_counter() - start_time
+        with open(file_path, "rb") as f:
+            content_bytes = f.read()
+    except FileNotFoundError:
+        print(f"❌ Erro: Arquivo '{file_path}' não encontrado!")
+        return
 
-        # Salvar no Histórico
-        save_task_result(
-            task_id=f"azure-{int(time.time()*1000)}",
-            filename=file.filename,
-            engine="azure-di",
-            model="prebuilt-read",
-            pages=len(result.pages),
-            execution_time=round(execution_time, 4),
-            status="success",
-        )
+    poller = client.begin_analyze_document(
+        "prebuilt-read",
+        body=content_bytes,
+        content_type="application/pdf",
+        output_content_format=DocumentContentFormat.MARKDOWN,
+    )
+    
+    result: AnalyzeResult = poller.result()
 
-        return {"text": result.content}
+    return {"text": result.content}
+    # return result
+    
 
-    except HttpResponseError as e:
-        raise HTTPException(status_code=500, detail=f"Erro no Azure Document Intelligence: {str(e)}")
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Erro interno: {str(e)}")
-
+if __name__ == "__main__":
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+    pdf_teste = os.path.join(BASE_DIR, "..", "docs", "Caratinga.pdf")
+    print("--- [AZURE AI] Iniciando Análise do Documento ---")
+    print("⏳ Carregando arquivo e enviando requisição para nuvem...")
+    resultado = analyze_read(pdf_teste)
+    print(resultado)
+    # if resultado and "text" in resultado:
+    #     print("\n=== TEXTO EXTRAÍDO PELA AZURE ===")
+    #     print(resultado["text"])
+    # else:
+    #     print("\nNenhum texto foi retornado ou ocorreu um erro.")

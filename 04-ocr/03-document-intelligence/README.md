@@ -82,8 +82,17 @@ Esqueça saídas em JSON cheias de coordenadas cartesianas (X, Y) complicadas. A
 Para você sentir um gostinho sem se emaranhar em centenas de scripts, desenhamos esse módulo perfeitamente fechadinho em `2` arquivos unificados que farão todo o seu coração vibrar.
 
 ### Lab 01 — Azure AI Document Intelligence (Mágica Oculta e Rápida)
-**Arquivo:** `01_azure.py` *(Sendo implementado...)*
-O contato nativo final. Utilizaremos o SDK para chamarmos sem esforço as rotas de *Prebuilt Invoices*, testaremos o esqueleto de Layout puro com tabelas enjoadas em PDFs caóticos, e por último, daremos vida explícita à modelagem pedindo os campos extraídos por inferência de Prompt com o fabuoso `Query Fields`.
+**Arquivo:** `01_azure_ai.py`
+O contato nativo final contra a infraestrutura Azure. Nesta demonstração simplificada, dispensaremos recursos de *Query Fields* ou *Invoices* e focaremos em utilizar o método principal **`begin_analyze_document`** repassando o modelo base `"prebuilt-read"`.
+
+O grande pulo do gato aqui é o uso estrutural do `output_content_format=DocumentContentFormat.MARKDOWN` nativo do client, solicitando que a nuvem já nos devolva a extração formatadinha em markdown em vez de JSON puro.
+
+**Variáveis de Ambiente Necessárias (`.env`)**:
+Para rodar esse laboratório na sua máquina, lembre-se de configurar suas credenciais do Azure:
+```env
+AI_SERVICE_ENDPOINT="https://seu-recurso.cognitiveservices.azure.com/"
+AI_SERVICE_KEY="sua_chave_secreta_aqui"
+```
 
 ### Lab 02 — Docling (A base pura para RAG Frameworks)
 **Arquivo:** `02_docling.py` *(Sendo implementado...)*
@@ -101,7 +110,7 @@ Com o servidor rodando, você pode testar o envio de PDFs pelo Swagger entrando 
 
 ## Referências
 
-- [Azure AI Document Intelligence — Documentação oficial](https://learn.microsoft.com/azure/ai-services/document-intelligence/)
+- [Azure AI Document Intelligence — Documentação oficial](https://learn.microsoft.com/pt-br/python/api/azure-ai-documentintelligence/azure.ai.documentintelligence.documentintelligenceclient?view=azure-python-preview)
 - [Azure AI Document Intelligence — Preços](https://azure.microsoft.com/pricing/details/ai-document-intelligence/)
 - [Azure AI Document Intelligence Studio](https://documentintelligence.ai.azure.com/studio)
 - [azure-ai-documentintelligence — PyPI](https://pypi.org/project/azure-ai-documentintelligence/)
