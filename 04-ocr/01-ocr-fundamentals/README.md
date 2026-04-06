@@ -218,8 +218,6 @@ O lab replica os mesmos documentos do Lab 01-A com EasyOCR e constrói uma tabel
 
 **Arquivo:** `fund_easyocr.py`
 
-
-
 ### Desafio extra
 
 Use o Tesseract e o EasyOCR em uma nota fiscal ou recibo real (foto tirada com celular). Documente quais campos foram reconhecidos corretamente e quais falharam. Guarde esse documento — ele será usado nas Aulas 03 e 04 para comparar com os modelos modernos.
