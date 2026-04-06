@@ -1,6 +1,7 @@
 # 🏭 Módulo 3: Document Intelligence
 
-> **Objetivo:** Evoluir do OCR de caracteres para compreensão de documentos. Dominar PaddleOCR para extração estruturada local, entender o Azure AI Document Intelligence como serviço gerenciado de produção, e aprender a usar o Docling como framework de ingestão de documentos para pipelines de IA.
+> **Objetivo:** Dar o salto definitivo saindo da extração cega de pixels (OCR convencional) rumo ao entendimento estrutural e contextual de documentos corporativos complexos, ancorados por dois titãs do mercado: a solução em nuvem da Microsoft (Azure) e a esteira open-source especializada da IBM Research (Docling).
+> **Status:** A ponte técnica entre os documentos crus e a extração rica para Bancos de Dados ou Agentes RAG.
 
 ---
 
@@ -9,101 +10,63 @@
 Ao final desta aula, você será capaz de:
 
 - Explicar a diferença entre OCR clássico e Document Intelligence
-- Usar PaddleOCR para detecção e reconhecimento de texto estruturado localmente
 - Usar o Azure AI Document Intelligence com modelos prebuilt e entender seus modelos disponíveis
 - Usar o Docling para converter documentos complexos em formatos prontos para IA
 - Integrar Docling com LangChain e LlamaIndex para pipelines de RAG
-- Decidir entre solução local (PaddleOCR + Docling) e gerenciada (Azure) para cada cenário
+- Decidir entre solução local (Docling) e gerenciada (Azure) para cada cenário
+
+
+## 1. OCR Convencional vs. Document Intelligence
+
+Até a última etapa, nossa busca se baseava em uma pergunta simplista: *"Quais letras estão escritas nesta imagem?"*
+A partir de agora, a grande missão muda para: *"O que este documento significa e como suas informações se relacionam geometricamente?"*
+
+- **O Limite do OCR Convencional (ex: Tesseract/EasyOCR):** Ele extrai texto de força bruta num bloco linear contínuo. Se você passar um boleto bancário, o OCR vai cuspir na tela uma dezenas de números avulsos. Ele não faz ideia de que o "R$ 450,00" lido no canto esquerdo pertence ao campo "Valor do Recibo" que estava impresso duas linhas acima. Informações tubulares, colunas duplas e caixas de seleção são ignorados.
+- **A Revolução do Document Intelligence:** Aqui nós adicionamos *Semântica e Estrutura Lógica* à visão computacional. Um modelo de *Doc Intelligence* destrói e remonta a arquitetura da página. Ele constrói matrizes perfeitas para Tabelas complexas (mesmo sem bordas), respeita hierarquia entre Títulos (`<h1>`) e blocos de texto nativos, entende o que é rodapé, isola imagens soltas no centro da página e busca pares chave-valor (Key-Values). Ou seja: você deixa de ter um "parágrafo gigante solto" e passa a ter de fato um documento inteligente que a máquina compreende.
+
+### Nossas Ferramentas: Especialistas Modernos
+Com o crescimento absurdo de extrações de documentos na vida corporativa, substituiremos bibliotecas pesadas e problemáticas de manter (como o extinto PaddleOCR) por dois focos profissionais onde os *AI Engineers* atuais gastam 90% do seu tempo:
+1. **Azure AI Document Intelligence**: A solução *Cloud-Native* e infalível, entregando tudo já mastigado em larga escala mediante pagamento sob uso nas nuvens da Microsoft.
+2. **Docling**: O ápice do ecossistema Open-Source atual (mantido debaixo da estrutura da IBM), focadíssimo em transformar seus PDFs confusos em dados formatados puramente para ensinar IA (*Large Language Models*).
 
 ---
 
-## 1. Da leitura de texto à compreensão de documentos
+## 2. Azure AI Document Intelligence (A Solução Analítica)
 
-Até a Aula 02, trabalhamos com a pergunta: *"Qual é o texto nesta imagem?"*
+Originalmente referenciado pela comunidade dev como *Azure Form Recognizer*, a Microsoft unificou recentemente suas dezenas de modelagens de visão e texto em apenas um único produto fortíssimo na nuvem, sendo o padrão ouro moderno para o meio enterprise.
 
-A partir desta aula, a pergunta muda para: *"O que este documento contém e como está organizado?"*
+### O Poder da Extração Total
+Diferente das bibliotecas locais, aqui você simplesmente remete o PDF inteiro na rota da API e a magia pesada de GPU roda na central da nuvem, de onde recebemos de volta a estrutura meticulosamente dissecada.
 
-Considere uma nota fiscal. O Tesseract pode ler todos os caracteres corretamente e ainda assim produzir um resultado inútil para extração de dados, porque não sabe que "R$ 1.234,56" é o valor total — não um número qualquer. Não sabe que o CNPJ do emissor está no cabeçalho. Não consegue reconstruir a tabela de itens com colunas corretas. Devolve tudo como texto linear, perdendo qualquer estrutura da página.
+- **Modelos pre-treinados (*Prebuilt Models*):** A verdadeira maravilha em termos de ganho de tempo de desenvolvimento. Por estar na vanguarda do mercado corporativo global, a Microsoft deixou modelos em fase final de produção super preparados. Você precisa extrair informações cruciais de um **IRPJ / Documento de Imposto**, ou os valores de um **Receipt (Recibinho do mercado)**, Notas de Serviços Fiscais, RGs ou Passaportes? Basta chamar a rota específica para este fim e a API fará mapeamento nativo retornando o JSON já nomeado (ex: `{ "BusinessName": "Auto Center Zeca", "Subtotal": 120.00 }`).
+- **Recorte Base de Layout:** Para extrair faturas que o `prebuilt` não engoliu. Seu layout base reconstrói fielmente checkboxes marcados, tabelas com campos nulos escondidos ou blocos flutuantes, gerando uma marcação precisa da tela até para furos de grampeador nas folhas.
+- **Campos customizados na ponta do dedo (*Query Fields*):** O principal atrativo unificando Inteligência Generativa (LLMs) ao layout extractor. Imagine escanear a página da escritura de um imóvel que tem padrões visuais caóticos. Com os Query Fields, passamos propriedades dizendo exatamete: *"Quero saber quem é o Locatário"*, e a IA visual infere na hora dentro do documento qual espaço se refere cognitivamente àquele alvo, fazendo o "clipping" da área exata daquela resposta sem nenhuma linha complexa de Regex.
 
-Document Intelligence resolve **compreensão de layout e estrutura**. As ferramentas desta aula representam a segunda geração — a ponte entre OCR clássico e os VLMs da Aula 04.
-
-### O espectro de soluções nesta aula
-
-```
-Local + Open Source                          Gerenciado + API
-─────────────────────────────────────────────────────────────
-PaddleOCR          Docling           Azure AI Document Intelligence
-(rápido, local,    (ingestão para    (sem infra, prebuilt models,
- detecção precisa)  IA / RAG)         enterprise, pay-per-page)
-```
-
-As três ferramentas não são concorrentes — elas se complementam dependendo do cenário.
+🔗 **[Acesso a documentação e tutoriais oficiais (Azure AI Doc Intelligence)](https://learn.microsoft.com/azure/ai-services/document-intelligence)**
 
 ---
 
-## 2. PaddleOCR — OCR multilíngue de alta performance
+## 3. Docling — A Ingestão Definitiva (Trator para RAGs)
 
-O PaddleOCR, desenvolvido pela Baidu, é um dos frameworks de OCR mais usados em produção, especialmente para idiomas não-latinos e documentos com layouts variados. Diferente do Tesseract, ele **separa explicitamente** detecção (onde está o texto?) de reconhecimento (qual é o texto?), usando modelos neurais otimizados para cada etapa.
+Se o Azure busca te entregar um banco de dados estruturado, a estrela Open source atual do mercado [Docling GitHub Repo](https://github.com/DS4SD/docling) tem apenas um foco: **Comida para IA.**
+Este ecossistema foi pensado pela IBM Research durante a febre dos modelos LLM para resolver o maior terror do AI Engineer: Como extrair a página inteira de tal modo que o *"ChatGPT não fique confuso na hora de re-ler ela"*?
 
-### 2.1 Arquitetura
+### Transformando Monstrinhos em Markdown
+Esqueça saídas em JSON cheias de coordenadas cartesianas (X, Y) complicadas. A mágica do Docling é a padronização baseada em marcações semânticas legíveis, com foco total de exportar os arquivos em arquivos **Markdown (`.md`)** perfeitos. E não à toa: Llama-3, Claude e o ecossistema GPT-X foram incansavelmente alimentados compreendendo muito mais o "Markdown Geométrico do Github" do que qualquer outro modelo lexical. 
 
-**Detecção:** o modelo DB (Differentiable Binarization) detecta regiões de texto como mapas de probabilidade e produz bounding boxes de alta precisão mesmo para texto curvado ou irregular.
+### Pilares Relevantes do Docling
+- **TableFormer:** reconstrução de estrutura de tabelas, incluindo headers aninhados e células mescladas. É notavelmente melhor que qualquer abordagem genérica para tabelas.
 
-**Classificação de ângulo:** modelo adicional que detecta texto rotacionado (180°) e corrige antes do reconhecimento.
+-  **Conversor Universal em Pipeline única:** Enquanto você precisaria de `python-docx` para Word, `PyPPTX` para Microsoft apresentações ou `py-pdf` para PDF (cada uma soltando a extração com tags diferentes)... o Docling atua como um canivete-suíço Ingestor Universal. Seja um arquivo puramente escaneado, seja a capa de uma patente com símbolos matemáticos `LaTeX`, HTML antigo ou Relatório Médico no Word: a ingestão lê o miolo geométrico de todos eles e formata-os para um output universal Markdown super amigável aos modelos nativos das instâncias LLM.
 
-**Reconhecimento:** SVTR (Scene Vision Transformer Recognition) ou modelos baseados em atenção reconhecem o texto em cada região detectada.
-
-### 2.2 O que o PaddleOCR faz melhor que o Tesseract
-
-- Detecção muito mais robusta em texto irregular, curvado ou em múltiplas orientações
-- Suporte nativo a dezenas de idiomas sem configuração adicional
-- Score de confiança por região, não só por palavra
-- Melhor performance em documentos com layout misto — texto + tabelas + imagens
-- Saída com coordenadas precisas de cada região, útil para extração posicional
-
-### 2.3 Saída e estruturação
-
-A saída do PaddleOCR inclui para cada região: as quatro coordenadas do bounding box, o texto reconhecido e o score de confiança. Ordenando os resultados por posição (y, depois x), é possível reconstruir a ordem de leitura — o que o Tesseract não faz de forma confiável em documentos multicoluna.
-
-### 2.4 Quando usar PaddleOCR
-
-PaddleOCR é a escolha certa quando você precisa de **OCR estruturado com posicionamento preciso** que **rode completamente local**, especialmente em documentos multilíngues ou com texto em múltiplas orientações. Ele não entende semântica, mas entende posição — já é um grande avanço sobre o Tesseract.
+🔗 **[Documentação e Início Rápido Oficial para Cientistas (Docling)](https://ds4sd.github.io/docling/)**
 
 ---
 
-## 3. Azure AI Document Intelligence
 
-O Azure AI Document Intelligence (anteriormente Azure Form Recognizer) é o serviço gerenciado da Microsoft para extração inteligente de informações de documentos. É uma API de produção que não requer gerenciamento de infraestrutura, GPU ou modelos — você envia o documento, o serviço processa e retorna JSON estruturado.
+## Quando usar Azure vs. soluções locais
 
-### 3.1 Por que ele importa no mundo real
-
-Para a maioria das empresas que trabalham com automação de documentos, o Azure AI Document Intelligence é a escolha de produção padrão porque:
-
-- **Zero infraestrutura:** não é necessário gerenciar GPU, containers ou modelos
-- **Escalabilidade automática:** processa picos de volume sem configuração adicional
-- **Modelos prontos para uso:** faturas, recibos, identidades, contratos, formulários fiscais — sem treinamento
-- **SLA enterprise:** garantias de disponibilidade para ambientes corporativos
-- **Conformidade e segurança:** ISO 27001, SOC 2, GDPR, processamento regional de dados
-
-O trade-off: custo por página e dependência de conectividade com a nuvem Azure.
-
-
-### 3.2 Preços e tier gratuito
-
-O Azure AI Document Intelligence tem um **tier gratuito (F0)** com 500 páginas por mês sem custo — suficiente para desenvolvimento e testes. Os preços do tier pago (S0):
-
-| Modelo | Custo aproximado |
-|--------|-----------------|
-| Read e Layout | US$ 1,50 por 1.000 páginas |
-| Modelos prebuilt (invoice, receipt, ID...) | US$ 10,00 por 1.000 páginas |
-| Custom model — análise | US$ 10,00 por 1.000 páginas |
-| Custom model — treinamento | US$ 0,50 por hora de compute |
-
-Para volumes acima de 1 milhão de páginas/mês, descontos são aplicados automaticamente.
-
-### 3.3 Quando usar Azure vs. soluções locais
-
-| Critério | Azure AI Doc. Intelligence | PaddleOCR + Docling |
+| Critério | Azure AI Doc. Intelligence | Docling |
 |----------|---------------------------|---------------------|
 | Infraestrutura necessária | Zero | GPU recomendada |
 | Custo fixo | Nenhum | Hardware/cloud |
@@ -114,142 +77,41 @@ Para volumes acima de 1 milhão de páginas/mês, descontos são aplicados autom
 | Manutenção de modelos | Zero | Atualizações periódicas |
 | Documentos tipificados (NF, recibo, ID) | Excelente (modelos prebuilt) | Requer customização |
 
-**Regra prática:** ambiente Azure + volume variável + documentos tipificados + sem restrição de privacidade → Azure AI Document Intelligence. Volume alto e previsível + restrições de dados + customização profunda → PaddleOCR + Docling.
+## 4. Estrutura dos Laboratórios Práticos
 
----
+Para você sentir um gostinho sem se emaranhar em centenas de scripts, desenhamos esse módulo perfeitamente fechadinho em `2` arquivos unificados que farão todo o seu coração vibrar.
 
-## 4. Docling — o framework para documentos prontos para IA
+### Lab 01 — Azure AI Document Intelligence (Mágica Oculta e Rápida)
+**Arquivo:** `01_azure.py` *(Sendo implementado...)*
+O contato nativo final. Utilizaremos o SDK para chamarmos sem esforço as rotas de *Prebuilt Invoices*, testaremos o esqueleto de Layout puro com tabelas enjoadas em PDFs caóticos, e por último, daremos vida explícita à modelagem pedindo os campos extraídos por inferência de Prompt com o fabuoso `Query Fields`.
 
-O Docling é o framework mais completo desta aula. Desenvolvido pelo time de IA do IBM Research Zurich e atualmente hospedado na LF AI & Data Foundation, ele foi criado para resolver um problema específico: **transformar documentos complexos em formatos que modelos de linguagem consigam consumir com fidelidade**.
+### Lab 02 — Docling (A base pura para RAG Frameworks)
+**Arquivo:** `02_docling.py` *(Sendo implementado...)*
+Na prática! Utilizaremos essa biblioteca fenomenal instalando localmente no seu computador. Daremos a ele um arquivo rico complexo e assistiremos em tempo real ele varrer o documento extraíndo tabelas de fundos irregulares, empacotando e exportando na tela a sua formatação crua universal via `Markdown Document`, onde validaremos que as sessões e títulos não foram misturados uns sobre os outros!
 
-A proposta do Docling vai além do OCR. Ele é um **conversor de documentos** que entende estrutura, preserva hierarquia e exporta em formatos otimizados para IA.
-
-### 4.1 O que o Docling resolve que OCR simples não resolve
-
-Quando você extrai texto de um PDF com PyMuPDF ou roda OCR com Tesseract, você obtém texto plano. Mas documentos têm estrutura: cabeçalhos com hierarquia, tabelas com linhas e colunas e headers aninhados, figuras com legendas associadas, código com formatação preservada, fórmulas matemáticas, e ordem de leitura correta em layouts multicoluna.
-
-O Docling preserva toda essa estrutura em um formato unificado chamado **DoclingDocument**, exportável para Markdown, JSON, HTML e DocTags.
-
-### 4.2 Formatos de entrada suportados
-
-PDF (scaneado e born-digital), DOCX, PPTX, XLSX, HTML, imagens (PNG, TIFF, JPEG), LaTeX, XML (patentes USPTO, artigos JATS, relatórios XBRL), e áudio (WAV, MP3) via ASR integrado.
-
-### 4.3 Modelos internos
-
-**DocLayNet:** análise de layout — identifica regiões da página (texto, tabela, figura, código, fórmula, cabeçalho).
-
-**TableFormer:** reconstrução de estrutura de tabelas, incluindo headers aninhados e células mescladas. É notavelmente melhor que qualquer abordagem genérica para tabelas.
-
-**Granite-Docling (258M):** VLM compacto da IBM que pode substituir múltiplos modelos especializados em uma passagem única. Usa o formato **DocTags** — linguagem de marcação criada para representar documentos de forma compacta e estruturada para LLMs.
-
-**Motor de OCR configurável:** EasyOCR, Tesseract ou outros — substituível sem mudar o restante da pipeline.
-
-### 4.4 DocTags e Granite-Docling
-
-DocTags é o formato interno que codifica texto, estrutura e posição em um único formato com tags explícitas para cada tipo de elemento (`<section>`, `<table>`, `<figure>`, `<formula>`, `<code>`) junto com coordenadas de bounding box.
-
-O **Granite-Docling-258M** gera DocTags diretamente, consolidando layout, OCR, tabelas, fórmulas e código em uma única passagem, com qualidade comparável a modelos muito maiores para document parsing. Open source sob Apache 2.0.
-
-### 4.5 Integração com ecossistema de IA
-
-- **LangChain** — `DoclingLoader` como document loader direto
-- **LlamaIndex** — `DoclingReader` e `DoclingNodeParser` para chunking estruturado por seção
-- **Crew AI** e **Haystack**
-- Bases vetoriais (ChromaDB, Weaviate, Qdrant) via exportação JSON
-
-### 4.6 Por que Docling melhora o RAG vs. texto plano
-
-Texto plano extraído por OCR simples degrada a qualidade do RAG porque: tabelas chegam como texto desordenado, seções são cortadas arbitrariamente por limite de tokens, a hierarquia de headings desaparece, e legendas se separam das figuras. Com Docling, todos esses problemas são resolvidos antes do documento chegar ao embedding.
-
-### 4.7 Quando usar cada ferramenta desta aula
-
-| Critério | PaddleOCR | Azure AI Doc. Intel. | Docling |
-|----------|-----------|---------------------|---------|
-| Texto simples posicionado | ✓ | ✓ | ✓ |
-| Tabelas estruturadas | Limitado | Excelente | Excelente |
-| Hierarquia de seções | — | ✓ | ✓ |
-| Destino: RAG / LLM | — | Parcial | ✓ (nativo) |
-| Documentos tipificados (NF, ID, recibo) | — | ✓ (prebuilt) | — |
-| Sem dependência de API | ✓ | — | ✓ |
-| Setup em 15 minutos | — | ✓ | — |
-| Múltiplos formatos de entrada | Imagem | PDF + Imagem + Office | Tudo |
-
----
-
-## 5. Quando usar VLMs em vez de Document Intelligence
-
-Use frameworks de Document Intelligence (PaddleOCR, Docling, Azure) quando o documento tem estrutura previsível, você precisa de bounding boxes para extração posicional, ou privacidade exige execução local.
-
-Use VLMs (Aula 04) quando o documento contém imagens, gráficos ou diagramas relevantes para extração; o conteúdo é ambíguo e requer raciocínio; você precisa de Q&A em linguagem natural; ou a variedade de tipos de documento é alta demais para regras explícitas.
-
-A combinação mais poderosa: **Azure AI Document Intelligence para documentos tipificados + Docling para ingestão RAG + VLM para documentos com conteúdo visual ou semântica complexa**.
-
----
-
-## 6. Estrutura do laboratório
-
-### Lab 03-A — PaddleOCR com visualização estruturada
-
-Processe os documentos da Aula 01 com o PaddleOCR. Compare os bounding boxes detectados com os erros do Tesseract. Foque especialmente em documentos multicoluna ou com texto em ângulo.
-
-**Arquivo:** `labs/lab_03a_paddleocr.py`
-
-### Lab 03-B — Azure AI Document Intelligence com modelos prebuilt
-
-Configure um recurso no portal Azure (tier gratuito F0 é suficiente para o lab). Processe um conjunto de documentos com pelo menos três modelos: `prebuilt-read`, `prebuilt-layout` e `prebuilt-invoice`. Para cada modelo, inspecione o JSON de saída completo e compare a qualidade de extração de tabelas com os resultados anteriores de Tesseract e EasyOCR.
-
-**Arquivo:** `labs/lab_03b_azure_document_intelligence.py`
-
-### Lab 03-C — Azure Query Fields e campos personalizados
-
-Use o `prebuilt-layout` com query fields em português para extrair campos específicos de documentos sem modelo prebuilt dedicado. Defina campos como "Razão social do emitente", "Data de vencimento" e "Valor líquido". Avalie a precisão da extração via IA generativa do Azure vs. extração por regex do pós-processamento.
-
-**Arquivo:** `labs/lab_03c_azure_query_fields.py`
-
-### Lab 03-D — Docling end-to-end com RAG (lab principal)
-
-1. Converter um PDF complexo com o Docling (relatório com tabelas, imagens e múltiplas seções)
-2. Exportar para Markdown e JSON e inspecionar a estrutura preservada
-3. Comparar com a extração via Azure `prebuilt-layout` do mesmo documento
-4. Usar o `DoclingLoader` do LangChain para criar um pipeline de Q&A com Ollama
-5. Fazer 3 perguntas ao pipeline e avaliar a qualidade das respostas
-
-**Arquivo:** `labs/lab_03d_docling_rag.py`
-
-### Desafio extra — pipeline híbrido com roteamento
-
-Construa um roteador que classifica o tipo de documento e escolhe a ferramenta:
-- Nota fiscal / recibo → Azure `prebuilt-invoice` ou `prebuilt-receipt`
-- Documento genérico para RAG → Docling + ChromaDB + Q&A
-- Imagem simples com texto → PaddleOCR
-
----
-
-## Resumo da aula
-
-- PaddleOCR separa detecção e reconhecimento com modelos neurais — ideal para solução local com layout variado
-- Azure AI Document Intelligence é o serviço gerenciado de referência para produção — modelos prebuilt para documentos tipificados, zero infra, pay-per-page, com output em Markdown para RAG
-- O modelo `prebuilt-layout` com saída em Markdown preserva estrutura de tabelas e hierarquia — direto para ingestão em RAG
-- Query fields permitem extração de campos em linguagem natural sem treinar modelos customizados
-- Docling é o framework mais completo para ingestão de documentos em pipelines de IA — TableFormer, DocLayNet e Granite-Docling resolvem o que OCR simples não consegue
-- Azure e Docling se complementam: Azure para documentos tipificados, Docling para conteúdo livre em RAG
+### Extra — Docling via API Server (Docker)
+O Docling não precisa rodar apenas embutido num script Python. Você pode subir ele como um microserviço puramente focado em receber documentos via API Rest. 
+Para rodar o servidor oficial via Docker localmente e expor sua porta, use o comando:
+```bash
+docker run -d -p 5001:5001 --name docling-serve ghcr.io/docling-project/docling-serve:latest
+```
+Com o servidor rodando, você pode testar o envio de PDFs pelo Swagger entrando em `http://localhost:5001/docs`.
 
 ---
 
 ## Referências
 
 - [Azure AI Document Intelligence — Documentação oficial](https://learn.microsoft.com/azure/ai-services/document-intelligence/)
-- [Azure AI Document Intelligence — What's New](https://learn.microsoft.com/azure/ai-services/document-intelligence/whats-new)
 - [Azure AI Document Intelligence — Preços](https://azure.microsoft.com/pricing/details/ai-document-intelligence/)
 - [Azure AI Document Intelligence Studio](https://documentintelligence.ai.azure.com/studio)
 - [azure-ai-documentintelligence — PyPI](https://pypi.org/project/azure-ai-documentintelligence/)
 - [Docling — Documentação oficial](https://docling-project.github.io/docling/)
+- [Docling - Reference](https://docling-project.github.io/docling/reference/document_converter/)
 - [Docling — GitHub](https://github.com/docling-project/docling)
-- [Granite-Docling-258M — HuggingFace](https://huggingface.co/ibm-granite/granite-docling-258M)
-- [IBM — Granite-Docling announcement](https://www.ibm.com/new/announcements/granite-docling-end-to-end-document-conversion)
-- [Docling Technical Report (arxiv 2408.09869)](https://arxiv.org/abs/2408.09869)
 - [LangChain — DoclingLoader](https://python.langchain.com/docs/integrations/document_loaders/docling/)
-- [PaddleOCR — Documentação](https://paddlepaddle.github.io/PaddleOCR/latest/en/index.html)
 
----
-Próxima aula:**[Aula 04 — VLMs especializados e multimodais](../04-vlm-multimodals)**
+
+
+## ⏭️ Próximo Passo
+Dominando essas extrações robustas, os seus dados não estruturados já foram transformados em estruturas úteis. 
+Siga para a mágica puramente visual avançada: **[Aula 04 — VLMs (Modelos Visuais de Padrão Aberto) Multimodais](../04-vlm-multimodals)**.

@@ -210,13 +210,13 @@ O lab percorre a aplicação do Tesseract em diferentes tipos de documentos: um 
 3. Observar onde os erros se concentram
 4. Ajustar os parâmetros PSM e OEM e medir o impacto
 
-**Arquivo:** `fund_tesseract.py`
+**Arquivo:** `01_tesseract.py`
 
 ### EasyOCR e comparação
 
 O lab replica os mesmos documentos do Lab 01-A com EasyOCR e constrói uma tabela comparativa de CER, WER e tempo de execução. O objetivo é desenvolver intuição sobre qual ferramenta performa melhor em cada tipo de documento.
 
-**Arquivo:** `fund_easyocr.py`
+**Arquivo:** `02_easyocr.py`
 
 ### Desafio extra
 

@@ -17,6 +17,6 @@ def extracao_nativa_pdf(pdf_path: str):
 
 if __name__ == "__main__":
     BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-    pdf_teste = os.path.join(BASE_DIR, "Caratinga.pdf")
+    pdf_teste = os.path.join(BASE_DIR, "..", "docs", "Caratinga.pdf")
     
     extracao_nativa_pdf(pdf_teste)
