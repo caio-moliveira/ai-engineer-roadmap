@@ -8,22 +8,18 @@ from pathlib import Path
 from deepagents import create_deep_agent
 from deepagents.backends import CompositeBackend, FilesystemBackend
 from dotenv import load_dotenv
-from langchain.chat_models import init_chat_model
 from langchain.tools import tool
-from langchain_core.rate_limiters import InMemoryRateLimiter
 from langgraph.checkpoint.memory import MemorySaver
 from langgraph.store.memory import InMemoryStore
 from langfuse.langchain import CallbackHandler
 from tavily import TavilyClient
 from langchain.agents.middleware import ModelFallbackMiddleware
+from skills.powerpoint.scripts.generate_from_spec import generate_ppt_from_spec
 
 load_dotenv()
 
 tavily_client = TavilyClient(api_key=os.environ["TAVILY_API_KEY"])
 langfuse_handler = CallbackHandler()
-
-_SKILLS_SCRIPTS = os.path.join(os.path.dirname(os.path.abspath(__file__)), "skills", "powerpoint", "scripts")
-
 
 @tool
 def tavily_search(query: str) -> str:
@@ -41,9 +37,7 @@ def build_pptx(spec_file: str, output_file: str) -> str:
         spec_file: Absolute path to presentation_spec.json
         output_file: Absolute path for the output .pptx file
     """
-    if _SKILLS_SCRIPTS not in sys.path:
-        sys.path.insert(0, _SKILLS_SCRIPTS)
-    from generate_from_spec import generate_ppt_from_spec
+    
     return generate_ppt_from_spec(spec_file, output_file)
 
 CURRENT_DIR   = os.path.dirname(os.path.abspath(__file__))
@@ -219,10 +213,10 @@ NARRATIVE_BUILDER = {
    — parse the JSON block inside the "## Estilo Visual" section to extract brand colours.
 
 4. For each slide in the outline, write polished final content:
-   - capa: compelling subtitle referencing Jornada de Dados
+   - capa: compelling subtitle referencing Jornada de Dados. Place both links on the capa slide. Here are the links: https://suajornadadedados.curseduca.pro/m/courses and https://github.com/caio-moliveira/ai-engineer-roadmap. 
    - sobre_mim: fill from about_me.md (bio, bullets, main_message)
    - bloco_intro: add a hook sentence connecting to the previous block's outcome
-   - conclusao: 3–5 actionable takeaways spanning all blocks
+   - conclusao: 3–5 actionable takeaways spanning all blocks. Place the link to the landing page of the course in the last slide. Here is the link: https://sun.eduzz.com/60E2AY86W3
    - The slides with the block lessons should be a list of all lessons of that block.
 
 5. Write ONE artifact with `write_file`:
@@ -243,6 +237,7 @@ NARRATIVE_BUILDER = {
 }
 
 CRITICAL: For "sobre_mim" slides, "bio" MUST be a plain string (one sentence from the **Bio** line in about_me.md). NEVER set "bio" to a dict or nested object.
+CRITICAL: Do not forget to add the links to the capa and conclusao slides.
 
 Return: {"status":"success","artifacts_generated":["/artifacts/presentation_spec.json"],"errors":[]}
 """,

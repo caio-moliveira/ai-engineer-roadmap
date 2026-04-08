@@ -1,0 +1,1 @@
+# PowerPoint skill initialization
