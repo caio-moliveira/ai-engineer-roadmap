@@ -1,0 +1,242 @@
+{
+  "title": "Jornada de Dados — Engenheiro de IA",
+  "subtitle": "Construção profissional de sistemas de IA, RAG e agentes em produção",
+  "author": "Caio Machado de Oliveira",
+  "course": "Jornada de Dados — Engenheiro de IA",
+  "aspect_ratio": "16:9",
+  "brand": {
+    "primary_color": "#1B2A4A",
+    "accent_color": "#00C2CB",
+    "text_color": "#FFFFFF"
+  },
+  "slides": [
+    {
+      "id": 1,
+      "type": "capa",
+      "title": "Trilha Completa: Engenharia de IA",
+      "subtitle": "Domine Engenharia de IA com Jornada de Dados — do zero ao projeto em produção.\n\nAcesse aqui: https://suajornadadedados.curseduca.pro/m/courses",
+      "objective": "",
+      "bullets": [],
+      "main_message": ""
+    },
+    {
+      "id": 2,
+      "type": "sobre_mim",
+      "title": "Sobre Mim",
+      "subtitle": "Da experiência prática à sua próxima entrega",
+      "bio": "Especialista em Engenharia de Dados e Inteligência Artificial, construindo soluções end-to-end que integram pipelines de dados e sistemas inteligentes com LLMs, RAG e automação.",
+      "bullets": [
+        "AI Engineer no TCEMG, liderando a transformação digital do setor público com assistentes virtuais, RAG, agentes de IA e fluxos agenticos para aumentar produtividade e eficiência.",
+        "Implementação de pesquisa inteligente de jurisprudência/leis/normas com consultas semânticas, reduzindo drasticamente o tempo de busca e análise jurídica.",
+        "Data Engineer na Quality Engineering, com foco em APIs de catálogo de dados, pipelines escaláveis, e construção de agente RAG para onboarding.",
+        "Desenvolvimento de workflow de análise automática de notas fiscais usando OCR e PLN, reduzindo o tempo de processamento de 7 dias para 0,5 dia em mais de 300 documentos.",
+        "Técnicas e especialidades: LLMs, RAG (chunking/embeddings), bancos vetoriais, OCR, NLP/PLN, fine-tuning, LangChain, arquitetura escalável, ingestão em tempo real e automação.",
+        "Comunidade/ensino: Monitor técnico e instrutor em Engenharia de Dados e IA na Jornada de Dados, ministrando workshops e mentoria prática com busca semântica, vetores e aplicações com IA."
+      ],
+      "main_message": "Eu ensino este curso para ajudar você a transformar fundamentos de Engenharia de Dados e IA em aplicações reais com LLMs — com arquitetura, qualidade e escalabilidade — usando RAG, embeddings, agentes e automações que geram valor de negócio."
+    },
+    {
+      "id": 3,
+      "type": "course_intro",
+      "title": "O que você vai construir neste curso",
+      "subtitle": "Agora que você conhece meu contexto, vamos transformar intenção em entrega: você vai construir sistemas reais — do desenho da arquitetura ao deploy.",
+      "bio": "",
+      "bullets": [
+        "Arquitetura e engenharia de software para sistemas baseados em LLMs (probabilísticos, caros e com inferência externa)",
+        "RAG ponta a ponta: ingestão, chunking, embeddings, retrieval, avaliação e produção",
+        "Agentes confiáveis: orquestração, tool calling, memória, human-in-the-loop e multi-agents",
+        "OCR & Document Intelligence: pipelines robustos com VLMs e inferência local",
+        "Quando usar Fine-Tuning (e quando NÃO usar): preparação de datasets, LoRA/QLoRA e deploy/ops"
+      ],
+      "objective": "",
+      "main_message": ""
+    },
+    {
+      "id": 4,
+      "type": "bloco_intro",
+      "title": "Bloco 1: LLM Fundamentals (Fundamentos da Engenharia de IA)",
+      "subtitle": "Antes de conectar dados e automatizar processos, você precisa de base técnica — para projetar soluções determinísticas ao redor de LLMs.",
+      "objective": "Criar a base para projetar sistemas determinísticos ao redor de LLMs: entender modelos, construir APIs e contratos estruturados, e escolher armazenamento híbrido.",
+      "bullets": [
+        "Profissão AI Engineer: pilares, mindset e trade-offs de produção",
+        "Física dos LLMs: tokenização, context window, parâmetros de geração e tool calling",
+        "Python para IA: ambiente reprodutível e stacks assíncronas",
+        "FastAPI + Pydantic: APIs de alto desempenho com schemas e validação",
+        "Modelagem de dados e structured output com Pydantic/LangChain",
+        "Bancos SQL vs Vector DB e integração para memória de longo prazo (ex.: Qdrant)"
+      ],
+      "main_message": ""
+    },
+    {
+      "id": 5,
+      "type": "content",
+      "title": "Aulas — Bloco 1",
+      "subtitle": "Com essa base, você sai do “modelo” e entra na engenharia: APIs, dados estruturados e decisões de armazenamento.",
+      "bio": "",
+      "bullets": [
+        "01 — Profissão AI Engineer: papel e responsabilidades no mundo real",
+        "02 — Fundamentos de LLMs & GenAI: tokenização, contexto, geração, tool calling e RAG vs Fine-tuning",
+        "03 — Python para Sistemas de IA: workspace, dependências e frameworks",
+        "04 — FastAPI para Aplicações de IA: endpoints, async e estrutura de projeto",
+        "05 — Data Modeling & Structured Output: schemas Pydantic e forçar retornos estruturados",
+        "06 — Vector Databases & Bancos Relacionais: SQL vs vetorial e Qdrant"
+      ],
+      "objective": "",
+      "main_message": ""
+    },
+    {
+      "id": 6,
+      "type": "bloco_intro",
+      "title": "Bloco 2: Sistemas RAG",
+      "subtitle": "Agora que você sabe como pensar e construir ao redor de LLMs, vamos conectá-los aos seus dados — com ingestão robusta, retrieval eficiente e avaliação contínua.",
+      "objective": "Conectar LLMs a dados privados com ingestão robusta, retrieval eficiente e avaliação contínua para produção segura.",
+      "bullets": [
+        "Arquitetura mental de RAG (Ingestion → Store → Retrieve → Generate)",
+        "ETL e chunking com foco em qualidade semântica e metadados",
+        "Embeddings modernos e indexação vetorial",
+        "Retrieval híbrido, reranking e query expansion",
+        "RAG Agents e Graph RAG para casos complexos",
+        "Avaliação (RAGAS) e observabilidade/segurança/otimização de custos"
+      ],
+      "main_message": ""
+    },
+    {
+      "id": 7,
+      "type": "content",
+      "title": "Aulas — Bloco 2",
+      "subtitle": "Você vai passar pelas peças do RAG, até ter um sistema que mede qualidade e aguenta produção.",
+      "bio": "",
+      "bullets": [
+        "01 — Fundamentos de RAG e Modelos Mentais",
+        "02 — Ingestão e Pipelines (ETL para IA, chunking e metadados)",
+        "03 — Embeddings (visão moderna e modelos)",
+        "04 — Vector DBs (indexação e trade-offs; opções como Qdrant/pgvector)",
+        "05 — Retrieval Strategies (hybrid search, reranking, query expansion)",
+        "06 — RAG Agents (LangChain vs LlamaIndex; tool use)",
+        "07 — Graph RAG (knowledge graphs e relações)",
+        "08 — Avaliação e Observabilidade (RAGAS, tracing e golden datasets)",
+        "09 — RAG em Produção (cache semântico, segurança, custos)"
+      ],
+      "objective": "",
+      "main_message": ""
+    },
+    {
+      "id": 8,
+      "type": "bloco_intro",
+      "title": "Bloco 3: AI Agents (Sistemas Inteligentes)",
+      "subtitle": "Com RAG funcionando, o próximo passo é dar autonomia controlada: agentes confiáveis que executam, lembram e se defendem.",
+      "objective": "Projetar, orquestrar e operar agentes confiáveis em produção usando grafos de estado, tool calling, memória e guardrails.",
+      "bullets": [
+        "Workflow vs agente: loops de raciocínio e espectro de autonomia",
+        "Arquiteturas: ReAct, Plan-and-Solve e padrões de decisão",
+        "Tool calling e structured output com schemas rigorosos",
+        "LangGraph: máquinas de estado e recuperação de erros",
+        "Memória (short-term e long-term) e engenharia de persistência",
+        "MCP e integrações padronizadas; human-in-the-loop e multi-agents"
+      ],
+      "main_message": ""
+    },
+    {
+      "id": 9,
+      "type": "content",
+      "title": "Aulas — Bloco 3",
+      "subtitle": "Aqui você transforma consultas em fluxos: agentes que planejam, chamam ferramentas e operam com segurança.",
+      "bio": "",
+      "bullets": [
+        "01 — Fundamentos de Agentes e Arquiteturas (workflow vs agente; spectrum)",
+        "02 — Criando seu primeiro Agente (tool calling + structured output)",
+        "03 — LangGraph e Orquestração (state machines e controle de fluxo)",
+        "04 — Sistemas de Memória (short/long-term e persistência)",
+        "05 — Ferramentas e MCP (desacoplamento e integrações)",
+        "06 — Human-in-the-Loop (aprovação, pausa e auditoria)",
+        "07 — Multi-Agent Systems (delegação, custo e padrões)",
+        "08 — Deep Agents (guardrails, perigos e avaliação de trajetórias)",
+        "09 — Agentes em Produção (observabilidade, deploy e monitoramento)"
+      ],
+      "objective": "",
+      "main_message": ""
+    },
+    {
+      "id": 10,
+      "type": "bloco_intro",
+      "title": "Bloco 4: OCR Engineering",
+      "subtitle": "Quando o seu conhecimento vive em documentos, o gargalo muda: você precisa de pipelines de Document Intelligence robustos e mensuráveis.",
+      "objective": "Construir pipelines de Document Intelligence do fundamento ao deploy, combinando OCR clássico, VLMs e serving local otimizado.",
+      "bullets": [
+        "OCR de verdade: texto + layout + estrutura e métricas (CER/WER)",
+        "OCR pipelines: pré/pós-processamento e trade-offs qualidade × custo × latência",
+        "Document Intelligence: arquitetura end-to-end, filas/workers, idempotência e falhas",
+        "VLMs multimodais: quando usar, otimizações (FP16/INT8/quantização) e formatos",
+        "Serving frameworks: Hugging Face, Ollama e vLLM",
+        "Projeto final: pipeline completo com extração estruturada e integração downstream"
+      ],
+      "main_message": ""
+    },
+    {
+      "id": 11,
+      "type": "content",
+      "title": "Aulas — Bloco 4",
+      "subtitle": "Do layout ao serving: você vai conseguir extrair informação com qualidade e integrar no downstream.",
+      "bio": "",
+      "bullets": [
+        "01 — OCR Fundamentals (layout, layout-aware, desafios e métricas)",
+        "02 — OCR Pipelines (componentes, ferramentas e chunking/estruturação)",
+        "03 — Document Intelligence (end-to-end, observabilidade e tratamento de falhas)",
+        "04 — VLMs especializados e multimodais (tokens visuais e escolhas de modelo)",
+        "05 — Frameworks de serving (execução local, vLLM/TGI, batch/streaming)",
+        "06 — Final Project (infra, VRAM, quantização e entrega do pipeline)"
+      ],
+      "objective": "",
+      "main_message": ""
+    },
+    {
+      "id": 12,
+      "type": "bloco_intro",
+      "title": "Bloco 5: Fine-Tuning e Especialização de Modelos",
+      "subtitle": "Por fim, quando RAG/prompting não resolverem, você vai dominar a decisão: fine-tuning com governança, eficiência e deploy seguro.",
+      "objective": "Aprender a decidir entre RAG e fine-tuning, preparar datasets corretamente, treinar com LoRA/QLoRA e operar deploy com governança.",
+      "bullets": [
+        "Fine-tuning vs RAG vs prompting: matriz de decisão e realidade operacional",
+        "Tipos de adaptação: LoRA, QLoRA, PEFT e full fine-tuning",
+        "Workflow com Unsloth: do dataset ao adapter/GGUF",
+        "Treino e avaliação: baselines e LLM-as-a-judge",
+        "Deploy do modelo: adapters no vLLM e estratégias de merge",
+        "Fine-tuning em produção: ops, riscos, compliance e manutenção"
+      ],
+      "main_message": ""
+    },
+    {
+      "id": 13,
+      "type": "content",
+      "title": "Aulas — Bloco 5",
+      "subtitle": "Você vai fechar o ciclo: escolher o caminho certo e colocar o modelo especializado em produção com segurança.",
+      "bio": "",
+      "bullets": [
+        "01 — Fundamentos de Fine-Tuning (decisão e tipos de adaptação)",
+        "02 — Unsloth (workflow real e eficiência)",
+        "03 — Meu Primeiro LLM: dataset, preparação, treino e avaliação",
+        "04 — Deploy do Modelo (adapters e merge)",
+        "05 — Fine-Tuning em Produção (ops, governança e riscos)"
+      ],
+      "objective": "",
+      "main_message": ""
+    },
+    {
+      "id": 14,
+      "type": "conclusao",
+      "title": "Próximos passos",
+      "subtitle": "Você já viu cada bloco com foco em produção. Agora é hora de transformar isso em plano e implementação.",
+      "bio": "",
+      "bullets": [
+        "Comece pelo Bloco 1 e construa uma base sólida de engenharia para LLMs",
+        "Implemente um RAG completo no Bloco 2 e inclua avaliação contínua",
+        "Evolua para agentes (Bloco 3) aplicando guardrails e observabilidade",
+        "Se o seu domínio envolve documentos, avance para OCR/Document Intelligence (Bloco 4)",
+        "Por fim, use fine-tuning apenas quando o RAG/prompting não resolver — e opere com segurança"
+      ],
+      "objective": "",
+      "main_message": "Transforme fundamentos em projeto real: você vai sair com competências para construir e operar sistemas de IA do jeito que o mercado exige — arquitetados, avaliados e prontos para produção.",
+      "cta_link": "https://sun.eduzz.com/60E2AY86W3"
+    }
+  ]
+}

@@ -45,15 +45,6 @@ REPO_PATH     = r"E:\job-work\ai-engineer-roadmap"
 CV_DIR        = os.path.join(CURRENT_DIR, "docs")
 ARTIFACTS_DIR = os.path.join(CURRENT_DIR, "artifacts")
 
-# Shared rate-limited model — all agents go through the same token bucket.
-# 0.5 req/s = 30 req/min. At ~3 000 tokens/req → ~90 k TPM (well under the 200 k limit).
-# _rate_limiter = InMemoryRateLimiter(
-#     requests_per_second=0.5,
-#     check_every_n_seconds=0.05,
-#     max_bucket_size=2,
-# )
-# _model = init_chat_model("openai:gpt-5.4-nano", rate_limiter=_rate_limiter)
-
 
 # ── Subagent definitions ─────────────────────────────────────────────────────
 
@@ -213,7 +204,7 @@ NARRATIVE_BUILDER = {
    — parse the JSON block inside the "## Estilo Visual" section to extract brand colours.
 
 4. For each slide in the outline, write polished final content:
-   - capa: compelling subtitle referencing Jornada de Dados. Place both links on the capa slide. Here are the links: https://suajornadadedados.curseduca.pro/m/courses and https://github.com/caio-moliveira/ai-engineer-roadmap. 
+   - capa: compelling subtitle referencing Jornada de Dados. Place the link on the capa slide. Here is the link: https://suajornadadedados.curseduca.pro/m/courses
    - sobre_mim: fill from about_me.md (bio, bullets, main_message)
    - bloco_intro: add a hook sentence connecting to the previous block's outcome
    - conclusao: 3–5 actionable takeaways spanning all blocks. Place the link to the landing page of the course in the last slide. Here is the link: https://sun.eduzz.com/60E2AY86W3

@@ -1,0 +1,219 @@
+[
+  {
+    "id": 1,
+    "type": "capa",
+    "title": "Trilha Completa: Engenharia de IA",
+    "subtitle": "Construção profissional de sistemas de IA, RAG e agentes em produção"
+  },
+  {
+    "id": 2,
+    "type": "sobre_mim",
+    "title": "Sobre Mim",
+    "source": "/artifacts/about_me.md"
+  },
+  {
+    "id": 3,
+    "type": "course_intro",
+    "title": "O que você vai construir neste curso",
+    "bullets": [
+      "Arquitetura e engenharia de software para sistemas baseados em LLMs (probabilísticos, caros e com inferência externa)",
+      "RAG ponta a ponta: ingestão, chunking, embeddings, retrieval, avaliação e produção",
+      "Agentes confiáveis: orquestração, tool calling, memória, human-in-the-loop e multi-agents",
+      "OCR & Document Intelligence: pipelines robustos com VLMs e inferência local",
+      "Quando usar Fine-Tuning (e quando NÃO usar): preparação de datasets, LoRA/QLoRA e deploy/ops"
+    ]
+  },
+  {
+    "id": 4,
+    "type": "bloco_intro",
+    "title": "Bloco 1: LLM Fundamentals (Fundamentos da Engenharia de IA)",
+    "objective": "Criar a base para projetar sistemas determinísticos ao redor de LLMs: entender modelos, construir APIs e contratos estruturados, e escolher armazenamento híbrido.",
+    "bullets": [
+      "Profissão AI Engineer: pilares, mindset e trade-offs de produção",
+      "Física dos LLMs: tokenização, context window, parâmetros de geração e tool calling",
+      "Python para IA: ambiente reprodutível e stacks assíncronas",
+      "FastAPI + Pydantic: APIs de alto desempenho com schemas e validação",
+      "Modelagem de dados e structured output com Pydantic/LangChain",
+      "Bancos SQL vs Vector DB e integração para memória de longo prazo (ex.: Qdrant)"
+    ],
+    "source_readmes": [
+      "/repo/01-fundamentals/01-ai-engineer-profession/README.md",
+      "/repo/01-fundamentals/02-llm-fundamentals/README.md",
+      "/repo/01-fundamentals/03-python-for-ai/README.md",
+      "/repo/01-fundamentals/04-fastapi/README.md",
+      "/repo/01-fundamentals/05-data-modeling/README.md",
+      "/repo/01-fundamentals/06-databases/README.md"
+    ]
+  },
+  {
+    "id": 5,
+    "type": "content",
+    "title": "Aulas — Bloco 1",
+    "bullets": [
+      "01 — Profissão AI Engineer: papel e responsabilidades no mundo real",
+      "02 — Fundamentos de LLMs & GenAI: tokenização, contexto, geração, tool calling e RAG vs Fine-tuning",
+      "03 — Python para Sistemas de IA: workspace, dependências e frameworks",
+      "04 — FastAPI para Aplicações de IA: endpoints, async e estrutura de projeto",
+      "05 — Data Modeling & Structured Output: schemas Pydantic e forçar retornos estruturados",
+      "06 — Vector Databases & Bancos Relacionais: SQL vs vetorial e Qdrant"
+    ],
+    "source_readmes": [
+      "/repo/01-fundamentals/01-ai-engineer-profession/README.md",
+      "/repo/01-fundamentals/02-llm-fundamentals/README.md",
+      "/repo/01-fundamentals/03-python-for-ai/README.md",
+      "/repo/01-fundamentals/04-fastapi/README.md",
+      "/repo/01-fundamentals/05-data-modeling/README.md",
+      "/repo/01-fundamentals/06-databases/README.md"
+    ]
+  },
+  {
+    "id": 6,
+    "type": "bloco_intro",
+    "title": "Bloco 2: Sistemas RAG",
+    "objective": "Conectar LLMs a dados privados com ingestão robusta, retrieval eficiente e avaliação contínua para produção segura.",
+    "bullets": [
+      "Arquitetura mental de RAG (Ingestion → Store → Retrieve → Generate)",
+      "ETL e chunking com foco em qualidade semântica e metadados",
+      "Embeddings modernos e indexação vetorial",
+      "Retrieval híbrido, reranking e query expansion",
+      "RAG Agents e Graph RAG para casos complexos",
+      "Avaliação (RAGAS) e observabilidade/segurança/otimização de custos"
+    ],
+    "source_readmes": [
+      "/repo/02-rag/README.md"
+    ]
+  },
+  {
+    "id": 7,
+    "type": "content",
+    "title": "Aulas — Bloco 2",
+    "bullets": [
+      "01 — Fundamentos de RAG e Modelos Mentais",
+      "02 — Ingestão e Pipelines (ETL para IA, chunking e metadados)",
+      "03 — Embeddings (visão moderna e modelos)",
+      "04 — Vector DBs (indexação e trade-offs; opções como Qdrant/pgvector)",
+      "05 — Retrieval Strategies (hybrid search, reranking, query expansion)",
+      "06 — RAG Agents (LangChain vs LlamaIndex; tool use)",
+      "07 — Graph RAG (knowledge graphs e relações)",
+      "08 — Avaliação e Observabilidade (RAGAS, tracing e golden datasets)",
+      "09 — RAG em Produção (cache semântico, segurança, custos)"
+    ],
+    "source_readmes": [
+      "/repo/02-rag/README.md"
+    ]
+  },
+  {
+    "id": 8,
+    "type": "bloco_intro",
+    "title": "Bloco 3: AI Agents (Sistemas Inteligentes)",
+    "objective": "Projetar, orquestrar e operar agentes confiáveis em produção usando grafos de estado, tool calling, memória e guardrails.",
+    "bullets": [
+      "Workflow vs agente: loops de raciocínio e espectro de autonomia",
+      "Arquiteturas: ReAct, Plan-and-Solve e padrões de decisão",
+      "Tool calling e structured output com schemas rigorosos",
+      "LangGraph: máquinas de estado e recuperação de erros",
+      "Memória (short-term e long-term) e engenharia de persistência",
+      "MCP e integrações padronizadas; human-in-the-loop e multi-agents"
+    ],
+    "source_readmes": [
+      "/repo/03-ai-agents/README.md"
+    ]
+  },
+  {
+    "id": 9,
+    "type": "content",
+    "title": "Aulas — Bloco 3",
+    "bullets": [
+      "01 — Fundamentos de Agentes e Arquiteturas (workflow vs agente; spectrum)",
+      "02 — Criando seu primeiro Agente (tool calling + structured output)",
+      "03 — LangGraph e Orquestração (state machines e controle de fluxo)",
+      "04 — Sistemas de Memória (short/long-term e persistência)",
+      "05 — Ferramentas e MCP (desacoplamento e integrações)",
+      "06 — Human-in-the-Loop (aprovação, pausa e auditoria)",
+      "07 — Multi-Agent Systems (delegação, custo e padrões)",
+      "08 — Deep Agents (guardrails, perigos e avaliação de trajetórias)",
+      "09 — Agentes em Produção (observabilidade, deploy e monitoramento)"
+    ],
+    "source_readmes": [
+      "/repo/03-ai-agents/README.md"
+    ]
+  },
+  {
+    "id": 10,
+    "type": "bloco_intro",
+    "title": "Bloco 4: OCR Engineering",
+    "objective": "Construir pipelines de Document Intelligence do fundamento ao deploy, combinando OCR clássico, VLMs e serving local otimizado.",
+    "bullets": [
+      "OCR de verdade: texto + layout + estrutura e métricas (CER/WER)",
+      "OCR pipelines: pré/pós-processamento e trade-offs qualidade × custo × latência",
+      "Document Intelligence: arquitetura end-to-end, filas/workers, idempotência e falhas",
+      "VLMs multimodais: quando usar, otimizações (FP16/INT8/quantização) e formatos",
+      "Serving frameworks: Hugging Face, Ollama e vLLM",
+      "Projeto final: pipeline completo com extração estruturada e integração downstream"
+    ],
+    "source_readmes": [
+      "/repo/04-ocr/README.md"
+    ]
+  },
+  {
+    "id": 11,
+    "type": "content",
+    "title": "Aulas — Bloco 4",
+    "bullets": [
+      "01 — OCR Fundamentals (layout, layout-aware, desafios e métricas)",
+      "02 — OCR Pipelines (componentes, ferramentas e chunking/estruturação)",
+      "03 — Document Intelligence (end-to-end, observabilidade e tratamento de falhas)",
+      "04 — VLMs especializados e multimodais (tokens visuais e escolhas de modelo)",
+      "05 — Frameworks de serving (execução local, vLLM/TGI, batch/streaming)",
+      "06 — Final Project (infra, VRAM, quantização e entrega do pipeline)"
+    ],
+    "source_readmes": [
+      "/repo/04-ocr/README.md"
+    ]
+  },
+  {
+    "id": 12,
+    "type": "bloco_intro",
+    "title": "Bloco 5: Fine-Tuning e Especialização de Modelos",
+    "objective": "Aprender a decidir entre RAG e fine-tuning, preparar datasets corretamente, treinar com LoRA/QLoRA e operar deploy com governança.",
+    "bullets": [
+      "Fine-tuning vs RAG vs prompting: matriz de decisão e realidade operacional",
+      "Tipos de adaptação: LoRA, QLoRA, PEFT e full fine-tuning",
+      "Workflow com Unsloth: do dataset ao adapter/GGUF",
+      "Treino e avaliação: baselines e LLM-as-a-judge",
+      "Deploy do modelo: adapters no vLLM e estratégias de merge",
+      "Fine-tuning em produção: ops, riscos, compliance e manutenção"
+    ],
+    "source_readmes": [
+      "/repo/05-fine-tuning/README.md"
+    ]
+  },
+  {
+    "id": 13,
+    "type": "content",
+    "title": "Aulas — Bloco 5",
+    "bullets": [
+      "01 — Fundamentos de Fine-Tuning (decisão e tipos de adaptação)",
+      "02 — Unsloth (workflow real e eficiência)",
+      "03 — Meu Primeiro LLM: dataset, preparação, treino e avaliação",
+      "04 — Deploy do Modelo (adapters e merge)",
+      "05 — Fine-Tuning em Produção (ops, governança e riscos)"
+    ],
+    "source_readmes": [
+      "/repo/05-fine-tuning/README.md"
+    ]
+  },
+  {
+    "id": 14,
+    "type": "conclusao",
+    "title": "Próximos passos",
+    "bullets": [
+      "Comece pelo Bloco 1 e construa uma base sólida de engenharia para LLMs",
+      "Implemente um RAG completo no Bloco 2 e inclua avaliação contínua",
+      "Evolua para agentes (Bloco 3) aplicando guardrails e observabilidade",
+      "Se o seu domínio envolve documentos, avance para OCR/Document Intelligence (Bloco 4)",
+      "Por fim, use fine-tuning apenas quando o RAG/prompting não resolver — e opere com segurança"
+    ],
+    "main_message": "Transforme fundamentos em projeto real: você vai sair com competências para construir e operar sistemas de IA do jeito que o mercado exige — arquitetados, avaliados e prontos para produção."
+  }
+]
