@@ -1,4 +1,4 @@
-# 🏭 Módulo 7.2: Pipelines de OCR no Mundo Real
+# 🏭 Módulo 2: Pipelines de OCR no Mundo Real
 
 > **Goal:** Evoluir da teoria das ferramentas para a construção de uma esteira robusta de processamento ("Fábrica de Documentos"), resolvendo os problemas feios do mundo real.  
 > **Status:** Mão na massa.
@@ -60,4 +60,4 @@ Nesta aula, a parte prática irá englobar a construção técnica deste roteado
 
 ## ⏭️ Próximo Passo
 Depois de extrair perfeitamente o seu primeiro batch de prontuários difíceis, como usar esses dados como agentes de busca eficientes?
-Vá para **[Módulo 8: Document Intelligence em Produção](../08-document-intelligence)**.
+Vá para **[Módulo 3: Document Intelligence em Produção](../03-document-intelligence)**.
