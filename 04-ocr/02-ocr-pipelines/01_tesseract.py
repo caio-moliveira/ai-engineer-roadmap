@@ -57,7 +57,7 @@ def run_tesseract_pdf(pdf_path: str):
 
 if __name__ == "__main__":
     BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-    imagem_teste = os.path.join(BASE_DIR, "..", "docs", "logo.png")
+    imagem_teste = os.path.join(BASE_DIR, "..", "docs", "imagem.jpg")
     pdf_teste = os.path.join(BASE_DIR, "..", "docs", "1.pdf")
 
     # run_tesseract_imagem(imagem_teste)

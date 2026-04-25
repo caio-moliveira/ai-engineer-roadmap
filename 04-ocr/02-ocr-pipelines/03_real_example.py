@@ -93,7 +93,7 @@ if __name__ == "__main__":
     print(markdown)
 
     # Salva o resultado em arquivo
-    saida = os.path.join(BASE_DIR, "decreto_suplementar.md")
+    saida = os.path.join(BASE_DIR, "output.md")
     with open(saida, "w", encoding="utf-8") as f:
         f.write(markdown)
     print(f"\nArquivo salvo em: {saida}")

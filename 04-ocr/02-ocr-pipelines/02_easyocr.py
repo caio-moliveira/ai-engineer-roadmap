@@ -8,7 +8,7 @@ def run_easyocr_imagem(image_path: str):
     start = time.time()
     
     try:
-        reader = easyocr.Reader(['pt', 'en'], gpu=True)
+        reader = easyocr.Reader(['pt'], gpu=True)
         resultados = reader.readtext(image_path, detail=0)
     except Exception as e:
         print(f"Erro ao processar imagem '{image_path}': {e}")
@@ -66,12 +66,12 @@ def run_easyocr_pdf(pdf_path: str):
 
 if __name__ == "__main__":
     BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-    imagem_teste = os.path.join(BASE_DIR, "..", "docs", "1.jpeg")
-    pdf_teste = os.path.join(BASE_DIR, "..", "docs", "Caratinga.pdf")
+    imagem_teste = os.path.join(BASE_DIR, "..", "docs", "imagem.jpg")
+    pdf_teste = os.path.join(BASE_DIR, "..", "docs", "1.pdf")
 
     # ===============================
     # Descomente o que deseja testar:
     # ===============================
 
-    run_easyocr_imagem(imagem_teste)
-    # run_easyocr_pdf(pdf_teste)
+    # run_easyocr_imagem(imagem_teste)
+    run_easyocr_pdf(pdf_teste)
