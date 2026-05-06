@@ -7,6 +7,7 @@ from langchain_anthropic import ChatAnthropic
 from langchain_core.messages import HumanMessage
 from langchain_openai import ChatOpenAI
 from dotenv import load_dotenv
+from pprint import pprint
 load_dotenv()
 
 
@@ -37,17 +38,15 @@ if __name__ == "__main__":
     imagem = pdf_para_base64(pdf_path)
 
     prompt = (
-        "Extract all the text from this document. "
-        "If there are any images, charts or diagrams, describe them. "
-        "Preserve the document structure as much as possible."
+        "Extract all the text from this document. Keep the structure of the document. "
     )
 
     # modelo = ChatOpenAI(model="gpt-5.4")
     modelo = ChatAnthropic(model="claude-opus-4-7")
 
     resultado = rodar_modelo(modelo, imagem, prompt)
-    # saida = Path(pdf_path).with_suffix(".md")
+    # saida = Path(pdf_path).with_name(f"{Path(pdf_path).stem}_output.md")
     # saida.write_text(resultado, encoding="utf-8")
 
-    print(resultado)
+    pprint(resultado)
 

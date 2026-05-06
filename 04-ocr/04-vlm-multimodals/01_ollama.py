@@ -5,7 +5,7 @@ import ollama
 
 
 MODEL = "qwen3-vl:8b"
-#MODEL = "glm-ocr"
+# MODEL = "glm-ocr"
 
 
 def ocr_image(image_path: Path, mode: str = "Text Recognition") -> str:
@@ -86,7 +86,7 @@ def process_file(input_path: str, mode: str = "Text Recognition") -> str:
 
 if __name__ == "__main__":
     BASE_DIR = Path(__file__).resolve().parent
-    arquivo = BASE_DIR / ".." / "docs" / "imagem.jpg"
+    arquivo = BASE_DIR / ".." / "docs" / "1.pdf"
 
     resultado = process_file(
         arquivo,
