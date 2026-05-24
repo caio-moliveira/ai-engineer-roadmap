@@ -1,0 +1,2068 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Módulo 05 — Fine-Tuning de LLMs | AI Engineer Roadmap</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700;9..144,900&family=Manrope:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* ========== TOKENS ========== */
+  :root {
+    --bg-0: #050810;
+    --bg-1: #0a0f1c;
+    --bg-2: #111827;
+    --bg-3: #1a2336;
+    --line: rgba(0, 212, 255, 0.12);
+    --line-strong: rgba(0, 212, 255, 0.28);
+
+    --ink-1: #f4f7ff;
+    --ink-2: #c5cce0;
+    --ink-3: #8892b0;
+    --ink-4: #5a6480;
+
+    --blue-deep: #0040ff;
+    --blue-mid:  #1170ff;
+    --blue-cyan: #00d4ff;
+    --blue-glow: rgba(17, 112, 255, 0.4);
+
+    --accent-1: #0040ff;
+    --accent-2: #00d4ff;
+
+    --aula-1: #00d4ff;
+    --aula-2: #1170ff;
+    --aula-3: #0040ff;
+    --aula-4: #6d4cff;
+
+    --warn: #ffb547;
+    --good: #29d398;
+    --bad:  #ff6464;
+
+    --serif: 'Fraunces', Georgia, serif;
+    --sans:  'Manrope', -apple-system, sans-serif;
+    --mono:  'JetBrains Mono', ui-monospace, monospace;
+
+    --r-sm: 4px;
+    --r-md: 8px;
+    --r-lg: 14px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg-0);
+    color: var(--ink-1);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    background-image:
+      radial-gradient(ellipse 80% 50% at 20% -10%, rgba(0, 64, 255, 0.18), transparent 60%),
+      radial-gradient(ellipse 60% 40% at 90% 110%, rgba(0, 212, 255, 0.10), transparent 60%);
+    background-attachment: fixed;
+  }
+
+  ::selection { background: var(--blue-mid); color: white; }
+
+  a { color: var(--blue-cyan); text-decoration: none; border-bottom: 1px dotted var(--blue-cyan); transition: all .15s; }
+  a:hover { color: white; border-bottom-color: white; background: rgba(0, 212, 255, 0.08); }
+
+  /* ========== LAYOUT ========== */
+  .layout {
+    display: grid;
+    grid-template-columns: 320px minmax(0, 1fr);
+    min-height: 100vh;
+  }
+
+  /* ========== SIDEBAR ========== */
+  .sidebar {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    background: linear-gradient(180deg, var(--bg-1) 0%, var(--bg-0) 100%);
+    border-right: 1px solid var(--line);
+    padding: 36px 28px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+  }
+  .sidebar-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 8px;
+  }
+  .logo-cube {
+    width: 36px; height: 36px;
+    flex-shrink: 0;
+    background: linear-gradient(135deg, var(--blue-deep), var(--blue-cyan));
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    position: relative;
+  }
+  .logo-cube::after {
+    content: '';
+    position: absolute; inset: 6px;
+    background: var(--bg-1);
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  }
+  .brand {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--blue-cyan);
+  }
+  .brand-sub {
+    font-size: 12px;
+    color: var(--ink-3);
+    margin-top: 2px;
+  }
+
+  .module-title {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 28px;
+    line-height: 1.1;
+    margin: 28px 0 6px;
+    letter-spacing: -0.01em;
+  }
+  .module-title em {
+    font-style: italic;
+    color: var(--blue-cyan);
+  }
+  .module-meta {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-4);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 32px;
+  }
+
+  .nav-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--ink-4);
+    margin: 16px 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-list { list-style: none; padding: 0; margin: 0; }
+  .nav-list li { margin-bottom: 4px; }
+  .nav-link {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 12px 10px;
+    border-radius: var(--r-md);
+    color: var(--ink-2);
+    border-bottom: none;
+    transition: all .2s;
+    line-height: 1.3;
+  }
+  .nav-link:hover {
+    background: rgba(0, 212, 255, 0.06);
+    color: white;
+  }
+  .nav-num {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--ink-4);
+    width: 28px;
+    flex-shrink: 0;
+    padding-top: 2px;
+  }
+  .nav-text { flex: 1; }
+  .nav-title-sm {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink-1);
+  }
+  .nav-desc {
+    font-size: 11px;
+    color: var(--ink-3);
+    margin-top: 2px;
+  }
+  .nav-link[data-aula="1"]:hover .nav-num { color: var(--aula-1); }
+  .nav-link[data-aula="2"]:hover .nav-num { color: var(--aula-2); }
+  .nav-link[data-aula="3"]:hover .nav-num { color: var(--aula-3); }
+  .nav-link[data-aula="4"]:hover .nav-num { color: var(--aula-4); }
+
+  .sidebar-footer {
+    margin-top: auto;
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--ink-4);
+    line-height: 1.6;
+  }
+  .sidebar-footer a {
+    color: var(--ink-3);
+    border: none;
+    display: block;
+    margin-top: 4px;
+  }
+  .sidebar-footer a:hover { color: var(--blue-cyan); background: none; }
+
+  /* ========== MAIN ========== */
+  .main { padding: 0; }
+
+  .aula {
+    padding: 80px 72px 100px;
+    max-width: 980px;
+    border-bottom: 1px solid var(--line);
+    scroll-margin-top: 0;
+    position: relative;
+  }
+  .aula::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--line-strong), transparent);
+  }
+
+  /* Cabeçalho da aula */
+  .aula-header { margin-bottom: 56px; }
+  .aula-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    padding: 6px 12px;
+    border: 1px solid currentColor;
+    border-radius: 100px;
+    margin-bottom: 22px;
+  }
+  .aula-tag::before {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+    box-shadow: 0 0 12px currentColor;
+  }
+  #aula-1 .aula-tag { color: var(--aula-1); }
+  #aula-2 .aula-tag { color: var(--aula-2); }
+  #aula-3 .aula-tag { color: var(--aula-3); }
+  #aula-4 .aula-tag { color: var(--aula-4); }
+
+  .aula-title {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 56px;
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    margin: 0 0 18px;
+  }
+  .aula-title em {
+    font-style: italic;
+    background: linear-gradient(135deg, var(--blue-cyan), var(--blue-mid));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .aula-subtitle {
+    font-size: 19px;
+    color: var(--ink-2);
+    max-width: 720px;
+    line-height: 1.55;
+  }
+
+  /* Seções */
+  h2 {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 32px;
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+    margin: 64px 0 24px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--line);
+    position: relative;
+  }
+  h2 .num {
+    font-family: var(--mono);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink-4);
+    margin-right: 16px;
+    letter-spacing: 0.05em;
+  }
+  h3 {
+    font-family: var(--sans);
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 1.3;
+    margin: 36px 0 14px;
+    color: var(--ink-1);
+  }
+  h4 {
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--blue-cyan);
+    margin: 28px 0 12px;
+  }
+
+  p { margin: 0 0 16px; color: var(--ink-2); }
+  strong { color: var(--ink-1); font-weight: 600; }
+  em { color: var(--ink-1); font-style: italic; }
+
+  ul, ol { margin: 0 0 18px; padding-left: 24px; color: var(--ink-2); }
+  li { margin-bottom: 8px; line-height: 1.6; }
+  li::marker { color: var(--blue-cyan); }
+
+  code {
+    font-family: var(--mono);
+    font-size: 0.88em;
+    background: var(--bg-2);
+    color: var(--blue-cyan);
+    padding: 2px 6px;
+    border-radius: var(--r-sm);
+    border: 1px solid var(--line);
+  }
+
+  /* Code blocks */
+  pre {
+    font-family: var(--mono);
+    font-size: 13px;
+    line-height: 1.6;
+    background: var(--bg-1);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--blue-mid);
+    border-radius: var(--r-md);
+    padding: 18px 22px;
+    overflow-x: auto;
+    margin: 18px 0 24px;
+    color: var(--ink-1);
+    position: relative;
+  }
+  pre::before {
+    content: attr(data-lang);
+    position: absolute;
+    top: 8px;
+    right: 14px;
+    font-family: var(--mono);
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--ink-4);
+  }
+  pre code {
+    background: none;
+    border: none;
+    color: inherit;
+    padding: 0;
+    font-size: inherit;
+  }
+
+  /* Sintaxe */
+  .tk-kw { color: #c084fc; font-weight: 500; }      /* keyword */
+  .tk-str { color: #86efac; }                        /* string */
+  .tk-num { color: #fcd34d; }                        /* number */
+  .tk-com { color: var(--ink-4); font-style: italic;}/* comment */
+  .tk-fn  { color: #00d4ff; }                        /* function */
+  .tk-cls { color: #fda4af; }                        /* class */
+  .tk-prm { color: #fdba74; }                        /* param/property */
+  .tk-op  { color: var(--ink-3); }                   /* operator */
+  .tk-dec { color: #a78bfa; }                        /* decorator */
+  .tk-meta{ color: var(--blue-cyan); font-weight: 600; }
+
+  /* ========== COMPONENTES ========== */
+
+  /* Tabela */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 18px 0 28px;
+    font-size: 14px;
+  }
+  th, td {
+    text-align: left;
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  th {
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--blue-cyan);
+    font-weight: 600;
+    background: rgba(0, 212, 255, 0.04);
+    border-bottom: 1px solid var(--line-strong);
+  }
+  td { color: var(--ink-2); }
+  td strong { color: var(--ink-1); }
+  tr:hover td { background: rgba(255,255,255,0.02); }
+
+  /* Callout / box */
+  .box {
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--blue-mid);
+    background: var(--bg-1);
+    border-radius: var(--r-md);
+    padding: 20px 24px;
+    margin: 22px 0;
+  }
+  .box-title {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--blue-cyan);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .box-title::before {
+    content: '◆';
+    color: var(--blue-mid);
+  }
+  .box.warn { border-left-color: var(--warn); }
+  .box.warn .box-title { color: var(--warn); }
+  .box.warn .box-title::before { color: var(--warn); content: '▲'; }
+  .box.good { border-left-color: var(--good); }
+  .box.good .box-title { color: var(--good); }
+  .box.good .box-title::before { color: var(--good); content: '●'; }
+  .box.bad { border-left-color: var(--bad); }
+  .box.bad .box-title { color: var(--bad); }
+  .box.bad .box-title::before { color: var(--bad); content: '✕'; }
+
+  /* Quote / paper citation */
+  .quote {
+    margin: 28px 0;
+    padding: 24px 28px 24px 32px;
+    border-left: 2px solid var(--blue-cyan);
+    background: linear-gradient(90deg, rgba(0, 212, 255, 0.05), transparent 60%);
+    border-radius: 0 var(--r-md) var(--r-md) 0;
+    position: relative;
+  }
+  .quote::before {
+    content: '"';
+    position: absolute;
+    top: 4px;
+    left: 14px;
+    font-family: var(--serif);
+    font-size: 56px;
+    line-height: 1;
+    color: var(--blue-cyan);
+    opacity: 0.3;
+  }
+  .quote p {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 17px;
+    color: var(--ink-1);
+    line-height: 1.55;
+    margin: 0 0 10px;
+  }
+  .quote-cite {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--ink-3);
+  }
+  .quote-cite a {
+    color: var(--ink-3);
+    border-bottom-color: var(--ink-4);
+  }
+
+  /* Reference list */
+  .refs {
+    list-style: none;
+    padding: 0;
+    margin: 16px 0;
+    font-size: 13px;
+  }
+  .refs li {
+    padding: 10px 0;
+    border-bottom: 1px dashed var(--line);
+    color: var(--ink-3);
+    line-height: 1.5;
+    display: flex;
+    gap: 12px;
+  }
+  .refs li::before {
+    content: '↗';
+    color: var(--blue-cyan);
+    font-family: var(--mono);
+    flex-shrink: 0;
+  }
+  .refs li::marker { content: none; }
+  .refs strong { color: var(--ink-1); }
+  .refs em { color: var(--ink-2); }
+
+  /* Grid cards */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 16px;
+    margin: 20px 0 28px;
+  }
+  .card {
+    background: var(--bg-1);
+    border: 1px solid var(--line);
+    border-radius: var(--r-md);
+    padding: 22px;
+    transition: all .2s;
+  }
+  .card:hover {
+    border-color: var(--line-strong);
+    transform: translateY(-2px);
+  }
+  .card-tag {
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--blue-cyan);
+    margin-bottom: 8px;
+    display: block;
+  }
+  .card-title {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 19px;
+    line-height: 1.2;
+    margin: 0 0 8px;
+    color: var(--ink-1);
+  }
+  .card-body {
+    font-size: 14px;
+    color: var(--ink-3);
+    line-height: 1.55;
+  }
+
+  /* Two columns */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+    margin: 22px 0;
+  }
+  @media (max-width: 880px) { .two-col { grid-template-columns: 1fr; } }
+
+  /* Repo reference */
+  .repo-ref {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--mono);
+    font-size: 12px;
+    padding: 6px 10px;
+    background: var(--bg-2);
+    border: 1px solid var(--line);
+    border-radius: var(--r-sm);
+    color: var(--ink-2);
+    margin: 4px 4px 4px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .repo-ref::before {
+    content: '⌗';
+    color: var(--blue-cyan);
+  }
+  .repo-ref:hover {
+    color: var(--blue-cyan);
+    background: var(--bg-3);
+    border-color: var(--line-strong);
+  }
+
+  /* Stat row */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 16px;
+    margin: 24px 0;
+  }
+  .stat {
+    background: var(--bg-1);
+    border: 1px solid var(--line);
+    border-radius: var(--r-md);
+    padding: 18px;
+  }
+  .stat-num {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 1;
+    background: linear-gradient(135deg, var(--blue-cyan), var(--blue-mid));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .stat-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--ink-3);
+    margin-top: 6px;
+  }
+
+  /* SVG diagram container */
+  .diagram {
+    background: var(--bg-1);
+    border: 1px solid var(--line);
+    border-radius: var(--r-md);
+    padding: 28px;
+    margin: 24px 0;
+    overflow-x: auto;
+  }
+  .diagram-caption {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-4);
+    text-align: center;
+    margin-top: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+  }
+
+  /* Decision flowchart */
+  .flow {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin: 24px 0;
+  }
+  .flow-node {
+    padding: 14px 18px;
+    border: 1px solid var(--line);
+    border-radius: var(--r-md);
+    background: var(--bg-1);
+    font-size: 14px;
+  }
+  .flow-q {
+    border-left: 3px solid var(--blue-cyan);
+    font-weight: 600;
+    color: var(--ink-1);
+  }
+  .flow-q::before {
+    content: 'PERGUNTA ';
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    color: var(--blue-cyan);
+    margin-right: 8px;
+  }
+  .flow-a {
+    margin-left: 32px;
+    border-left: 2px solid var(--blue-mid);
+    padding: 12px 16px;
+    background: rgba(17, 112, 255, 0.04);
+    font-size: 13px;
+    color: var(--ink-2);
+  }
+  .flow-a strong { color: var(--blue-cyan); }
+  .flow-arrow {
+    margin-left: 36px;
+    color: var(--ink-4);
+    font-family: var(--mono);
+    font-size: 14px;
+  }
+
+  /* Loss chart */
+  .loss-chart {
+    background: var(--bg-1);
+    border: 1px solid var(--line);
+    border-radius: var(--r-md);
+    padding: 24px;
+    margin: 20px 0;
+  }
+
+  /* Highlight inline */
+  .hl {
+    background: rgba(0, 212, 255, 0.12);
+    color: var(--blue-cyan);
+    padding: 1px 6px;
+    border-radius: var(--r-sm);
+    font-weight: 600;
+  }
+
+  /* Top progress */
+  .progress-bar {
+    position: fixed;
+    top: 0;
+    left: 320px;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--aula-1), var(--aula-2), var(--aula-3), var(--aula-4));
+    z-index: 100;
+    transform-origin: 0 50%;
+    transform: scaleX(0);
+    transition: transform .1s;
+  }
+
+  /* Scroll bars */
+  ::-webkit-scrollbar { width: 8px; height: 8px; }
+  ::-webkit-scrollbar-track { background: var(--bg-0); }
+  ::-webkit-scrollbar-thumb { background: var(--bg-3); border-radius: 4px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--blue-mid); }
+
+  /* Mobile fallback */
+  @media (max-width: 1024px) {
+    .layout { grid-template-columns: 1fr; }
+    .sidebar { position: relative; height: auto; }
+    .aula { padding: 56px 32px 72px; }
+    .aula-title { font-size: 40px; }
+    .progress-bar { left: 0; }
+  }
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progress"></div>
+
+<div class="layout">
+
+  <!-- ========== SIDEBAR ========== -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <div class="logo-cube"></div>
+      <div>
+        <div class="brand">AI Engineer Roadmap</div>
+        <div class="brand-sub">por Caio Oliveira</div>
+      </div>
+    </div>
+
+    <h1 class="module-title">Módulo 05<br><em>Fine-Tuning de LLMs</em></h1>
+    <div class="module-meta">4 aulas · ~6 horas · prática completa</div>
+
+    <div class="nav-label">Trilha do módulo</div>
+    <ul class="nav-list">
+      <li><a class="nav-link" data-aula="1" href="#aula-1">
+        <span class="nav-num">01</span>
+        <span class="nav-text">
+          <span class="nav-title-sm">Fundamentos</span>
+          <span class="nav-desc">O que é, como funciona, por que existe</span>
+        </span>
+      </a></li>
+      <li><a class="nav-link" data-aula="2" href="#aula-2">
+        <span class="nav-num">02</span>
+        <span class="nav-text">
+          <span class="nav-title-sm">Prompt vs RAG vs Fine-Tuning</span>
+          <span class="nav-desc">Comparação técnica e framework de decisão</span>
+        </span>
+      </a></li>
+      <li><a class="nav-link" data-aula="3" href="#aula-3">
+        <span class="nav-num">03</span>
+        <span class="nav-text">
+          <span class="nav-title-sm">Pipeline: planejamento e dataset</span>
+          <span class="nav-desc">PRD, schema, geração sintética, validação</span>
+        </span>
+      </a></li>
+      <li><a class="nav-link" data-aula="4" href="#aula-4">
+        <span class="nav-num">04</span>
+        <span class="nav-text">
+          <span class="nav-title-sm">Treino, avaliação e deploy</span>
+          <span class="nav-desc">LoRA, métricas, GGUF e llama.cpp</span>
+        </span>
+      </a></li>
+    </ul>
+
+    <div class="sidebar-footer">
+      REPOSITÓRIOS
+      <a href="https://github.com/caio-moliveira/ai-engineer-roadmap" target="_blank">/ai-engineer-roadmap</a>
+      <a href="https://github.com/caio-moliveira/ai-engineer-fine-tuning-example" target="_blank">/ai-engineer-fine-tuning-example</a>
+    </div>
+  </aside>
+
+  <!-- ========== MAIN ========== -->
+  <main class="main">
+
+    <!-- ============================================================ -->
+    <!-- AULA 1 — FUNDAMENTOS                                          -->
+    <!-- ============================================================ -->
+    <section class="aula" id="aula-1">
+      <header class="aula-header">
+        <span class="aula-tag">Aula 01 · Fundamentos</span>
+        <h1 class="aula-title">O que é, como funciona<br>e por que <em>existe</em> fine-tuning</h1>
+        <p class="aula-subtitle">Antes de discutir quando usar, você precisa entender o que está acontecendo no nível dos parâmetros. Esta aula constrói o modelo mental: pré-treino, instruction tuning, e as três famílias de fine-tuning (Full, LoRA, QLoRA) com a matemática que justifica cada uma.</p>
+      </header>
+
+      <!-- 1.1 Recapitulando o pipeline de um LLM -->
+      <h2><span class="num">1.1</span>Recapitulando o pipeline de um LLM</h2>
+
+      <p>Um LLM moderno passa por <strong>três fases distintas</strong> antes de chegar nas mãos do usuário. Cada uma tem propósito, custo e dataset diferentes. Fine-tuning é a terceira — e entender as duas anteriores é o que evita confusão sobre o que ele faz e não faz.</p>
+
+      <div class="diagram">
+        <svg viewBox="0 0 880 280" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:auto;">
+          <defs>
+            <linearGradient id="g1" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stop-color="#0040ff"/>
+              <stop offset="100%" stop-color="#00d4ff"/>
+            </linearGradient>
+          </defs>
+
+          <!-- Stage 1: Pre-training -->
+          <rect x="20" y="60" width="240" height="160" rx="8" fill="#0a0f1c" stroke="#1170ff" stroke-width="1.5"/>
+          <text x="140" y="40" text-anchor="middle" font-family="JetBrains Mono" font-size="11" fill="#00d4ff" font-weight="600" letter-spacing="2">FASE 1</text>
+          <text x="140" y="92" text-anchor="middle" font-family="Fraunces" font-size="20" fill="#f4f7ff" font-weight="600">Pré-treino</text>
+          <text x="140" y="115" text-anchor="middle" font-family="Manrope" font-size="11" fill="#8892b0">Predição next-token</text>
+          <text x="140" y="145" text-anchor="middle" font-family="Manrope" font-size="11" fill="#c5cce0">TB de texto da web</text>
+          <text x="140" y="165" text-anchor="middle" font-family="Manrope" font-size="11" fill="#c5cce0">Bilhões de parâmetros</text>
+          <text x="140" y="185" text-anchor="middle" font-family="Manrope" font-size="11" fill="#c5cce0">Custo: milhões de USD</text>
+          <text x="140" y="205" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#5a6480">~ uma vez na vida</text>
+
+          <!-- Arrow 1 -->
+          <line x1="265" y1="140" x2="305" y2="140" stroke="#1170ff" stroke-width="1.5"/>
+          <polygon points="305,135 315,140 305,145" fill="#1170ff"/>
+
+          <!-- Stage 2: Instruction Tuning -->
+          <rect x="320" y="60" width="240" height="160" rx="8" fill="#0a0f1c" stroke="#1170ff" stroke-width="1.5"/>
+          <text x="440" y="40" text-anchor="middle" font-family="JetBrains Mono" font-size="11" fill="#00d4ff" font-weight="600" letter-spacing="2">FASE 2</text>
+          <text x="440" y="92" text-anchor="middle" font-family="Fraunces" font-size="20" fill="#f4f7ff" font-weight="600">Instruction Tuning</text>
+          <text x="440" y="115" text-anchor="middle" font-family="Manrope" font-size="11" fill="#8892b0">SFT + RLHF / DPO</text>
+          <text x="440" y="145" text-anchor="middle" font-family="Manrope" font-size="11" fill="#c5cce0">Milhões de pares</text>
+          <text x="440" y="165" text-anchor="middle" font-family="Manrope" font-size="11" fill="#c5cce0">(instrução, resposta)</text>
+          <text x="440" y="185" text-anchor="middle" font-family="Manrope" font-size="11" fill="#c5cce0">Aprende a "conversar"</text>
+          <text x="440" y="205" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#5a6480">→ Qwen-Instruct, Llama-Chat</text>
+
+          <!-- Arrow 2 -->
+          <line x1="565" y1="140" x2="605" y2="140" stroke="#1170ff" stroke-width="1.5"/>
+          <polygon points="605,135 615,140 605,145" fill="#1170ff"/>
+
+          <!-- Stage 3: Fine-tuning -->
+          <rect x="620" y="60" width="240" height="160" rx="8" fill="#0a0f1c" stroke="#00d4ff" stroke-width="2"/>
+          <text x="740" y="40" text-anchor="middle" font-family="JetBrains Mono" font-size="11" fill="#00d4ff" font-weight="700" letter-spacing="2">FASE 3 ← VOCÊ</text>
+          <text x="740" y="92" text-anchor="middle" font-family="Fraunces" font-size="20" fill="#00d4ff" font-weight="600">Fine-tuning</text>
+          <text x="740" y="115" text-anchor="middle" font-family="Manrope" font-size="11" fill="#8892b0">Task-specific SFT</text>
+          <text x="740" y="145" text-anchor="middle" font-family="Manrope" font-size="11" fill="#c5cce0">Centenas a milhares</text>
+          <text x="740" y="165" text-anchor="middle" font-family="Manrope" font-size="11" fill="#c5cce0">de exemplos do <em>seu</em> domínio</text>
+          <text x="740" y="185" text-anchor="middle" font-family="Manrope" font-size="11" fill="#c5cce0">Aprende padrão idiossincrático</text>
+          <text x="740" y="205" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#5a6480">Custo: USD a centenas</text>
+        </svg>
+        <div class="diagram-caption">As três fases de treino de um LLM — cada uma com 3 ordens de magnitude menos dados que a anterior</div>
+      </div>
+
+      <p>O ponto crítico é entender que o modelo que você baixa do Hugging Face (<code>Qwen2.5-Coder-1.5B-Instruct</code>, por exemplo) <strong>já passou pelas fases 1 e 2</strong>. Você está adicionando uma quarta camada, muito fina, em cima.</p>
+
+      <div class="quote">
+        <p>We propose a method called instruction tuning, which we define as supervised fine-tuning on a collection of NLP datasets described via natural language instructions. We show that instruction tuning substantially improves zero-shot performance on unseen tasks.</p>
+        <div class="quote-cite">Wei et al., 2021 — <a href="https://arxiv.org/abs/2109.01652" target="_blank">Finetuned Language Models Are Zero-Shot Learners (FLAN)</a></div>
+      </div>
+
+      <!-- 1.2 O que fine-tuning realmente faz -->
+      <h2><span class="num">1.2</span>O que fine-tuning realmente faz</h2>
+
+      <p><strong>Definição operacional:</strong> fine-tuning é continuar o treino supervisionado de um modelo já treinado em um dataset menor e mais específico, com <em>learning rates muito baixos</em>, para que o modelo incorpore padrões da sua tarefa sem destruir o conhecimento geral.</p>
+
+      <h3>O que ele faz bem</h3>
+      <ul>
+        <li><strong>Formato.</strong> Output sempre em JSON específico, sempre em markdown estruturado, sempre com determinada assinatura.</li>
+        <li><strong>Estilo.</strong> Tom de voz, vocabulário, registro (formal, técnico, conversacional).</li>
+        <li><strong>Convenções de domínio.</strong> Padrões idiossincráticos: "número da lei sempre sem ponto", "inciso sempre em romano maiúsculo".</li>
+        <li><strong>Comportamento condicional.</strong> "Se a entrada não tiver lei nenhuma, devolva lista vazia" (negativos).</li>
+      </ul>
+
+      <h3>O que ele <em>não</em> faz</h3>
+      <ul>
+        <li><strong>Não injeta conhecimento factual atualizado.</strong> Você não fine-tuna para o modelo "saber" da decisão do STF de ontem.</li>
+        <li><strong>Não ensina raciocínio que o modelo base não tem.</strong> Se Qwen 1.5B não sabe resolver derivadas, treinar em 500 exemplos de derivadas não vai criar essa capacidade do nada.</li>
+        <li><strong>Não substitui RAG.</strong> Conhecimento que muda com frequência continua em RAG, mesmo num pipeline fine-tunado.</li>
+      </ul>
+
+      <div class="box warn">
+        <div class="box-title">A confusão clássica</div>
+        <p style="margin:0">"Fine-tunei meu modelo nos meus PDFs internos e ele continua errando os fatos." É esperado. Fine-tuning ensina <strong>formato e padrão</strong>, não fatos. Para fatos use RAG. A aula 02 desenrola isso em detalhe.</p>
+      </div>
+
+      <!-- 1.3 Full FT, LoRA, QLoRA -->
+      <h2><span class="num">1.3</span>As três famílias: Full FT, LoRA, QLoRA</h2>
+
+      <p>Quando você fine-tuna, está atualizando matrizes de pesos. Há três estratégias dependendo de <strong>quais</strong> e <strong>como</strong> você atualiza essas matrizes.</p>
+
+      <h3>Full Fine-Tuning</h3>
+
+      <p>Atualiza <strong>todos</strong> os parâmetros do modelo. É o que se fez originalmente. O custo de memória é brutal porque cada parâmetro precisa de espaço para:</p>
+
+      <ol>
+        <li>O próprio peso (em fp16: 2 bytes)</li>
+        <li>O gradiente (mesmo tamanho: 2 bytes)</li>
+        <li>Os estados do otimizador Adam (momentum + variância, em fp32: 8 bytes)</li>
+      </ol>
+
+      <p>Total: <strong>~12 bytes por parâmetro</strong>. Para um modelo de 7B, isso significa <span class="hl">84 GB de VRAM mínimo</span>. Para 1.5B, ainda são ~18 GB. Uma RTX 3060 tem 12 GB. Você simplesmente não treina full FT em GPU consumer.</p>
+
+      <h3>LoRA — Low-Rank Adaptation</h3>
+
+      <p>Insight do paper de Hu et al. (Microsoft, 2021): quando você fine-tuna um modelo grande, a <em>matriz de atualização</em> <code>ΔW</code> que você precisa aprender tem rank intrínseco baixo. Ou seja, a "mudança" que você quer aplicar ao modelo é representável com muito menos parâmetros do que a matriz original.</p>
+
+      <div class="diagram">
+        <svg viewBox="0 0 700 280" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:auto;">
+          <!-- Original W -->
+          <rect x="40" y="80" width="120" height="120" fill="#1a2336" stroke="#5a6480" stroke-width="1.5"/>
+          <text x="100" y="50" text-anchor="middle" font-family="JetBrains Mono" font-size="14" fill="#8892b0">W (congelado)</text>
+          <text x="100" y="68" text-anchor="middle" font-family="JetBrains Mono" font-size="11" fill="#5a6480">d × d</text>
+          <text x="100" y="148" text-anchor="middle" font-family="Fraunces" font-size="32" fill="#5a6480" font-style="italic">W</text>
+
+          <!-- + sign -->
+          <text x="195" y="148" text-anchor="middle" font-family="Manrope" font-size="36" fill="#00d4ff" font-weight="300">+</text>
+
+          <!-- A matrix -->
+          <rect x="240" y="80" width="40" height="120" fill="#0a0f1c" stroke="#00d4ff" stroke-width="2"/>
+          <text x="260" y="68" text-anchor="middle" font-family="JetBrains Mono" font-size="11" fill="#00d4ff">d × r</text>
+          <text x="260" y="148" text-anchor="middle" font-family="Fraunces" font-size="24" fill="#00d4ff" font-style="italic">A</text>
+
+          <!-- × sign -->
+          <text x="305" y="148" text-anchor="middle" font-family="Manrope" font-size="28" fill="#00d4ff" font-weight="300">×</text>
+
+          <!-- B matrix -->
+          <rect x="330" y="125" width="120" height="40" fill="#0a0f1c" stroke="#00d4ff" stroke-width="2"/>
+          <text x="390" y="115" text-anchor="middle" font-family="JetBrains Mono" font-size="11" fill="#00d4ff">r × d</text>
+          <text x="390" y="153" text-anchor="middle" font-family="Fraunces" font-size="24" fill="#00d4ff" font-style="italic">B</text>
+
+          <!-- = sign -->
+          <text x="485" y="148" text-anchor="middle" font-family="Manrope" font-size="32" fill="#8892b0" font-weight="300">=</text>
+
+          <!-- Result -->
+          <rect x="520" y="80" width="120" height="120" fill="#0a0f1c" stroke="#1170ff" stroke-width="1.5" stroke-dasharray="4 3"/>
+          <text x="580" y="68" text-anchor="middle" font-family="JetBrains Mono" font-size="11" fill="#1170ff">d × d</text>
+          <text x="580" y="148" text-anchor="middle" font-family="Fraunces" font-size="20" fill="#f4f7ff">W + ΔW</text>
+          <text x="580" y="170" text-anchor="middle" font-family="JetBrains Mono" font-size="9" fill="#8892b0">(virtual)</text>
+
+          <!-- Label -->
+          <text x="350" y="245" text-anchor="middle" font-family="Manrope" font-size="13" fill="#c5cce0">
+            <tspan font-family="Fraunces" font-style="italic">W</tspan>
+            <tspan> + (</tspan>
+            <tspan fill="#00d4ff" font-family="Fraunces" font-style="italic">A</tspan>
+            <tspan> × </tspan>
+            <tspan fill="#00d4ff" font-family="Fraunces" font-style="italic">B</tspan>
+            <tspan>) = </tspan>
+            <tspan font-family="Fraunces" font-style="italic">W</tspan>
+            <tspan>'</tspan>
+            <tspan> — você treina só A e B</tspan>
+          </text>
+        </svg>
+        <div class="diagram-caption">A decomposição low-rank de LoRA: ao invés de aprender ΔW (d×d), aprende A (d×r) e B (r×d) com r &lt;&lt; d</div>
+      </div>
+
+      <p>Em fórmula:</p>
+
+      <pre data-lang="MATEMÁTICA"><span class="tk-meta">ΔW</span> ≈ <span class="tk-meta">A</span> × <span class="tk-meta">B</span>     onde   <span class="tk-meta">A</span> ∈ ℝ<sup>d×r</sup>,  <span class="tk-meta">B</span> ∈ ℝ<sup>r×d</sup>,  <span class="tk-meta">r</span> &lt;&lt; d
+
+<span class="tk-com"># d = 1024 (tamanho da dimensão latente do modelo)</span>
+<span class="tk-com"># r = 16  (rank escolhido — tipicamente 4 a 64)</span>
+
+<span class="tk-com"># Parâmetros originais: d × d  = 1.048.576</span>
+<span class="tk-com"># Parâmetros LoRA:    2 × d × r =    32.768  (3% do original)</span></pre>
+
+      <p>Na prática, com Qwen 1.5B e <code>r=16</code>, o nosso treino atualizou <strong>18 milhões de parâmetros</strong> (1.18% dos 1.56 bilhão totais). O modelo base fica congelado. O resultado é um "adapter" de ~70 MB que você pode anexar ao modelo base na inferência.</p>
+
+      <div class="quote">
+        <p>We propose Low-Rank Adaptation, or LoRA, which freezes the pretrained model weights and injects trainable rank decomposition matrices into each layer of the Transformer architecture, greatly reducing the number of trainable parameters for downstream tasks.</p>
+        <div class="quote-cite">Hu et al., 2021 — <a href="https://arxiv.org/abs/2106.09685" target="_blank">LoRA: Low-Rank Adaptation of Large Language Models</a></div>
+      </div>
+
+      <h3>QLoRA — LoRA + quantização 4-bit</h3>
+
+      <p>Dettmers et al. (2023) levou LoRA ao extremo: <strong>carregar o modelo base em 4-bit</strong> usando NF4 (NormalFloat 4-bit, distribuição calibrada para pesos de redes neurais), e treinar adapters em cima. O resultado é que você consegue fine-tunar modelos de 65B em uma única GPU de 48 GB.</p>
+
+      <div class="quote">
+        <p>QLoRA reduces the average memory requirements of finetuning a 65B parameter model from &gt;780GB of GPU memory to &lt;48GB without degrading the runtime or predictive performance compared to a 16-bit fully finetuned baseline.</p>
+        <div class="quote-cite">Dettmers et al., 2023 — <a href="https://arxiv.org/abs/2305.14314" target="_blank">QLoRA: Efficient Finetuning of Quantized LLMs</a></div>
+      </div>
+
+      <p>Para o nosso caso (Qwen 1.5B em RTX 3060 com 12 GB), <strong>bf16 já cabia</strong>, então não precisamos de QLoRA. É bom entender que existe: a hora que você quiser fine-tunar Llama 3 70B em hardware razoável, é o caminho.</p>
+
+      <h3>Tabela comparativa das famílias</h3>
+
+      <table>
+        <thead>
+          <tr><th>Critério</th><th>Full FT</th><th>LoRA</th><th>QLoRA</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Parâmetros treinados</strong></td><td>100%</td><td>0.1% – 3%</td><td>0.1% – 3%</td></tr>
+          <tr><td><strong>VRAM (modelo 7B)</strong></td><td>~84 GB</td><td>~16 GB</td><td>~6 GB</td></tr>
+          <tr><td><strong>Qualidade final</strong></td><td>Teto</td><td>~ 95-99% do Full</td><td>~ 95-99% do Full</td></tr>
+          <tr><td><strong>Catastrophic forgetting</strong></td><td>Alto risco</td><td>Baixo (base congelado)</td><td>Baixo (base congelado)</td></tr>
+          <tr><td><strong>Quando usar</strong></td><td>Mudança radical de domínio + GPU sobrando</td><td>Default moderno para tarefa específica</td><td>Modelo grande + GPU limitada</td></tr>
+        </tbody>
+      </table>
+
+      <!-- 1.4 Catastrophic forgetting -->
+      <h2><span class="num">1.4</span>Catastrophic forgetting e por que LoRA é seguro</h2>
+
+      <p><strong>Catastrophic forgetting</strong> (McCloskey &amp; Cohen, 1989, conceito clássico de redes neurais) é o fenômeno onde uma rede neural, ao aprender uma nova tarefa, "esquece" o que aprendeu antes. Em LLMs isso aparece como: você fine-tuna em JSON jurídico, e o modelo passa a responder em JSON até para "olá, tudo bem?".</p>
+
+      <p>LoRA mitiga isso por construção: <strong>os pesos originais são congelados</strong>. Você está adicionando uma "perturbação" em cima, e pode até desligá-la em runtime. Se quiser, é só não carregar o adapter — o modelo volta a ser ele mesmo.</p>
+
+      <div class="box good">
+        <div class="box-title">Mental model útil</div>
+        <p style="margin:0">Pense no modelo base como um <strong>profissional generalista</strong>. Fine-tuning com LoRA é dar a ele um <strong>caderno de notas específico</strong> ("nessa empresa fazemos assim, nesse formato"). Ele consulta o caderno quando o adapter está ativo, mas não desaprende a profissão.</p>
+      </div>
+
+      <!-- 1.5 Decisões antes de começar -->
+      <h2><span class="num">1.5</span>Decisões antes de uma linha de código</h2>
+
+      <p>Antes de instalar PyTorch, você deve ter <strong>respostas claras</strong> para cinco perguntas. Se qualquer uma estiver vaga, pare e refine — vai te poupar dias de retrabalho.</p>
+
+      <ol>
+        <li><strong>Que tarefa?</strong> Bem definida, com input e output claros. "Melhorar respostas" não é tarefa. "Extrair citações de leis brasileiras em JSON estrito a partir de parágrafos jurídicos em pt-BR" é.</li>
+        <li><strong>Que modelo base?</strong> Pequeno o suficiente para sua GPU, grande o suficiente para a tarefa, com características relevantes (suporte ao idioma, variante "Coder" se output é estruturado).</li>
+        <li><strong>Que dataset?</strong> Quantos exemplos, de onde vêm, como validar qualidade. Tem que ser concreto antes de gastar com geração ou anotação.</li>
+        <li><strong>Que hardware?</strong> Define método (LoRA puro vs QLoRA), precisão (bf16 vs fp16), batch size, e até o modelo viável.</li>
+        <li><strong>Que critério de sucesso?</strong> Métricas mensuráveis com thresholds aceitáveis, <em>definidos antes do treino</em>. Aula 03 mostra como isso vira o PRD.</li>
+      </ol>
+
+      <h2><span class="num">1.6</span>Referências da aula</h2>
+
+      <ul class="refs">
+        <li><div><strong>Wei et al. (2021).</strong> <em>Finetuned Language Models Are Zero-Shot Learners</em>. — <a href="https://arxiv.org/abs/2109.01652" target="_blank">arxiv.org/abs/2109.01652</a></div></li>
+        <li><div><strong>Ouyang et al. (2022).</strong> <em>Training language models to follow instructions with human feedback</em> (InstructGPT). — <a href="https://arxiv.org/abs/2203.02155" target="_blank">arxiv.org/abs/2203.02155</a></div></li>
+        <li><div><strong>Hu et al. (2021).</strong> <em>LoRA: Low-Rank Adaptation of Large Language Models</em>. — <a href="https://arxiv.org/abs/2106.09685" target="_blank">arxiv.org/abs/2106.09685</a></div></li>
+        <li><div><strong>Dettmers et al. (2023).</strong> <em>QLoRA: Efficient Finetuning of Quantized LLMs</em>. — <a href="https://arxiv.org/abs/2305.14314" target="_blank">arxiv.org/abs/2305.14314</a></div></li>
+        <li><div><strong>Houlsby et al. (2019).</strong> <em>Parameter-Efficient Transfer Learning for NLP</em> (paper original de adapters). — <a href="https://arxiv.org/abs/1902.00751" target="_blank">arxiv.org/abs/1902.00751</a></div></li>
+        <li><div><strong>Hoffmann et al. (2022).</strong> <em>Training Compute-Optimal Large Language Models</em> (Chinchilla scaling laws). — <a href="https://arxiv.org/abs/2203.15556" target="_blank">arxiv.org/abs/2203.15556</a></div></li>
+        <li><div><strong>HuggingFace PEFT</strong> — biblioteca usada no curso. <a href="https://github.com/huggingface/peft" target="_blank">github.com/huggingface/peft</a></div></li>
+      </ul>
+
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- AULA 2 — PROMPT vs RAG vs FINE-TUNING                         -->
+    <!-- ============================================================ -->
+    <section class="aula" id="aula-2">
+      <header class="aula-header">
+        <span class="aula-tag">Aula 02 · Decisão arquitetural</span>
+        <h1 class="aula-title">Prompt vs RAG vs <em>Fine-Tuning</em></h1>
+        <p class="aula-subtitle">As três técnicas resolvem problemas diferentes. Usá-las erradas custa tempo, dinheiro e qualidade. Esta aula tem duas metades: primeiro a comparação técnica profunda (eixos de custo, latência, atualização, dados), depois um framework de decisão concreto com fluxograma.</p>
+      </header>
+
+      <h2><span class="num">2.1</span>O mapa mental: três alavancas distintas</h2>
+
+      <p>Quando você quer que um LLM faça algo específico, há essencialmente três alavancas que você pode puxar — e elas mexem em dimensões diferentes do problema:</p>
+
+      <div class="grid">
+        <div class="card">
+          <span class="card-tag">Alavanca 1</span>
+          <h3 class="card-title">Prompt Engineering</h3>
+          <p class="card-body">Você muda <strong>a instrução</strong>. O modelo é o mesmo, mas você descreve melhor o que ele deve fazer, dá exemplos no contexto (few-shot), divide o problema em passos (chain-of-thought).</p>
+        </div>
+        <div class="card">
+          <span class="card-tag">Alavanca 2</span>
+          <h3 class="card-title">RAG</h3>
+          <p class="card-body">Você muda <strong>o contexto disponível</strong>. Antes de chamar o modelo, busca documentos relevantes em uma base externa e injeta no prompt. O modelo continua igual, mas agora tem informação que não tinha.</p>
+        </div>
+        <div class="card">
+          <span class="card-tag">Alavanca 3</span>
+          <h3 class="card-title">Fine-Tuning</h3>
+          <p class="card-body">Você muda <strong>o modelo</strong>. Atualiza pesos para que ele incorpore padrões da sua tarefa. Mais investimento, mas resultado mais consistente e barato em tempo de inferência.</p>
+        </div>
+      </div>
+
+      <div class="quote">
+        <p>Retrieval-augmented generation combines pre-trained parametric and non-parametric memory for language generation. We endow pre-trained, parametric-memory generation models with a non-parametric memory through a general-purpose fine-tuning approach.</p>
+        <div class="quote-cite">Lewis et al., 2020 — <a href="https://arxiv.org/abs/2005.11401" target="_blank">Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks</a></div>
+      </div>
+
+      <!-- METADE 1: COMPARAÇÃO TÉCNICA -->
+      <h2><span class="num">2.2</span>Metade 1 — Comparação técnica profunda</h2>
+
+      <h3>Eixo 1: O que cada técnica realmente muda</h3>
+
+      <table>
+        <thead>
+          <tr><th>Componente</th><th>Prompt</th><th>RAG</th><th>Fine-Tuning</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Pesos do modelo</strong></td><td>Inalterados</td><td>Inalterados</td><td>Adaptados (parcial ou total)</td></tr>
+          <tr><td><strong>Contexto na inferência</strong></td><td>Prompt fixo + exemplos</td><td>Prompt + chunks buscados</td><td>Prompt enxuto</td></tr>
+          <tr><td><strong>Fonte do "saber"</strong></td><td>Pré-treino + contexto</td><td>Base externa indexada</td><td>Pré-treino + ajuste fino</td></tr>
+          <tr><td><strong>Atualização de conhecimento</strong></td><td>Editar prompt</td><td>Reindexar documentos</td><td>Re-treinar com novo dataset</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Eixo 2: Custos</h3>
+
+      <p>Custo total se decompõe em quatro componentes: setup inicial, dados, computação de inferência por chamada, e manutenção. Eles têm perfis muito diferentes:</p>
+
+      <table>
+        <thead>
+          <tr><th>Custo</th><th>Prompt</th><th>RAG</th><th>Fine-Tuning</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Setup inicial</strong></td><td>Quase zero</td><td>Médio (embeddings + vector DB)</td><td>Alto (dataset + treino)</td></tr>
+          <tr><td><strong>Inferência por chamada</strong></td><td>Alto (prompt longo paga sempre)</td><td>Alto (prompt + chunks longos)</td><td>Baixo (modelo absorveu padrão)</td></tr>
+          <tr><td><strong>Manutenção</strong></td><td>Edição manual de prompts</td><td>Reindexação periódica</td><td>Re-treino quando dataset muda</td></tr>
+          <tr><td><strong>Hardware</strong></td><td>API externa serve</td><td>API + vector DB</td><td>GPU para treino, depois inferência local viável</td></tr>
+        </tbody>
+      </table>
+
+      <div class="box">
+        <div class="box-title">A inversão do ponto de equilíbrio</div>
+        <p style="margin:0">Em alto volume de chamadas, fine-tuning é o <strong>mais barato a longo prazo</strong>. Você pagou o setup uma vez (dataset + treino: USD dezenas a centenas) e cada inferência custa quase nada — pode rodar local. Prompt engineering com modelo grande via API: <em>cada chamada paga</em>. Para sistemas com milhares de chamadas/dia, a conta vira a favor do FT em semanas.</p>
+      </div>
+
+      <h3>Eixo 3: Latência</h3>
+
+      <p>Três fontes de latência num pipeline:</p>
+
+      <ol>
+        <li><strong>Latência de rede</strong> (se chama API externa): 50-300 ms só de ida e volta.</li>
+        <li><strong>Latência do retrieval</strong> (em RAG): busca vetorial + reranking, 100-500 ms.</li>
+        <li><strong>Latência de inferência</strong> (geração): proporcional ao número de tokens (contexto + resposta).</li>
+      </ol>
+
+      <p>RAG é o pior dos mundos em latência: paga rede + retrieval + inferência com contexto grande. Fine-tuning local com modelo pequeno é o melhor: rede zero, retrieval zero, contexto enxuto. No nosso caso prático, atingimos <strong>1,73 segundo por parágrafo</strong> em RTX 3060 com Qwen 1.5B fine-tunado.</p>
+
+      <h3>Eixo 4: Atualização de conhecimento</h3>
+
+      <table>
+        <thead>
+          <tr><th>Situação</th><th>Prompt</th><th>RAG</th><th>Fine-Tuning</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Mudou um documento</td><td>Editar prompt manualmente</td><td><strong>Reindexar</strong> ✅</td><td>Re-treinar (dias)</td></tr>
+          <tr><td>Mudou o estilo de saída</td><td>Editar prompt</td><td>Inalterado (não resolve)</td><td><strong>Re-treinar</strong> ✅</td></tr>
+          <tr><td>Mudou o vocabulário interno</td><td>Editar prompt</td><td>Reindexar</td><td><strong>Re-treinar</strong> ✅</td></tr>
+          <tr><td>Documento secreto não pode ir para LLM externo</td><td>Inviável</td><td>Inviável</td><td><strong>FT local</strong> ✅</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Eixo 5: Tipo de "aprendizado"</h3>
+
+      <p>Este é o eixo conceitualmente mais importante e o mais mal-entendido. Fine-tuning e RAG ensinam coisas <strong>fundamentalmente diferentes</strong>:</p>
+
+      <div class="two-col">
+        <div class="box good">
+          <div class="box-title">RAG — memória semântica</div>
+          <p style="margin: 0 0 8px"><strong>Ensina O QUE.</strong></p>
+          <p style="margin: 0">"Aqui está informação que você não tinha. Use-a para responder." Bom para: documentos internos, factos atualizados, FAQ, regulações específicas.</p>
+        </div>
+        <div class="box good">
+          <div class="box-title">Fine-tuning — memória procedural</div>
+          <p style="margin: 0 0 8px"><strong>Ensina COMO.</strong></p>
+          <p style="margin: 0">"Quando você ver entradas assim, responda assim, neste formato, com essas convenções." Bom para: formato estrito, estilo de voz, classificações específicas, padrões idiossincráticos.</p>
+        </div>
+      </div>
+
+      <div class="quote">
+        <p>Few-shot prompting can teach a model to use a new tool, but cannot reliably teach it new factual knowledge. Fine-tuning can teach format and style robustly, but is a poor way to inject up-to-date factual content — for that, retrieval is more effective.</p>
+        <div class="quote-cite">Petroni et al., 2019 — <a href="https://arxiv.org/abs/1909.01066" target="_blank">Language Models as Knowledge Bases?</a> (síntese da literatura subsequente)</div>
+      </div>
+
+      <h3>Pipeline híbrido: quase sempre o melhor</h3>
+
+      <p>Na prática, sistemas de produção combinam as três:</p>
+
+      <div class="diagram">
+        <svg viewBox="0 0 880 220" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:auto;">
+          <!-- User input -->
+          <rect x="20" y="80" width="120" height="60" rx="6" fill="#0a0f1c" stroke="#5a6480"/>
+          <text x="80" y="105" text-anchor="middle" font-family="Manrope" font-size="12" fill="#c5cce0">Pergunta</text>
+          <text x="80" y="122" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#8892b0">do usuário</text>
+
+          <line x1="145" y1="110" x2="180" y2="110" stroke="#5a6480"/>
+          <polygon points="180,105 188,110 180,115" fill="#5a6480"/>
+
+          <!-- Retrieval -->
+          <rect x="195" y="60" width="140" height="50" rx="6" fill="#0a0f1c" stroke="#00d4ff"/>
+          <text x="265" y="78" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#00d4ff" letter-spacing="1">RAG</text>
+          <text x="265" y="98" text-anchor="middle" font-family="Manrope" font-size="11" fill="#c5cce0">retrieve docs</text>
+
+          <!-- Prompt assembly -->
+          <rect x="195" y="125" width="140" height="50" rx="6" fill="#0a0f1c" stroke="#1170ff"/>
+          <text x="265" y="143" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#1170ff" letter-spacing="1">PROMPT</text>
+          <text x="265" y="163" text-anchor="middle" font-family="Manrope" font-size="11" fill="#c5cce0">template + context</text>
+
+          <line x1="340" y1="135" x2="380" y2="135" stroke="#5a6480"/>
+          <polygon points="380,130 388,135 380,140" fill="#5a6480"/>
+
+          <!-- Model (FT) -->
+          <rect x="395" y="95" width="180" height="80" rx="6" fill="#0a0f1c" stroke="#00d4ff" stroke-width="2"/>
+          <text x="485" y="120" text-anchor="middle" font-family="JetBrains Mono" font-size="11" fill="#00d4ff" letter-spacing="2" font-weight="600">FINE-TUNED MODEL</text>
+          <text x="485" y="142" text-anchor="middle" font-family="Manrope" font-size="11" fill="#c5cce0">aprendeu formato,</text>
+          <text x="485" y="158" text-anchor="middle" font-family="Manrope" font-size="11" fill="#c5cce0">estilo, convenções</text>
+
+          <line x1="580" y1="135" x2="620" y2="135" stroke="#5a6480"/>
+          <polygon points="620,130 628,135 620,140" fill="#5a6480"/>
+
+          <!-- Output -->
+          <rect x="635" y="100" width="220" height="70" rx="6" fill="#0a0f1c" stroke="#1170ff"/>
+          <text x="745" y="125" text-anchor="middle" font-family="Manrope" font-size="12" fill="#c5cce0">Resposta no formato</text>
+          <text x="745" y="143" text-anchor="middle" font-family="Manrope" font-size="12" fill="#c5cce0">aprendido +</text>
+          <text x="745" y="161" text-anchor="middle" font-family="Manrope" font-size="12" fill="#c5cce0">contexto atualizado</text>
+        </svg>
+        <div class="diagram-caption">Pipeline híbrido: RAG fornece o "o quê", o modelo fine-tunado garante o "como"</div>
+      </div>
+
+      <!-- METADE 2: FRAMEWORK DE DECISÃO -->
+      <h2><span class="num">2.3</span>Metade 2 — Framework de decisão</h2>
+
+      <p>Use este fluxograma na ordem. A primeira "sim" determina sua abordagem inicial. Você sempre pode evoluir depois.</p>
+
+      <div class="flow">
+        <div class="flow-node flow-q">Volume de chamadas/dia é alto (1k+) e o custo por chamada importa?</div>
+        <div class="flow-node flow-a">Sim → considere <strong>fine-tuning</strong> com modelo pequeno local. Não → siga.</div>
+        <div class="flow-arrow">↓</div>
+
+        <div class="flow-node flow-q">Os dados são confidenciais e não podem sair da sua infra?</div>
+        <div class="flow-node flow-a">Sim → <strong>fine-tuning</strong> local ou RAG com modelo local. Não → siga.</div>
+        <div class="flow-arrow">↓</div>
+
+        <div class="flow-node flow-q">O output tem formato estrito (JSON com schema, XML, etc.) ou estilo idiossincrático?</div>
+        <div class="flow-node flow-a">Sim → <strong>fine-tuning</strong> consegue qualidade superior. Prompt funciona em modelo grande mas paga sempre. Não → siga.</div>
+        <div class="flow-arrow">↓</div>
+
+        <div class="flow-node flow-q">A resposta depende de informação que muda com frequência (docs internos, normativas, FAQs)?</div>
+        <div class="flow-node flow-a">Sim → <strong>RAG</strong> é a resposta. Pode combinar com FT para formato, mas o conhecimento atualizado vem do retrieval. Não → siga.</div>
+        <div class="flow-arrow">↓</div>
+
+        <div class="flow-node flow-q">A tarefa é simples e cabem 3-5 exemplos no contexto?</div>
+        <div class="flow-node flow-a">Sim → <strong>few-shot prompting</strong> em modelo grande. Mais barato de prototipar e suficiente para baixo volume. Não → siga.</div>
+        <div class="flow-arrow">↓</div>
+
+        <div class="flow-node flow-q">É um protótipo / POC?</div>
+        <div class="flow-node flow-a">Sim → comece com <strong>prompt engineering</strong> em modelo top de linha. Valide produto antes de investir em FT.</div>
+      </div>
+
+      <h3>Anti-padrões que você verá em projetos reais</h3>
+
+      <div class="box bad">
+        <div class="box-title">"Fine-tunei nos meus PDFs e ele não sabe o que está nos PDFs"</div>
+        <p style="margin:0">Fine-tuning ensina formato/estilo, não fatos. Documentos que mudam ou que precisam ser citados de volta com precisão pedem <strong>RAG</strong>. Vide aula 1.2.</p>
+      </div>
+
+      <div class="box bad">
+        <div class="box-title">"Vou fazer RAG do meu schema JSON"</div>
+        <p style="margin:0">Schema é estrutura, não conhecimento. RAG vai injetar o schema em todo prompt, gastando tokens, e ainda assim o modelo escapa do formato. <strong>Fine-tuning</strong> faz o modelo memorizar o formato como segunda natureza.</p>
+      </div>
+
+      <div class="box bad">
+        <div class="box-title">"Fine-tunei sem definir métrica de sucesso, agora não sei se está bom"</div>
+        <p style="margin:0">Sem métricas pré-definidas, qualquer resultado parece "ok". Aula 03 entra em PRD; aula 04 em métricas estruturais. Loss baixa de treino <em>não</em> é métrica de sucesso.</p>
+      </div>
+
+      <h3>O nosso caso prático justifica fine-tuning</h3>
+
+      <p>O projeto que vai aparecer nas aulas 03 e 04 (extração estruturada de citações de leis brasileiras) é um exemplo paradigmático de onde FT brilha:</p>
+
+      <ul>
+        <li><strong>Output em JSON estrito</strong> com 7 campos e vocabulário fechado → formato.</li>
+        <li><strong>Alto volume</strong> previsto (milhares de documentos jurídicos) → custo por chamada importa.</li>
+        <li><strong>Latência crítica</strong> (rodar local em pipeline batch) → API externa é gargalo.</li>
+        <li><strong>Dados privados</strong> em alguns clientes → preciso rodar em on-prem.</li>
+        <li><strong>Conhecimento estável</strong> (catálogo de ~30 leis brasileiras canônicas; muda raramente) → não precisa de RAG.</li>
+      </ul>
+
+      <h2><span class="num">2.4</span>Referências da aula</h2>
+
+      <ul class="refs">
+        <li><div><strong>Lewis et al. (2020).</strong> <em>Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks</em>. — <a href="https://arxiv.org/abs/2005.11401" target="_blank">arxiv.org/abs/2005.11401</a></div></li>
+        <li><div><strong>Brown et al. (2020).</strong> <em>Language Models are Few-Shot Learners</em> (GPT-3, fundamento de few-shot). — <a href="https://arxiv.org/abs/2005.14165" target="_blank">arxiv.org/abs/2005.14165</a></div></li>
+        <li><div><strong>Wei et al. (2022).</strong> <em>Chain-of-Thought Prompting Elicits Reasoning in Large Language Models</em>. — <a href="https://arxiv.org/abs/2201.11903" target="_blank">arxiv.org/abs/2201.11903</a></div></li>
+        <li><div><strong>Asai et al. (2023).</strong> <em>Self-RAG: Learning to Retrieve, Generate, and Critique through Self-Reflection</em>. — <a href="https://arxiv.org/abs/2310.11511" target="_blank">arxiv.org/abs/2310.11511</a></div></li>
+        <li><div><strong>OpenAI Cookbook.</strong> <em>When to use fine-tuning</em>. — <a href="https://cookbook.openai.com/examples/how_to_finetune_chat_models" target="_blank">cookbook.openai.com</a></div></li>
+        <li><div><strong>Anthropic.</strong> <em>Prompt engineering vs fine-tuning</em>. — <a href="https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/overview" target="_blank">docs.anthropic.com</a></div></li>
+      </ul>
+
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- AULA 3 — PIPELINE: PLANEJAMENTO + DATASET                     -->
+    <!-- ============================================================ -->
+    <section class="aula" id="aula-3">
+      <header class="aula-header">
+        <span class="aula-tag">Aula 03 · Prática (1/2)</span>
+        <h1 class="aula-title">Pipeline: <em>planejamento</em><br>e dataset</h1>
+        <p class="aula-subtitle">A primeira metade do pipeline real de fine-tuning. Tudo que acontece antes do <code>trainer.train()</code>: PRD, escolha do modelo, schema de output, geração sintética de dataset com Claude, validação automática de cobertura. Mais da metade do sucesso de um FT está aqui.</p>
+      </header>
+
+      <div class="box">
+        <div class="box-title">Repositório do projeto</div>
+        <p style="margin: 0 0 10px">Esta aula referencia código que está em:</p>
+        <a class="repo-ref" href="https://github.com/caio-moliveira/ai-engineer-fine-tuning-example" target="_blank">caio-moliveira/ai-engineer-fine-tuning-example</a>
+        <p style="margin: 10px 0 0">O documento técnico completo (com troubleshooting e apêndices) está em <code>docs/CURSO_FINE_TUNING.md</code> do repositório.</p>
+      </div>
+
+      <!-- 3.1 PRD -->
+      <h2><span class="num">3.1</span>O PRD — congelando decisões antes do código</h2>
+
+      <p>Um <strong>Product Requirements Document</strong> simples, escrito antes da primeira linha de código, evita a armadilha clássica do FT: ficar reabrindo decisões de design durante a implementação. No nosso projeto, ele consolida sete decisões críticas:</p>
+
+      <table>
+        <thead>
+          <tr><th>Decisão</th><th>Valor</th><th>Razão</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Modelo base</td><td><code>Qwen/Qwen2.5-Coder-1.5B-Instruct</code></td><td>Pequeno (cabe em qualquer GPU), variante Coder excelente em JSON, instruct-tuned, decente em pt-BR</td></tr>
+          <tr><td>Técnica</td><td>LoRA puro (PEFT + Transformers)</td><td>Sem Unsloth (incompatibilidade Windows), sem bitsandbytes</td></tr>
+          <tr><td>Precisão</td><td>bf16</td><td>RTX 3060 (Ampere) suporta nativo, sem risco de overflow do fp16</td></tr>
+          <tr><td>Dataset</td><td>500 exemplos sintéticos</td><td>Suficiente para tarefa estruturada; com 425 de treino atingimos 89% exact-match</td></tr>
+          <tr><td>Gerador</td><td>Claude Haiku via Anthropic API</td><td>Qualidade alta, custo baixo (~USD 2-3 total)</td></tr>
+          <tr><td>Schema</td><td>Lista flat de objetos, 7 campos</td><td>Define o contrato do output — decisão mais crítica do projeto</td></tr>
+          <tr><td>Negativos</td><td>~18% do dataset</td><td>Para o modelo aprender a devolver <code>[]</code> quando não há lei</td></tr>
+        </tbody>
+      </table>
+
+      <div class="box good">
+        <div class="box-title">Princípio</div>
+        <p style="margin:0">Decisões congeladas em PRD evitam mudar design durante a implementação. Se algo precisar mudar, <strong>mude o PRD primeiro</strong>, então o código. Isso parece burocracia mas economiza dias.</p>
+      </div>
+
+      <!-- 3.2 Escolha do modelo -->
+      <h2><span class="num">3.2</span>Escolha do modelo base — o que pesar</h2>
+
+      <p>Cinco critérios para escolher o modelo base, em ordem de importância:</p>
+
+      <ol>
+        <li><strong>Cabe na sua GPU?</strong> Regra de bolso para LoRA em bf16: <code>VRAM ≈ params × 2 bytes × 1.5</code> (peso + ativações + gradientes do adapter). Qwen 1.5B em bf16: ~4 GB. Folga confortável em GPU de 12 GB.</li>
+        <li><strong>Conhece bem o idioma?</strong> Modelos majoritariamente em inglês (Phi, Mistral antigo) têm pt-BR fraco. Qwen 2.5 e Llama 3.x são bons. Teste pedindo para resumir um parágrafo em pt-BR <em>antes</em> de treinar.</li>
+        <li><strong>Tem variante especializada para sua tarefa?</strong> Para JSON/código → variante "Coder". Para diálogo → "Instruct". Para análise → "Chat".</li>
+        <li><strong>É open-weights com licença permissiva?</strong> Llama tem restrições; Qwen 2.5 é Apache 2.0 (mais livre); Mistral mudou políticas. Cheque antes de partir para produção comercial.</li>
+        <li><strong>Tem suporte ativo nas libs?</strong> Compatibilidade com HuggingFace Transformers, PEFT, llama.cpp (para deploy GGUF posterior).</li>
+      </ol>
+
+      <h3>Alternativas que consideramos</h3>
+
+      <table>
+        <thead>
+          <tr><th>Modelo</th><th>Pró</th><th>Contra</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Qwen2.5-Coder-1.5B-Instruct</strong> ✅</td><td>Coder = ótimo em JSON; pt-BR decente; Apache 2.0</td><td>Conhecimento jurídico zero — mas é o que vamos ensinar</td></tr>
+          <tr><td>Llama-3.2-1B</td><td>Marca forte, ótimo em pt-BR</td><td>Sem variante Coder; licença Meta restritiva</td></tr>
+          <tr><td>Phi-3.5-mini</td><td>Pequeno e rápido</td><td>pt-BR mais fraco; menos comunidade</td></tr>
+          <tr><td>Qwen2.5-1.5B (sem Coder)</td><td>Mesmas vantagens, mais geral</td><td>Coder dá vantagem mensurável em output estruturado</td></tr>
+        </tbody>
+      </table>
+
+      <!-- 3.3 Schema -->
+      <h2><span class="num">3.3</span>Schema de output — o contrato</h2>
+
+      <p>O <strong>schema é o contrato</strong> entre o modelo treinado e quem vai consumir. Decisões aqui se propagam para tudo: geração de dataset, métricas de avaliação, integração no app cliente. Defina <em>antes</em> de gerar a primeira linha do dataset.</p>
+
+      <pre data-lang="JSON"><span class="tk-op">[</span>
+  <span class="tk-op">{</span>
+    <span class="tk-str">"tipo_lei"</span><span class="tk-op">:</span> <span class="tk-str">"LEI"</span><span class="tk-op">,</span>
+    <span class="tk-str">"num_lei"</span><span class="tk-op">:</span>  <span class="tk-str">"8666"</span><span class="tk-op">,</span>
+    <span class="tk-str">"ano_lei"</span><span class="tk-op">:</span>  <span class="tk-str">"1993"</span><span class="tk-op">,</span>
+    <span class="tk-str">"artigo"</span><span class="tk-op">:</span>   <span class="tk-str">"37"</span><span class="tk-op">,</span>
+    <span class="tk-str">"paragrafo"</span><span class="tk-op">:</span> <span class="tk-kw">null</span><span class="tk-op">,</span>
+    <span class="tk-str">"inciso"</span><span class="tk-op">:</span>    <span class="tk-str">"XXI"</span><span class="tk-op">,</span>
+    <span class="tk-str">"alinea"</span><span class="tk-op">:</span>    <span class="tk-kw">null</span>
+  <span class="tk-op">}</span>
+<span class="tk-op">]</span></pre>
+
+      <h3>Regras críticas do schema</h3>
+
+      <ul>
+        <li><strong>Sempre lista</strong>, mesmo com 0 ou 1 item. Nunca <code>null</code>, nunca objeto solto. <em>Por quê:</em> consumidor pode iterar sem casos especiais.</li>
+        <li><strong>Todos os valores são string ou <code>null</code></strong>. Nunca inteiro, nunca string vazia. <em>Por quê:</em> string vazia e null carregam significados diferentes; mistura confunde o modelo.</li>
+        <li><strong>Vocabulário fechado para <code>tipo_lei</code></strong>: 21 valores válidos (CF, LEI, LC, DEC, etc.). <em>Por quê:</em> o modelo aprende a usar só esses; impossível alucinar tipo novo.</li>
+        <li><strong>Formatos canônicos</strong>: <code>num_lei</code> só dígitos (<code>"8666"</code> não <code>"8.666"</code>); <code>inciso</code> sempre romano maiúsculo; <code>alinea</code> sempre minúscula.</li>
+      </ul>
+
+      <div class="box">
+        <div class="box-title">Princípio fundamental</div>
+        <p style="margin:0">Quanto mais estrito o schema, mais o modelo <strong>memoriza padrões consistentes</strong> e menos aluciná. Cada chave opcional ou valor "às vezes" enfraquece o aprendizado. Vale ser quase paranóico aqui.</p>
+      </div>
+
+      <!-- 3.4 Structure-first -->
+      <h2><span class="num">3.4</span>Estratégia structure-first — invertendo a anotação</h2>
+
+      <p>O caminho tradicional para criar dataset de extração é: pegar textos reais, contratar anotadores, validar. Caro, lento, sujeito a viés do anotador. Nós invertemos:</p>
+
+      <div class="diagram">
+        <svg viewBox="0 0 880 280" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:auto;">
+          <!-- Step 1 -->
+          <rect x="20" y="60" width="180" height="160" rx="8" fill="#0a0f1c" stroke="#00d4ff" stroke-width="1.5"/>
+          <text x="110" y="36" text-anchor="middle" font-family="JetBrains Mono" font-size="11" fill="#00d4ff" font-weight="600" letter-spacing="1">PASSO 1</text>
+          <text x="110" y="90" text-anchor="middle" font-family="Fraunces" font-size="17" fill="#f4f7ff" font-weight="600">Amostra a</text>
+          <text x="110" y="110" text-anchor="middle" font-family="Fraunces" font-size="17" fill="#f4f7ff" font-weight="600">estrutura</text>
+          <text x="110" y="138" text-anchor="middle" font-family="Manrope" font-size="10" fill="#8892b0">"vou citar:</text>
+          <text x="110" y="153" text-anchor="middle" font-family="Manrope" font-size="10" fill="#c5cce0">Lei 8666/93 art 37 XXI</text>
+          <text x="110" y="168" text-anchor="middle" font-family="Manrope" font-size="10" fill="#c5cce0">+ CF art 37 caput"</text>
+          <text x="110" y="200" text-anchor="middle" font-family="JetBrains Mono" font-size="9" fill="#5a6480">amostrador.py</text>
+
+          <line x1="205" y1="140" x2="240" y2="140" stroke="#1170ff"/>
+          <polygon points="240,135 248,140 240,145" fill="#1170ff"/>
+
+          <!-- Step 2 -->
+          <rect x="255" y="60" width="180" height="160" rx="8" fill="#0a0f1c" stroke="#00d4ff" stroke-width="1.5"/>
+          <text x="345" y="36" text-anchor="middle" font-family="JetBrains Mono" font-size="11" fill="#00d4ff" font-weight="600" letter-spacing="1">PASSO 2</text>
+          <text x="345" y="90" text-anchor="middle" font-family="Fraunces" font-size="17" fill="#f4f7ff" font-weight="600">Claude redige</text>
+          <text x="345" y="110" text-anchor="middle" font-family="Fraunces" font-size="17" fill="#f4f7ff" font-weight="600">o parágrafo</text>
+          <text x="345" y="138" text-anchor="middle" font-family="Manrope" font-size="10" fill="#8892b0">prompt: "escreva um</text>
+          <text x="345" y="153" text-anchor="middle" font-family="Manrope" font-size="10" fill="#c5cce0">acórdão citando: …"</text>
+          <text x="345" y="168" text-anchor="middle" font-family="Manrope" font-size="10" fill="#c5cce0">4 estilos rotacionados</text>
+          <text x="345" y="200" text-anchor="middle" font-family="JetBrains Mono" font-size="9" fill="#5a6480">gerar_dataset.py</text>
+
+          <line x1="440" y1="140" x2="475" y2="140" stroke="#1170ff"/>
+          <polygon points="475,135 483,140 475,145" fill="#1170ff"/>
+
+          <!-- Step 3 -->
+          <rect x="490" y="60" width="180" height="160" rx="8" fill="#0a0f1c" stroke="#00d4ff" stroke-width="1.5"/>
+          <text x="580" y="36" text-anchor="middle" font-family="JetBrains Mono" font-size="11" fill="#00d4ff" font-weight="600" letter-spacing="1">PASSO 3</text>
+          <text x="580" y="90" text-anchor="middle" font-family="Fraunces" font-size="17" fill="#f4f7ff" font-weight="600">Valida</text>
+          <text x="580" y="110" text-anchor="middle" font-family="Fraunces" font-size="17" fill="#f4f7ff" font-weight="600">cobertura</text>
+          <text x="580" y="138" text-anchor="middle" font-family="Manrope" font-size="10" fill="#8892b0">apelidos das leis</text>
+          <text x="580" y="153" text-anchor="middle" font-family="Manrope" font-size="10" fill="#c5cce0">aparecem no texto?</text>
+          <text x="580" y="168" text-anchor="middle" font-family="Manrope" font-size="10" fill="#c5cce0">se não → descarta</text>
+          <text x="580" y="200" text-anchor="middle" font-family="JetBrains Mono" font-size="9" fill="#5a6480">validador.py</text>
+
+          <line x1="675" y1="140" x2="710" y2="140" stroke="#1170ff"/>
+          <polygon points="710,135 718,140 710,145" fill="#1170ff"/>
+
+          <!-- Step 4 -->
+          <rect x="725" y="60" width="135" height="160" rx="8" fill="#0a0f1c" stroke="#1170ff" stroke-width="2"/>
+          <text x="792" y="36" text-anchor="middle" font-family="JetBrains Mono" font-size="11" fill="#1170ff" font-weight="600" letter-spacing="1">PASSO 4</text>
+          <text x="792" y="90" text-anchor="middle" font-family="Fraunces" font-size="17" fill="#f4f7ff" font-weight="600">Par</text>
+          <text x="792" y="110" text-anchor="middle" font-family="Fraunces" font-size="17" fill="#f4f7ff" font-weight="600">(texto, JSON)</text>
+          <text x="792" y="145" text-anchor="middle" font-family="Manrope" font-size="10" fill="#c5cce0">exemplo de treino</text>
+          <text x="792" y="160" text-anchor="middle" font-family="Manrope" font-size="10" fill="#c5cce0">ground truth</text>
+          <text x="792" y="175" text-anchor="middle" font-family="Manrope" font-size="10" fill="#c5cce0">por design</text>
+        </svg>
+        <div class="diagram-caption">Pipeline structure-first: a estrutura define o texto, não o contrário</div>
+      </div>
+
+      <p><strong>Vantagens:</strong></p>
+      <ul>
+        <li>Ground truth é construído <em>por design</em>, não por anotação.</li>
+        <li>Distribuição de quais leis, quantos campos, quais combinações fica controlada.</li>
+        <li>Negativos (texto sem lei) são triviais de gerar.</li>
+        <li>Custo escala bem: <strong>~USD 0.005 por exemplo</strong> com Claude Haiku.</li>
+      </ul>
+
+      <h3>O catálogo curado de leis</h3>
+
+      <p>Cada lei no catálogo (<a href="https://github.com/caio-moliveira/ai-engineer-fine-tuning-example/blob/main/src/catalogo_leis.py" target="_blank"><code>src/catalogo_leis.py</code></a>) tem:</p>
+
+      <pre data-lang="PYTHON"><span class="tk-op">{</span>
+    <span class="tk-str">"tipo_lei"</span><span class="tk-op">:</span> <span class="tk-str">"LEI"</span><span class="tk-op">,</span>
+    <span class="tk-str">"num_lei"</span><span class="tk-op">:</span> <span class="tk-str">"8666"</span><span class="tk-op">,</span>
+    <span class="tk-str">"ano_lei"</span><span class="tk-op">:</span> <span class="tk-str">"1993"</span><span class="tk-op">,</span>
+    <span class="tk-str">"apelidos"</span><span class="tk-op">:</span> <span class="tk-op">[</span><span class="tk-str">"Lei nº 8.666/93"</span><span class="tk-op">,</span> <span class="tk-str">"Lei de Licitações"</span><span class="tk-op">,</span> <span class="tk-op">...]</span><span class="tk-op">,</span>
+    <span class="tk-str">"peso"</span><span class="tk-op">:</span> <span class="tk-num">10</span><span class="tk-op">,</span>                          <span class="tk-com"># frequência relativa na amostragem</span>
+    <span class="tk-str">"artigos_validos"</span><span class="tk-op">:</span> <span class="tk-op">[</span><span class="tk-str">"3"</span><span class="tk-op">,</span> <span class="tk-str">"6"</span><span class="tk-op">,</span> <span class="tk-str">"22"</span><span class="tk-op">,</span> <span class="tk-str">"37"</span><span class="tk-op">]</span><span class="tk-op">,</span>  <span class="tk-com"># artigos reais</span>
+<span class="tk-op">}</span></pre>
+
+      <p>Três campos fazem trabalho importante:</p>
+      <ul>
+        <li><strong><code>peso</code></strong>: define quais leis aparecem mais (Constituição Federal peso 20, decretos raros peso 1-3). Amostragem ponderada reflete distribuição real.</li>
+        <li><strong><code>apelidos</code></strong>: formas que o texto pode citar a lei. Usados depois para validar cobertura.</li>
+        <li><strong><code>artigos_validos</code></strong>: evita gerar "Lei 8.666 art. 999" (que não existe).</li>
+      </ul>
+
+      <!-- 3.5 Amostragem -->
+      <h2><span class="num">3.5</span>Amostragem ponderada — como decidir a distribuição</h2>
+
+      <p>O dataset tem que refletir a distribuição esperada de uso real, não ser "balanceado" no sentido ingênuo. No nosso caso:</p>
+
+      <h3>Distribuição de quantos campos por dispositivo</h3>
+
+      <table>
+        <thead><tr><th>Combinação</th><th>%</th><th>Exemplo</th></tr></thead>
+        <tbody>
+          <tr><td>Só lei</td><td>25%</td><td>"Lei 8.666 de 1993"</td></tr>
+          <tr><td>Lei + artigo</td><td>30%</td><td>"art. 37 da CF"</td></tr>
+          <tr><td>Lei + artigo + parágrafo</td><td>15%</td><td>"art. 37, §1º"</td></tr>
+          <tr><td>Lei + artigo + inciso</td><td>20%</td><td>"art. 5º, XXII, CF"</td></tr>
+          <tr><td>Lei + artigo + parágrafo + inciso</td><td>7%</td><td>"art. 5º, §2º, III"</td></tr>
+          <tr><td>Lei + artigo + inciso + alínea</td><td>3%</td><td>"art. 195, IV, b"</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Negativos — 18% sem nenhuma lei</h3>
+
+      <p>Negativos são o detalhe mais frequentemente esquecido em datasets de extração. <strong>Sem eles, o modelo aprende que todo texto jurídico cita lei</strong> e alucina referências em parágrafos neutros.</p>
+
+      <pre data-lang="PROMPT NEGATIVO">Escreva UM parágrafo de texto jurídico no estilo {estilo} que
+NÃO cite nenhuma lei, decreto, súmula, código ou dispositivo legal.
+Pode mencionar princípios gerais, posições doutrinárias, jurisprudência
+genérica, mas nunca uma referência específica.</pre>
+
+      <p>O par fica: <code>(texto sem lei, [])</code>. O modelo aprende a devolver lista vazia, e nas métricas medimos <strong>FP em negativos</strong> (falsos positivos: % de negativos onde o modelo inventou alguma lei). No nosso resultado: 0%.</p>
+
+      <h3>Reprodutibilidade</h3>
+
+      <pre data-lang="PYTHON"><span class="tk-kw">import</span> random
+<span class="tk-kw">import</span> os
+
+random.seed(<span class="tk-fn">int</span>(os.environ.get(<span class="tk-str">"SEED"</span>, <span class="tk-str">"3407"</span>)))</pre>
+
+      <p>O número <code>3407</code> vem de tradição (David Picard, <em>"Torch.manual_seed(3407) is all you need"</em>, 2021 — meio brincadeira, meio sério). Use qualquer seed fixo. O importante é que seja reproduzível: rodar duas vezes deve dar o mesmo dataset.</p>
+
+      <!-- 3.6 Loop de geração -->
+      <h2><span class="num">3.6</span>Loop de geração com Claude</h2>
+
+      <p>O script <a href="https://github.com/caio-moliveira/ai-engineer-fine-tuning-example/blob/main/src/gerar_dataset.py" target="_blank"><code>src/gerar_dataset.py</code></a> implementa o loop principal. Snippet cirúrgico do core:</p>
+
+      <pre data-lang="PYTHON"><span class="tk-kw">for</span> _ <span class="tk-kw">in</span> <span class="tk-fn">range</span>(meta_de_exemplos):
+    <span class="tk-kw">if</span> random.random() &lt; PERC_NEGATIVOS:        <span class="tk-com"># 0.18</span>
+        prompt = <span class="tk-fn">construir_prompt_negativo</span>()
+        ground_truth = []
+    <span class="tk-kw">else</span>:
+        dispositivos, estilo = <span class="tk-fn">amostrar_paragrafo</span>()
+        prompt = <span class="tk-fn">construir_prompt_redacao</span>(dispositivos, estilo)
+        ground_truth = dispositivos
+
+    paragrafo = <span class="tk-fn">chamar_claude</span>(prompt)              <span class="tk-com"># anthropic.messages.create</span>
+
+    <span class="tk-kw">if</span> <span class="tk-fn">validar_cobertura</span>(paragrafo, dispositivos):
+        <span class="tk-fn">salvar_jsonl</span>({
+            <span class="tk-str">"prompt"</span>: paragrafo,
+            <span class="tk-str">"completion"</span>: json.dumps(ground_truth, ensure_ascii=<span class="tk-kw">False</span>),
+        })
+    <span class="tk-kw">else</span>:
+        <span class="tk-com"># cobertura falhou — Claude esqueceu de mencionar alguma lei</span>
+        <span class="tk-com"># descarta e tenta outra; até 3 retries por exemplo</span>
+        <span class="tk-kw">continue</span></pre>
+
+      <h3>Detalhes que importam na engenharia do script</h3>
+
+      <ul>
+        <li><strong>Append incremental</strong> em <code>data/dataset.jsonl</code>, não acumula em memória. Você não quer perder 400 exemplos por um KeyboardInterrupt.</li>
+        <li><strong>Resumível</strong>: se o script cair, recomeça contando linhas existentes no arquivo.</li>
+        <li><strong>Rate limit defensivo</strong>: <code>time.sleep(0.3)</code> entre chamadas, retry exponencial em 429.</li>
+        <li><strong>Print de progresso</strong> a cada 10 exemplos.</li>
+        <li><strong>Split 85/15 train/test</strong> ao final, com seed determinística.</li>
+      </ul>
+
+      <div class="stats">
+        <div class="stat"><div class="stat-num">500</div><div class="stat-label">Exemplos gerados</div></div>
+        <div class="stat"><div class="stat-num">~30min</div><div class="stat-label">Tempo total</div></div>
+        <div class="stat"><div class="stat-num">USD 2-3</div><div class="stat-label">Custo Claude Haiku</div></div>
+        <div class="stat"><div class="stat-num">85/15</div><div class="stat-label">Split train/test</div></div>
+      </div>
+
+      <!-- 3.7 Validação de cobertura -->
+      <h2><span class="num">3.7</span>Validação de cobertura — o filtro automático</h2>
+
+      <p>Claude às vezes "criativa demais" e escreve um parágrafo que não cita uma das leis pedidas. Sem filtro, esse par <code>(texto, ground_truth)</code> vira ruído: o modelo aprende a inventar referências. Daí <a href="https://github.com/caio-moliveira/ai-engineer-fine-tuning-example/blob/main/src/validador.py" target="_blank"><code>src/validador.py</code></a>:</p>
+
+      <pre data-lang="PYTHON"><span class="tk-kw">def</span> <span class="tk-fn">validar_cobertura</span>(paragrafo: <span class="tk-cls">str</span>, dispositivos: <span class="tk-cls">list</span>[<span class="tk-cls">dict</span>]) -&gt; <span class="tk-cls">bool</span>:
+    <span class="tk-str">"""
+    Para cada lei do ground truth, pelo menos UM dos seus
+    apelidos deve aparecer no texto (normalizado: lowercase,
+    sem acentos, sem pontuação).
+    """</span>
+    texto_norm = <span class="tk-fn">normalizar</span>(paragrafo)
+
+    <span class="tk-kw">for</span> disp <span class="tk-kw">in</span> dispositivos:
+        lei = <span class="tk-fn">buscar_no_catalogo</span>(disp[<span class="tk-str">"tipo_lei"</span>], disp[<span class="tk-str">"num_lei"</span>])
+        apelidos_norm = [<span class="tk-fn">normalizar</span>(a) <span class="tk-kw">for</span> a <span class="tk-kw">in</span> lei[<span class="tk-str">"apelidos"</span>]]
+
+        <span class="tk-kw">if</span> <span class="tk-kw">not</span> <span class="tk-fn">any</span>(ap <span class="tk-kw">in</span> texto_norm <span class="tk-kw">for</span> ap <span class="tk-kw">in</span> apelidos_norm):
+            <span class="tk-kw">return</span> <span class="tk-kw">False</span>
+
+    <span class="tk-kw">return</span> <span class="tk-kw">True</span></pre>
+
+      <div class="box good">
+        <div class="box-title">Por que isso é poderoso</div>
+        <p style="margin:0">Você consegue um ground truth <em>garantidamente verdadeiro</em> sem revisão manual. Cada exemplo que entra no <code>dataset.jsonl</code> passou pelo filtro. Isso é difícil de replicar com anotação humana em larga escala.</p>
+      </div>
+
+      <!-- 3.8 -->
+      <h2><span class="num">3.8</span>O que vai estar no <code>train.jsonl</code></h2>
+
+      <p>Formato final, uma linha por exemplo:</p>
+
+      <pre data-lang="JSONL">{<span class="tk-str">"prompt"</span>: <span class="tk-str">"Em decisão recente, o STF reafirmou que a Lei nº 8.666/93, art. 37, XXI, exige licitação pública…"</span>, <span class="tk-str">"completion"</span>: <span class="tk-str">"[{\"tipo_lei\":\"LEI\",\"num_lei\":\"8666\",\"ano_lei\":\"1993\",\"artigo\":\"37\",\"paragrafo\":null,\"inciso\":\"XXI\",\"alinea\":null}]"</span>}
+{<span class="tk-str">"prompt"</span>: <span class="tk-str">"O princípio da legalidade impõe limites ao poder de polícia…"</span>, <span class="tk-str">"completion"</span>: <span class="tk-str">"[]"</span>}
+{<span class="tk-str">"prompt"</span>: <span class="tk-str">"…"</span>, <span class="tk-str">"completion"</span>: <span class="tk-str">"…"</span>}</pre>
+
+      <p>Esse é o ponto exato em que terminamos a aula 03. Você tem:</p>
+
+      <ul>
+        <li>Um PRD com decisões congeladas</li>
+        <li>Um modelo base escolhido com justificativa</li>
+        <li>Um schema definido formalmente</li>
+        <li><code>data/train.jsonl</code> com ~425 exemplos validados</li>
+        <li><code>data/test.jsonl</code> com ~75 exemplos para avaliação posterior</li>
+      </ul>
+
+      <p>A aula 04 pega esse dataset, treina o LoRA, avalia e faz o deploy local.</p>
+
+      <h2><span class="num">3.9</span>Referências da aula</h2>
+
+      <ul class="refs">
+        <li><div><strong>Repositório do projeto.</strong> <em>ai-engineer-fine-tuning-example</em>. — <a href="https://github.com/caio-moliveira/ai-engineer-fine-tuning-example" target="_blank">github.com/caio-moliveira/ai-engineer-fine-tuning-example</a></div></li>
+        <li><div><strong>Wang et al. (2022).</strong> <em>Self-Instruct: Aligning Language Models with Self-Generated Instructions</em> (base teórica para dataset sintético). — <a href="https://arxiv.org/abs/2212.10560" target="_blank">arxiv.org/abs/2212.10560</a></div></li>
+        <li><div><strong>Taori et al. (2023).</strong> <em>Stanford Alpaca: An Instruction-following LLaMA Model</em> (caso emblemático de dataset gerado por LLM). — <a href="https://github.com/tatsu-lab/stanford_alpaca" target="_blank">github.com/tatsu-lab/stanford_alpaca</a></div></li>
+        <li><div><strong>Picard (2021).</strong> <em>Torch.manual_seed(3407) is all you need</em>. — <a href="https://arxiv.org/abs/2109.08203" target="_blank">arxiv.org/abs/2109.08203</a></div></li>
+        <li><div><strong>Qwen team.</strong> <em>Qwen2.5 Technical Report</em>. — <a href="https://arxiv.org/abs/2412.15115" target="_blank">arxiv.org/abs/2412.15115</a></div></li>
+        <li><div><strong>Anthropic.</strong> <em>Claude API — Messages Reference</em>. — <a href="https://docs.anthropic.com/en/api/messages" target="_blank">docs.anthropic.com/en/api/messages</a></div></li>
+      </ul>
+
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- AULA 4 — TREINO, AVALIAÇÃO E DEPLOY                           -->
+    <!-- ============================================================ -->
+    <section class="aula" id="aula-4">
+      <header class="aula-header">
+        <span class="aula-tag">Aula 04 · Prática (2/2)</span>
+        <h1 class="aula-title">Treino, avaliação<br>e <em>deploy local</em></h1>
+        <p class="aula-subtitle">A segunda metade do pipeline. Configuração LoRA, hiperparâmetros, o detalhe crítico do loss masking, métricas estruturais além da loss, e deploy via llama.cpp + GGUF para uso com a lib OpenAI localmente. Tudo o que diferencia um modelo treinado de um produto que você pode integrar.</p>
+      </header>
+
+      <div class="box">
+        <div class="box-title">Repositório do projeto</div>
+        <a class="repo-ref" href="https://github.com/caio-moliveira/ai-engineer-fine-tuning-example" target="_blank">caio-moliveira/ai-engineer-fine-tuning-example</a>
+      </div>
+
+      <!-- 4.1 LoRA config -->
+      <h2><span class="num">4.1</span>Configuração do LoRA — escolhas e racional</h2>
+
+      <p>A configuração inteira do LoRA cabe em um objeto. Cada parâmetro tem um trade-off mensurável.</p>
+
+      <pre data-lang="PYTHON · src/treino.py"><span class="tk-kw">from</span> peft <span class="tk-kw">import</span> LoraConfig
+
+LORA_CONFIG = <span class="tk-fn">LoraConfig</span>(
+    r=<span class="tk-num">16</span>,                              <span class="tk-com"># rank — capacidade do adapter</span>
+    lora_alpha=<span class="tk-num">32</span>,                     <span class="tk-com"># escala efetiva = alpha/r = 2.0</span>
+    target_modules=[
+        <span class="tk-str">"q_proj"</span>, <span class="tk-str">"k_proj"</span>, <span class="tk-str">"v_proj"</span>, <span class="tk-str">"o_proj"</span>,     <span class="tk-com"># atenção</span>
+        <span class="tk-str">"gate_proj"</span>, <span class="tk-str">"up_proj"</span>, <span class="tk-str">"down_proj"</span>,        <span class="tk-com"># MLP</span>
+    ],
+    lora_dropout=<span class="tk-num">0.05</span>,
+    bias=<span class="tk-str">"none"</span>,
+    task_type=<span class="tk-str">"CAUSAL_LM"</span>,
+)</pre>
+
+      <h3>O significado de cada hiperparâmetro</h3>
+
+      <table>
+        <thead><tr><th>Parâmetro</th><th>Função</th><th>Trade-off</th></tr></thead>
+        <tbody>
+          <tr><td><code>r=16</code></td><td>Rank das matrizes A e B</td><td>Maior = mais capacidade, mais parâmetros, mais overfit. Menor = mais leve, menos capaz. 8-32 é a faixa útil.</td></tr>
+          <tr><td><code>lora_alpha=32</code></td><td>Escala da contribuição do adapter</td><td>Efetiva = α/r. Convenção comum α = 2r.</td></tr>
+          <tr><td><code>target_modules</code></td><td>Quais camadas recebem LoRA</td><td>Só atenção (q,k,v,o) é mais leve. + MLP (gate, up, down) é mais expressivo. Para output estruturado, MLP ajuda.</td></tr>
+          <tr><td><code>lora_dropout=0.05</code></td><td>Regularização</td><td>Combate overfit em dataset pequeno. 0.05-0.1 é típico.</td></tr>
+          <tr><td><code>bias="none"</code></td><td>Não treina vieses</td><td>Economia mínima; raramente vale a pena treinar.</td></tr>
+        </tbody>
+      </table>
+
+      <p>Resultado dessa config no Qwen 1.5B:</p>
+
+      <div class="stats">
+        <div class="stat"><div class="stat-num">18M</div><div class="stat-label">Params treináveis</div></div>
+        <div class="stat"><div class="stat-num">1.18%</div><div class="stat-label">Do total (1.56B)</div></div>
+        <div class="stat"><div class="stat-num">~70MB</div><div class="stat-label">Tamanho do adapter</div></div>
+        <div class="stat"><div class="stat-num">~7min</div><div class="stat-label">3 épocas, RTX 3060</div></div>
+      </div>
+
+      <!-- 4.2 Training args -->
+      <h2><span class="num">4.2</span>Hiperparâmetros do treino</h2>
+
+      <pre data-lang="PYTHON · src/treino.py"><span class="tk-kw">from</span> transformers <span class="tk-kw">import</span> TrainingArguments
+
+TRAINING_ARGS = <span class="tk-fn">TrainingArguments</span>(
+    output_dir=<span class="tk-str">"outputs/checkpoints"</span>,
+    num_train_epochs=<span class="tk-num">3</span>,
+    per_device_train_batch_size=<span class="tk-num">2</span>,
+    gradient_accumulation_steps=<span class="tk-num">4</span>,        <span class="tk-com"># batch efetivo = 2 × 4 = 8</span>
+    learning_rate=<span class="tk-num">2e-4</span>,                   <span class="tk-com"># LoRA: 100x maior que full FT</span>
+    warmup_ratio=<span class="tk-num">0.05</span>,                    <span class="tk-com"># 5% inicial em ramp-up</span>
+    lr_scheduler_type=<span class="tk-str">"cosine"</span>,
+    logging_steps=<span class="tk-num">5</span>,
+    save_strategy=<span class="tk-str">"epoch"</span>,
+    bf16=<span class="tk-kw">True</span>,
+    optim=<span class="tk-str">"adamw_torch"</span>,                   <span class="tk-com"># sem 8bit, ambiente Windows</span>
+    gradient_checkpointing=<span class="tk-kw">True</span>,           <span class="tk-com"># troca compute por VRAM</span>
+    seed=<span class="tk-num">3407</span>,
+    report_to=<span class="tk-str">"none"</span>,
+)</pre>
+
+      <h3>Por que esses valores</h3>
+
+      <table>
+        <thead><tr><th>Parâmetro</th><th>Valor</th><th>Justificativa</th></tr></thead>
+        <tbody>
+          <tr><td><code>num_train_epochs</code></td><td>3</td><td>Padrão para tarefa estruturada. Mais épocas em dataset pequeno → overfit fácil.</td></tr>
+          <tr><td><code>per_device_train_batch_size</code></td><td>2</td><td>Limite de VRAM com seq_len=1024. Em GPU maior, sobe para 4-8.</td></tr>
+          <tr><td><code>gradient_accumulation_steps</code></td><td>4</td><td>Acumula gradiente de 4 steps antes de atualizar → batch <em>efetivo</em> = 8. Comportamento como se fosse batch 8.</td></tr>
+          <tr><td><code>learning_rate</code></td><td>2e-4</td><td>LoRA tolera LRs ~100× maior que full FT (que usa 1e-5 a 5e-5). Padrão da literatura.</td></tr>
+          <tr><td><code>warmup_ratio</code></td><td>0.05</td><td>5% inicial com LR subindo de 0. Evita explosão do gradiente no começo.</td></tr>
+          <tr><td><code>lr_scheduler_type</code></td><td>cosine</td><td>Sobe no warmup, depois desce em formato cosseno até ~0. Padrão moderno.</td></tr>
+          <tr><td><code>bf16</code></td><td>true</td><td>Range igual a fp32, metade da memória, sem overflow do fp16. Suportado em Ampere+.</td></tr>
+          <tr><td><code>gradient_checkpointing</code></td><td>true</td><td>Não guarda ativações intermediárias, recomputa no backward. Mais lento, menos VRAM.</td></tr>
+        </tbody>
+      </table>
+
+      <!-- 4.3 Loss masking -->
+      <h2><span class="num">4.3</span>Loss masking — o detalhe que mais gente erra</h2>
+
+      <p>Este é <strong>o</strong> ponto mais frequentemente esquecido em FT caseiro. Sem loss masking, o modelo aprende a reproduzir o input <em>também</em>, gastando capacidade onde não devia.</p>
+
+      <h3>O formato ChatML do Qwen</h3>
+
+      <pre data-lang="CHATML">&lt;|im_start|&gt;system
+Você extrai citações de leis brasileiras em JSON.
+&lt;|im_end|&gt;
+&lt;|im_start|&gt;user
+Conforme o art. 37, XXI, da CF, é obrigatória a licitação…
+&lt;|im_end|&gt;
+&lt;|im_start|&gt;assistant
+[{"tipo_lei":"CF","num_lei":"1988","ano_lei":"1988","artigo":"37",…}]
+&lt;|im_end|&gt;</pre>
+
+      <p>Durante o treino, o modelo deveria aprender a gerar <strong>apenas o JSON do <code>assistant</code></strong>, dado tudo que vem antes. Tokens do <code>system</code> e <code>user</code> são <em>input</em>, não target. Mas se você não falar isso explicitamente, ele tenta aprender a gerar tudo, do <code>&lt;|im_start|&gt;system</code> até o final.</p>
+
+      <h3>A implementação: <code>label = -100</code></h3>
+
+      <p>PyTorch tem uma convenção: tokens com label <code>-100</code> são ignorados no cálculo da loss. Você usa isso para "esconder" o prefixo:</p>
+
+      <pre data-lang="PYTHON · loss masking core"><span class="tk-com"># Monta o prefixo: tudo até o início da resposta do assistant</span>
+prefix_text = tokenizer.<span class="tk-fn">apply_chat_template</span>(
+    [
+        {<span class="tk-str">"role"</span>: <span class="tk-str">"system"</span>, <span class="tk-str">"content"</span>: SYSTEM_PROMPT},
+        {<span class="tk-str">"role"</span>: <span class="tk-str">"user"</span>,   <span class="tk-str">"content"</span>: paragrafo},
+    ],
+    tokenize=<span class="tk-kw">False</span>,
+    add_generation_prompt=<span class="tk-kw">True</span>,  <span class="tk-com"># termina em "&lt;|im_start|&gt;assistant\n"</span>
+)
+
+prefix_ids   = tokenizer(prefix_text, add_special_tokens=<span class="tk-kw">False</span>).input_ids
+response_ids = tokenizer(completion + tokenizer.eos_token,
+                          add_special_tokens=<span class="tk-kw">False</span>).input_ids
+
+input_ids = prefix_ids + response_ids
+labels    = [<span class="tk-num">-100</span>] * <span class="tk-fn">len</span>(prefix_ids) + <span class="tk-fn">list</span>(response_ids)
+                  <span class="tk-com">↑</span>
+       <span class="tk-com">tokens do prefixo: NÃO contam na loss</span></pre>
+
+      <div class="box good">
+        <div class="box-title">Verificação rápida</div>
+        <p style="margin:0">Antes de gastar 30 min treinando: imprima <code>tokenizer.decode([t for t, l in zip(input_ids, labels) if l != -100])</code> em alguns exemplos. Você deveria ver <strong>só o JSON</strong> da resposta. Se vir prompt + JSON, o masking está errado.</p>
+      </div>
+
+      <p>Um <strong>data collator custom</strong> respeita o <code>-100</code> ao fazer padding do batch. Sem isso, o padding pode "vazar" para os labels e bagunçar a loss.</p>
+
+      <p>Resultado: a loss reportada conta só os ~50 tokens do JSON de cada exemplo, em vez dos ~300 tokens totais. <strong>Capacidade do modelo concentrada onde importa.</strong></p>
+
+      <!-- 4.4 Smoke test -->
+      <h2><span class="num">4.4</span>Smoke test antes do treino real</h2>
+
+      <p>Antes de gastar a janela completa de treino, rode 10 steps só pra ver se o pipeline está vivo:</p>
+
+      <pre data-lang="POWERSHELL">uv run python src/treino.py --smoke</pre>
+
+      <table>
+        <thead><tr><th>Resultado em 10 steps</th><th>O que significa</th></tr></thead>
+        <tbody>
+          <tr><td>Loss desce (ex: 2.8 → 1.4)</td><td>Pipeline OK. Pode partir para treino completo.</td></tr>
+          <tr><td>Loss não muda</td><td>LR baixo demais, ou masking impedindo aprendizado.</td></tr>
+          <tr><td>Loss explode (NaN)</td><td>LR alto demais, gradientes instáveis, problema de precisão.</td></tr>
+          <tr><td>Crasha antes do step 1</td><td>Bug em tokenização, schema, ou config. Stack trace dirá.</td></tr>
+        </tbody>
+      </table>
+
+      <!-- 4.5 Loss real -->
+      <h2><span class="num">4.5</span>Interpretando a loss do treino real</h2>
+
+      <p>A loss do nosso treino real, capturada em <code>logging_steps=5</code>:</p>
+
+      <div class="loss-chart">
+        <svg viewBox="0 0 720 280" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:auto;">
+          <!-- Axes -->
+          <line x1="60" y1="240" x2="680" y2="240" stroke="#5a6480" stroke-width="1"/>
+          <line x1="60" y1="20" x2="60" y2="240" stroke="#5a6480" stroke-width="1"/>
+
+          <!-- Y labels -->
+          <text x="50" y="30" text-anchor="end" font-family="JetBrains Mono" font-size="10" fill="#8892b0">0.30</text>
+          <text x="50" y="80" text-anchor="end" font-family="JetBrains Mono" font-size="10" fill="#8892b0">0.20</text>
+          <text x="50" y="130" text-anchor="end" font-family="JetBrains Mono" font-size="10" fill="#8892b0">0.10</text>
+          <text x="50" y="180" text-anchor="end" font-family="JetBrains Mono" font-size="10" fill="#8892b0">0.05</text>
+          <text x="50" y="245" text-anchor="end" font-family="JetBrains Mono" font-size="10" fill="#8892b0">0.00</text>
+
+          <!-- Grid -->
+          <line x1="60" y1="30" x2="680" y2="30" stroke="#1a2336" stroke-dasharray="2 4"/>
+          <line x1="60" y1="80" x2="680" y2="80" stroke="#1a2336" stroke-dasharray="2 4"/>
+          <line x1="60" y1="130" x2="680" y2="130" stroke="#1a2336" stroke-dasharray="2 4"/>
+          <line x1="60" y1="180" x2="680" y2="180" stroke="#1a2336" stroke-dasharray="2 4"/>
+
+          <!-- X labels (epochs) -->
+          <text x="60" y="260" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#8892b0">epoch 0</text>
+          <text x="265" y="260" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#8892b0">1</text>
+          <text x="475" y="260" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#8892b0">2</text>
+          <text x="680" y="260" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#8892b0">3</text>
+
+          <!-- Loss curve -->
+          <path d="
+            M 75,42
+            L 100,55
+            L 130,75
+            L 165,95
+            L 200,113
+            L 240,135
+            L 280,158
+            L 320,178
+            L 360,192
+            L 400,202
+            L 440,212
+            L 480,220
+            L 520,225
+            L 560,228
+            L 600,230
+            L 640,232
+            L 670,233
+          " stroke="#00d4ff" stroke-width="2" fill="none"/>
+
+          <!-- Points -->
+          <circle cx="100" cy="55" r="3" fill="#00d4ff"/>
+          <circle cx="165" cy="95" r="3" fill="#00d4ff"/>
+          <circle cx="280" cy="158" r="3" fill="#00d4ff"/>
+          <circle cx="440" cy="212" r="3" fill="#00d4ff"/>
+          <circle cx="640" cy="232" r="3" fill="#00d4ff"/>
+
+          <!-- Annotations -->
+          <text x="110" y="42" font-family="JetBrains Mono" font-size="10" fill="#00d4ff">0.2846</text>
+          <text x="180" y="83" font-family="JetBrains Mono" font-size="10" fill="#00d4ff">0.0825</text>
+          <text x="295" y="146" font-family="JetBrains Mono" font-size="10" fill="#00d4ff">0.0288</text>
+          <text x="455" y="200" font-family="JetBrains Mono" font-size="10" fill="#00d4ff">0.0076</text>
+          <text x="565" y="220" font-family="JetBrains Mono" font-size="10" fill="#00d4ff">0.0064</text>
+
+          <!-- Title -->
+          <text x="370" y="15" text-anchor="middle" font-family="JetBrains Mono" font-size="11" fill="#c5cce0" font-weight="600">TRAINING LOSS · 3 ÉPOCAS · 425 EXEMPLOS</text>
+        </svg>
+      </div>
+
+      <table>
+        <thead><tr><th>Métrica</th><th>Saudável</th><th>Bandeira amarela</th></tr></thead>
+        <tbody>
+          <tr><td><code>loss</code></td><td>Descendo monotonicamente</td><td>Oscila ou sobe → LR ou masking</td></tr>
+          <tr><td><code>grad_norm</code></td><td>Entre 0.05 e 5</td><td>&gt; 10 → instável; ≈ 0 → não aprende</td></tr>
+          <tr><td><code>learning_rate</code></td><td>Sobe no warmup, desce no cosine</td><td>Se constante, scheduler errado</td></tr>
+        </tbody>
+      </table>
+
+      <div class="box warn">
+        <div class="box-title">Loss baixa ≠ generalizou</div>
+        <p style="margin:0">Loss de treino &lt; 0.01 em dataset pequeno é <em>possível overfit</em>. Só métricas no test set confirmam que generalizou. Nunca declare vitória só pela loss.</p>
+      </div>
+
+      <!-- 4.6 Avaliação -->
+      <h2><span class="num">4.6</span>Avaliação — métricas estruturais</h2>
+
+      <p>A loss do treino mede uma coisa: <em>probabilidade de produzir o token certo</em>. Mas o que você realmente quer saber é: o JSON é válido? Tem o schema certo? As leis batem com o gold?</p>
+
+      <p>O script <a href="https://github.com/caio-moliveira/ai-engineer-fine-tuning-example/blob/main/src/avaliar.py" target="_blank"><code>src/avaliar.py</code></a> roda inferência real no <code>test.jsonl</code> e calcula métricas semânticas.</p>
+
+      <h3>O conjunto de métricas</h3>
+
+      <table>
+        <thead><tr><th>Métrica</th><th>O que mede</th></tr></thead>
+        <tbody>
+          <tr><td>JSON validity %</td><td>Parseou como JSON sem erro</td></tr>
+          <tr><td>Schema validity %</td><td>Tem exatamente as 7 chaves, tipos certos, vocabulário fechado</td></tr>
+          <tr><td>Exact-match (ordered)</td><td>Output idêntico ao ground_truth, mesma ordem</td></tr>
+          <tr><td>Exact-match (unordered)</td><td>Mesmo conjunto de objetos, ignorando ordem</td></tr>
+          <tr><td>F1 micro de itens</td><td>Acerto por dispositivo (lei + sub-campos)</td></tr>
+          <tr><td>F1 micro de leis</td><td>Acerto só de (tipo_lei, num_lei, ano_lei)</td></tr>
+          <tr><td>F1 por campo</td><td>Precision/recall/F1 individuais</td></tr>
+          <tr><td>FP em negativos</td><td>% de textos sem lei onde o modelo "inventou" alguma</td></tr>
+          <tr><td>Latência média</td><td>Segundos por inferência</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Geração determinística para avaliação</h3>
+
+      <pre data-lang="PYTHON">model.<span class="tk-fn">generate</span>(
+    **inputs,
+    do_sample=<span class="tk-kw">False</span>,             <span class="tk-com"># greedy: sempre token mais provável</span>
+    max_new_tokens=<span class="tk-num">512</span>,
+    pad_token_id=tokenizer.pad_token_id,
+    eos_token_id=tokenizer.eos_token_id,
+)</pre>
+
+      <p><code>do_sample=False</code> = <strong>greedy decoding</strong>. Sem temperature, sem top_p, sem top_k. Mesma entrada → mesma saída sempre. Essencial para reprodutibilidade da avaliação.</p>
+
+      <h3>Critérios de aceitação vs resultado real</h3>
+
+      <p>Os critérios foram definidos no PRD, <em>antes</em> do treino. Bater o alvo é o objetivo; superar é bônus.</p>
+
+      <table>
+        <thead><tr><th>Critério</th><th>Alvo (PRD)</th><th>Resultado real</th><th></th></tr></thead>
+        <tbody>
+          <tr><td>JSON sintaticamente válido</td><td>≥ 95%</td><td><strong>100%</strong></td><td style="color: var(--good)">✓</td></tr>
+          <tr><td>Schema válido</td><td>≥ 90%</td><td><strong>100%</strong></td><td style="color: var(--good)">✓</td></tr>
+          <tr><td>Exact-match unordered</td><td>≥ 70%</td><td><strong>89.33%</strong></td><td style="color: var(--good)">✓</td></tr>
+          <tr><td>F1 detecção de lei</td><td>≥ 0.80</td><td><strong>0.9333</strong></td><td style="color: var(--good)">✓</td></tr>
+          <tr><td>Latência por inferência</td><td>≤ 3s</td><td><strong>1.73s</strong></td><td style="color: var(--good)">✓</td></tr>
+          <tr><td>FP em negativos</td><td>informativo</td><td><strong>0%</strong></td><td style="color: var(--good)">✓</td></tr>
+        </tbody>
+      </table>
+
+      <!-- 4.7 Deploy -->
+      <h2><span class="num">4.7</span>Deploy local com llama.cpp — para usar com a lib OpenAI</h2>
+
+      <p>O objetivo final do deploy é: rodar o modelo <strong>localmente</strong>, expondo uma API compatível com a interface da OpenAI. Assim, qualquer código que hoje fala com a OpenAI fala com seu modelo trocando o <code>base_url</code>.</p>
+
+      <h3>Por que llama.cpp / GGUF</h3>
+
+      <table>
+        <thead>
+          <tr><th>Critério</th><th>llama.cpp</th><th>vLLM</th><th>FastAPI manual</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Roda em Windows nativo</td><td style="color: var(--good)">✓</td><td style="color: var(--bad)">precisa WSL2</td><td style="color: var(--good)">✓</td></tr>
+          <tr><td>API OpenAI-compatible built-in</td><td style="color: var(--good)">✓ (server)</td><td style="color: var(--good)">✓</td><td style="color: var(--bad)">implementar</td></tr>
+          <tr><td>Quantização GGUF integrada</td><td style="color: var(--good)">✓ (q4_k_m, q8_0, f16)</td><td style="color: var(--warn)">parcial</td><td style="color: var(--bad)">não</td></tr>
+          <tr><td>Footprint</td><td>Mínimo (C++)</td><td>Pesado</td><td>Médio</td></tr>
+          <tr><td>Setup</td><td>Minutos</td><td>Horas</td><td>Implementação completa</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Passo 1 — Merge do LoRA com o base</h3>
+
+      <p>llama.cpp consome modelos <strong>standalone</strong>. Você precisa fundir o adapter LoRA no modelo base, produzindo um único conjunto de pesos.</p>
+
+      <pre data-lang="PYTHON · src/treino.py (final)"><span class="tk-kw">from</span> peft <span class="tk-kw">import</span> PeftModel
+
+base = AutoModelForCausalLM.<span class="tk-fn">from_pretrained</span>(MODEL_NAME, torch_dtype=torch.bfloat16)
+merged = <span class="tk-fn">PeftModel</span>.<span class="tk-fn">from_pretrained</span>(base, <span class="tk-str">"outputs/lora"</span>).<span class="tk-fn">merge_and_unload</span>()
+merged.<span class="tk-fn">save_pretrained</span>(<span class="tk-str">"outputs/merged"</span>)
+tokenizer.<span class="tk-fn">save_pretrained</span>(<span class="tk-str">"outputs/merged"</span>)</pre>
+
+      <p>O resultado em <code>outputs/merged/</code> é um modelo HuggingFace normal, ~3 GB.</p>
+
+      <h3>Passo 2 — Conversão para GGUF</h3>
+
+      <p>GGUF é o formato binário que o llama.cpp consome. A conversão usa o script oficial do projeto:</p>
+
+      <pre data-lang="POWERSHELL">git clone https://github.com/ggerganov/llama.cpp
+cd llama.cpp
+pip install -r requirements/requirements-convert_hf_to_gguf.txt
+
+python convert_hf_to_gguf.py outputs/merged `
+    --outtype f16 `
+    --outfile deploy/extrator-leis.gguf</pre>
+
+      <h4>Escolha de quantização</h4>
+
+      <table>
+        <thead><tr><th>Tipo</th><th>Tamanho</th><th>Qualidade</th><th>Quando usar</th></tr></thead>
+        <tbody>
+          <tr><td><code>f16</code></td><td>~3 GB</td><td>Igual ao bf16 do treino</td><td>Você tem VRAM e quer fidelidade máxima</td></tr>
+          <tr><td><code>q8_0</code></td><td>~1.5 GB</td><td>Perda quase nula</td><td>Default razoável para produção</td></tr>
+          <tr><td><code>q4_k_m</code></td><td>~1 GB</td><td>Perda &lt; 2% em tarefas típicas</td><td>Hardware limitado, edge, CPU-only</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Passo 3 — Servir com llama.cpp em modo OpenAI-compatible</h3>
+
+      <p>O llama.cpp tem um <code>llama-server</code> que expõe a API no padrão OpenAI:</p>
+
+      <pre data-lang="POWERSHELL">llama-server `
+    -m deploy/extrator-leis.gguf `
+    --port 8080 `
+    --host 0.0.0.0 `
+    --n-gpu-layers 999 `
+    --ctx-size 2048 `
+    --chat-template chatml</pre>
+
+      <p>Detalhes importantes do comando:</p>
+      <ul>
+        <li><strong><code>--n-gpu-layers 999</code></strong>: tenta colocar todas as camadas na GPU. Se a VRAM não couber, diminua.</li>
+        <li><strong><code>--ctx-size 2048</code></strong>: tamanho máximo de contexto. Mais = mais VRAM.</li>
+        <li><strong><code>--chat-template chatml</code></strong>: usa o template do Qwen. Sem isso, o modelo não responde no formato esperado.</li>
+      </ul>
+
+      <h3>Passo 4 — Usar com a lib OpenAI</h3>
+
+      <p>Aqui está a parte que justifica todo o pipeline: <strong>o cliente é a lib OpenAI normal</strong>, só muda a <code>base_url</code>.</p>
+
+      <pre data-lang="PYTHON · deploy/cliente.py"><span class="tk-kw">from</span> openai <span class="tk-kw">import</span> OpenAI
+
+client = <span class="tk-fn">OpenAI</span>(
+    base_url=<span class="tk-str">"http://localhost:8080/v1"</span>,    <span class="tk-com"># aponta para o llama-server local</span>
+    api_key=<span class="tk-str">"sk-no-key-required"</span>,            <span class="tk-com"># server local ignora, mas a lib exige string</span>
+)
+
+paragrafo = <span class="tk-str">"Conforme o art. 37, XXI, da CF, é obrigatória a licitação…"</span>
+
+resp = client.chat.completions.<span class="tk-fn">create</span>(
+    model=<span class="tk-str">"extrator-leis"</span>,                  <span class="tk-com"># nome simbólico, o server serve um único modelo</span>
+    messages=[
+        {<span class="tk-str">"role"</span>: <span class="tk-str">"system"</span>, <span class="tk-str">"content"</span>: SYSTEM_PROMPT},
+        {<span class="tk-str">"role"</span>: <span class="tk-str">"user"</span>,   <span class="tk-str">"content"</span>: paragrafo},
+    ],
+    temperature=<span class="tk-num">0</span>,                          <span class="tk-com"># determinístico para extração</span>
+    max_tokens=<span class="tk-num">512</span>,
+)
+
+<span class="tk-fn">print</span>(resp.choices[<span class="tk-num">0</span>].message.content)
+<span class="tk-com"># [{"tipo_lei":"CF","num_lei":"1988","ano_lei":"1988","artigo":"37",…}]</span></pre>
+
+      <div class="box good">
+        <div class="box-title">A consequência prática</div>
+        <p style="margin:0">Sua app que hoje chama <code>gpt-4o</code> via OpenAI agora pode chamar <strong>seu modelo fine-tunado rodando local</strong> trocando uma string. Frameworks como LangChain, LlamaIndex, instructor, etc. funcionam todos do mesmo jeito. Esse é o ponto de chegada do módulo.</p>
+      </div>
+
+      <!-- 4.8 -->
+      <h2><span class="num">4.8</span>Encerramento — para onde ir depois</h2>
+
+      <h3>Para melhorar este modelo</h3>
+      <ul>
+        <li><strong>Dataset maior</strong>: 1000-2000 exemplos cobrem mais leis e combinações.</li>
+        <li><strong>Leis do domínio real</strong>: adicionar ao catálogo as leis específicas que aparecem nos textos dos seus consumidores.</li>
+        <li><strong>Avaliação humana</strong>: especialistas avaliando 20-30 exemplos pegam erros que métricas automáticas não veem.</li>
+      </ul>
+
+      <h3>Para escalar</h3>
+      <ul>
+        <li><strong>vLLM em servidor Linux</strong>: batching contínuo, throughput muito maior. Substitui o llama-server quando produção exige paralelismo.</li>
+        <li><strong>Quantização int4</strong>: rodar em hardware menor, edge devices.</li>
+        <li><strong>Cache de respostas</strong>: para textos repetidos.</li>
+        <li><strong>Pipeline async</strong>: processar batches de documentos.</li>
+      </ul>
+
+      <h3>Para evoluir tecnicamente</h3>
+      <ul>
+        <li><strong>DPO (Direct Preference Optimization)</strong>: além de SFT, alinhar a preferências.</li>
+        <li><strong>Continued pretraining</strong>: pré-treinar mais em dados do domínio antes do FT.</li>
+        <li><strong>Distillation</strong>: usar um modelo grande (Claude, GPT-4) para "ensinar" um pequeno — complementar à abordagem deste curso.</li>
+      </ul>
+
+      <h2><span class="num">4.9</span>Referências da aula</h2>
+
+      <ul class="refs">
+        <li><div><strong>Repositório do projeto.</strong> <em>ai-engineer-fine-tuning-example</em>. — <a href="https://github.com/caio-moliveira/ai-engineer-fine-tuning-example" target="_blank">github.com/caio-moliveira/ai-engineer-fine-tuning-example</a></div></li>
+        <li><div><strong>llama.cpp.</strong> <em>Inference of LLMs in pure C/C++</em>. — <a href="https://github.com/ggerganov/llama.cpp" target="_blank">github.com/ggerganov/llama.cpp</a></div></li>
+        <li><div><strong>GGUF specification.</strong> Formato binário usado pelo llama.cpp. — <a href="https://github.com/ggerganov/ggml/blob/master/docs/gguf.md" target="_blank">ggml/docs/gguf.md</a></div></li>
+        <li><div><strong>Rafailov et al. (2023).</strong> <em>Direct Preference Optimization: Your Language Model is Secretly a Reward Model</em>. — <a href="https://arxiv.org/abs/2305.18290" target="_blank">arxiv.org/abs/2305.18290</a></div></li>
+        <li><div><strong>Loshchilov &amp; Hutter (2017).</strong> <em>SGDR: Stochastic Gradient Descent with Warm Restarts</em> (origem do cosine scheduler). — <a href="https://arxiv.org/abs/1608.03983" target="_blank">arxiv.org/abs/1608.03983</a></div></li>
+        <li><div><strong>HuggingFace Transformers — Trainer.</strong> Documentação oficial. — <a href="https://huggingface.co/docs/transformers/main_classes/trainer" target="_blank">huggingface.co/docs/transformers</a></div></li>
+        <li><div><strong>OpenAI API reference.</strong> Especificação do <code>/v1/chat/completions</code> que o llama-server emula. — <a href="https://platform.openai.com/docs/api-reference/chat" target="_blank">platform.openai.com/docs/api-reference</a></div></li>
+      </ul>
+
+    </section>
+
+  </main>
+</div>
+
+<script>
+  // Barra de progresso
+  const progress = document.getElementById('progress');
+  function updateProgress() {
+    const scrolled = window.scrollY;
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    progress.style.transform = `scaleX(${scrolled / max})`;
+  }
+  window.addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+</script>
+
+</body>
+</html>
