@@ -1,10 +1,14 @@
+import asyncio
 import json
+import logging
 import tempfile
 import uuid
 from datetime import datetime, timezone
 from pathlib import Path
 
 from fastapi import APIRouter, File, HTTPException, UploadFile
+
+logger = logging.getLogger(__name__)
 
 from crud import delete_receipt, get_all_receipts, get_receipt, insert_receipt, update_receipt
 from schemas import ReceiptOut, ReceiptPatch
@@ -32,12 +36,14 @@ async def create_receipt(file: UploadFile = File(..., description="Imagem do rec
         tmp_path = Path(tmp.name)
 
     try:
-        raw_text = ocr_image(tmp_path)
+        # ocr_image é bloqueante (chamada ao Ollama) — roda em thread para não travar o event loop
+        raw_text = await asyncio.to_thread(ocr_image, tmp_path)
     finally:
         tmp_path.unlink(missing_ok=True)
 
     try:
-        parsed = parse_receipt(raw_text)
+        # parse_receipt também é bloqueante (chamada HTTP ao OpenAI via LangChain)
+        parsed = await asyncio.to_thread(parse_receipt, raw_text)
     except (json.JSONDecodeError, KeyError) as exc:
         raise HTTPException(
             status_code=422,

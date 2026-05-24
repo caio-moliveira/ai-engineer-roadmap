@@ -3,11 +3,11 @@ from contextlib import asynccontextmanager
 from dotenv import load_dotenv
 from fastapi import FastAPI
 
-load_dotenv()
-
 from database import init_db
 from frontend import router as frontend_router
 from router import router as receipts_router
+
+load_dotenv()
 
 
 @asynccontextmanager
@@ -25,7 +25,6 @@ app = FastAPI(
 
 app.include_router(receipts_router)
 app.include_router(frontend_router)
-
 
 if __name__ == "__main__":
     import uvicorn
