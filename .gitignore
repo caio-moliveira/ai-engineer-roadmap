@@ -9,3 +9,7 @@ wheels/
 # Virtual environments
 .venv
 .env
+CLAUDE.md
+skills-lock.json
+.agents/
+.claude/
