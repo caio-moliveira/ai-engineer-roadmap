@@ -160,14 +160,14 @@ Este bloco ensina como rodar modelos localmente, otimizar inferência e construi
 
 ### 📦 Módulos
 
-| #  | Módulo                                                                  | Tema                  |
-| -- | ----------------------------------------------------------------------- | --------------------- |
-| 01 | [OCR Fundamentals](./04-ocr/01-ocr-fundamentals)           | Layout + texto        |
-| 02 | [OCR Pipelines](./04-ocr/02-ocr-pipelines)                 | Pipeline completo  |
-| 03 | [Document Intelligence](./04-ocr/03-document-intelligence) | Document Intelligence   |
-| 04 | [Hugging Face](./04-ocr/04-vlm-multimodals)                   | VLMs especializados e multimodais  |
-| 05 | [Ollama](./04-ocr/05-serving-frameworks)                               | Frameworks de serving |
-| 06 | [vLLM](./04-ocr/06-final-project)                                   | Projeto Final   |
+| #  | Módulo                                                     | Tema                           |
+| -- | --------------------------------------------------------- | ------------------------------ |
+| 01 | [OCR Fundamentals](./04-ocr/01-ocr-fundamentals)           | Layout + texto + estrutura     |
+| 02 | [OCR Pipelines](./04-ocr/02-ocr-pipelines)                 | Pipeline completo              |
+| 03 | [Document Intelligence](./04-ocr/03-document-intelligence) | Docling + Azure                |
+| 04 | [VLMs e Multimodais](./04-ocr/04-vlm-multimodals)          | Modelos locais e VLMs frontier |
+| 05 | [Frameworks de Serving](./04-ocr/05-serving-frameworks)    | HuggingFace + vLLM             |
+| 06 | [Projeto Final](./04-ocr/06-final-project)                 | Receipt OCR API                |
 
 
 ---
@@ -181,21 +181,20 @@ Este bloco ensina quando treinar modelos — e principalmente quando não treina
 ✔ diferença entre Fine-Tune e RAG  
 ✔ estratégias modernas de adaptação (LoRA, QLoRA)  
 ✔ preparação profissional de datasets  
-✔ avaliação antes do treino  
-✔ workflow completo com Unsloth  
-✔ deploy e manutenção
+✔ avaliação estrutural antes e depois do treino  
+✔ workflow completo de treino com PEFT/LoRA  
+✔ deploy local via llama.cpp + GGUF (API OpenAI-compatible)
 
 ---
 
 ### 📦 Módulos
 
-| #  | Módulo                                                               | Tema                        |
-| -- | -------------------------------------------------------------------- | --------------------------- |
-| 01 | [Fundamentos de Fine-Tuning](./05-fine-tuning/01-fine-tuning-fundamentals) | Conceitos e Adaptação       |
-| 02 | [Unsloth](./05-fine-tuning/02-unsloth)                               | Workflow real               |
-| 03 | [Meu Primeiro LLM](./05-fine-tuning/03-my-first-llm)                 | Dataset, Treino e Avaliação |
-| 04 | [Deploy do Modelo](./05-fine-tuning/04-model-deploy)                 | Adapters e Merge            |
-| 05 | [Fine-Tuning em Produção](./05-fine-tuning/05-fine-tuning-production)| Ops e Governança            |
+| #  | Módulo                                                                       | Tema                        |
+| -- | ---------------------------------------------------------------------------- | --------------------------- |
+| 01 | [Fundamentos de Fine-Tuning](./05-fine-tuning/01-fine-tuning-fundamentals)   | Conceitos e Adaptação       |
+| 02 | [Raio-X: Prompt vs RAG vs FT](./05-fine-tuning/02-x-ray-fine-tunning)        | Decisão arquitetural        |
+| 03 | [Pipeline: Planejamento e Dataset](./05-fine-tuning/03-pipeline)             | Dataset e geração sintética |
+| 04 | [Treino, Avaliação e Deploy Local](./05-fine-tuning/04-train-deploy)         | LoRA, métricas e deploy     |
 
 ---
 
