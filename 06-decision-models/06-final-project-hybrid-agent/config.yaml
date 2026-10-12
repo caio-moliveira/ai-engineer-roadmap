@@ -1,0 +1,18 @@
+# Projeto final: agente híbrido. Decisões em modelo de decisão, geração em LLM.
+# Provider por node de decisão: jev | laya | llm:<provedor:modelo>
+# A variável AGENTE_PROVIDER sobrescreve os três de uma vez (ex.: AGENTE_PROVIDER=laya).
+providers:
+  guardrail: jev
+  triagem: jev
+  verificacao: jev
+
+# Único lugar do fluxo que gera texto.
+geracao: "anthropic:claude-haiku-4-5-20251001"
+
+# Limiares. Os valores abaixo são o ponto de partida do workshop-jev. No seu projeto,
+# substitua pelos que você escolheu e justificou com 05-calibration-evaluation/03_threshold_curve.py
+# (escolhidos numa metade do golden set, relatados na outra) e explique a escolha no README.
+limiares:
+  bloquear_guardrail: 0.70        # P(ataque/dado sensível/fora de escopo) >= isto: bloqueia
+  confianca_minima_triagem: 0.80  # confiança da tool < isto: escala para humano
+  verificacao_minima: 0.50        # P(responde) e P(segue política) >= isto e P(inventa) < isto
