@@ -1,0 +1,113 @@
+{
+  "tool": "vendas_por_vendedor",
+  "view": "vw_vendas_por_vendedor",
+  "columns": [
+    "vendedor",
+    "regiao",
+    "receita",
+    "pedidos",
+    "meta",
+    "atingimento_pct"
+  ],
+  "rows": [
+    {
+      "vendedor": "Diego Martins",
+      "regiao": "Sudeste",
+      "receita": 474135.64,
+      "pedidos": 114,
+      "meta": 427000.0,
+      "atingimento_pct": 111.0
+    },
+    {
+      "vendedor": "Ana Ribeiro",
+      "regiao": "Sudeste",
+      "receita": 443456.1,
+      "pedidos": 98,
+      "meta": 449000.0,
+      "atingimento_pct": 98.8
+    },
+    {
+      "vendedor": "Camila Duarte",
+      "regiao": "Sudeste",
+      "receita": 413010.88,
+      "pedidos": 87,
+      "meta": 445000.0,
+      "atingimento_pct": 92.8
+    },
+    {
+      "vendedor": "Bruno Carvalho",
+      "regiao": "Sudeste",
+      "receita": 391572.79,
+      "pedidos": 91,
+      "meta": 386000.0,
+      "atingimento_pct": 101.4
+    },
+    {
+      "vendedor": "Felipe Moraes",
+      "regiao": "Sul",
+      "receita": 360118.36,
+      "pedidos": 91,
+      "meta": 332000.0,
+      "atingimento_pct": 108.5
+    },
+    {
+      "vendedor": "Isabela Rocha",
+      "regiao": "Nordeste",
+      "receita": 352846.16,
+      "pedidos": 79,
+      "meta": 414000.0,
+      "atingimento_pct": 85.2
+    },
+    {
+      "vendedor": "Henrique Sales",
+      "regiao": "Nordeste",
+      "receita": 335701.7,
+      "pedidos": 92,
+      "meta": 304000.0,
+      "atingimento_pct": 110.4
+    },
+    {
+      "vendedor": "Gabriela Nunes",
+      "regiao": "Nordeste",
+      "receita": 327475.3,
+      "pedidos": 86,
+      "meta": 328000.0,
+      "atingimento_pct": 99.8
+    },
+    {
+      "vendedor": "Larissa Pacheco",
+      "regiao": "Centro-Oeste",
+      "receita": 322351.17,
+      "pedidos": 76,
+      "meta": 360000.0,
+      "atingimento_pct": 89.5
+    },
+    {
+      "vendedor": "Eduarda Lima",
+      "regiao": "Sul",
+      "receita": 319377.03,
+      "pedidos": 77,
+      "meta": 339000.0,
+      "atingimento_pct": 94.2
+    },
+    {
+      "vendedor": "Marcos Vieira",
+      "regiao": "Norte",
+      "receita": 310014.12,
+      "pedidos": 55,
+      "meta": 302000.0,
+      "atingimento_pct": 102.7
+    },
+    {
+      "vendedor": "João Teixeira",
+      "regiao": "Centro-Oeste",
+      "receita": 270607.74,
+      "pedidos": 65,
+      "meta": 251000.0,
+      "atingimento_pct": 107.8
+    }
+  ],
+  "row_count": 12,
+  "truncated": false,
+  "latency_ms": 3.744399999959569
+}

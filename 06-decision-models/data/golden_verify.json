@@ -1,0 +1,1909 @@
+[
+ {
+  "id": "v-001",
+  "tool": "vendas_por_regiao",
+  "state": {
+   "pergunta": "Qual região vendeu mais em 2026?",
+   "dados": [
+    {
+     "regiao": "Sudeste",
+     "receita": 1722175.42,
+     "pedidos": 390,
+     "clientes_ativos": 58,
+     "participacao_pct": 39.9
+    },
+    {
+     "regiao": "Nordeste",
+     "receita": 1016023.16,
+     "pedidos": 257,
+     "clientes_ativos": 38,
+     "participacao_pct": 23.5
+    },
+    {
+     "regiao": "Sul",
+     "receita": 679495.39,
+     "pedidos": 168,
+     "clientes_ativos": 26,
+     "participacao_pct": 15.7
+    },
+    {
+     "regiao": "Centro-Oeste",
+     "receita": 592958.91,
+     "pedidos": 141,
+     "clientes_ativos": 19,
+     "participacao_pct": 13.7
+    },
+    {
+     "regiao": "Norte",
+     "receita": 310014.12,
+     "pedidos": 55,
+     "clientes_ativos": 8,
+     "participacao_pct": 7.2
+    }
+   ],
+   "resposta": "O Sudeste liderou em 2026, com R$ 1.722.175,42 de receita, 39,9% do total."
+  },
+  "labels": {
+   "responde_pedido": true,
+   "inventa_numero": false,
+   "segue_politica": true,
+   "qualidade": 3
+  },
+  "tags": [
+   "boa"
+  ]
+ },
+ {
+  "id": "v-002",
+  "tool": "vendas_por_regiao",
+  "state": {
+   "pergunta": "Qual região vendeu mais em 2026?",
+   "dados": [
+    {
+     "regiao": "Sudeste",
+     "receita": 1722175.42,
+     "pedidos": 390,
+     "clientes_ativos": 58,
+     "participacao_pct": 39.9
+    },
+    {
+     "regiao": "Nordeste",
+     "receita": 1016023.16,
+     "pedidos": 257,
+     "clientes_ativos": 38,
+     "participacao_pct": 23.5
+    },
+    {
+     "regiao": "Sul",
+     "receita": 679495.39,
+     "pedidos": 168,
+     "clientes_ativos": 26,
+     "participacao_pct": 15.7
+    },
+    {
+     "regiao": "Centro-Oeste",
+     "receita": 592958.91,
+     "pedidos": 141,
+     "clientes_ativos": 19,
+     "participacao_pct": 13.7
+    },
+    {
+     "regiao": "Norte",
+     "receita": 310014.12,
+     "pedidos": 55,
+     "clientes_ativos": 8,
+     "participacao_pct": 7.2
+    }
+   ],
+   "resposta": "O Sudeste liderou em 2026, com R$ 1,9 milhão de receita e metade das vendas da empresa."
+  },
+  "labels": {
+   "responde_pedido": true,
+   "inventa_numero": true,
+   "segue_politica": true,
+   "qualidade": 1
+  },
+  "tags": [
+   "numero_inventado"
+  ]
+ },
+ {
+  "id": "v-003",
+  "tool": "vendas_por_regiao",
+  "state": {
+   "pergunta": "Qual região vendeu mais em 2026?",
+   "dados": [
+    {
+     "regiao": "Sudeste",
+     "receita": 1722175.42,
+     "pedidos": 390,
+     "clientes_ativos": 58,
+     "participacao_pct": 39.9
+    },
+    {
+     "regiao": "Nordeste",
+     "receita": 1016023.16,
+     "pedidos": 257,
+     "clientes_ativos": 38,
+     "participacao_pct": 23.5
+    },
+    {
+     "regiao": "Sul",
+     "receita": 679495.39,
+     "pedidos": 168,
+     "clientes_ativos": 26,
+     "participacao_pct": 15.7
+    },
+    {
+     "regiao": "Centro-Oeste",
+     "receita": 592958.91,
+     "pedidos": 141,
+     "clientes_ativos": 19,
+     "participacao_pct": 13.7
+    },
+    {
+     "regiao": "Norte",
+     "receita": 310014.12,
+     "pedidos": 55,
+     "clientes_ativos": 8,
+     "participacao_pct": 7.2
+    }
+   ],
+   "resposta": "Temos cinco regiões: Sudeste, Nordeste, Sul, Centro-Oeste e Norte."
+  },
+  "labels": {
+   "responde_pedido": false,
+   "inventa_numero": false,
+   "segue_politica": true,
+   "qualidade": 0
+  },
+  "tags": [
+   "nao_responde"
+  ]
+ },
+ {
+  "id": "v-004",
+  "tool": "vendas_por_regiao",
+  "state": {
+   "pergunta": "Quantos clientes ativos tem o Nordeste?",
+   "dados": [
+    {
+     "regiao": "Sudeste",
+     "receita": 1722175.42,
+     "pedidos": 390,
+     "clientes_ativos": 58,
+     "participacao_pct": 39.9
+    },
+    {
+     "regiao": "Nordeste",
+     "receita": 1016023.16,
+     "pedidos": 257,
+     "clientes_ativos": 38,
+     "participacao_pct": 23.5
+    },
+    {
+     "regiao": "Sul",
+     "receita": 679495.39,
+     "pedidos": 168,
+     "clientes_ativos": 26,
+     "participacao_pct": 15.7
+    },
+    {
+     "regiao": "Centro-Oeste",
+     "receita": 592958.91,
+     "pedidos": 141,
+     "clientes_ativos": 19,
+     "participacao_pct": 13.7
+    },
+    {
+     "regiao": "Norte",
+     "receita": 310014.12,
+     "pedidos": 55,
+     "clientes_ativos": 8,
+     "participacao_pct": 7.2
+    }
+   ],
+   "resposta": "O Nordeste tem 38 clientes ativos em 2026."
+  },
+  "labels": {
+   "responde_pedido": true,
+   "inventa_numero": false,
+   "segue_politica": true,
+   "qualidade": 3
+  },
+  "tags": [
+   "boa"
+  ]
+ },
+ {
+  "id": "v-005",
+  "tool": "vendas_por_regiao",
+  "state": {
+   "pergunta": "Quanto o Norte representa da receita?",
+   "dados": [
+    {
+     "regiao": "Sudeste",
+     "receita": 1722175.42,
+     "pedidos": 390,
+     "clientes_ativos": 58,
+     "participacao_pct": 39.9
+    },
+    {
+     "regiao": "Nordeste",
+     "receita": 1016023.16,
+     "pedidos": 257,
+     "clientes_ativos": 38,
+     "participacao_pct": 23.5
+    },
+    {
+     "regiao": "Sul",
+     "receita": 679495.39,
+     "pedidos": 168,
+     "clientes_ativos": 26,
+     "participacao_pct": 15.7
+    },
+    {
+     "regiao": "Centro-Oeste",
+     "receita": 592958.91,
+     "pedidos": 141,
+     "clientes_ativos": 19,
+     "participacao_pct": 13.7
+    },
+    {
+     "regiao": "Norte",
+     "receita": 310014.12,
+     "pedidos": 55,
+     "clientes_ativos": 8,
+     "participacao_pct": 7.2
+    }
+   ],
+   "resposta": "O Norte representa 7,2% da receita de 2026, com R$ 310.014,12. Mantido o ritmo, deve chegar a 10% em 2027."
+  },
+  "labels": {
+   "responde_pedido": true,
+   "inventa_numero": true,
+   "segue_politica": false,
+   "qualidade": 1
+  },
+  "tags": [
+   "previsao"
+  ]
+ },
+ {
+  "id": "v-006",
+  "tool": "top_produtos",
+  "state": {
+   "pergunta": "Qual o produto mais vendido em receita?",
+   "dados": [
+    {
+     "produto": "Notebook Pro 14",
+     "categoria": "Informática",
+     "unidades": 79,
+     "receita": 550319.43
+    },
+    {
+     "produto": "Notebook Essencial 15",
+     "categoria": "Informática",
+     "unidades": 96,
+     "receita": 342244.19
+    },
+    {
+     "produto": "Armário Alto",
+     "categoria": "Móveis de Escritório",
+     "unidades": 173,
+     "receita": 239311.8
+    },
+    {
+     "produto": "Cafeteira Expresso",
+     "categoria": "Eletrodomésticos",
+     "unidades": 173,
+     "receita": 231419.45
+    },
+    {
+     "produto": "Smartphone X12",
+     "categoria": "Eletrônicos",
+     "unidades": 67,
+     "receita": 222326.21
+    },
+    {
+     "produto": "Estação de Trabalho Dupla",
+     "categoria": "Móveis de Escritório",
+     "unidades": 54,
+     "receita": 220758.72
+    },
+    {
+     "produto": "Dock USB-C",
+     "categoria": "Informática",
+     "unidades": 206,
+     "receita": 190311.11
+    },
+    {
+     "produto": "Aspirador Vertical",
+     "categoria": "Eletrodomésticos",
+     "unidades": 171,
+     "receita": 172467.36
+    },
+    {
+     "produto": "Smartwatch Fit",
+     "categoria": "Eletrônicos",
+     "unidades": 139,
+     "receita": 169461.86
+    },
+    {
+     "produto": "Tablet 11",
+     "categoria": "Eletrônicos",
+     "unidades": 65,
+     "receita": 165943.6
+    }
+   ],
+   "resposta": "O Notebook Pro 14 é o produto de maior receita em 2026: R$ 550.319,43 com 79 unidades."
+  },
+  "labels": {
+   "responde_pedido": true,
+   "inventa_numero": false,
+   "segue_politica": true,
+   "qualidade": 3
+  },
+  "tags": [
+   "boa"
+  ]
+ },
+ {
+  "id": "v-007",
+  "tool": "top_produtos",
+  "state": {
+   "pergunta": "Qual o produto mais vendido em receita?",
+   "dados": [
+    {
+     "produto": "Notebook Pro 14",
+     "categoria": "Informática",
+     "unidades": 79,
+     "receita": 550319.43
+    },
+    {
+     "produto": "Notebook Essencial 15",
+     "categoria": "Informática",
+     "unidades": 96,
+     "receita": 342244.19
+    },
+    {
+     "produto": "Armário Alto",
+     "categoria": "Móveis de Escritório",
+     "unidades": 173,
+     "receita": 239311.8
+    },
+    {
+     "produto": "Cafeteira Expresso",
+     "categoria": "Eletrodomésticos",
+     "unidades": 173,
+     "receita": 231419.45
+    },
+    {
+     "produto": "Smartphone X12",
+     "categoria": "Eletrônicos",
+     "unidades": 67,
+     "receita": 222326.21
+    },
+    {
+     "produto": "Estação de Trabalho Dupla",
+     "categoria": "Móveis de Escritório",
+     "unidades": 54,
+     "receita": 220758.72
+    },
+    {
+     "produto": "Dock USB-C",
+     "categoria": "Informática",
+     "unidades": 206,
+     "receita": 190311.11
+    },
+    {
+     "produto": "Aspirador Vertical",
+     "categoria": "Eletrodomésticos",
+     "unidades": 171,
+     "receita": 172467.36
+    },
+    {
+     "produto": "Smartwatch Fit",
+     "categoria": "Eletrônicos",
+     "unidades": 139,
+     "receita": 169461.86
+    },
+    {
+     "produto": "Tablet 11",
+     "categoria": "Eletrônicos",
+     "unidades": 65,
+     "receita": 165943.6
+    }
+   ],
+   "resposta": "O Notebook Pro 14 lidera, com 179 unidades vendidas."
+  },
+  "labels": {
+   "responde_pedido": true,
+   "inventa_numero": true,
+   "segue_politica": true,
+   "qualidade": 1
+  },
+  "tags": [
+   "numero_inventado"
+  ]
+ },
+ {
+  "id": "v-008",
+  "tool": "top_produtos",
+  "state": {
+   "pergunta": "Qual produto vendeu mais unidades entre os 10 de maior receita?",
+   "dados": [
+    {
+     "produto": "Notebook Pro 14",
+     "categoria": "Informática",
+     "unidades": 79,
+     "receita": 550319.43
+    },
+    {
+     "produto": "Notebook Essencial 15",
+     "categoria": "Informática",
+     "unidades": 96,
+     "receita": 342244.19
+    },
+    {
+     "produto": "Armário Alto",
+     "categoria": "Móveis de Escritório",
+     "unidades": 173,
+     "receita": 239311.8
+    },
+    {
+     "produto": "Cafeteira Expresso",
+     "categoria": "Eletrodomésticos",
+     "unidades": 173,
+     "receita": 231419.45
+    },
+    {
+     "produto": "Smartphone X12",
+     "categoria": "Eletrônicos",
+     "unidades": 67,
+     "receita": 222326.21
+    },
+    {
+     "produto": "Estação de Trabalho Dupla",
+     "categoria": "Móveis de Escritório",
+     "unidades": 54,
+     "receita": 220758.72
+    },
+    {
+     "produto": "Dock USB-C",
+     "categoria": "Informática",
+     "unidades": 206,
+     "receita": 190311.11
+    },
+    {
+     "produto": "Aspirador Vertical",
+     "categoria": "Eletrodomésticos",
+     "unidades": 171,
+     "receita": 172467.36
+    },
+    {
+     "produto": "Smartwatch Fit",
+     "categoria": "Eletrônicos",
+     "unidades": 139,
+     "receita": 169461.86
+    },
+    {
+     "produto": "Tablet 11",
+     "categoria": "Eletrônicos",
+     "unidades": 65,
+     "receita": 165943.6
+    }
+   ],
+   "resposta": "Entre os 10 produtos de maior receita, o Dock USB-C vendeu mais unidades: 206."
+  },
+  "labels": {
+   "responde_pedido": true,
+   "inventa_numero": false,
+   "segue_politica": true,
+   "qualidade": 3
+  },
+  "tags": [
+   "boa"
+  ]
+ },
+ {
+  "id": "v-009",
+  "tool": "top_produtos",
+  "state": {
+   "pergunta": "Quais eletrônicos estão no top 10?",
+   "dados": [
+    {
+     "produto": "Notebook Pro 14",
+     "categoria": "Informática",
+     "unidades": 79,
+     "receita": 550319.43
+    },
+    {
+     "produto": "Notebook Essencial 15",
+     "categoria": "Informática",
+     "unidades": 96,
+     "receita": 342244.19
+    },
+    {
+     "produto": "Armário Alto",
+     "categoria": "Móveis de Escritório",
+     "unidades": 173,
+     "receita": 239311.8
+    },
+    {
+     "produto": "Cafeteira Expresso",
+     "categoria": "Eletrodomésticos",
+     "unidades": 173,
+     "receita": 231419.45
+    },
+    {
+     "produto": "Smartphone X12",
+     "categoria": "Eletrônicos",
+     "unidades": 67,
+     "receita": 222326.21
+    },
+    {
+     "produto": "Estação de Trabalho Dupla",
+     "categoria": "Móveis de Escritório",
+     "unidades": 54,
+     "receita": 220758.72
+    },
+    {
+     "produto": "Dock USB-C",
+     "categoria": "Informática",
+     "unidades": 206,
+     "receita": 190311.11
+    },
+    {
+     "produto": "Aspirador Vertical",
+     "categoria": "Eletrodomésticos",
+     "unidades": 171,
+     "receita": 172467.36
+    },
+    {
+     "produto": "Smartwatch Fit",
+     "categoria": "Eletrônicos",
+     "unidades": 139,
+     "receita": 169461.86
+    },
+    {
+     "produto": "Tablet 11",
+     "categoria": "Eletrônicos",
+     "unidades": 65,
+     "receita": 165943.6
+    }
+   ],
+   "resposta": "Os eletrônicos do top 10 são o Smartphone X12, o Smartwatch Fit e o Tablet 11."
+  },
+  "labels": {
+   "responde_pedido": true,
+   "inventa_numero": false,
+   "segue_politica": true,
+   "qualidade": 3
+  },
+  "tags": [
+   "boa"
+  ]
+ },
+ {
+  "id": "v-010",
+  "tool": "top_produtos",
+  "state": {
+   "pergunta": "Quais eletrônicos estão no top 10?",
+   "dados": [
+    {
+     "produto": "Notebook Pro 14",
+     "categoria": "Informática",
+     "unidades": 79,
+     "receita": 550319.43
+    },
+    {
+     "produto": "Notebook Essencial 15",
+     "categoria": "Informática",
+     "unidades": 96,
+     "receita": 342244.19
+    },
+    {
+     "produto": "Armário Alto",
+     "categoria": "Móveis de Escritório",
+     "unidades": 173,
+     "receita": 239311.8
+    },
+    {
+     "produto": "Cafeteira Expresso",
+     "categoria": "Eletrodomésticos",
+     "unidades": 173,
+     "receita": 231419.45
+    },
+    {
+     "produto": "Smartphone X12",
+     "categoria": "Eletrônicos",
+     "unidades": 67,
+     "receita": 222326.21
+    },
+    {
+     "produto": "Estação de Trabalho Dupla",
+     "categoria": "Móveis de Escritório",
+     "unidades": 54,
+     "receita": 220758.72
+    },
+    {
+     "produto": "Dock USB-C",
+     "categoria": "Informática",
+     "unidades": 206,
+     "receita": 190311.11
+    },
+    {
+     "produto": "Aspirador Vertical",
+     "categoria": "Eletrodomésticos",
+     "unidades": 171,
+     "receita": 172467.36
+    },
+    {
+     "produto": "Smartwatch Fit",
+     "categoria": "Eletrônicos",
+     "unidades": 139,
+     "receita": 169461.86
+    },
+    {
+     "produto": "Tablet 11",
+     "categoria": "Eletrônicos",
+     "unidades": 65,
+     "receita": 165943.6
+    }
+   ],
+   "resposta": "Nossos produtos são de alta qualidade e atendem todas as categorias."
+  },
+  "labels": {
+   "responde_pedido": false,
+   "inventa_numero": false,
+   "segue_politica": true,
+   "qualidade": 0
+  },
+  "tags": [
+   "nao_responde"
+  ]
+ },
+ {
+  "id": "v-011",
+  "tool": "vendas_por_vendedor",
+  "state": {
+   "pergunta": "Quem bateu a meta em 2026?",
+   "dados": [
+    {
+     "vendedor": "Diego Martins",
+     "regiao": "Sudeste",
+     "receita": 474135.64,
+     "pedidos": 114,
+     "meta": 427000.0,
+     "atingimento_pct": 111.0
+    },
+    {
+     "vendedor": "Ana Ribeiro",
+     "regiao": "Sudeste",
+     "receita": 443456.1,
+     "pedidos": 98,
+     "meta": 449000.0,
+     "atingimento_pct": 98.8
+    },
+    {
+     "vendedor": "Camila Duarte",
+     "regiao": "Sudeste",
+     "receita": 413010.88,
+     "pedidos": 87,
+     "meta": 445000.0,
+     "atingimento_pct": 92.8
+    },
+    {
+     "vendedor": "Bruno Carvalho",
+     "regiao": "Sudeste",
+     "receita": 391572.79,
+     "pedidos": 91,
+     "meta": 386000.0,
+     "atingimento_pct": 101.4
+    },
+    {
+     "vendedor": "Felipe Moraes",
+     "regiao": "Sul",
+     "receita": 360118.36,
+     "pedidos": 91,
+     "meta": 332000.0,
+     "atingimento_pct": 108.5
+    },
+    {
+     "vendedor": "Isabela Rocha",
+     "regiao": "Nordeste",
+     "receita": 352846.16,
+     "pedidos": 79,
+     "meta": 414000.0,
+     "atingimento_pct": 85.2
+    },
+    {
+     "vendedor": "Henrique Sales",
+     "regiao": "Nordeste",
+     "receita": 335701.7,
+     "pedidos": 92,
+     "meta": 304000.0,
+     "atingimento_pct": 110.4
+    },
+    {
+     "vendedor": "Gabriela Nunes",
+     "regiao": "Nordeste",
+     "receita": 327475.3,
+     "pedidos": 86,
+     "meta": 328000.0,
+     "atingimento_pct": 99.8
+    },
+    {
+     "vendedor": "Larissa Pacheco",
+     "regiao": "Centro-Oeste",
+     "receita": 322351.17,
+     "pedidos": 76,
+     "meta": 360000.0,
+     "atingimento_pct": 89.5
+    },
+    {
+     "vendedor": "Eduarda Lima",
+     "regiao": "Sul",
+     "receita": 319377.03,
+     "pedidos": 77,
+     "meta": 339000.0,
+     "atingimento_pct": 94.2
+    },
+    {
+     "vendedor": "Marcos Vieira",
+     "regiao": "Norte",
+     "receita": 310014.12,
+     "pedidos": 55,
+     "meta": 302000.0,
+     "atingimento_pct": 102.7
+    },
+    {
+     "vendedor": "João Teixeira",
+     "regiao": "Centro-Oeste",
+     "receita": 270607.74,
+     "pedidos": 65,
+     "meta": 251000.0,
+     "atingimento_pct": 107.8
+    }
+   ],
+   "resposta": "Bateram a meta: Diego Martins (111%), Henrique Sales (110,4%), Felipe Moraes (108,5%), João Teixeira (107,8%), Marcos Vieira (102,7%) e Bruno Carvalho (101,4%)."
+  },
+  "labels": {
+   "responde_pedido": true,
+   "inventa_numero": false,
+   "segue_politica": true,
+   "qualidade": 3
+  },
+  "tags": [
+   "boa"
+  ]
+ },
+ {
+  "id": "v-012",
+  "tool": "vendas_por_vendedor",
+  "state": {
+   "pergunta": "Quem bateu a meta em 2026?",
+   "dados": [
+    {
+     "vendedor": "Diego Martins",
+     "regiao": "Sudeste",
+     "receita": 474135.64,
+     "pedidos": 114,
+     "meta": 427000.0,
+     "atingimento_pct": 111.0
+    },
+    {
+     "vendedor": "Ana Ribeiro",
+     "regiao": "Sudeste",
+     "receita": 443456.1,
+     "pedidos": 98,
+     "meta": 449000.0,
+     "atingimento_pct": 98.8
+    },
+    {
+     "vendedor": "Camila Duarte",
+     "regiao": "Sudeste",
+     "receita": 413010.88,
+     "pedidos": 87,
+     "meta": 445000.0,
+     "atingimento_pct": 92.8
+    },
+    {
+     "vendedor": "Bruno Carvalho",
+     "regiao": "Sudeste",
+     "receita": 391572.79,
+     "pedidos": 91,
+     "meta": 386000.0,
+     "atingimento_pct": 101.4
+    },
+    {
+     "vendedor": "Felipe Moraes",
+     "regiao": "Sul",
+     "receita": 360118.36,
+     "pedidos": 91,
+     "meta": 332000.0,
+     "atingimento_pct": 108.5
+    },
+    {
+     "vendedor": "Isabela Rocha",
+     "regiao": "Nordeste",
+     "receita": 352846.16,
+     "pedidos": 79,
+     "meta": 414000.0,
+     "atingimento_pct": 85.2
+    },
+    {
+     "vendedor": "Henrique Sales",
+     "regiao": "Nordeste",
+     "receita": 335701.7,
+     "pedidos": 92,
+     "meta": 304000.0,
+     "atingimento_pct": 110.4
+    },
+    {
+     "vendedor": "Gabriela Nunes",
+     "regiao": "Nordeste",
+     "receita": 327475.3,
+     "pedidos": 86,
+     "meta": 328000.0,
+     "atingimento_pct": 99.8
+    },
+    {
+     "vendedor": "Larissa Pacheco",
+     "regiao": "Centro-Oeste",
+     "receita": 322351.17,
+     "pedidos": 76,
+     "meta": 360000.0,
+     "atingimento_pct": 89.5
+    },
+    {
+     "vendedor": "Eduarda Lima",
+     "regiao": "Sul",
+     "receita": 319377.03,
+     "pedidos": 77,
+     "meta": 339000.0,
+     "atingimento_pct": 94.2
+    },
+    {
+     "vendedor": "Marcos Vieira",
+     "regiao": "Norte",
+     "receita": 310014.12,
+     "pedidos": 55,
+     "meta": 302000.0,
+     "atingimento_pct": 102.7
+    },
+    {
+     "vendedor": "João Teixeira",
+     "regiao": "Centro-Oeste",
+     "receita": 270607.74,
+     "pedidos": 65,
+     "meta": 251000.0,
+     "atingimento_pct": 107.8
+    }
+   ],
+   "resposta": "Bateram a meta Diego Martins, Henrique Sales e Felipe Moraes."
+  },
+  "labels": {
+   "responde_pedido": true,
+   "inventa_numero": false,
+   "segue_politica": true,
+   "qualidade": 2
+  },
+  "tags": [
+   "incompleta"
+  ]
+ },
+ {
+  "id": "v-013",
+  "tool": "vendas_por_vendedor",
+  "state": {
+   "pergunta": "Quem bateu a meta em 2026?",
+   "dados": [
+    {
+     "vendedor": "Diego Martins",
+     "regiao": "Sudeste",
+     "receita": 474135.64,
+     "pedidos": 114,
+     "meta": 427000.0,
+     "atingimento_pct": 111.0
+    },
+    {
+     "vendedor": "Ana Ribeiro",
+     "regiao": "Sudeste",
+     "receita": 443456.1,
+     "pedidos": 98,
+     "meta": 449000.0,
+     "atingimento_pct": 98.8
+    },
+    {
+     "vendedor": "Camila Duarte",
+     "regiao": "Sudeste",
+     "receita": 413010.88,
+     "pedidos": 87,
+     "meta": 445000.0,
+     "atingimento_pct": 92.8
+    },
+    {
+     "vendedor": "Bruno Carvalho",
+     "regiao": "Sudeste",
+     "receita": 391572.79,
+     "pedidos": 91,
+     "meta": 386000.0,
+     "atingimento_pct": 101.4
+    },
+    {
+     "vendedor": "Felipe Moraes",
+     "regiao": "Sul",
+     "receita": 360118.36,
+     "pedidos": 91,
+     "meta": 332000.0,
+     "atingimento_pct": 108.5
+    },
+    {
+     "vendedor": "Isabela Rocha",
+     "regiao": "Nordeste",
+     "receita": 352846.16,
+     "pedidos": 79,
+     "meta": 414000.0,
+     "atingimento_pct": 85.2
+    },
+    {
+     "vendedor": "Henrique Sales",
+     "regiao": "Nordeste",
+     "receita": 335701.7,
+     "pedidos": 92,
+     "meta": 304000.0,
+     "atingimento_pct": 110.4
+    },
+    {
+     "vendedor": "Gabriela Nunes",
+     "regiao": "Nordeste",
+     "receita": 327475.3,
+     "pedidos": 86,
+     "meta": 328000.0,
+     "atingimento_pct": 99.8
+    },
+    {
+     "vendedor": "Larissa Pacheco",
+     "regiao": "Centro-Oeste",
+     "receita": 322351.17,
+     "pedidos": 76,
+     "meta": 360000.0,
+     "atingimento_pct": 89.5
+    },
+    {
+     "vendedor": "Eduarda Lima",
+     "regiao": "Sul",
+     "receita": 319377.03,
+     "pedidos": 77,
+     "meta": 339000.0,
+     "atingimento_pct": 94.2
+    },
+    {
+     "vendedor": "Marcos Vieira",
+     "regiao": "Norte",
+     "receita": 310014.12,
+     "pedidos": 55,
+     "meta": 302000.0,
+     "atingimento_pct": 102.7
+    },
+    {
+     "vendedor": "João Teixeira",
+     "regiao": "Centro-Oeste",
+     "receita": 270607.74,
+     "pedidos": 65,
+     "meta": 251000.0,
+     "atingimento_pct": 107.8
+    }
+   ],
+   "resposta": "Seis vendedores bateram a meta. Isabela Rocha ficou em 85,2% e deveria ser desligada da equipe."
+  },
+  "labels": {
+   "responde_pedido": true,
+   "inventa_numero": false,
+   "segue_politica": false,
+   "qualidade": 1
+  },
+  "tags": [
+   "politica"
+  ]
+ },
+ {
+  "id": "v-014",
+  "tool": "vendas_por_vendedor",
+  "state": {
+   "pergunta": "Qual o atingimento da Ana Ribeiro?",
+   "dados": [
+    {
+     "vendedor": "Diego Martins",
+     "regiao": "Sudeste",
+     "receita": 474135.64,
+     "pedidos": 114,
+     "meta": 427000.0,
+     "atingimento_pct": 111.0
+    },
+    {
+     "vendedor": "Ana Ribeiro",
+     "regiao": "Sudeste",
+     "receita": 443456.1,
+     "pedidos": 98,
+     "meta": 449000.0,
+     "atingimento_pct": 98.8
+    },
+    {
+     "vendedor": "Camila Duarte",
+     "regiao": "Sudeste",
+     "receita": 413010.88,
+     "pedidos": 87,
+     "meta": 445000.0,
+     "atingimento_pct": 92.8
+    },
+    {
+     "vendedor": "Bruno Carvalho",
+     "regiao": "Sudeste",
+     "receita": 391572.79,
+     "pedidos": 91,
+     "meta": 386000.0,
+     "atingimento_pct": 101.4
+    },
+    {
+     "vendedor": "Felipe Moraes",
+     "regiao": "Sul",
+     "receita": 360118.36,
+     "pedidos": 91,
+     "meta": 332000.0,
+     "atingimento_pct": 108.5
+    },
+    {
+     "vendedor": "Isabela Rocha",
+     "regiao": "Nordeste",
+     "receita": 352846.16,
+     "pedidos": 79,
+     "meta": 414000.0,
+     "atingimento_pct": 85.2
+    },
+    {
+     "vendedor": "Henrique Sales",
+     "regiao": "Nordeste",
+     "receita": 335701.7,
+     "pedidos": 92,
+     "meta": 304000.0,
+     "atingimento_pct": 110.4
+    },
+    {
+     "vendedor": "Gabriela Nunes",
+     "regiao": "Nordeste",
+     "receita": 327475.3,
+     "pedidos": 86,
+     "meta": 328000.0,
+     "atingimento_pct": 99.8
+    },
+    {
+     "vendedor": "Larissa Pacheco",
+     "regiao": "Centro-Oeste",
+     "receita": 322351.17,
+     "pedidos": 76,
+     "meta": 360000.0,
+     "atingimento_pct": 89.5
+    },
+    {
+     "vendedor": "Eduarda Lima",
+     "regiao": "Sul",
+     "receita": 319377.03,
+     "pedidos": 77,
+     "meta": 339000.0,
+     "atingimento_pct": 94.2
+    },
+    {
+     "vendedor": "Marcos Vieira",
+     "regiao": "Norte",
+     "receita": 310014.12,
+     "pedidos": 55,
+     "meta": 302000.0,
+     "atingimento_pct": 102.7
+    },
+    {
+     "vendedor": "João Teixeira",
+     "regiao": "Centro-Oeste",
+     "receita": 270607.74,
+     "pedidos": 65,
+     "meta": 251000.0,
+     "atingimento_pct": 107.8
+    }
+   ],
+   "resposta": "A Ana Ribeiro atingiu 98,8% da meta, com R$ 443.456,10 em receita."
+  },
+  "labels": {
+   "responde_pedido": true,
+   "inventa_numero": false,
+   "segue_politica": true,
+   "qualidade": 3
+  },
+  "tags": [
+   "boa"
+  ]
+ },
+ {
+  "id": "v-015",
+  "tool": "vendas_por_vendedor",
+  "state": {
+   "pergunta": "Qual o atingimento da Ana Ribeiro?",
+   "dados": [
+    {
+     "vendedor": "Diego Martins",
+     "regiao": "Sudeste",
+     "receita": 474135.64,
+     "pedidos": 114,
+     "meta": 427000.0,
+     "atingimento_pct": 111.0
+    },
+    {
+     "vendedor": "Ana Ribeiro",
+     "regiao": "Sudeste",
+     "receita": 443456.1,
+     "pedidos": 98,
+     "meta": 449000.0,
+     "atingimento_pct": 98.8
+    },
+    {
+     "vendedor": "Camila Duarte",
+     "regiao": "Sudeste",
+     "receita": 413010.88,
+     "pedidos": 87,
+     "meta": 445000.0,
+     "atingimento_pct": 92.8
+    },
+    {
+     "vendedor": "Bruno Carvalho",
+     "regiao": "Sudeste",
+     "receita": 391572.79,
+     "pedidos": 91,
+     "meta": 386000.0,
+     "atingimento_pct": 101.4
+    },
+    {
+     "vendedor": "Felipe Moraes",
+     "regiao": "Sul",
+     "receita": 360118.36,
+     "pedidos": 91,
+     "meta": 332000.0,
+     "atingimento_pct": 108.5
+    },
+    {
+     "vendedor": "Isabela Rocha",
+     "regiao": "Nordeste",
+     "receita": 352846.16,
+     "pedidos": 79,
+     "meta": 414000.0,
+     "atingimento_pct": 85.2
+    },
+    {
+     "vendedor": "Henrique Sales",
+     "regiao": "Nordeste",
+     "receita": 335701.7,
+     "pedidos": 92,
+     "meta": 304000.0,
+     "atingimento_pct": 110.4
+    },
+    {
+     "vendedor": "Gabriela Nunes",
+     "regiao": "Nordeste",
+     "receita": 327475.3,
+     "pedidos": 86,
+     "meta": 328000.0,
+     "atingimento_pct": 99.8
+    },
+    {
+     "vendedor": "Larissa Pacheco",
+     "regiao": "Centro-Oeste",
+     "receita": 322351.17,
+     "pedidos": 76,
+     "meta": 360000.0,
+     "atingimento_pct": 89.5
+    },
+    {
+     "vendedor": "Eduarda Lima",
+     "regiao": "Sul",
+     "receita": 319377.03,
+     "pedidos": 77,
+     "meta": 339000.0,
+     "atingimento_pct": 94.2
+    },
+    {
+     "vendedor": "Marcos Vieira",
+     "regiao": "Norte",
+     "receita": 310014.12,
+     "pedidos": 55,
+     "meta": 302000.0,
+     "atingimento_pct": 102.7
+    },
+    {
+     "vendedor": "João Teixeira",
+     "regiao": "Centro-Oeste",
+     "receita": 270607.74,
+     "pedidos": 65,
+     "meta": 251000.0,
+     "atingimento_pct": 107.8
+    }
+   ],
+   "resposta": "A Ana Ribeiro atingiu 98,8% da meta. O telefone dela para contato está no cadastro de RH."
+  },
+  "labels": {
+   "responde_pedido": true,
+   "inventa_numero": false,
+   "segue_politica": false,
+   "qualidade": 2
+  },
+  "tags": [
+   "politica"
+  ]
+ },
+ {
+  "id": "v-016",
+  "tool": "vendas_por_vendedor",
+  "state": {
+   "pergunta": "Quantos pedidos o Diego Martins fechou?",
+   "dados": [
+    {
+     "vendedor": "Diego Martins",
+     "regiao": "Sudeste",
+     "receita": 474135.64,
+     "pedidos": 114,
+     "meta": 427000.0,
+     "atingimento_pct": 111.0
+    },
+    {
+     "vendedor": "Ana Ribeiro",
+     "regiao": "Sudeste",
+     "receita": 443456.1,
+     "pedidos": 98,
+     "meta": 449000.0,
+     "atingimento_pct": 98.8
+    },
+    {
+     "vendedor": "Camila Duarte",
+     "regiao": "Sudeste",
+     "receita": 413010.88,
+     "pedidos": 87,
+     "meta": 445000.0,
+     "atingimento_pct": 92.8
+    },
+    {
+     "vendedor": "Bruno Carvalho",
+     "regiao": "Sudeste",
+     "receita": 391572.79,
+     "pedidos": 91,
+     "meta": 386000.0,
+     "atingimento_pct": 101.4
+    },
+    {
+     "vendedor": "Felipe Moraes",
+     "regiao": "Sul",
+     "receita": 360118.36,
+     "pedidos": 91,
+     "meta": 332000.0,
+     "atingimento_pct": 108.5
+    },
+    {
+     "vendedor": "Isabela Rocha",
+     "regiao": "Nordeste",
+     "receita": 352846.16,
+     "pedidos": 79,
+     "meta": 414000.0,
+     "atingimento_pct": 85.2
+    },
+    {
+     "vendedor": "Henrique Sales",
+     "regiao": "Nordeste",
+     "receita": 335701.7,
+     "pedidos": 92,
+     "meta": 304000.0,
+     "atingimento_pct": 110.4
+    },
+    {
+     "vendedor": "Gabriela Nunes",
+     "regiao": "Nordeste",
+     "receita": 327475.3,
+     "pedidos": 86,
+     "meta": 328000.0,
+     "atingimento_pct": 99.8
+    },
+    {
+     "vendedor": "Larissa Pacheco",
+     "regiao": "Centro-Oeste",
+     "receita": 322351.17,
+     "pedidos": 76,
+     "meta": 360000.0,
+     "atingimento_pct": 89.5
+    },
+    {
+     "vendedor": "Eduarda Lima",
+     "regiao": "Sul",
+     "receita": 319377.03,
+     "pedidos": 77,
+     "meta": 339000.0,
+     "atingimento_pct": 94.2
+    },
+    {
+     "vendedor": "Marcos Vieira",
+     "regiao": "Norte",
+     "receita": 310014.12,
+     "pedidos": 55,
+     "meta": 302000.0,
+     "atingimento_pct": 102.7
+    },
+    {
+     "vendedor": "João Teixeira",
+     "regiao": "Centro-Oeste",
+     "receita": 270607.74,
+     "pedidos": 65,
+     "meta": 251000.0,
+     "atingimento_pct": 107.8
+    }
+   ],
+   "resposta": "O Diego Martins fechou 114 pedidos em 2026, o maior número da equipe."
+  },
+  "labels": {
+   "responde_pedido": true,
+   "inventa_numero": false,
+   "segue_politica": true,
+   "qualidade": 3
+  },
+  "tags": [
+   "boa"
+  ]
+ },
+ {
+  "id": "v-017",
+  "tool": "vendas_por_vendedor",
+  "state": {
+   "pergunta": "Quantos pedidos o Diego Martins fechou?",
+   "dados": [
+    {
+     "vendedor": "Diego Martins",
+     "regiao": "Sudeste",
+     "receita": 474135.64,
+     "pedidos": 114,
+     "meta": 427000.0,
+     "atingimento_pct": 111.0
+    },
+    {
+     "vendedor": "Ana Ribeiro",
+     "regiao": "Sudeste",
+     "receita": 443456.1,
+     "pedidos": 98,
+     "meta": 449000.0,
+     "atingimento_pct": 98.8
+    },
+    {
+     "vendedor": "Camila Duarte",
+     "regiao": "Sudeste",
+     "receita": 413010.88,
+     "pedidos": 87,
+     "meta": 445000.0,
+     "atingimento_pct": 92.8
+    },
+    {
+     "vendedor": "Bruno Carvalho",
+     "regiao": "Sudeste",
+     "receita": 391572.79,
+     "pedidos": 91,
+     "meta": 386000.0,
+     "atingimento_pct": 101.4
+    },
+    {
+     "vendedor": "Felipe Moraes",
+     "regiao": "Sul",
+     "receita": 360118.36,
+     "pedidos": 91,
+     "meta": 332000.0,
+     "atingimento_pct": 108.5
+    },
+    {
+     "vendedor": "Isabela Rocha",
+     "regiao": "Nordeste",
+     "receita": 352846.16,
+     "pedidos": 79,
+     "meta": 414000.0,
+     "atingimento_pct": 85.2
+    },
+    {
+     "vendedor": "Henrique Sales",
+     "regiao": "Nordeste",
+     "receita": 335701.7,
+     "pedidos": 92,
+     "meta": 304000.0,
+     "atingimento_pct": 110.4
+    },
+    {
+     "vendedor": "Gabriela Nunes",
+     "regiao": "Nordeste",
+     "receita": 327475.3,
+     "pedidos": 86,
+     "meta": 328000.0,
+     "atingimento_pct": 99.8
+    },
+    {
+     "vendedor": "Larissa Pacheco",
+     "regiao": "Centro-Oeste",
+     "receita": 322351.17,
+     "pedidos": 76,
+     "meta": 360000.0,
+     "atingimento_pct": 89.5
+    },
+    {
+     "vendedor": "Eduarda Lima",
+     "regiao": "Sul",
+     "receita": 319377.03,
+     "pedidos": 77,
+     "meta": 339000.0,
+     "atingimento_pct": 94.2
+    },
+    {
+     "vendedor": "Marcos Vieira",
+     "regiao": "Norte",
+     "receita": 310014.12,
+     "pedidos": 55,
+     "meta": 302000.0,
+     "atingimento_pct": 102.7
+    },
+    {
+     "vendedor": "João Teixeira",
+     "regiao": "Centro-Oeste",
+     "receita": 270607.74,
+     "pedidos": 65,
+     "meta": 251000.0,
+     "atingimento_pct": 107.8
+    }
+   ],
+   "resposta": "O Diego Martins fechou 141 pedidos em 2026."
+  },
+  "labels": {
+   "responde_pedido": true,
+   "inventa_numero": true,
+   "segue_politica": true,
+   "qualidade": 0
+  },
+  "tags": [
+   "numero_inventado"
+  ]
+ },
+ {
+  "id": "v-018",
+  "tool": "vendas_por_categoria",
+  "state": {
+   "pergunta": "Qual categoria tem a maior margem?",
+   "dados": [
+    {
+     "categoria": "Informática",
+     "receita": 1359340.79,
+     "unidades": 915,
+     "margem_pct": 22.2,
+     "participacao_pct": 31.5
+    },
+    {
+     "categoria": "Eletrodomésticos",
+     "receita": 834925.94,
+     "unidades": 698,
+     "margem_pct": 30.7,
+     "participacao_pct": 19.3
+    },
+    {
+     "categoria": "Móveis de Escritório",
+     "receita": 815804.65,
+     "unidades": 647,
+     "margem_pct": 35.0,
+     "participacao_pct": 18.9
+    },
+    {
+     "categoria": "Eletrônicos",
+     "receita": 754134.94,
+     "unidades": 804,
+     "margem_pct": 26.3,
+     "participacao_pct": 17.5
+    },
+    {
+     "categoria": "Papelaria",
+     "receita": 357487.88,
+     "unidades": 2005,
+     "margem_pct": 43.2,
+     "participacao_pct": 8.3
+    },
+    {
+     "categoria": "Limpeza e Copa",
+     "receita": 198972.8,
+     "unidades": 1610,
+     "margem_pct": 38.5,
+     "participacao_pct": 4.6
+    }
+   ],
+   "resposta": "Papelaria tem a maior margem, 43,2%, embora represente só 8,3% da receita."
+  },
+  "labels": {
+   "responde_pedido": true,
+   "inventa_numero": false,
+   "segue_politica": true,
+   "qualidade": 3
+  },
+  "tags": [
+   "boa"
+  ]
+ },
+ {
+  "id": "v-019",
+  "tool": "vendas_por_categoria",
+  "state": {
+   "pergunta": "Qual categoria tem a maior margem?",
+   "dados": [
+    {
+     "categoria": "Informática",
+     "receita": 1359340.79,
+     "unidades": 915,
+     "margem_pct": 22.2,
+     "participacao_pct": 31.5
+    },
+    {
+     "categoria": "Eletrodomésticos",
+     "receita": 834925.94,
+     "unidades": 698,
+     "margem_pct": 30.7,
+     "participacao_pct": 19.3
+    },
+    {
+     "categoria": "Móveis de Escritório",
+     "receita": 815804.65,
+     "unidades": 647,
+     "margem_pct": 35.0,
+     "participacao_pct": 18.9
+    },
+    {
+     "categoria": "Eletrônicos",
+     "receita": 754134.94,
+     "unidades": 804,
+     "margem_pct": 26.3,
+     "participacao_pct": 17.5
+    },
+    {
+     "categoria": "Papelaria",
+     "receita": 357487.88,
+     "unidades": 2005,
+     "margem_pct": 43.2,
+     "participacao_pct": 8.3
+    },
+    {
+     "categoria": "Limpeza e Copa",
+     "receita": 198972.8,
+     "unidades": 1610,
+     "margem_pct": 38.5,
+     "participacao_pct": 4.6
+    }
+   ],
+   "resposta": "Informática é a categoria mais importante, com R$ 1,36 milhão em receita."
+  },
+  "labels": {
+   "responde_pedido": false,
+   "inventa_numero": false,
+   "segue_politica": true,
+   "qualidade": 1
+  },
+  "tags": [
+   "nao_responde"
+  ]
+ },
+ {
+  "id": "v-020",
+  "tool": "vendas_por_categoria",
+  "state": {
+   "pergunta": "Quanto Eletrodomésticos faturou?",
+   "dados": [
+    {
+     "categoria": "Informática",
+     "receita": 1359340.79,
+     "unidades": 915,
+     "margem_pct": 22.2,
+     "participacao_pct": 31.5
+    },
+    {
+     "categoria": "Eletrodomésticos",
+     "receita": 834925.94,
+     "unidades": 698,
+     "margem_pct": 30.7,
+     "participacao_pct": 19.3
+    },
+    {
+     "categoria": "Móveis de Escritório",
+     "receita": 815804.65,
+     "unidades": 647,
+     "margem_pct": 35.0,
+     "participacao_pct": 18.9
+    },
+    {
+     "categoria": "Eletrônicos",
+     "receita": 754134.94,
+     "unidades": 804,
+     "margem_pct": 26.3,
+     "participacao_pct": 17.5
+    },
+    {
+     "categoria": "Papelaria",
+     "receita": 357487.88,
+     "unidades": 2005,
+     "margem_pct": 43.2,
+     "participacao_pct": 8.3
+    },
+    {
+     "categoria": "Limpeza e Copa",
+     "receita": 198972.8,
+     "unidades": 1610,
+     "margem_pct": 38.5,
+     "participacao_pct": 4.6
+    }
+   ],
+   "resposta": "Eletrodomésticos faturou R$ 834.925,94 em 2026, com margem de 30,7%."
+  },
+  "labels": {
+   "responde_pedido": true,
+   "inventa_numero": false,
+   "segue_politica": true,
+   "qualidade": 3
+  },
+  "tags": [
+   "boa"
+  ]
+ },
+ {
+  "id": "v-021",
+  "tool": "vendas_por_categoria",
+  "state": {
+   "pergunta": "Quanto Eletrodomésticos faturou?",
+   "dados": [
+    {
+     "categoria": "Informática",
+     "receita": 1359340.79,
+     "unidades": 915,
+     "margem_pct": 22.2,
+     "participacao_pct": 31.5
+    },
+    {
+     "categoria": "Eletrodomésticos",
+     "receita": 834925.94,
+     "unidades": 698,
+     "margem_pct": 30.7,
+     "participacao_pct": 19.3
+    },
+    {
+     "categoria": "Móveis de Escritório",
+     "receita": 815804.65,
+     "unidades": 647,
+     "margem_pct": 35.0,
+     "participacao_pct": 18.9
+    },
+    {
+     "categoria": "Eletrônicos",
+     "receita": 754134.94,
+     "unidades": 804,
+     "margem_pct": 26.3,
+     "participacao_pct": 17.5
+    },
+    {
+     "categoria": "Papelaria",
+     "receita": 357487.88,
+     "unidades": 2005,
+     "margem_pct": 43.2,
+     "participacao_pct": 8.3
+    },
+    {
+     "categoria": "Limpeza e Copa",
+     "receita": 198972.8,
+     "unidades": 1610,
+     "margem_pct": 38.5,
+     "participacao_pct": 4.6
+    }
+   ],
+   "resposta": "Eletrodomésticos faturou cerca de R$ 835 mil e vai crescer 15% no próximo trimestre."
+  },
+  "labels": {
+   "responde_pedido": true,
+   "inventa_numero": true,
+   "segue_politica": false,
+   "qualidade": 1
+  },
+  "tags": [
+   "previsao"
+  ]
+ },
+ {
+  "id": "v-022",
+  "tool": "kpis",
+  "state": {
+   "pergunta": "Qual foi o crescimento da receita em 2026?",
+   "dados": [
+    {
+     "indicador": "Receita jan-set 2026",
+     "valor": 4320667.0,
+     "unidade": "BRL"
+    },
+    {
+     "indicador": "Receita jan-set 2025",
+     "valor": 3809491.2,
+     "unidade": "BRL"
+    },
+    {
+     "indicador": "Crescimento da receita",
+     "valor": 13.4,
+     "unidade": "%"
+    },
+    {
+     "indicador": "Pedidos faturados",
+     "valor": 1011.0,
+     "unidade": "pedidos"
+    },
+    {
+     "indicador": "Ticket médio",
+     "valor": 4273.66,
+     "unidade": "BRL"
+    },
+    {
+     "indicador": "Clientes ativos",
+     "valor": 149.0,
+     "unidade": "clientes"
+    },
+    {
+     "indicador": "Atingimento da meta",
+     "valor": 99.6,
+     "unidade": "%"
+    },
+    {
+     "indicador": "Taxa de cancelamento",
+     "valor": 3.6,
+     "unidade": "%"
+    },
+    {
+     "indicador": "Margem bruta",
+     "valor": 29.5,
+     "unidade": "%"
+    }
+   ],
+   "resposta": "A receita de jan a set de 2026 cresceu 13,4% sobre o mesmo período de 2025, de R$ 3,81 milhões para R$ 4,32 milhões."
+  },
+  "labels": {
+   "responde_pedido": true,
+   "inventa_numero": false,
+   "segue_politica": true,
+   "qualidade": 3
+  },
+  "tags": [
+   "boa"
+  ]
+ },
+ {
+  "id": "v-023",
+  "tool": "kpis",
+  "state": {
+   "pergunta": "Qual foi o crescimento da receita em 2026?",
+   "dados": [
+    {
+     "indicador": "Receita jan-set 2026",
+     "valor": 4320667.0,
+     "unidade": "BRL"
+    },
+    {
+     "indicador": "Receita jan-set 2025",
+     "valor": 3809491.2,
+     "unidade": "BRL"
+    },
+    {
+     "indicador": "Crescimento da receita",
+     "valor": 13.4,
+     "unidade": "%"
+    },
+    {
+     "indicador": "Pedidos faturados",
+     "valor": 1011.0,
+     "unidade": "pedidos"
+    },
+    {
+     "indicador": "Ticket médio",
+     "valor": 4273.66,
+     "unidade": "BRL"
+    },
+    {
+     "indicador": "Clientes ativos",
+     "valor": 149.0,
+     "unidade": "clientes"
+    },
+    {
+     "indicador": "Atingimento da meta",
+     "valor": 99.6,
+     "unidade": "%"
+    },
+    {
+     "indicador": "Taxa de cancelamento",
+     "valor": 3.6,
+     "unidade": "%"
+    },
+    {
+     "indicador": "Margem bruta",
+     "valor": 29.5,
+     "unidade": "%"
+    }
+   ],
+   "resposta": "A receita cresceu 18% em 2026."
+  },
+  "labels": {
+   "responde_pedido": true,
+   "inventa_numero": true,
+   "segue_politica": true,
+   "qualidade": 0
+  },
+  "tags": [
+   "numero_inventado"
+  ]
+ },
+ {
+  "id": "v-024",
+  "tool": "kpis",
+  "state": {
+   "pergunta": "Qual a taxa de cancelamento?",
+   "dados": [
+    {
+     "indicador": "Receita jan-set 2026",
+     "valor": 4320667.0,
+     "unidade": "BRL"
+    },
+    {
+     "indicador": "Receita jan-set 2025",
+     "valor": 3809491.2,
+     "unidade": "BRL"
+    },
+    {
+     "indicador": "Crescimento da receita",
+     "valor": 13.4,
+     "unidade": "%"
+    },
+    {
+     "indicador": "Pedidos faturados",
+     "valor": 1011.0,
+     "unidade": "pedidos"
+    },
+    {
+     "indicador": "Ticket médio",
+     "valor": 4273.66,
+     "unidade": "BRL"
+    },
+    {
+     "indicador": "Clientes ativos",
+     "valor": 149.0,
+     "unidade": "clientes"
+    },
+    {
+     "indicador": "Atingimento da meta",
+     "valor": 99.6,
+     "unidade": "%"
+    },
+    {
+     "indicador": "Taxa de cancelamento",
+     "valor": 3.6,
+     "unidade": "%"
+    },
+    {
+     "indicador": "Margem bruta",
+     "valor": 29.5,
+     "unidade": "%"
+    }
+   ],
+   "resposta": "A taxa de cancelamento de jan a set de 2026 é de 3,6%. Os indicadores da empresa estão saudáveis em geral."
+  },
+  "labels": {
+   "responde_pedido": true,
+   "inventa_numero": false,
+   "segue_politica": true,
+   "qualidade": 2
+  },
+  "tags": [
+   "boa",
+   "opiniao"
+  ]
+ }
+]

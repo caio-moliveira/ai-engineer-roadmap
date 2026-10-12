@@ -1,0 +1,163 @@
+{
+  "tool": "vendas_mensal",
+  "view": "vw_vendas_mensal",
+  "columns": [
+    "mes",
+    "receita",
+    "pedidos",
+    "ticket_medio",
+    "variacao_pct"
+  ],
+  "rows": [
+    {
+      "mes": "2025-01",
+      "receita": 333990.1,
+      "pedidos": 88,
+      "ticket_medio": 3795.34,
+      "variacao_pct": null
+    },
+    {
+      "mes": "2025-02",
+      "receita": 428283.15,
+      "pedidos": 92,
+      "ticket_medio": 4655.25,
+      "variacao_pct": 28.2
+    },
+    {
+      "mes": "2025-03",
+      "receita": 442135.75,
+      "pedidos": 101,
+      "ticket_medio": 4377.58,
+      "variacao_pct": 3.2
+    },
+    {
+      "mes": "2025-04",
+      "receita": 388203.5,
+      "pedidos": 99,
+      "ticket_medio": 3921.25,
+      "variacao_pct": -12.2
+    },
+    {
+      "mes": "2025-05",
+      "receita": 504228.45,
+      "pedidos": 113,
+      "ticket_medio": 4462.2,
+      "variacao_pct": 29.9
+    },
+    {
+      "mes": "2025-06",
+      "receita": 395083.4,
+      "pedidos": 98,
+      "ticket_medio": 4031.46,
+      "variacao_pct": -21.6
+    },
+    {
+      "mes": "2025-07",
+      "receita": 436801.35,
+      "pedidos": 98,
+      "ticket_medio": 4457.16,
+      "variacao_pct": 10.6
+    },
+    {
+      "mes": "2025-08",
+      "receita": 480381.15,
+      "pedidos": 105,
+      "ticket_medio": 4575.06,
+      "variacao_pct": 10.0
+    },
+    {
+      "mes": "2025-09",
+      "receita": 400384.35,
+      "pedidos": 101,
+      "ticket_medio": 3964.2,
+      "variacao_pct": -16.7
+    },
+    {
+      "mes": "2025-10",
+      "receita": 434234.8,
+      "pedidos": 113,
+      "ticket_medio": 3842.79,
+      "variacao_pct": 8.5
+    },
+    {
+      "mes": "2025-11",
+      "receita": 537817.8,
+      "pedidos": 140,
+      "ticket_medio": 3841.56,
+      "variacao_pct": 23.9
+    },
+    {
+      "mes": "2025-12",
+      "receita": 613303.25,
+      "pedidos": 137,
+      "ticket_medio": 4476.67,
+      "variacao_pct": 14.0
+    },
+    {
+      "mes": "2026-01",
+      "receita": 395978.8,
+      "pedidos": 100,
+      "ticket_medio": 3959.79,
+      "variacao_pct": -35.4
+    },
+    {
+      "mes": "2026-02",
+      "receita": 365979.28,
+      "pedidos": 104,
+      "ticket_medio": 3519.03,
+      "variacao_pct": -7.6
+    },
+    {
+      "mes": "2026-03",
+      "receita": 498301.54,
+      "pedidos": 112,
+      "ticket_medio": 4449.12,
+      "variacao_pct": 36.2
+    },
+    {
+      "mes": "2026-04",
+      "receita": 583814.19,
+      "pedidos": 109,
+      "ticket_medio": 5356.09,
+      "variacao_pct": 17.2
+    },
+    {
+      "mes": "2026-05",
+      "receita": 531033.1,
+      "pedidos": 115,
+      "ticket_medio": 4617.68,
+      "variacao_pct": -9.0
+    },
+    {
+      "mes": "2026-06",
+      "receita": 437759.71,
+      "pedidos": 111,
+      "ticket_medio": 3943.78,
+      "variacao_pct": -17.6
+    },
+    {
+      "mes": "2026-07",
+      "receita": 458857.36,
+      "pedidos": 113,
+      "ticket_medio": 4060.68,
+      "variacao_pct": 4.8
+    },
+    {
+      "mes": "2026-08",
+      "receita": 470878.15,
+      "pedidos": 122,
+      "ticket_medio": 3859.66,
+      "variacao_pct": 2.6
+    },
+    {
+      "mes": "2026-09",
+      "receita": 578064.86,
+      "pedidos": 125,
+      "ticket_medio": 4624.52,
+      "variacao_pct": 22.8
+    }
+  ],
+  "row_count": 21,
+  "truncated": false,
+  "latency_ms": 6.3213999997060455
+}

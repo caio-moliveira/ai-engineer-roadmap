@@ -1,0 +1,43 @@
+# Preços em US$ por 1M tokens. Nunca escreva preço no código: o custo de toda decisão
+# sai desta tabela (RF-07). Mudou um preço, mudou a conclusão da comparação:
+# commit explícito e revisão humana.
+#
+# Fonte e data de cada linha estão no campo `source`. Preços de API mudam;
+# confira antes de apresentar números e atualize `reference_date`.
+#
+# Modelo ausente ou com preço null -> PricingMissingError (nunca custo zero silencioso).
+
+reference_date: "2026-10-03"
+
+models:
+  # Jev cobra só entrada; a saída de um modelo de decisão é a distribuição, não tokens.
+  jev-1.13.0:
+    input: 0.042
+    output: 0
+    source: "TypeSafe, tabela copiada do workshop-jev em 03/10/2026"
+  # Laya roda na sua máquina: o custo é hardware e energia, não token.
+  # Para comparar com API, calcule custo/hora da máquina ÷ decisões/hora no seu ambiente.
+  laya-rl-agent:
+    input: 0
+    output: 0
+    source: "Apache 2.0, self-hosted; custo de hardware fora da tabela"
+  gpt-5.6-luna:
+    input: 0.20
+    output: 1.20
+    source: "OpenAI, página de preços vigente desde 30/07/2026 (via workshop-jev)"
+  claude-haiku-4-5-20251001:
+    input: 1.00
+    output: 5.00
+    source: "Anthropic, tabela de preços em 03/10/2026, sem prompt caching (via workshop-jev)"
+  claude-sonnet-5-5:
+    input: 2.00
+    output: 10.00
+    source: "Anthropic, tabela de preços em 03/10/2026, sem prompt caching (via workshop-jev)"
+  claude-opus-5-5:
+    input: 4.00
+    output: 20.00
+    source: "Anthropic, tabela de preços em 03/10/2026, sem prompt caching (via workshop-jev)"
+  meu-systemone:
+    input: 0
+    output: 0
+    source: "Servidor do módulo 07 (self-hosted); custo de hardware fora da tabela"

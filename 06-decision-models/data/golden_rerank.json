@@ -1,0 +1,416 @@
+[
+ {
+  "id": "r-01",
+  "pergunta": "O que causa o efeito estufa?",
+  "candidatos": [
+   {
+    "id": "r-01-01",
+    "rank_retriever": 1,
+    "trecho": "O aquecimento global é o aumento da temperatura média do planeta observado desde o século XIX.",
+    "relevancia": 1
+   },
+   {
+    "id": "r-01-02",
+    "rank_retriever": 2,
+    "trecho": "Estufas agrícolas usam plástico ou vidro para reter calor e proteger as plantas do frio.",
+    "relevancia": 0
+   },
+   {
+    "id": "r-01-03",
+    "rank_retriever": 3,
+    "trecho": "Gases como dióxido de carbono, metano e óxido nitroso absorvem a radiação infravermelha emitida pela superfície e a devolvem em parte para baixo, aquecendo a atmosfera.",
+    "relevancia": 2
+   },
+   {
+    "id": "r-01-04",
+    "rank_retriever": 4,
+    "trecho": "O Acordo de Paris estabeleceu a meta de limitar o aquecimento a bem menos de 2 °C.",
+    "relevancia": 0
+   },
+   {
+    "id": "r-01-05",
+    "rank_retriever": 5,
+    "trecho": "A queima de combustíveis fósseis é a principal fonte do aumento de CO2 na atmosfera desde a Revolução Industrial.",
+    "relevancia": 1
+   },
+   {
+    "id": "r-01-06",
+    "rank_retriever": 6,
+    "trecho": "Sem o efeito estufa natural, a temperatura média da Terra seria de cerca de -18 °C.",
+    "relevancia": 1
+   },
+   {
+    "id": "r-01-07",
+    "rank_retriever": 7,
+    "trecho": "O vapor d'água é o gás de efeito estufa mais abundante, mas sua concentração responde à temperatura em vez de controlá-la.",
+    "relevancia": 2
+   },
+   {
+    "id": "r-01-08",
+    "rank_retriever": 8,
+    "trecho": "Painéis solares convertem a luz do sol diretamente em eletricidade.",
+    "relevancia": 0
+   },
+   {
+    "id": "r-01-09",
+    "rank_retriever": 9,
+    "trecho": "O metano tem potencial de aquecimento muito maior que o CO2 em um horizonte de 20 anos.",
+    "relevancia": 1
+   },
+   {
+    "id": "r-01-10",
+    "rank_retriever": 10,
+    "trecho": "A camada de ozônio protege a superfície da radiação ultravioleta.",
+    "relevancia": 0
+   }
+  ],
+  "tags": [
+   "clima"
+  ]
+ },
+ {
+  "id": "r-02",
+  "pergunta": "Como o aquecimento global afeta o nível do mar?",
+  "candidatos": [
+   {
+    "id": "r-02-01",
+    "rank_retriever": 1,
+    "trecho": "O nível do mar sobe por dois motivos: a água do oceano se expande ao aquecer e o gelo de geleiras e mantos polares derrete e escoa para o mar.",
+    "relevancia": 2
+   },
+   {
+    "id": "r-02-02",
+    "rank_retriever": 2,
+    "trecho": "As marés são causadas pela atração gravitacional da Lua e do Sol.",
+    "relevancia": 0
+   },
+   {
+    "id": "r-02-03",
+    "rank_retriever": 3,
+    "trecho": "Cidades costeiras baixas estão entre as mais expostas a inundações nas próximas décadas.",
+    "relevancia": 1
+   },
+   {
+    "id": "r-02-04",
+    "rank_retriever": 4,
+    "trecho": "O derretimento do gelo marinho do Ártico não eleva o nível do mar diretamente, porque esse gelo já flutua na água.",
+    "relevancia": 2
+   },
+   {
+    "id": "r-02-05",
+    "rank_retriever": 5,
+    "trecho": "O oceano absorveu mais de 90% do calor extra retido pelo sistema climático.",
+    "relevancia": 1
+   },
+   {
+    "id": "r-02-06",
+    "rank_retriever": 6,
+    "trecho": "Recifes de coral sofrem branqueamento quando a água fica quente demais.",
+    "relevancia": 0
+   },
+   {
+    "id": "r-02-07",
+    "rank_retriever": 7,
+    "trecho": "O manto de gelo da Groenlândia perdeu massa em ritmo acelerado nas últimas décadas, contribuindo para a alta do mar.",
+    "relevancia": 2
+   },
+   {
+    "id": "r-02-08",
+    "rank_retriever": 8,
+    "trecho": "A pesca industrial reduziu estoques de várias espécies.",
+    "relevancia": 0
+   },
+   {
+    "id": "r-02-09",
+    "rank_retriever": 9,
+    "trecho": "Ressacas mais fortes aumentam a erosão de praias.",
+    "relevancia": 1
+   },
+   {
+    "id": "r-02-10",
+    "rank_retriever": 10,
+    "trecho": "Os oceanos cobrem cerca de 71% da superfície da Terra.",
+    "relevancia": 0
+   }
+  ],
+  "tags": [
+   "clima"
+  ]
+ },
+ {
+  "id": "r-03",
+  "pergunta": "Quais setores mais emitem gases de efeito estufa?",
+  "candidatos": [
+   {
+    "id": "r-03-01",
+    "rank_retriever": 1,
+    "trecho": "A geração de energia elétrica e de calor a partir de carvão, petróleo e gás é o maior setor emissor no mundo.",
+    "relevancia": 2
+   },
+   {
+    "id": "r-03-02",
+    "rank_retriever": 2,
+    "trecho": "O consumo de energia per capita varia muito entre países.",
+    "relevancia": 0
+   },
+   {
+    "id": "r-03-03",
+    "rank_retriever": 3,
+    "trecho": "Transporte, sobretudo rodoviário, responde por uma parcela grande das emissões de CO2.",
+    "relevancia": 2
+   },
+   {
+    "id": "r-03-04",
+    "rank_retriever": 4,
+    "trecho": "No Brasil, a mudança de uso da terra, principalmente o desmatamento, é historicamente a maior fonte de emissões.",
+    "relevancia": 2
+   },
+   {
+    "id": "r-03-05",
+    "rank_retriever": 5,
+    "trecho": "A agropecuária emite metano pela digestão do gado e óxido nitroso pelo uso de fertilizantes.",
+    "relevancia": 2
+   },
+   {
+    "id": "r-03-06",
+    "rank_retriever": 6,
+    "trecho": "Carros elétricos não emitem gases pelo escapamento.",
+    "relevancia": 1
+   },
+   {
+    "id": "r-03-07",
+    "rank_retriever": 7,
+    "trecho": "A indústria do cimento libera CO2 tanto pela queima de combustível quanto pela reação química do calcário.",
+    "relevancia": 1
+   },
+   {
+    "id": "r-03-08",
+    "rank_retriever": 8,
+    "trecho": "O efeito estufa é um fenômeno natural essencial para a vida.",
+    "relevancia": 0
+   },
+   {
+    "id": "r-03-09",
+    "rank_retriever": 9,
+    "trecho": "Créditos de carbono permitem compensar emissões financiando projetos de redução.",
+    "relevancia": 0
+   },
+   {
+    "id": "r-03-10",
+    "rank_retriever": 10,
+    "trecho": "Edifícios consomem energia para climatização e iluminação.",
+    "relevancia": 1
+   }
+  ],
+  "tags": [
+   "clima"
+  ]
+ },
+ {
+  "id": "r-04",
+  "pergunta": "O que é mitigação e o que é adaptação às mudanças climáticas?",
+  "candidatos": [
+   {
+    "id": "r-04-01",
+    "rank_retriever": 1,
+    "trecho": "Mitigação é reduzir as emissões ou aumentar a remoção de gases de efeito estufa, atacando a causa do problema.",
+    "relevancia": 2
+   },
+   {
+    "id": "r-04-02",
+    "rank_retriever": 2,
+    "trecho": "Adaptação é ajustar sistemas naturais e humanos aos efeitos já em curso, como construir diques ou mudar o calendário de plantio.",
+    "relevancia": 2
+   },
+   {
+    "id": "r-04-03",
+    "rank_retriever": 3,
+    "trecho": "O IPCC publica relatórios de avaliação sobre o conhecimento científico do clima.",
+    "relevancia": 0
+   },
+   {
+    "id": "r-04-04",
+    "rank_retriever": 4,
+    "trecho": "Plantar árvores remove CO2 da atmosfera enquanto elas crescem.",
+    "relevancia": 1
+   },
+   {
+    "id": "r-04-05",
+    "rank_retriever": 5,
+    "trecho": "Sistemas de alerta de enchente salvam vidas em regiões vulneráveis.",
+    "relevancia": 1
+   },
+   {
+    "id": "r-04-06",
+    "rank_retriever": 6,
+    "trecho": "A temperatura média global já subiu cerca de 1,2 °C em relação ao período pré-industrial.",
+    "relevancia": 0
+   },
+   {
+    "id": "r-04-07",
+    "rank_retriever": 7,
+    "trecho": "As duas estratégias se complementam: quanto menos se mitiga, mais caro fica adaptar.",
+    "relevancia": 2
+   },
+   {
+    "id": "r-04-08",
+    "rank_retriever": 8,
+    "trecho": "Energia eólica é gerada pela força do vento sobre turbinas.",
+    "relevancia": 0
+   },
+   {
+    "id": "r-04-09",
+    "rank_retriever": 9,
+    "trecho": "Sementes resistentes à seca ajudam agricultores a conviver com chuvas irregulares.",
+    "relevancia": 1
+   },
+   {
+    "id": "r-04-10",
+    "rank_retriever": 10,
+    "trecho": "A Conferência das Partes (COP) reúne países anualmente para negociar o clima.",
+    "relevancia": 0
+   }
+  ],
+  "tags": [
+   "clima"
+  ]
+ },
+ {
+  "id": "r-05",
+  "pergunta": "Por que o Ártico aquece mais rápido que o resto do planeta?",
+  "candidatos": [
+   {
+    "id": "r-05-01",
+    "rank_retriever": 1,
+    "trecho": "O Ártico aquece cerca de quatro vezes mais rápido que a média global, fenômeno chamado amplificação ártica.",
+    "relevancia": 1
+   },
+   {
+    "id": "r-05-02",
+    "rank_retriever": 2,
+    "trecho": "Quando o gelo e a neve derretem, a superfície escura do mar e do solo absorve mais radiação solar, o que aquece ainda mais a região: é o efeito albedo.",
+    "relevancia": 2
+   },
+   {
+    "id": "r-05-03",
+    "rank_retriever": 3,
+    "trecho": "Ursos-polares dependem do gelo marinho para caçar focas.",
+    "relevancia": 0
+   },
+   {
+    "id": "r-05-04",
+    "rank_retriever": 4,
+    "trecho": "Mudanças na circulação atmosférica e oceânica transportam mais calor para as altas latitudes.",
+    "relevancia": 2
+   },
+   {
+    "id": "r-05-05",
+    "rank_retriever": 5,
+    "trecho": "A Antártida é um continente coberto por gelo, ao contrário do Ártico, que é um oceano.",
+    "relevancia": 0
+   },
+   {
+    "id": "r-05-06",
+    "rank_retriever": 6,
+    "trecho": "O degelo do permafrost pode liberar metano e CO2 guardados no solo congelado.",
+    "relevancia": 1
+   },
+   {
+    "id": "r-05-07",
+    "rank_retriever": 7,
+    "trecho": "Rotas de navegação pelo Ártico estão ficando abertas por mais meses do ano.",
+    "relevancia": 0
+   },
+   {
+    "id": "r-05-08",
+    "rank_retriever": 8,
+    "trecho": "Uma atmosfera mais rasa e estável perto do solo concentra o aquecimento na superfície polar.",
+    "relevancia": 2
+   },
+   {
+    "id": "r-05-09",
+    "rank_retriever": 9,
+    "trecho": "O aquecimento global aumenta a frequência de ondas de calor.",
+    "relevancia": 0
+   },
+   {
+    "id": "r-05-10",
+    "rank_retriever": 10,
+    "trecho": "Auroras boreais são causadas por partículas do vento solar.",
+    "relevancia": 0
+   }
+  ],
+  "tags": [
+   "clima"
+  ]
+ },
+ {
+  "id": "r-06",
+  "pergunta": "Quais são os efeitos das mudanças climáticas na saúde humana?",
+  "candidatos": [
+   {
+    "id": "r-06-01",
+    "rank_retriever": 1,
+    "trecho": "Ondas de calor mais intensas aumentam internações e mortes, sobretudo entre idosos e pessoas com doenças crônicas.",
+    "relevancia": 2
+   },
+   {
+    "id": "r-06-02",
+    "rank_retriever": 2,
+    "trecho": "A temperatura do corpo humano é regulada pelo hipotálamo.",
+    "relevancia": 0
+   },
+   {
+    "id": "r-06-03",
+    "rank_retriever": 3,
+    "trecho": "Mosquitos transmissores de dengue e malária ampliam sua área de ocorrência com o aumento da temperatura.",
+    "relevancia": 2
+   },
+   {
+    "id": "r-06-04",
+    "rank_retriever": 4,
+    "trecho": "Secas e enchentes afetam a produção de alimentos e podem agravar a desnutrição.",
+    "relevancia": 2
+   },
+   {
+    "id": "r-06-05",
+    "rank_retriever": 5,
+    "trecho": "A poluição do ar por queimadas piora doenças respiratórias.",
+    "relevancia": 1
+   },
+   {
+    "id": "r-06-06",
+    "rank_retriever": 6,
+    "trecho": "Hospitais consomem muita energia e também emitem gases de efeito estufa.",
+    "relevancia": 0
+   },
+   {
+    "id": "r-06-07",
+    "rank_retriever": 7,
+    "trecho": "Eventos extremos causam estresse e problemas de saúde mental nas populações atingidas.",
+    "relevancia": 1
+   },
+   {
+    "id": "r-06-08",
+    "rank_retriever": 8,
+    "trecho": "A vacinação é a forma mais eficaz de prevenir várias doenças infecciosas.",
+    "relevancia": 0
+   },
+   {
+    "id": "r-06-09",
+    "rank_retriever": 9,
+    "trecho": "A água contaminada após enchentes aumenta casos de diarreia e leptospirose.",
+    "relevancia": 2
+   },
+   {
+    "id": "r-06-10",
+    "rank_retriever": 10,
+    "trecho": "O clima de uma região é a média do tempo ao longo de décadas.",
+    "relevancia": 0
+   }
+  ],
+  "tags": [
+   "clima"
+  ]
+ }
+]

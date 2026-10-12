@@ -1,0 +1,75 @@
+{
+  "tool": "top_produtos",
+  "view": "vw_top_produtos",
+  "columns": [
+    "produto",
+    "categoria",
+    "unidades",
+    "receita"
+  ],
+  "rows": [
+    {
+      "produto": "Notebook Pro 14",
+      "categoria": "Informática",
+      "unidades": 79,
+      "receita": 550319.43
+    },
+    {
+      "produto": "Notebook Essencial 15",
+      "categoria": "Informática",
+      "unidades": 96,
+      "receita": 342244.19
+    },
+    {
+      "produto": "Armário Alto",
+      "categoria": "Móveis de Escritório",
+      "unidades": 173,
+      "receita": 239311.8
+    },
+    {
+      "produto": "Cafeteira Expresso",
+      "categoria": "Eletrodomésticos",
+      "unidades": 173,
+      "receita": 231419.45
+    },
+    {
+      "produto": "Smartphone X12",
+      "categoria": "Eletrônicos",
+      "unidades": 67,
+      "receita": 222326.21
+    },
+    {
+      "produto": "Estação de Trabalho Dupla",
+      "categoria": "Móveis de Escritório",
+      "unidades": 54,
+      "receita": 220758.72
+    },
+    {
+      "produto": "Dock USB-C",
+      "categoria": "Informática",
+      "unidades": 206,
+      "receita": 190311.11
+    },
+    {
+      "produto": "Aspirador Vertical",
+      "categoria": "Eletrodomésticos",
+      "unidades": 171,
+      "receita": 172467.36
+    },
+    {
+      "produto": "Smartwatch Fit",
+      "categoria": "Eletrônicos",
+      "unidades": 139,
+      "receita": 169461.86
+    },
+    {
+      "produto": "Tablet 11",
+      "categoria": "Eletrônicos",
+      "unidades": 65,
+      "receita": 165943.6
+    }
+  ],
+  "row_count": 10,
+  "truncated": false,
+  "latency_ms": 5.489699999998265
+}

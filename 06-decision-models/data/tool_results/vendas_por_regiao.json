@@ -1,0 +1,51 @@
+{
+  "tool": "vendas_por_regiao",
+  "view": "vw_vendas_por_regiao",
+  "columns": [
+    "regiao",
+    "receita",
+    "pedidos",
+    "clientes_ativos",
+    "participacao_pct"
+  ],
+  "rows": [
+    {
+      "regiao": "Sudeste",
+      "receita": 1722175.42,
+      "pedidos": 390,
+      "clientes_ativos": 58,
+      "participacao_pct": 39.9
+    },
+    {
+      "regiao": "Nordeste",
+      "receita": 1016023.16,
+      "pedidos": 257,
+      "clientes_ativos": 38,
+      "participacao_pct": 23.5
+    },
+    {
+      "regiao": "Sul",
+      "receita": 679495.39,
+      "pedidos": 168,
+      "clientes_ativos": 26,
+      "participacao_pct": 15.7
+    },
+    {
+      "regiao": "Centro-Oeste",
+      "receita": 592958.91,
+      "pedidos": 141,
+      "clientes_ativos": 19,
+      "participacao_pct": 13.7
+    },
+    {
+      "regiao": "Norte",
+      "receita": 310014.12,
+      "pedidos": 55,
+      "clientes_ativos": 8,
+      "participacao_pct": 7.2
+    }
+  ],
+  "row_count": 5,
+  "truncated": false,
+  "latency_ms": 4.4563000001289765
+}

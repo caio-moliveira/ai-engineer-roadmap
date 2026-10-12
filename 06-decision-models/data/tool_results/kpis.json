@@ -1,0 +1,59 @@
+{
+  "tool": "kpis",
+  "view": "vw_kpis",
+  "columns": [
+    "indicador",
+    "valor",
+    "unidade"
+  ],
+  "rows": [
+    {
+      "indicador": "Receita jan-set 2026",
+      "valor": 4320667.0,
+      "unidade": "BRL"
+    },
+    {
+      "indicador": "Receita jan-set 2025",
+      "valor": 3809491.2,
+      "unidade": "BRL"
+    },
+    {
+      "indicador": "Crescimento da receita",
+      "valor": 13.4,
+      "unidade": "%"
+    },
+    {
+      "indicador": "Pedidos faturados",
+      "valor": 1011.0,
+      "unidade": "pedidos"
+    },
+    {
+      "indicador": "Ticket médio",
+      "valor": 4273.66,
+      "unidade": "BRL"
+    },
+    {
+      "indicador": "Clientes ativos",
+      "valor": 149.0,
+      "unidade": "clientes"
+    },
+    {
+      "indicador": "Atingimento da meta",
+      "valor": 99.6,
+      "unidade": "%"
+    },
+    {
+      "indicador": "Taxa de cancelamento",
+      "valor": 3.6,
+      "unidade": "%"
+    },
+    {
+      "indicador": "Margem bruta",
+      "valor": 29.5,
+      "unidade": "%"
+    }
+  ],
+  "row_count": 9,
+  "truncated": false,
+  "latency_ms": 4.554500000267581
+}

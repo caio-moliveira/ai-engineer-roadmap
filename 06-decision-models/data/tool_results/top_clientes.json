@@ -1,0 +1,97 @@
+{
+  "tool": "top_clientes",
+  "view": "vw_top_clientes",
+  "columns": [
+    "cliente",
+    "segmento",
+    "regiao",
+    "pedidos",
+    "receita",
+    "ultima_compra"
+  ],
+  "rows": [
+    {
+      "cliente": "Colégio Tropical S.A.",
+      "segmento": "Corporativo",
+      "regiao": "Sudeste",
+      "pedidos": 34,
+      "receita": 246270.65,
+      "ultima_compra": "2026-09-29"
+    },
+    {
+      "cliente": "Distribuidora Ipê ME",
+      "segmento": "Corporativo",
+      "regiao": "Sudeste",
+      "pedidos": 14,
+      "receita": 98020.42,
+      "ultima_compra": "2026-09-27"
+    },
+    {
+      "cliente": "Transportadora Mirante ME",
+      "segmento": "Corporativo",
+      "regiao": "Sudeste",
+      "pedidos": 12,
+      "receita": 90055.63,
+      "ultima_compra": "2026-09-30"
+    },
+    {
+      "cliente": "Transportadora Solar S.A.",
+      "segmento": "Corporativo",
+      "regiao": "Sul",
+      "pedidos": 9,
+      "receita": 86234.2,
+      "ultima_compra": "2026-09-15"
+    },
+    {
+      "cliente": "Escritório Tropical S.A.",
+      "segmento": "Corporativo",
+      "regiao": "Centro-Oeste",
+      "pedidos": 12,
+      "receita": 85958.81,
+      "ultima_compra": "2026-08-29"
+    },
+    {
+      "cliente": "Colégio Litoral Ltda",
+      "segmento": "PME",
+      "regiao": "Sudeste",
+      "pedidos": 14,
+      "receita": 80114.11,
+      "ultima_compra": "2026-09-26"
+    },
+    {
+      "cliente": "Comercial Aurora S.A.",
+      "segmento": "Corporativo",
+      "regiao": "Nordeste",
+      "pedidos": 11,
+      "receita": 80083.22,
+      "ultima_compra": "2026-09-15"
+    },
+    {
+      "cliente": "Colégio Brasil Sul EPP",
+      "segmento": "Corporativo",
+      "regiao": "Sul",
+      "pedidos": 11,
+      "receita": 77117.87,
+      "ultima_compra": "2026-09-11"
+    },
+    {
+      "cliente": "Transportadora Itaú S.A.",
+      "segmento": "Corporativo",
+      "regiao": "Sudeste",
+      "pedidos": 7,
+      "receita": 69436.8,
+      "ultima_compra": "2026-09-25"
+    },
+    {
+      "cliente": "Rede Nova Era EPP",
+      "segmento": "Corporativo",
+      "regiao": "Nordeste",
+      "pedidos": 9,
+      "receita": 67230.59,
+      "ultima_compra": "2026-09-21"
+    }
+  ],
+  "row_count": 10,
+  "truncated": false,
+  "latency_ms": 5.122300000039104
+}

@@ -1,0 +1,1571 @@
+[
+ {
+  "id": "t-001",
+  "state": {
+   "ticket": "Fui cobrado duas vezes na fatura de setembro. Preciso que estornem o valor duplicado ainda hoje."
+  },
+  "cliente": {
+   "plano": "pro",
+   "meses_cliente": 26,
+   "valor_mensal": 189.0
+  },
+  "labels": {
+   "fila": "financeiro",
+   "categoria": "cobranca_indevida",
+   "urgencia": 2,
+   "rota": "barato",
+   "pede_reembolso": true,
+   "ameaca_cancelar": false,
+   "relata_erro": false,
+   "pede_informacao": false,
+   "cancelou_30d": false
+  },
+  "tags": [
+   "financeiro"
+  ],
+  "difficulty": "easy"
+ },
+ {
+  "id": "t-002",
+  "state": {
+   "ticket": "Apareceram duas cobranças de R$ 89,90 no meu cartão no mesmo dia. Se não resolverem, vou cancelar a assinatura."
+  },
+  "cliente": {
+   "plano": "basico",
+   "meses_cliente": 3,
+   "valor_mensal": 89.9
+  },
+  "labels": {
+   "fila": "financeiro",
+   "categoria": "cobranca_indevida",
+   "urgencia": 2,
+   "rota": "barato",
+   "pede_reembolso": true,
+   "ameaca_cancelar": true,
+   "relata_erro": false,
+   "pede_informacao": false,
+   "cancelou_30d": true
+  },
+  "tags": [
+   "financeiro"
+  ],
+  "difficulty": "medium"
+ },
+ {
+  "id": "t-003",
+  "state": {
+   "ticket": "Olá, notei que a mensalidade veio em duplicidade no boleto deste mês. Podem verificar quando puderem?"
+  },
+  "cliente": {
+   "plano": "empresa",
+   "meses_cliente": 40,
+   "valor_mensal": 990.0
+  },
+  "labels": {
+   "fila": "financeiro",
+   "categoria": "cobranca_indevida",
+   "urgencia": 1,
+   "rota": "barato",
+   "pede_reembolso": false,
+   "ameaca_cancelar": false,
+   "relata_erro": false,
+   "pede_informacao": false,
+   "cancelou_30d": false
+  },
+  "tags": [
+   "financeiro"
+  ],
+  "difficulty": "medium"
+ },
+ {
+  "id": "t-004",
+  "state": {
+   "ticket": "Cancelei o plano adicional de armazenamento em agosto e continuo sendo cobrado. Quero o dinheiro de volta dos dois meses."
+  },
+  "cliente": {
+   "plano": "pro",
+   "meses_cliente": 14,
+   "valor_mensal": 229.0
+  },
+  "labels": {
+   "fila": "financeiro",
+   "categoria": "estorno",
+   "urgencia": 1,
+   "rota": "barato",
+   "pede_reembolso": true,
+   "ameaca_cancelar": false,
+   "relata_erro": false,
+   "pede_informacao": false,
+   "cancelou_30d": false
+  },
+  "tags": [
+   "financeiro"
+  ],
+  "difficulty": "easy"
+ },
+ {
+  "id": "t-005",
+  "state": {
+   "ticket": "Pedi reembolso há 15 dias e até agora nada. Já é a terceira vez que abro chamado. Estou muito insatisfeito e pensando seriamente em sair."
+  },
+  "cliente": {
+   "plano": "pro",
+   "meses_cliente": 8,
+   "valor_mensal": 189.0
+  },
+  "labels": {
+   "fila": "financeiro",
+   "categoria": "estorno",
+   "urgencia": 2,
+   "rota": "caro",
+   "pede_reembolso": true,
+   "ameaca_cancelar": true,
+   "relata_erro": false,
+   "pede_informacao": false,
+   "cancelou_30d": true
+  },
+  "tags": [
+   "financeiro"
+  ],
+  "difficulty": "medium"
+ },
+ {
+  "id": "t-006",
+  "state": {
+   "ticket": "Como funciona a política de estorno caso eu desista do plano anual no meio do contrato?"
+  },
+  "cliente": {
+   "plano": "empresa",
+   "meses_cliente": 22,
+   "valor_mensal": 1490.0
+  },
+  "labels": {
+   "fila": "financeiro",
+   "categoria": "estorno",
+   "urgencia": 0,
+   "rota": "barato",
+   "pede_reembolso": false,
+   "ameaca_cancelar": false,
+   "relata_erro": false,
+   "pede_informacao": true,
+   "cancelou_30d": false
+  },
+  "tags": [
+   "financeiro"
+  ],
+  "difficulty": "medium"
+ },
+ {
+  "id": "t-007",
+  "state": {
+   "ticket": "Preciso da nota fiscal de julho com o CNPJ atualizado para fechar a contabilidade."
+  },
+  "cliente": {
+   "plano": "empresa",
+   "meses_cliente": 31,
+   "valor_mensal": 990.0
+  },
+  "labels": {
+   "fila": "financeiro",
+   "categoria": "nota_fiscal",
+   "urgencia": 1,
+   "rota": "barato",
+   "pede_reembolso": false,
+   "ameaca_cancelar": false,
+   "relata_erro": false,
+   "pede_informacao": false,
+   "cancelou_30d": false
+  },
+  "tags": [
+   "financeiro"
+  ],
+  "difficulty": "easy"
+ },
+ {
+  "id": "t-008",
+  "state": {
+   "ticket": "A nota fiscal saiu com a razão social antiga. Consigo reemitir?"
+  },
+  "cliente": {
+   "plano": "basico",
+   "meses_cliente": 12,
+   "valor_mensal": 89.9
+  },
+  "labels": {
+   "fila": "financeiro",
+   "categoria": "nota_fiscal",
+   "urgencia": 0,
+   "rota": "barato",
+   "pede_reembolso": false,
+   "ameaca_cancelar": false,
+   "relata_erro": false,
+   "pede_informacao": true,
+   "cancelou_30d": false
+  },
+  "tags": [
+   "financeiro"
+  ],
+  "difficulty": "easy"
+ },
+ {
+  "id": "t-009",
+  "state": {
+   "ticket": "Nosso financeiro precisa das notas de janeiro a junho em XML, não só em PDF. O sistema só deixa baixar PDF."
+  },
+  "cliente": {
+   "plano": "empresa",
+   "meses_cliente": 45,
+   "valor_mensal": 1490.0
+  },
+  "labels": {
+   "fila": "financeiro",
+   "categoria": "nota_fiscal",
+   "urgencia": 1,
+   "rota": "caro",
+   "pede_reembolso": false,
+   "ameaca_cancelar": false,
+   "relata_erro": false,
+   "pede_informacao": false,
+   "cancelou_30d": false
+  },
+  "tags": [
+   "financeiro",
+   "ambiguo"
+  ],
+  "difficulty": "hard"
+ },
+ {
+  "id": "t-010",
+  "state": {
+   "ticket": "O boleto venceu ontem porque não chegou no meu e-mail. Podem gerar um novo sem multa?"
+  },
+  "cliente": {
+   "plano": "basico",
+   "meses_cliente": 6,
+   "valor_mensal": 89.9
+  },
+  "labels": {
+   "fila": "financeiro",
+   "categoria": "boleto_pagamento",
+   "urgencia": 1,
+   "rota": "barato",
+   "pede_reembolso": false,
+   "ameaca_cancelar": false,
+   "relata_erro": false,
+   "pede_informacao": false,
+   "cancelou_30d": false
+  },
+  "tags": [
+   "financeiro"
+  ],
+  "difficulty": "easy"
+ },
+ {
+  "id": "t-011",
+  "state": {
+   "ticket": "Quero trocar a forma de pagamento de boleto para cartão de crédito. Onde faço isso?"
+  },
+  "cliente": {
+   "plano": "pro",
+   "meses_cliente": 19,
+   "valor_mensal": 189.0
+  },
+  "labels": {
+   "fila": "financeiro",
+   "categoria": "boleto_pagamento",
+   "urgencia": 0,
+   "rota": "barato",
+   "pede_reembolso": false,
+   "ameaca_cancelar": false,
+   "relata_erro": false,
+   "pede_informacao": true,
+   "cancelou_30d": false
+  },
+  "tags": [
+   "financeiro"
+  ],
+  "difficulty": "easy"
+ },
+ {
+  "id": "t-012",
+  "state": {
+   "ticket": "Meu acesso foi bloqueado por falta de pagamento, mas paguei o boleto na sexta. Tenho uma apresentação para um cliente em uma hora!"
+  },
+  "cliente": {
+   "plano": "pro",
+   "meses_cliente": 27,
+   "valor_mensal": 229.0
+  },
+  "labels": {
+   "fila": "financeiro",
+   "categoria": "boleto_pagamento",
+   "urgencia": 2,
+   "rota": "caro",
+   "pede_reembolso": false,
+   "ameaca_cancelar": false,
+   "relata_erro": false,
+   "pede_informacao": false,
+   "cancelou_30d": false
+  },
+  "tags": [
+   "financeiro",
+   "ambiguo"
+  ],
+  "difficulty": "hard"
+ },
+ {
+  "id": "t-013",
+  "state": {
+   "ticket": "Tentei pagar com Pix e o QR code dá erro de valor inválido."
+  },
+  "cliente": {
+   "plano": "basico",
+   "meses_cliente": 2,
+   "valor_mensal": 89.9
+  },
+  "labels": {
+   "fila": "financeiro",
+   "categoria": "boleto_pagamento",
+   "urgencia": 1,
+   "rota": "barato",
+   "pede_reembolso": false,
+   "ameaca_cancelar": false,
+   "relata_erro": true,
+   "pede_informacao": false,
+   "cancelou_30d": false
+  },
+  "tags": [
+   "financeiro",
+   "ambiguo"
+  ],
+  "difficulty": "medium"
+ },
+ {
+  "id": "t-014",
+  "state": {
+   "ticket": "Vocês aumentaram o valor da mensalidade sem avisar. Isso é um absurdo, quero explicação e a diferença de volta, senão cancelo."
+  },
+  "cliente": {
+   "plano": "basico",
+   "meses_cliente": 5,
+   "valor_mensal": 99.9
+  },
+  "labels": {
+   "fila": "financeiro",
+   "categoria": "estorno",
+   "urgencia": 1,
+   "rota": "caro",
+   "pede_reembolso": true,
+   "ameaca_cancelar": true,
+   "relata_erro": false,
+   "pede_informacao": false,
+   "cancelou_30d": true
+  },
+  "tags": [
+   "financeiro",
+   "ambiguo"
+  ],
+  "difficulty": "hard"
+ },
+ {
+  "id": "t-015",
+  "state": {
+   "ticket": "Recebi uma cobrança de um plano que nunca contratei."
+  },
+  "cliente": {
+   "plano": "basico",
+   "meses_cliente": 1,
+   "valor_mensal": 49.9
+  },
+  "labels": {
+   "fila": "financeiro",
+   "categoria": "cobranca_indevida",
+   "urgencia": 2,
+   "rota": "barato",
+   "pede_reembolso": false,
+   "ameaca_cancelar": false,
+   "relata_erro": false,
+   "pede_informacao": false,
+   "cancelou_30d": false
+  },
+  "tags": [
+   "financeiro"
+  ],
+  "difficulty": "medium"
+ },
+ {
+  "id": "t-016",
+  "state": {
+   "ticket": "O aplicativo fecha sozinho toda vez que tento anexar uma foto no Android."
+  },
+  "cliente": {
+   "plano": "pro",
+   "meses_cliente": 10,
+   "valor_mensal": 189.0
+  },
+  "labels": {
+   "fila": "tecnico",
+   "categoria": "erro_app",
+   "urgencia": 1,
+   "rota": "barato",
+   "pede_reembolso": false,
+   "ameaca_cancelar": false,
+   "relata_erro": true,
+   "pede_informacao": false,
+   "cancelou_30d": false
+  },
+  "tags": [
+   "tecnico"
+  ],
+  "difficulty": "easy"
+ },
+ {
+  "id": "t-017",
+  "state": {
+   "ticket": "Depois da atualização de ontem, o botão de salvar pedido não faz nada. Ninguém da equipe consegue trabalhar."
+  },
+  "cliente": {
+   "plano": "empresa",
+   "meses_cliente": 36,
+   "valor_mensal": 1490.0
+  },
+  "labels": {
+   "fila": "tecnico",
+   "categoria": "erro_app",
+   "urgencia": 2,
+   "rota": "barato",
+   "pede_reembolso": false,
+   "ameaca_cancelar": false,
+   "relata_erro": true,
+   "pede_informacao": false,
+   "cancelou_30d": false
+  },
+  "tags": [
+   "tecnico"
+  ],
+  "difficulty": "easy"
+ },
+ {
+  "id": "t-018",
+  "state": {
+   "ticket": "Dá erro 500 quando gero o relatório de vendas por vendedor. Já limpei o cache e testei em outro navegador."
+  },
+  "cliente": {
+   "plano": "pro",
+   "meses_cliente": 15,
+   "valor_mensal": 189.0
+  },
+  "labels": {
+   "fila": "tecnico",
+   "categoria": "erro_app",
+   "urgencia": 1,
+   "rota": "barato",
+   "pede_reembolso": false,
+   "ameaca_cancelar": false,
+   "relata_erro": true,
+   "pede_informacao": false,
+   "cancelou_30d": false
+  },
+  "tags": [
+   "tecnico"
+  ],
+  "difficulty": "easy"
+ },
+ {
+  "id": "t-019",
+  "state": {
+   "ticket": "É a quarta vez este mês que o sistema cai no fechamento do caixa. Vocês não testam nada antes de lançar? Assim não dá para continuar."
+  },
+  "cliente": {
+   "plano": "pro",
+   "meses_cliente": 9,
+   "valor_mensal": 229.0
+  },
+  "labels": {
+   "fila": "tecnico",
+   "categoria": "erro_app",
+   "urgencia": 2,
+   "rota": "caro",
+   "pede_reembolso": false,
+   "ameaca_cancelar": true,
+   "relata_erro": true,
+   "pede_informacao": false,
+   "cancelou_30d": true
+  },
+  "tags": [
+   "tecnico"
+  ],
+  "difficulty": "medium"
+ },
+ {
+  "id": "t-020",
+  "state": {
+   "ticket": "A integração com o marketplace parou de sincronizar o estoque desde segunda."
+  },
+  "cliente": {
+   "plano": "empresa",
+   "meses_cliente": 28,
+   "valor_mensal": 990.0
+  },
+  "labels": {
+   "fila": "tecnico",
+   "categoria": "integracao",
+   "urgencia": 2,
+   "rota": "caro",
+   "pede_reembolso": false,
+   "ameaca_cancelar": false,
+   "relata_erro": true,
+   "pede_informacao": false,
+   "cancelou_30d": false
+  },
+  "tags": [
+   "tecnico"
+  ],
+  "difficulty": "medium"
+ },
+ {
+  "id": "t-021",
+  "state": {
+   "ticket": "Como gero um token de API para conectar meu ERP?"
+  },
+  "cliente": {
+   "plano": "empresa",
+   "meses_cliente": 50,
+   "valor_mensal": 1490.0
+  },
+  "labels": {
+   "fila": "tecnico",
+   "categoria": "integracao",
+   "urgencia": 0,
+   "rota": "barato",
+   "pede_reembolso": false,
+   "ameaca_cancelar": false,
+   "relata_erro": false,
+   "pede_informacao": true,
+   "cancelou_30d": false
+  },
+  "tags": [
+   "tecnico"
+  ],
+  "difficulty": "easy"
+ },
+ {
+  "id": "t-022",
+  "state": {
+   "ticket": "O webhook de pedido criado está chegando duplicado no nosso servidor."
+  },
+  "cliente": {
+   "plano": "empresa",
+   "meses_cliente": 33,
+   "valor_mensal": 990.0
+  },
+  "labels": {
+   "fila": "tecnico",
+   "categoria": "integracao",
+   "urgencia": 1,
+   "rota": "caro",
+   "pede_reembolso": false,
+   "ameaca_cancelar": false,
+   "relata_erro": true,
+   "pede_informacao": false,
+   "cancelou_30d": false
+  },
+  "tags": [
+   "tecnico"
+  ],
+  "difficulty": "medium"
+ },
+ {
+  "id": "t-023",
+  "state": {
+   "ticket": "A sincronização com a agenda funciona, mas os horários aparecem com 3 horas de diferença."
+  },
+  "cliente": {
+   "plano": "pro",
+   "meses_cliente": 11,
+   "valor_mensal": 189.0
+  },
+  "labels": {
+   "fila": "tecnico",
+   "categoria": "integracao",
+   "urgencia": 1,
+   "rota": "caro",
+   "pede_reembolso": false,
+   "ameaca_cancelar": false,
+   "relata_erro": true,
+   "pede_informacao": false,
+   "cancelou_30d": false
+  },
+  "tags": [
+   "tecnico"
+  ],
+  "difficulty": "medium"
+ },
+ {
+  "id": "t-024",
+  "state": {
+   "ticket": "O sistema está muito lento hoje, cada tela demora uns 20 segundos para abrir."
+  },
+  "cliente": {
+   "plano": "pro",
+   "meses_cliente": 20,
+   "valor_mensal": 189.0
+  },
+  "labels": {
+   "fila": "tecnico",
+   "categoria": "lentidao",
+   "urgencia": 1,
+   "rota": "barato",
+   "pede_reembolso": false,
+   "ameaca_cancelar": false,
+   "relata_erro": true,
+   "pede_informacao": false,
+   "cancelou_30d": false
+  },
+  "tags": [
+   "tecnico"
+  ],
+  "difficulty": "easy"
+ },
+ {
+  "id": "t-025",
+  "state": {
+   "ticket": "Lentidão absurda desde a migração. Pagamos o plano empresarial justamente por desempenho. Se não melhorar até sexta, vamos procurar outro fornecedor."
+  },
+  "cliente": {
+   "plano": "empresa",
+   "meses_cliente": 7,
+   "valor_mensal": 1490.0
+  },
+  "labels": {
+   "fila": "tecnico",
+   "categoria": "lentidao",
+   "urgencia": 2,
+   "rota": "caro",
+   "pede_reembolso": false,
+   "ameaca_cancelar": true,
+   "relata_erro": true,
+   "pede_informacao": false,
+   "cancelou_30d": true
+  },
+  "tags": [
+   "tecnico"
+  ],
+  "difficulty": "medium"
+ },
+ {
+  "id": "t-026",
+  "state": {
+   "ticket": "A busca de clientes demora bastante quando digito o documento, mas pelo nome é rápida."
+  },
+  "cliente": {
+   "plano": "pro",
+   "meses_cliente": 30,
+   "valor_mensal": 189.0
+  },
+  "labels": {
+   "fila": "tecnico",
+   "categoria": "lentidao",
+   "urgencia": 0,
+   "rota": "caro",
+   "pede_reembolso": false,
+   "ameaca_cancelar": false,
+   "relata_erro": true,
+   "pede_informacao": false,
+   "cancelou_30d": false
+  },
+  "tags": [
+   "tecnico"
+  ],
+  "difficulty": "hard"
+ },
+ {
+  "id": "t-027",
+  "state": {
+   "ticket": "Preciso exportar todos os pedidos de 2025 para Excel. Qual o caminho?"
+  },
+  "cliente": {
+   "plano": "basico",
+   "meses_cliente": 18,
+   "valor_mensal": 89.9
+  },
+  "labels": {
+   "fila": "tecnico",
+   "categoria": "exportacao",
+   "urgencia": 0,
+   "rota": "barato",
+   "pede_reembolso": false,
+   "ameaca_cancelar": false,
+   "relata_erro": false,
+   "pede_informacao": true,
+   "cancelou_30d": false
+  },
+  "tags": [
+   "tecnico"
+  ],
+  "difficulty": "easy"
+ },
+ {
+  "id": "t-028",
+  "state": {
+   "ticket": "A exportação para CSV está trocando acentos por caracteres estranhos."
+  },
+  "cliente": {
+   "plano": "pro",
+   "meses_cliente": 13,
+   "valor_mensal": 189.0
+  },
+  "labels": {
+   "fila": "tecnico",
+   "categoria": "exportacao",
+   "urgencia": 1,
+   "rota": "barato",
+   "pede_reembolso": false,
+   "ameaca_cancelar": false,
+   "relata_erro": true,
+   "pede_informacao": false,
+   "cancelou_30d": false
+  },
+  "tags": [
+   "tecnico"
+  ],
+  "difficulty": "easy"
+ },
+ {
+  "id": "t-029",
+  "state": {
+   "ticket": "Quero baixar um backup completo dos meus dados antes de decidir se renovo o contrato."
+  },
+  "cliente": {
+   "plano": "empresa",
+   "meses_cliente": 11,
+   "valor_mensal": 990.0
+  },
+  "labels": {
+   "fila": "tecnico",
+   "categoria": "exportacao",
+   "urgencia": 1,
+   "rota": "caro",
+   "pede_reembolso": false,
+   "ameaca_cancelar": false,
+   "relata_erro": false,
+   "pede_informacao": false,
+   "cancelou_30d": true
+  },
+  "tags": [
+   "tecnico",
+   "ambiguo"
+  ],
+  "difficulty": "hard"
+ },
+ {
+  "id": "t-030",
+  "state": {
+   "ticket": "O relatório exportado em PDF corta as colunas da direita."
+  },
+  "cliente": {
+   "plano": "basico",
+   "meses_cliente": 4,
+   "valor_mensal": 89.9
+  },
+  "labels": {
+   "fila": "tecnico",
+   "categoria": "exportacao",
+   "urgencia": 0,
+   "rota": "barato",
+   "pede_reembolso": false,
+   "ameaca_cancelar": false,
+   "relata_erro": true,
+   "pede_informacao": false,
+   "cancelou_30d": false
+  },
+  "tags": [
+   "tecnico"
+  ],
+  "difficulty": "easy"
+ },
+ {
+  "id": "t-031",
+  "state": {
+   "ticket": "Quero passar do plano básico para o pro. A diferença é cobrada proporcional?"
+  },
+  "cliente": {
+   "plano": "basico",
+   "meses_cliente": 9,
+   "valor_mensal": 89.9
+  },
+  "labels": {
+   "fila": "comercial",
+   "categoria": "upgrade_plano",
+   "urgencia": 0,
+   "rota": "barato",
+   "pede_reembolso": false,
+   "ameaca_cancelar": false,
+   "relata_erro": false,
+   "pede_informacao": true,
+   "cancelou_30d": false
+  },
+  "tags": [
+   "comercial"
+  ],
+  "difficulty": "easy"
+ },
+ {
+  "id": "t-032",
+  "state": {
+   "ticket": "Nossa equipe cresceu para 40 pessoas. Qual plano atende e quanto fica?"
+  },
+  "cliente": {
+   "plano": "pro",
+   "meses_cliente": 24,
+   "valor_mensal": 229.0
+  },
+  "labels": {
+   "fila": "comercial",
+   "categoria": "upgrade_plano",
+   "urgencia": 1,
+   "rota": "barato",
+   "pede_reembolso": false,
+   "ameaca_cancelar": false,
+   "relata_erro": false,
+   "pede_informacao": true,
+   "cancelou_30d": false
+  },
+  "tags": [
+   "comercial"
+  ],
+  "difficulty": "easy"
+ },
+ {
+  "id": "t-033",
+  "state": {
+   "ticket": "Preciso de mais 5 usuários ainda hoje porque contratamos uma equipe nova que começa amanhã."
+  },
+  "cliente": {
+   "plano": "empresa",
+   "meses_cliente": 17,
+   "valor_mensal": 990.0
+  },
+  "labels": {
+   "fila": "comercial",
+   "categoria": "upgrade_plano",
+   "urgencia": 2,
+   "rota": "barato",
+   "pede_reembolso": false,
+   "ameaca_cancelar": false,
+   "relata_erro": false,
+   "pede_informacao": false,
+   "cancelou_30d": false
+  },
+  "tags": [
+   "comercial",
+   "ambiguo"
+  ],
+  "difficulty": "medium"
+ },
+ {
+  "id": "t-034",
+  "state": {
+   "ticket": "Vocês têm desconto para ONG?"
+  },
+  "cliente": {
+   "plano": "basico",
+   "meses_cliente": 2,
+   "valor_mensal": 49.9
+  },
+  "labels": {
+   "fila": "comercial",
+   "categoria": "preco_desconto",
+   "urgencia": 0,
+   "rota": "barato",
+   "pede_reembolso": false,
+   "ameaca_cancelar": false,
+   "relata_erro": false,
+   "pede_informacao": true,
+   "cancelou_30d": false
+  },
+  "tags": [
+   "comercial"
+  ],
+  "difficulty": "easy"
+ },
+ {
+  "id": "t-035",
+  "state": {
+   "ticket": "Recebi uma proposta do concorrente 30% mais barata. Conseguem cobrir ou vou ter que migrar."
+  },
+  "cliente": {
+   "plano": "pro",
+   "meses_cliente": 16,
+   "valor_mensal": 229.0
+  },
+  "labels": {
+   "fila": "comercial",
+   "categoria": "preco_desconto",
+   "urgencia": 1,
+   "rota": "caro",
+   "pede_reembolso": false,
+   "ameaca_cancelar": true,
+   "relata_erro": false,
+   "pede_informacao": false,
+   "cancelou_30d": true
+  },
+  "tags": [
+   "comercial"
+  ],
+  "difficulty": "medium"
+ },
+ {
+  "id": "t-036",
+  "state": {
+   "ticket": "Se eu pagar o ano à vista, qual o desconto?"
+  },
+  "cliente": {
+   "plano": "pro",
+   "meses_cliente": 6,
+   "valor_mensal": 189.0
+  },
+  "labels": {
+   "fila": "comercial",
+   "categoria": "preco_desconto",
+   "urgencia": 0,
+   "rota": "barato",
+   "pede_reembolso": false,
+   "ameaca_cancelar": false,
+   "relata_erro": false,
+   "pede_informacao": true,
+   "cancelou_30d": false
+  },
+  "tags": [
+   "comercial"
+  ],
+  "difficulty": "easy"
+ },
+ {
+  "id": "t-037",
+  "state": {
+   "ticket": "Somos uma rede com 12 lojas e queremos contratar para todas. Como funciona a implantação?"
+  },
+  "cliente": {
+   "plano": "trial",
+   "meses_cliente": 0,
+   "valor_mensal": 0.0
+  },
+  "labels": {
+   "fila": "comercial",
+   "categoria": "contratacao_nova",
+   "urgencia": 1,
+   "rota": "caro",
+   "pede_reembolso": false,
+   "ameaca_cancelar": false,
+   "relata_erro": false,
+   "pede_informacao": true,
+   "cancelou_30d": false
+  },
+  "tags": [
+   "comercial"
+  ],
+  "difficulty": "easy"
+ },
+ {
+  "id": "t-038",
+  "state": {
+   "ticket": "Quero contratar o módulo de nota fiscal eletrônica. Ele já vem no plano pro?"
+  },
+  "cliente": {
+   "plano": "pro",
+   "meses_cliente": 22,
+   "valor_mensal": 189.0
+  },
+  "labels": {
+   "fila": "comercial",
+   "categoria": "contratacao_nova",
+   "urgencia": 0,
+   "rota": "barato",
+   "pede_reembolso": false,
+   "ameaca_cancelar": false,
+   "relata_erro": false,
+   "pede_informacao": true,
+   "cancelou_30d": false
+  },
+  "tags": [
+   "comercial"
+  ],
+  "difficulty": "medium"
+ },
+ {
+  "id": "t-039",
+  "state": {
+   "ticket": "Estamos avaliando trocar nosso sistema atual. Vocês importam dados de outro ERP?"
+  },
+  "cliente": {
+   "plano": "trial",
+   "meses_cliente": 0,
+   "valor_mensal": 0.0
+  },
+  "labels": {
+   "fila": "comercial",
+   "categoria": "contratacao_nova",
+   "urgencia": 0,
+   "rota": "caro",
+   "pede_reembolso": false,
+   "ameaca_cancelar": false,
+   "relata_erro": false,
+   "pede_informacao": true,
+   "cancelou_30d": false
+  },
+  "tags": [
+   "comercial"
+  ],
+  "difficulty": "medium"
+ },
+ {
+  "id": "t-040",
+  "state": {
+   "ticket": "Podemos agendar uma demonstração para a diretoria na quinta à tarde?"
+  },
+  "cliente": {
+   "plano": "trial",
+   "meses_cliente": 0,
+   "valor_mensal": 0.0
+  },
+  "labels": {
+   "fila": "comercial",
+   "categoria": "demonstracao",
+   "urgencia": 0,
+   "rota": "barato",
+   "pede_reembolso": false,
+   "ameaca_cancelar": false,
+   "relata_erro": false,
+   "pede_informacao": false,
+   "cancelou_30d": false
+  },
+  "tags": [
+   "comercial"
+  ],
+  "difficulty": "easy"
+ },
+ {
+  "id": "t-041",
+  "state": {
+   "ticket": "Assisti à demonstração gravada, mas queria ver o módulo de estoque funcionando com um especialista."
+  },
+  "cliente": {
+   "plano": "trial",
+   "meses_cliente": 0,
+   "valor_mensal": 0.0
+  },
+  "labels": {
+   "fila": "comercial",
+   "categoria": "demonstracao",
+   "urgencia": 0,
+   "rota": "barato",
+   "pede_reembolso": false,
+   "ameaca_cancelar": false,
+   "relata_erro": false,
+   "pede_informacao": false,
+   "cancelou_30d": false
+  },
+  "tags": [
+   "comercial"
+  ],
+  "difficulty": "easy"
+ },
+ {
+  "id": "t-042",
+  "state": {
+   "ticket": "Preciso de uma demonstração urgente: a decisão de compra é amanhã de manhã."
+  },
+  "cliente": {
+   "plano": "trial",
+   "meses_cliente": 0,
+   "valor_mensal": 0.0
+  },
+  "labels": {
+   "fila": "comercial",
+   "categoria": "demonstracao",
+   "urgencia": 2,
+   "rota": "barato",
+   "pede_reembolso": false,
+   "ameaca_cancelar": false,
+   "relata_erro": false,
+   "pede_informacao": false,
+   "cancelou_30d": false
+  },
+  "tags": [
+   "comercial"
+  ],
+  "difficulty": "medium"
+ },
+ {
+  "id": "t-043",
+  "state": {
+   "ticket": "Contratei o plano pro achando que tinha emissão de boleto, e não tem. Quero o dinheiro de volta ou um upgrade sem custo."
+  },
+  "cliente": {
+   "plano": "pro",
+   "meses_cliente": 1,
+   "valor_mensal": 189.0
+  },
+  "labels": {
+   "fila": "comercial",
+   "categoria": "upgrade_plano",
+   "urgencia": 1,
+   "rota": "caro",
+   "pede_reembolso": true,
+   "ameaca_cancelar": false,
+   "relata_erro": false,
+   "pede_informacao": false,
+   "cancelou_30d": true
+  },
+  "tags": [
+   "comercial",
+   "ambiguo"
+  ],
+  "difficulty": "hard"
+ },
+ {
+  "id": "t-044",
+  "state": {
+   "ticket": "Qual a diferença entre o plano pro e o empresarial?"
+  },
+  "cliente": {
+   "plano": "basico",
+   "meses_cliente": 30,
+   "valor_mensal": 89.9
+  },
+  "labels": {
+   "fila": "comercial",
+   "categoria": "upgrade_plano",
+   "urgencia": 0,
+   "rota": "barato",
+   "pede_reembolso": false,
+   "ameaca_cancelar": false,
+   "relata_erro": false,
+   "pede_informacao": true,
+   "cancelou_30d": false
+  },
+  "tags": [
+   "comercial"
+  ],
+  "difficulty": "easy"
+ },
+ {
+  "id": "t-045",
+  "state": {
+   "ticket": "Vi no site uma promoção de 50% para novos clientes. Clientes antigos também têm direito?"
+  },
+  "cliente": {
+   "plano": "pro",
+   "meses_cliente": 38,
+   "valor_mensal": 189.0
+  },
+  "labels": {
+   "fila": "comercial",
+   "categoria": "preco_desconto",
+   "urgencia": 0,
+   "rota": "barato",
+   "pede_reembolso": false,
+   "ameaca_cancelar": false,
+   "relata_erro": false,
+   "pede_informacao": true,
+   "cancelou_30d": false
+  },
+  "tags": [
+   "comercial"
+  ],
+  "difficulty": "easy"
+ },
+ {
+  "id": "t-046",
+  "state": {
+   "ticket": "Esqueci minha senha e o e-mail de recuperação não chega."
+  },
+  "cliente": {
+   "plano": "basico",
+   "meses_cliente": 7,
+   "valor_mensal": 89.9
+  },
+  "labels": {
+   "fila": "conta",
+   "categoria": "senha_acesso",
+   "urgencia": 1,
+   "rota": "barato",
+   "pede_reembolso": false,
+   "ameaca_cancelar": false,
+   "relata_erro": true,
+   "pede_informacao": false,
+   "cancelou_30d": false
+  },
+  "tags": [
+   "conta"
+  ],
+  "difficulty": "easy"
+ },
+ {
+  "id": "t-047",
+  "state": {
+   "ticket": "Minha conta foi bloqueada depois de errar a senha três vezes e preciso emitir pedidos agora."
+  },
+  "cliente": {
+   "plano": "pro",
+   "meses_cliente": 21,
+   "valor_mensal": 189.0
+  },
+  "labels": {
+   "fila": "conta",
+   "categoria": "senha_acesso",
+   "urgencia": 2,
+   "rota": "barato",
+   "pede_reembolso": false,
+   "ameaca_cancelar": false,
+   "relata_erro": false,
+   "pede_informacao": false,
+   "cancelou_30d": false
+  },
+  "tags": [
+   "conta"
+  ],
+  "difficulty": "easy"
+ },
+ {
+  "id": "t-048",
+  "state": {
+   "ticket": "Não consigo ativar a autenticação em dois fatores, o código sempre dá inválido."
+  },
+  "cliente": {
+   "plano": "empresa",
+   "meses_cliente": 26,
+   "valor_mensal": 990.0
+  },
+  "labels": {
+   "fila": "conta",
+   "categoria": "senha_acesso",
+   "urgencia": 1,
+   "rota": "barato",
+   "pede_reembolso": false,
+   "ameaca_cancelar": false,
+   "relata_erro": true,
+   "pede_informacao": false,
+   "cancelou_30d": false
+  },
+  "tags": [
+   "conta"
+  ],
+  "difficulty": "medium"
+ },
+ {
+  "id": "t-049",
+  "state": {
+   "ticket": "Alguém entrou na minha conta de um IP que não conheço e mudou o e-mail cadastrado!"
+  },
+  "cliente": {
+   "plano": "pro",
+   "meses_cliente": 12,
+   "valor_mensal": 189.0
+  },
+  "labels": {
+   "fila": "conta",
+   "categoria": "senha_acesso",
+   "urgencia": 2,
+   "rota": "caro",
+   "pede_reembolso": false,
+   "ameaca_cancelar": false,
+   "relata_erro": false,
+   "pede_informacao": false,
+   "cancelou_30d": false
+  },
+  "tags": [
+   "conta"
+  ],
+  "difficulty": "medium"
+ },
+ {
+  "id": "t-050",
+  "state": {
+   "ticket": "Preciso trocar o e-mail do responsável pela conta, o antigo funcionário saiu da empresa."
+  },
+  "cliente": {
+   "plano": "empresa",
+   "meses_cliente": 35,
+   "valor_mensal": 990.0
+  },
+  "labels": {
+   "fila": "conta",
+   "categoria": "dados_cadastro",
+   "urgencia": 1,
+   "rota": "barato",
+   "pede_reembolso": false,
+   "ameaca_cancelar": false,
+   "relata_erro": false,
+   "pede_informacao": false,
+   "cancelou_30d": false
+  },
+  "tags": [
+   "conta"
+  ],
+  "difficulty": "easy"
+ },
+ {
+  "id": "t-051",
+  "state": {
+   "ticket": "Como altero o endereço de cobrança da empresa?"
+  },
+  "cliente": {
+   "plano": "pro",
+   "meses_cliente": 17,
+   "valor_mensal": 189.0
+  },
+  "labels": {
+   "fila": "conta",
+   "categoria": "dados_cadastro",
+   "urgencia": 0,
+   "rota": "barato",
+   "pede_reembolso": false,
+   "ameaca_cancelar": false,
+   "relata_erro": false,
+   "pede_informacao": true,
+   "cancelou_30d": false
+  },
+  "tags": [
+   "conta"
+  ],
+  "difficulty": "easy"
+ },
+ {
+  "id": "t-052",
+  "state": {
+   "ticket": "Mudamos de CNPJ após uma fusão. O que preciso enviar para atualizar o cadastro?"
+  },
+  "cliente": {
+   "plano": "empresa",
+   "meses_cliente": 42,
+   "valor_mensal": 1490.0
+  },
+  "labels": {
+   "fila": "conta",
+   "categoria": "dados_cadastro",
+   "urgencia": 0,
+   "rota": "caro",
+   "pede_reembolso": false,
+   "ameaca_cancelar": false,
+   "relata_erro": false,
+   "pede_informacao": true,
+   "cancelou_30d": false
+  },
+  "tags": [
+   "conta"
+  ],
+  "difficulty": "medium"
+ },
+ {
+  "id": "t-053",
+  "state": {
+   "ticket": "Quero cancelar minha assinatura. Como faço?"
+  },
+  "cliente": {
+   "plano": "basico",
+   "meses_cliente": 4,
+   "valor_mensal": 49.9
+  },
+  "labels": {
+   "fila": "conta",
+   "categoria": "cancelamento",
+   "urgencia": 1,
+   "rota": "barato",
+   "pede_reembolso": false,
+   "ameaca_cancelar": true,
+   "relata_erro": false,
+   "pede_informacao": true,
+   "cancelou_30d": true
+  },
+  "tags": [
+   "conta"
+  ],
+  "difficulty": "easy"
+ },
+ {
+  "id": "t-054",
+  "state": {
+   "ticket": "Vou cancelar no fim do mês. Antes disso, quero exportar tudo e saber se tem multa."
+  },
+  "cliente": {
+   "plano": "pro",
+   "meses_cliente": 10,
+   "valor_mensal": 189.0
+  },
+  "labels": {
+   "fila": "conta",
+   "categoria": "cancelamento",
+   "urgencia": 1,
+   "rota": "caro",
+   "pede_reembolso": false,
+   "ameaca_cancelar": true,
+   "relata_erro": false,
+   "pede_informacao": true,
+   "cancelou_30d": true
+  },
+  "tags": [
+   "conta"
+  ],
+  "difficulty": "medium"
+ },
+ {
+  "id": "t-055",
+  "state": {
+   "ticket": "Cancelem minha conta imediatamente e apaguem meus dados. Não quero mais nenhum contato."
+  },
+  "cliente": {
+   "plano": "basico",
+   "meses_cliente": 3,
+   "valor_mensal": 89.9
+  },
+  "labels": {
+   "fila": "conta",
+   "categoria": "cancelamento",
+   "urgencia": 2,
+   "rota": "barato",
+   "pede_reembolso": false,
+   "ameaca_cancelar": true,
+   "relata_erro": false,
+   "pede_informacao": false,
+   "cancelou_30d": true
+  },
+  "tags": [
+   "conta"
+  ],
+  "difficulty": "easy"
+ },
+ {
+  "id": "t-056",
+  "state": {
+   "ticket": "Estávamos pensando em cancelar, mas se tiver um plano mais barato a gente fica."
+  },
+  "cliente": {
+   "plano": "basico",
+   "meses_cliente": 14,
+   "valor_mensal": 89.9
+  },
+  "labels": {
+   "fila": "conta",
+   "categoria": "cancelamento",
+   "urgencia": 0,
+   "rota": "caro",
+   "pede_reembolso": false,
+   "ameaca_cancelar": true,
+   "relata_erro": false,
+   "pede_informacao": true,
+   "cancelou_30d": false
+  },
+  "tags": [
+   "conta",
+   "ambiguo"
+  ],
+  "difficulty": "hard"
+ },
+ {
+  "id": "t-057",
+  "state": {
+   "ticket": "Como dou permissão para o estagiário ver só os relatórios, sem editar nada?"
+  },
+  "cliente": {
+   "plano": "empresa",
+   "meses_cliente": 29,
+   "valor_mensal": 990.0
+  },
+  "labels": {
+   "fila": "conta",
+   "categoria": "usuarios_permissoes",
+   "urgencia": 0,
+   "rota": "barato",
+   "pede_reembolso": false,
+   "ameaca_cancelar": false,
+   "relata_erro": false,
+   "pede_informacao": true,
+   "cancelou_30d": false
+  },
+  "tags": [
+   "conta"
+  ],
+  "difficulty": "easy"
+ },
+ {
+  "id": "t-058",
+  "state": {
+   "ticket": "Removi um usuário por engano e ele perdeu todos os pedidos que tinha criado. Dá para recuperar?"
+  },
+  "cliente": {
+   "plano": "pro",
+   "meses_cliente": 23,
+   "valor_mensal": 229.0
+  },
+  "labels": {
+   "fila": "conta",
+   "categoria": "usuarios_permissoes",
+   "urgencia": 2,
+   "rota": "caro",
+   "pede_reembolso": false,
+   "ameaca_cancelar": false,
+   "relata_erro": false,
+   "pede_informacao": false,
+   "cancelou_30d": false
+  },
+  "tags": [
+   "conta"
+  ],
+  "difficulty": "medium"
+ },
+ {
+  "id": "t-059",
+  "state": {
+   "ticket": "Um vendedor está conseguindo ver o faturamento da empresa toda, e não deveria."
+  },
+  "cliente": {
+   "plano": "empresa",
+   "meses_cliente": 19,
+   "valor_mensal": 990.0
+  },
+  "labels": {
+   "fila": "conta",
+   "categoria": "usuarios_permissoes",
+   "urgencia": 1,
+   "rota": "caro",
+   "pede_reembolso": false,
+   "ameaca_cancelar": false,
+   "relata_erro": true,
+   "pede_informacao": false,
+   "cancelou_30d": false
+  },
+  "tags": [
+   "conta"
+  ],
+  "difficulty": "medium"
+ },
+ {
+  "id": "t-060",
+  "state": {
+   "ticket": "Qual o limite de usuários do plano básico?"
+  },
+  "cliente": {
+   "plano": "basico",
+   "meses_cliente": 8,
+   "valor_mensal": 49.9
+  },
+  "labels": {
+   "fila": "conta",
+   "categoria": "usuarios_permissoes",
+   "urgencia": 0,
+   "rota": "barato",
+   "pede_reembolso": false,
+   "ameaca_cancelar": false,
+   "relata_erro": false,
+   "pede_informacao": true,
+   "cancelou_30d": false
+  },
+  "tags": [
+   "conta",
+   "ambiguo"
+  ],
+  "difficulty": "medium"
+ }
+]

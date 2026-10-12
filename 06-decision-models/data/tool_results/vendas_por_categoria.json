@@ -1,0 +1,58 @@
+{
+  "tool": "vendas_por_categoria",
+  "view": "vw_vendas_por_categoria",
+  "columns": [
+    "categoria",
+    "receita",
+    "unidades",
+    "margem_pct",
+    "participacao_pct"
+  ],
+  "rows": [
+    {
+      "categoria": "Informática",
+      "receita": 1359340.79,
+      "unidades": 915,
+      "margem_pct": 22.2,
+      "participacao_pct": 31.5
+    },
+    {
+      "categoria": "Eletrodomésticos",
+      "receita": 834925.94,
+      "unidades": 698,
+      "margem_pct": 30.7,
+      "participacao_pct": 19.3
+    },
+    {
+      "categoria": "Móveis de Escritório",
+      "receita": 815804.65,
+      "unidades": 647,
+      "margem_pct": 35.0,
+      "participacao_pct": 18.9
+    },
+    {
+      "categoria": "Eletrônicos",
+      "receita": 754134.94,
+      "unidades": 804,
+      "margem_pct": 26.3,
+      "participacao_pct": 17.5
+    },
+    {
+      "categoria": "Papelaria",
+      "receita": 357487.88,
+      "unidades": 2005,
+      "margem_pct": 43.2,
+      "participacao_pct": 8.3
+    },
+    {
+      "categoria": "Limpeza e Copa",
+      "receita": 198972.8,
+      "unidades": 1610,
+      "margem_pct": 38.5,
+      "participacao_pct": 4.6
+    }
+  ],
+  "row_count": 6,
+  "truncated": false,
+  "latency_ms": 4.014799999822571
+}
