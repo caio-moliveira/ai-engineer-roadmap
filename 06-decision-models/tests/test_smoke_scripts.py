@@ -33,7 +33,7 @@ if os.environ.get("RUN_HEAVY") == "1":
 def test_script_roda_em_replay(script, tmp_path):
     path, *argv = script.split()
     env = {k: v for k, v in os.environ.items() if not k.endswith("_API_KEY")}  # sem chave nenhuma
-    env |= {"DECISION_PROVIDER": "replay", "PYTHONIOENCODING": "utf-8", "MPLBACKEND": "Agg",
+    env |= {"DECISION_PROVIDER": "replay", "PYTHONIOENCODING": "utf-8", "PYTHONUTF8": "1", "MPLBACKEND": "Agg",
             "LAYA_BASE_URL": "http://127.0.0.1:9"}  # porta fechada: se tentar a rede, falha
     proc = subprocess.run(
         [sys.executable, str(BLOCK / path), *argv],

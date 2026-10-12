@@ -17,6 +17,8 @@
    * Docs: [FastAPI](https://fastapi.tiangolo.com/)
    * Exemplo: `03_serve_systemone.py`
 
+No Windows, rode o script 02 com `PYTHONUTF8=1`: sem isso, o Laya falha ao reescrever o `tokenizer_config.json` do checkpoint ajustado (erro de codec `charmap`).
+
 Os scripts 01 e 02 baixam modelos do Hugging Face (de 550 MB a 1,3 GB) e treinam em CPU. Por isso ficam fora do smoke test padrão; rode com `RUN_HEAVY=1 uv run pytest tests` para incluí-los.
 
 ---
