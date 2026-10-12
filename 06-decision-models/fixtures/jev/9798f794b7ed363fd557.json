@@ -1,0 +1,59 @@
+{
+  "key": "9798f794b7ed363fd557",
+  "target": "jev",
+  "recorded_at": "2026-10-12",
+  "synthetic": true,
+  "origin": "SINTÉTICA: gerada a partir dos rótulos do golden set com ruído determinístico (fixtures/gerar_jev_sintetico.py). Não é medição do Jev.",
+  "request": {
+    "state": {
+      "remetente": "faturamento@jornadacloud.com.br",
+      "assunto": "Sua fatura de outubro está disponível",
+      "corpo": "Olá! A fatura de outubro da Jornada Cloud, no valor de R$ 189,00, já está disponível no painel em Configurações > Financeiro. Vencimento em 10/11."
+    },
+    "questions": {
+      "spam": {
+        "type": "noul",
+        "instructions": "Este e-mail é spam, golpe ou phishing?",
+        "criteria": {
+          "true": "Mensagem indesejada ou fraudulenta.",
+          "false": "Mensagem legítima, mesmo que seja comercial ou urgente."
+        }
+      }
+    }
+  },
+  "result": {
+    "provider": "jev",
+    "model": "jev-1.13.0",
+    "answers": {
+      "spam": {
+        "value": 0.0753,
+        "confidence": null,
+        "probabilities": {
+          "true": 0.0753,
+          "false": 0.9247
+        },
+        "expected": null
+      }
+    },
+    "latency_ms": 59.3,
+    "tokens_in": 128,
+    "tokens_out": 0,
+    "cost_usd": 5.376000000000001e-06,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": true,
+    "raw": {
+      "model": "jev-1.13.0",
+      "answers": {
+        "spam": {
+          "type": "noul",
+          "noul": 0.0753
+        }
+      },
+      "usage": {
+        "input_tokens": 128,
+        "output_tokens": 0
+      }
+    }
+  }
+}

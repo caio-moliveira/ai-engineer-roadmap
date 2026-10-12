@@ -1,0 +1,145 @@
+{
+  "key": "c742b2103b41c77560ae",
+  "target": "laya",
+  "recorded_at": "2026-10-12",
+  "synthetic": false,
+  "origin": "typesafe-sdk -> http://127.0.0.1:8001",
+  "request": {
+    "state": {
+      "ticket": "Apareceram duas cobranças de R$ 89,90 no meu cartão no mesmo dia. Se não resolverem, vou cancelar a assinatura."
+    },
+    "questions": {
+      "fila": {
+        "type": "choice",
+        "instructions": "Qual fila deve atender este ticket de suporte?",
+        "criteria": {
+          "financeiro": "cobranças, estornos, notas fiscais, boletos e pagamentos",
+          "tecnico": "erros no sistema, integrações, lentidão e exportação de dados",
+          "comercial": "planos, preços, descontos, contratação e demonstrações",
+          "conta": "senha e acesso, dados cadastrais, cancelamento, usuários e permissões"
+        }
+      },
+      "ameaca_cancelar": {
+        "type": "noul",
+        "instructions": "O cliente diz que vai cancelar, sair ou migrar para outro fornecedor?"
+      },
+      "urgencia": {
+        "type": "score",
+        "instructions": "Qual a urgência deste ticket?",
+        "criteria": [
+          "pode esperar",
+          "resolver esta semana",
+          "resolver hoje"
+        ]
+      }
+    }
+  },
+  "result": {
+    "provider": "laya",
+    "model": "laya-rl-agent",
+    "answers": {
+      "fila": {
+        "value": "financeiro",
+        "confidence": 1.0,
+        "probabilities": {
+          "financeiro": 1.0,
+          "tecnico": 0.0,
+          "comercial": 0.0,
+          "conta": 0.0
+        },
+        "expected": null
+      },
+      "ameaca_cancelar": {
+        "value": 0.9515,
+        "confidence": 0.9515,
+        "probabilities": {
+          "true": 0.9515,
+          "false": 0.04849999999999999
+        },
+        "expected": null
+      },
+      "urgencia": {
+        "value": 1,
+        "confidence": 0.3084,
+        "probabilities": {
+          "0": 0.0282,
+          "1": 0.6282,
+          "2": 0.3436
+        },
+        "expected": 1.3154
+      }
+    },
+    "latency_ms": 245.03400000321562,
+    "tokens_in": 273,
+    "tokens_out": 0,
+    "cost_usd": 0.0,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": false,
+    "raw": {
+      "model": "laya-rl-agent",
+      "answers": {
+        "fila": {
+          "type": "choice",
+          "choice": "financeiro",
+          "probabilities": {
+            "financeiro": 1.0,
+            "tecnico": 0.0,
+            "comercial": 0.0,
+            "conta": 0.0
+          },
+          "confidence": 1.0,
+          "answer_confidence": 1.0,
+          "action": {
+            "act_probability": 1.0
+          },
+          "x_jev_confidence": 1.0
+        },
+        "ameaca_cancelar": {
+          "type": "noul",
+          "noul": 0.9515,
+          "confidence": 0.9515,
+          "answer_confidence": 0.9515,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "urgencia": {
+          "type": "score",
+          "score": 1.3154,
+          "legend": {
+            "0": "pode esperar",
+            "1": "resolver esta semana",
+            "2": "resolver hoje"
+          },
+          "probabilities": {
+            "0": 0.0282,
+            "1": 0.6282,
+            "2": 0.3436
+          },
+          "confidence": 0.3084,
+          "answer_confidence": 0.6282,
+          "action": {
+            "act_probability": 1.0
+          },
+          "x_jev_confidence": 0.4423
+        }
+      },
+      "usage": {
+        "input_tokens": 273,
+        "output_tokens": 0,
+        "state_tokens": 37,
+        "state_tokens_dropped": 0,
+        "truncated": false,
+        "truncated_questions": []
+      },
+      "routing": {
+        "model": "multilingual",
+        "repo": "convaiinnovations/laya/multilingual",
+        "reason": "explicit model='multilingual'",
+        "detection": null,
+        "workflow": null
+      }
+    }
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "key": "93637dfc93888883d9df",
+  "target": "laya",
+  "recorded_at": "2026-10-12",
+  "synthetic": false,
+  "origin": "laya-serve em http://127.0.0.1:8001, modelo multilingual",
+  "request": {
+    "state": {
+      "remetente": "fornecedor@papelariacentral.com.br",
+      "assunto": "Novos dados bancários para pagamento",
+      "corpo": "Informamos que mudamos de banco. A partir de hoje, os pagamentos das notas devem ir para a conta abaixo, em nome de outra empresa do grupo."
+    },
+    "questions": {
+      "spam": {
+        "type": "noul",
+        "instructions": "Este e-mail é spam, golpe ou phishing?",
+        "criteria": {
+          "true": "Mensagem indesejada ou fraudulenta.",
+          "false": "Mensagem legítima, mesmo que seja comercial ou urgente."
+        }
+      }
+    }
+  },
+  "result": {
+    "provider": "laya",
+    "model": "laya-rl-agent",
+    "answers": {
+      "spam": {
+        "value": 0.9998,
+        "confidence": 0.9998,
+        "probabilities": {
+          "true": 0.9998,
+          "false": 0.00019999999999997797
+        },
+        "expected": null
+      }
+    },
+    "latency_ms": 220.8881000005931,
+    "tokens_in": 114,
+    "tokens_out": 0,
+    "cost_usd": 0.0,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": false,
+    "raw": {
+      "model": "laya-rl-agent",
+      "answers": {
+        "spam": {
+          "type": "noul",
+          "noul": 0.9998,
+          "confidence": 0.9998,
+          "answer_confidence": 0.9998,
+          "action": {
+            "act_probability": 1.0
+          }
+        }
+      },
+      "usage": {
+        "input_tokens": 114,
+        "output_tokens": 0,
+        "state_tokens": 68,
+        "state_tokens_dropped": 0,
+        "truncated": false,
+        "truncated_questions": []
+      },
+      "routing": {
+        "model": "multilingual",
+        "repo": "convaiinnovations/laya/multilingual",
+        "reason": "explicit model='multilingual'",
+        "detection": null,
+        "workflow": null
+      }
+    }
+  }
+}

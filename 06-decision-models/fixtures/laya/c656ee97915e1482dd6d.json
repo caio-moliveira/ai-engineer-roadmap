@@ -1,0 +1,84 @@
+{
+  "key": "c656ee97915e1482dd6d",
+  "target": "laya",
+  "recorded_at": "2026-10-12",
+  "synthetic": false,
+  "origin": "laya-serve em http://127.0.0.1:8001, modelo multilingual",
+  "request": {
+    "state": {
+      "ticket": "Mudamos de CNPJ após uma fusão. O que preciso enviar para atualizar o cadastro?"
+    },
+    "questions": {
+      "categoria": {
+        "type": "choice",
+        "instructions": "Este ticket já foi enviado para a fila conta. Qual a categoria dele?",
+        "criteria": {
+          "senha_acesso": "senha, login, bloqueio por senha, dois fatores ou invasão",
+          "dados_cadastro": "e-mail, endereço, CNPJ ou outros dados cadastrais",
+          "cancelamento": "cancelar a assinatura ou a conta",
+          "usuarios_permissoes": "usuários, permissões e limite de usuários"
+        }
+      }
+    }
+  },
+  "result": {
+    "provider": "laya",
+    "model": "laya-rl-agent",
+    "answers": {
+      "categoria": {
+        "value": "dados_cadastro",
+        "confidence": 0.473,
+        "probabilities": {
+          "senha_acesso": 0.0679,
+          "dados_cadastro": 0.7958,
+          "cancelamento": 0.0684,
+          "usuarios_permissoes": 0.068
+        },
+        "expected": null
+      }
+    },
+    "latency_ms": 83.48100000148406,
+    "tokens_in": 110,
+    "tokens_out": 0,
+    "cost_usd": 0.0,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": false,
+    "raw": {
+      "model": "laya-rl-agent",
+      "answers": {
+        "categoria": {
+          "type": "choice",
+          "choice": "dados_cadastro",
+          "probabilities": {
+            "senha_acesso": 0.0679,
+            "dados_cadastro": 0.7958,
+            "cancelamento": 0.0684,
+            "usuarios_permissoes": 0.068
+          },
+          "confidence": 0.473,
+          "answer_confidence": 0.7958,
+          "action": {
+            "act_probability": 1.0
+          },
+          "x_jev_confidence": 0.7276
+        }
+      },
+      "usage": {
+        "input_tokens": 110,
+        "output_tokens": 0,
+        "state_tokens": 24,
+        "state_tokens_dropped": 0,
+        "truncated": false,
+        "truncated_questions": []
+      },
+      "routing": {
+        "model": "multilingual",
+        "repo": "convaiinnovations/laya/multilingual",
+        "reason": "explicit model='multilingual'",
+        "detection": null,
+        "workflow": null
+      }
+    }
+  }
+}

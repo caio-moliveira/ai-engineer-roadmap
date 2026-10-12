@@ -1,0 +1,68 @@
+{
+  "key": "5d2abc3df8ad71631c2c",
+  "target": "jev",
+  "recorded_at": "2026-10-12",
+  "synthetic": true,
+  "origin": "SINTÉTICA: gerada a partir dos rótulos do golden set com ruído determinístico (fixtures/gerar_jev_sintetico.py). Não é medição do Jev.",
+  "request": {
+    "state": {
+      "ticket": "Quero trocar a forma de pagamento de boleto para cartão de crédito. Onde faço isso?"
+    },
+    "questions": {
+      "categoria": {
+        "type": "choice",
+        "instructions": "Este ticket já foi enviado para a fila comercial. Qual a categoria dele?",
+        "criteria": {
+          "upgrade_plano": "mudar de plano, comparar planos ou aumentar limites",
+          "preco_desconto": "preço, desconto, promoção ou proposta da concorrência",
+          "contratacao_nova": "contratar o produto ou um módulo novo",
+          "demonstracao": "agendar ou pedir demonstração"
+        }
+      }
+    }
+  },
+  "result": {
+    "provider": "jev",
+    "model": "jev-1.13.0",
+    "answers": {
+      "categoria": {
+        "value": "upgrade_plano",
+        "confidence": 0.7041,
+        "probabilities": {
+          "upgrade_plano": 0.7041,
+          "preco_desconto": 0.0848,
+          "contratacao_nova": 0.1127,
+          "demonstracao": 0.0984
+        },
+        "expected": null
+      }
+    },
+    "latency_ms": 54.5,
+    "tokens_in": 125,
+    "tokens_out": 0,
+    "cost_usd": 5.25e-06,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": true,
+    "raw": {
+      "model": "jev-1.13.0",
+      "answers": {
+        "categoria": {
+          "type": "choice",
+          "choice": "upgrade_plano",
+          "confidence": 0.7041,
+          "probabilities": {
+            "upgrade_plano": 0.7041,
+            "preco_desconto": 0.0848,
+            "contratacao_nova": 0.1127,
+            "demonstracao": 0.0984
+          }
+        }
+      },
+      "usage": {
+        "input_tokens": 125,
+        "output_tokens": 0
+      }
+    }
+  }
+}

@@ -1,0 +1,140 @@
+{
+  "key": "41ce715a6951ed53bf9f",
+  "target": "jev",
+  "recorded_at": "2026-10-12",
+  "synthetic": true,
+  "origin": "SINTÉTICA: gerada a partir dos rótulos do golden set com ruído determinístico (fixtures/gerar_jev_sintetico.py). Não é medição do Jev.",
+  "request": {
+    "state": {
+      "remetente": "notificacoes@bancohorizonte.com.br",
+      "assunto": "Compra aprovada no cartão final 4321",
+      "corpo": "Compra de R$ 152,30 aprovada em Mercado Bairro, hoje às 14h02. Não reconhece? Ligue para o número no verso do seu cartão."
+    },
+    "questions": {
+      "pede_credencial": {
+        "type": "noul",
+        "instructions": "O e-mail pede senha, código, login, dados de cartão ou dados bancários?"
+      },
+      "urgencia_artificial": {
+        "type": "noul",
+        "instructions": "O e-mail pressiona com prazo curto ou ameaça de bloqueio para forçar uma ação?"
+      },
+      "promete_premio": {
+        "type": "noul",
+        "instructions": "O e-mail promete prêmio, ganho fácil ou vantagem extraordinária?"
+      },
+      "remetente_inconsistente": {
+        "type": "noul",
+        "instructions": "O domínio do remetente é estranho ou não bate com a organização que a mensagem diz representar?"
+      },
+      "link_suspeito": {
+        "type": "noul",
+        "instructions": "O e-mail manda clicar em link de domínio estranho, encurtado ou abrir anexo executável?"
+      },
+      "pede_pagamento": {
+        "type": "noul",
+        "instructions": "O e-mail pede pagamento, transferência, Pix ou depósito?"
+      }
+    }
+  },
+  "result": {
+    "provider": "jev",
+    "model": "jev-1.13.0",
+    "answers": {
+      "pede_credencial": {
+        "value": 0.0128,
+        "confidence": null,
+        "probabilities": {
+          "true": 0.0128,
+          "false": 0.9872
+        },
+        "expected": null
+      },
+      "urgencia_artificial": {
+        "value": 0.5591,
+        "confidence": null,
+        "probabilities": {
+          "true": 0.5591,
+          "false": 0.44089999999999996
+        },
+        "expected": null
+      },
+      "promete_premio": {
+        "value": 0.1311,
+        "confidence": null,
+        "probabilities": {
+          "true": 0.1311,
+          "false": 0.8689
+        },
+        "expected": null
+      },
+      "remetente_inconsistente": {
+        "value": 0.1332,
+        "confidence": null,
+        "probabilities": {
+          "true": 0.1332,
+          "false": 0.8668
+        },
+        "expected": null
+      },
+      "link_suspeito": {
+        "value": 0.1169,
+        "confidence": null,
+        "probabilities": {
+          "true": 0.1169,
+          "false": 0.8831
+        },
+        "expected": null
+      },
+      "pede_pagamento": {
+        "value": 0.0423,
+        "confidence": null,
+        "probabilities": {
+          "true": 0.0423,
+          "false": 0.9577
+        },
+        "expected": null
+      }
+    },
+    "latency_ms": 82.2,
+    "tokens_in": 746,
+    "tokens_out": 0,
+    "cost_usd": 3.1332e-05,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": true,
+    "raw": {
+      "model": "jev-1.13.0",
+      "answers": {
+        "pede_credencial": {
+          "type": "noul",
+          "noul": 0.0128
+        },
+        "urgencia_artificial": {
+          "type": "noul",
+          "noul": 0.5591
+        },
+        "promete_premio": {
+          "type": "noul",
+          "noul": 0.1311
+        },
+        "remetente_inconsistente": {
+          "type": "noul",
+          "noul": 0.1332
+        },
+        "link_suspeito": {
+          "type": "noul",
+          "noul": 0.1169
+        },
+        "pede_pagamento": {
+          "type": "noul",
+          "noul": 0.0423
+        }
+      },
+      "usage": {
+        "input_tokens": 746,
+        "output_tokens": 0
+      }
+    }
+  }
+}

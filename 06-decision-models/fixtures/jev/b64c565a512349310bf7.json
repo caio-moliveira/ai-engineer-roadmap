@@ -1,0 +1,71 @@
+{
+  "key": "b64c565a512349310bf7",
+  "target": "jev",
+  "recorded_at": "2026-10-12",
+  "synthetic": true,
+  "origin": "SINTÉTICA: gerada a partir dos rótulos do golden set com ruído determinístico (fixtures/gerar_jev_sintetico.py). Não é medição do Jev.",
+  "request": {
+    "state": {
+      "pergunta": "O que é mitigação e o que é adaptação às mudanças climáticas?",
+      "trecho": "O IPCC publica relatórios de avaliação sobre o conhecimento científico do clima."
+    },
+    "questions": {
+      "relevancia": {
+        "type": "score",
+        "instructions": "O `trecho` ajuda a responder a `pergunta`?",
+        "criteria": [
+          "Não responde: fala de outro assunto ou só compartilha palavras com a pergunta.",
+          "Relacionado: trata do tema, mas não responde à pergunta.",
+          "Responde: contém a informação que a pergunta pede."
+        ]
+      }
+    }
+  },
+  "result": {
+    "provider": "jev",
+    "model": "jev-1.13.0",
+    "answers": {
+      "relevancia": {
+        "value": 0,
+        "confidence": 0.8049,
+        "probabilities": {
+          "0": 0.8049,
+          "1": 0.1108,
+          "2": 0.0843
+        },
+        "expected": 0.2794
+      }
+    },
+    "latency_ms": 54.2,
+    "tokens_in": 117,
+    "tokens_out": 0,
+    "cost_usd": 4.914000000000001e-06,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": true,
+    "raw": {
+      "model": "jev-1.13.0",
+      "answers": {
+        "relevancia": {
+          "type": "score",
+          "score": 0.2794,
+          "confidence": 0.8049,
+          "legend": {
+            "0": "Não responde: fala de outro assunto ou só compartilha palavras com a pergunta.",
+            "1": "Relacionado: trata do tema, mas não responde à pergunta.",
+            "2": "Responde: contém a informação que a pergunta pede."
+          },
+          "probabilities": {
+            "0": 0.8049,
+            "1": 0.1108,
+            "2": 0.0843
+          }
+        }
+      },
+      "usage": {
+        "input_tokens": 117,
+        "output_tokens": 0
+      }
+    }
+  }
+}

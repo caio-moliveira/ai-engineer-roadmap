@@ -1,0 +1,59 @@
+{
+  "key": "e232d77ce56871947c26",
+  "target": "llm:anthropic:claude-haiku-4-5-20251001",
+  "recorded_at": "2026-10-12",
+  "synthetic": false,
+  "origin": "LangChain init_chat_model + with_structured_output (anthropic:claude-haiku-4-5-20251001)",
+  "request": {
+    "state": {
+      "ticket": "Vi no site uma promoção de 50% para novos clientes. Clientes antigos também têm direito?"
+    },
+    "questions": {
+      "categoria": {
+        "type": "choice",
+        "instructions": "Qual a categoria deste ticket de suporte?",
+        "criteria": {
+          "cobranca_indevida": "cobrança duplicada ou de algo que o cliente não contratou",
+          "estorno": "pedido ou dúvida sobre devolução de dinheiro",
+          "nota_fiscal": "emissão, correção ou envio de nota fiscal",
+          "boleto_pagamento": "boleto, Pix, cartão, forma de pagamento ou acesso bloqueado por pagamento",
+          "erro_app": "falha, travamento ou botão que não funciona no sistema ou no app",
+          "integracao": "API, webhook, ERP, marketplace ou sincronização com outro sistema",
+          "lentidao": "sistema ou tela lenta",
+          "exportacao": "exportar, baixar ou fazer backup de dados e relatórios",
+          "upgrade_plano": "mudar de plano, comparar planos ou aumentar limites",
+          "preco_desconto": "preço, desconto, promoção ou proposta da concorrência",
+          "contratacao_nova": "contratar o produto ou um módulo novo",
+          "demonstracao": "agendar ou pedir demonstração",
+          "senha_acesso": "senha, login, bloqueio por senha, dois fatores ou invasão",
+          "dados_cadastro": "e-mail, endereço, CNPJ ou outros dados cadastrais",
+          "cancelamento": "cancelar a assinatura ou a conta",
+          "usuarios_permissoes": "usuários, permissões e limite de usuários"
+        }
+      }
+    }
+  },
+  "result": {
+    "provider": "llm:anthropic:claude-haiku-4-5-20251001",
+    "model": "claude-haiku-4-5-20251001",
+    "answers": {
+      "categoria": {
+        "value": "preco_desconto",
+        "confidence": 0.95,
+        "probabilities": null,
+        "expected": null
+      }
+    },
+    "latency_ms": 977.7842000003147,
+    "tokens_in": 1680,
+    "tokens_out": 55,
+    "cost_usd": 0.001955,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": false,
+    "raw": {
+      "content": "[{\"id\": \"toolu_016kwuRyQndEBeQ7Q5XKYsuF\", \"caller\": {\"type\": \"direct\"}, \"input\": {\"categoria\": {\"value\": \"preco_desconto\", \"confidence\": 0.95}}, \"name\": \"Respostas\", \"type\": \"tool_use\", \"toolset_name\": null}]",
+      "parsing_error": null
+    }
+  }
+}

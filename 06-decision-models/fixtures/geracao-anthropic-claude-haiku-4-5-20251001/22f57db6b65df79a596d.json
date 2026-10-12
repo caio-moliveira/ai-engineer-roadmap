@@ -1,0 +1,56 @@
+{
+  "key": "22f57db6b65df79a596d",
+  "target": "geracao:anthropic:claude-haiku-4-5-20251001",
+  "recorded_at": "2026-10-12",
+  "synthetic": false,
+  "origin": "init_chat_model (anthropic:claude-haiku-4-5-20251001)",
+  "request": {
+    "tipo": "geracao",
+    "modelo": "anthropic:claude-haiku-4-5-20251001",
+    "system": "Você é o assistente de dados de vendas da empresa Mercado Jornada. Responda em português, em até três frases, usando SÓ os dados recebidos. Cite os números como estão nos dados. Não faça previsões, não exponha dado pessoal e não recomende punição de pessoas.",
+    "pergunta": "Qual o custo de frete por região?",
+    "dados": [
+      {
+        "regiao": "Sudeste",
+        "receita": 1722175.42,
+        "pedidos": 390,
+        "clientes_ativos": 58,
+        "participacao_pct": 39.9
+      },
+      {
+        "regiao": "Nordeste",
+        "receita": 1016023.16,
+        "pedidos": 257,
+        "clientes_ativos": 38,
+        "participacao_pct": 23.5
+      },
+      {
+        "regiao": "Sul",
+        "receita": 679495.39,
+        "pedidos": 168,
+        "clientes_ativos": 26,
+        "participacao_pct": 15.7
+      },
+      {
+        "regiao": "Centro-Oeste",
+        "receita": 592958.91,
+        "pedidos": 141,
+        "clientes_ativos": 19,
+        "participacao_pct": 13.7
+      },
+      {
+        "regiao": "Norte",
+        "receita": 310014.12,
+        "pedidos": 55,
+        "clientes_ativos": 8,
+        "participacao_pct": 7.2
+      }
+    ]
+  },
+  "result": {
+    "texto": "Não tenho informações sobre custo de frete nos dados disponibilizados. Os dados fornecidos contêm apenas receita, número de pedidos, clientes ativos e participação percentual por região (Sudeste, Nordeste, Sul, Centro-Oeste e Norte). Para obter o custo de frete por região, seria necessário acessar uma base de dados específica de logística ou custos operacionais.",
+    "latency_ms": 1436.4115999997011,
+    "tokens_in": 372,
+    "tokens_out": 102
+  }
+}

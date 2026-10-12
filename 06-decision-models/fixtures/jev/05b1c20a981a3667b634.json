@@ -1,0 +1,62 @@
+{
+  "key": "05b1c20a981a3667b634",
+  "target": "jev",
+  "recorded_at": "2026-10-12",
+  "synthetic": true,
+  "origin": "SINTÉTICA: gerada a partir dos rótulos do golden set com ruído determinístico (fixtures/gerar_jev_sintetico.py). Não é medição do Jev.",
+  "request": {
+    "state": {
+      "ticket": "Vou cancelar no fim do mês. Antes disso, quero exportar tudo e saber se tem multa."
+    },
+    "questions": {
+      "rota": {
+        "type": "choice",
+        "instructions": "Qual modelo deve redigir a resposta para este ticket?",
+        "criteria": {
+          "barato": "Pedido simples e bem delimitado, com resposta padrão: um modelo pequeno resolve.",
+          "caro": "Caso ambíguo, com vários problemas, investigação técnica ou cliente prestes a sair: precisa de um modelo forte."
+        }
+      }
+    }
+  },
+  "result": {
+    "provider": "jev",
+    "model": "jev-1.13.0",
+    "answers": {
+      "rota": {
+        "value": "caro",
+        "confidence": 0.84,
+        "probabilities": {
+          "barato": 0.16,
+          "caro": 0.84
+        },
+        "expected": null
+      }
+    },
+    "latency_ms": 41.1,
+    "tokens_in": 90,
+    "tokens_out": 0,
+    "cost_usd": 3.7800000000000002e-06,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": true,
+    "raw": {
+      "model": "jev-1.13.0",
+      "answers": {
+        "rota": {
+          "type": "choice",
+          "choice": "caro",
+          "confidence": 0.84,
+          "probabilities": {
+            "barato": 0.16,
+            "caro": 0.84
+          }
+        }
+      },
+      "usage": {
+        "input_tokens": 90,
+        "output_tokens": 0
+      }
+    }
+  }
+}

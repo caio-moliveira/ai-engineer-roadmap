@@ -1,0 +1,68 @@
+{
+  "key": "6ba53f0ef22235ad026a",
+  "target": "jev",
+  "recorded_at": "2026-10-12",
+  "synthetic": true,
+  "origin": "SINTÉTICA: gerada a partir dos rótulos do golden set com ruído determinístico (fixtures/gerar_jev_sintetico.py). Não é medição do Jev.",
+  "request": {
+    "state": {
+      "ticket": "Esqueci minha senha e o e-mail de recuperação não chega."
+    },
+    "questions": {
+      "categoria": {
+        "type": "choice",
+        "instructions": "Este ticket já foi enviado para a fila tecnico. Qual a categoria dele?",
+        "criteria": {
+          "erro_app": "falha, travamento ou botão que não funciona no sistema ou no app",
+          "integracao": "API, webhook, ERP, marketplace ou sincronização com outro sistema",
+          "lentidao": "sistema ou tela lenta",
+          "exportacao": "exportar, baixar ou fazer backup de dados e relatórios"
+        }
+      }
+    }
+  },
+  "result": {
+    "provider": "jev",
+    "model": "jev-1.13.0",
+    "answers": {
+      "categoria": {
+        "value": "erro_app",
+        "confidence": 0.8329,
+        "probabilities": {
+          "erro_app": 0.8329,
+          "integracao": 0.0837,
+          "lentidao": 0.0669,
+          "exportacao": 0.0165
+        },
+        "expected": null
+      }
+    },
+    "latency_ms": 65.0,
+    "tokens_in": 122,
+    "tokens_out": 0,
+    "cost_usd": 5.124e-06,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": true,
+    "raw": {
+      "model": "jev-1.13.0",
+      "answers": {
+        "categoria": {
+          "type": "choice",
+          "choice": "erro_app",
+          "confidence": 0.8329,
+          "probabilities": {
+            "erro_app": 0.8329,
+            "integracao": 0.0837,
+            "lentidao": 0.0669,
+            "exportacao": 0.0165
+          }
+        }
+      },
+      "usage": {
+        "input_tokens": 122,
+        "output_tokens": 0
+      }
+    }
+  }
+}

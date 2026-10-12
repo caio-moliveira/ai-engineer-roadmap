@@ -1,0 +1,137 @@
+{
+  "key": "11df0e83b478029a5a15",
+  "target": "jev",
+  "recorded_at": "2026-10-12",
+  "synthetic": true,
+  "origin": "SINTÉTICA: gerada a partir dos rótulos do golden set com ruído determinístico (fixtures/gerar_jev_sintetico.py). Não é medição do Jev.",
+  "request": {
+    "state": {
+      "pergunta": "Qual o produto mais vendido em receita?",
+      "dados": [
+        {
+          "produto": "Notebook Pro 14",
+          "categoria": "Informática",
+          "unidades": 79,
+          "receita": 550319.43
+        },
+        {
+          "produto": "Notebook Essencial 15",
+          "categoria": "Informática",
+          "unidades": 96,
+          "receita": 342244.19
+        },
+        {
+          "produto": "Armário Alto",
+          "categoria": "Móveis de Escritório",
+          "unidades": 173,
+          "receita": 239311.8
+        },
+        {
+          "produto": "Cafeteira Expresso",
+          "categoria": "Eletrodomésticos",
+          "unidades": 173,
+          "receita": 231419.45
+        },
+        {
+          "produto": "Smartphone X12",
+          "categoria": "Eletrônicos",
+          "unidades": 67,
+          "receita": 222326.21
+        },
+        {
+          "produto": "Estação de Trabalho Dupla",
+          "categoria": "Móveis de Escritório",
+          "unidades": 54,
+          "receita": 220758.72
+        },
+        {
+          "produto": "Dock USB-C",
+          "categoria": "Informática",
+          "unidades": 206,
+          "receita": 190311.11
+        },
+        {
+          "produto": "Aspirador Vertical",
+          "categoria": "Eletrodomésticos",
+          "unidades": 171,
+          "receita": 172467.36
+        },
+        {
+          "produto": "Smartwatch Fit",
+          "categoria": "Eletrônicos",
+          "unidades": 139,
+          "receita": 169461.86
+        },
+        {
+          "produto": "Tablet 11",
+          "categoria": "Eletrônicos",
+          "unidades": 65,
+          "receita": 165943.6
+        }
+      ],
+      "resposta": "O Notebook Pro 14 lidera, com 179 unidades vendidas."
+    },
+    "questions": {
+      "qualidade": {
+        "type": "score",
+        "instructions": "Qual a qualidade da `resposta` para a `pergunta`, considerando os `dados`?",
+        "criteria": [
+          "Ruim: não responde ou afirma números errados.",
+          "Fraca: responde em parte, ou mistura acerto com erro, previsão ou opinião indevida.",
+          "Boa: responde corretamente, mas incompleta ou com algo desnecessário.",
+          "Excelente: responde completa e corretamente, só com os dados."
+        ]
+      }
+    }
+  },
+  "result": {
+    "provider": "jev",
+    "model": "jev-1.13.0",
+    "answers": {
+      "qualidade": {
+        "value": 1,
+        "confidence": 0.9585,
+        "probabilities": {
+          "0": 0.0159,
+          "1": 0.9585,
+          "2": 0.0164,
+          "3": 0.0092
+        },
+        "expected": 1.0189
+      }
+    },
+    "latency_ms": 59.2,
+    "tokens_in": 543,
+    "tokens_out": 0,
+    "cost_usd": 2.2806e-05,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": true,
+    "raw": {
+      "model": "jev-1.13.0",
+      "answers": {
+        "qualidade": {
+          "type": "score",
+          "score": 1.0189,
+          "confidence": 0.9585,
+          "legend": {
+            "0": "Ruim: não responde ou afirma números errados.",
+            "1": "Fraca: responde em parte, ou mistura acerto com erro, previsão ou opinião indevida.",
+            "2": "Boa: responde corretamente, mas incompleta ou com algo desnecessário.",
+            "3": "Excelente: responde completa e corretamente, só com os dados."
+          },
+          "probabilities": {
+            "0": 0.0159,
+            "1": 0.9585,
+            "2": 0.0164,
+            "3": 0.0092
+          }
+        }
+      },
+      "usage": {
+        "input_tokens": 543,
+        "output_tokens": 0
+      }
+    }
+  }
+}

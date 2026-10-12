@@ -1,0 +1,68 @@
+{
+  "key": "3455ee3ad7aa17a266e1",
+  "target": "jev",
+  "recorded_at": "2026-10-12",
+  "synthetic": true,
+  "origin": "SINTÉTICA: gerada a partir dos rótulos do golden set com ruído determinístico (fixtures/gerar_jev_sintetico.py). Não é medição do Jev.",
+  "request": {
+    "state": {
+      "ticket": "Preciso exportar todos os pedidos de 2025 para Excel. Qual o caminho?"
+    },
+    "questions": {
+      "fila": {
+        "type": "choice",
+        "instructions": "Qual fila deve atender este ticket de suporte?",
+        "criteria": {
+          "financeiro": "cobranças, estornos, notas fiscais, boletos e pagamentos",
+          "tecnico": "erros no sistema, integrações, lentidão e exportação de dados",
+          "comercial": "planos, preços, descontos, contratação e demonstrações",
+          "conta": "senha e acesso, dados cadastrais, cancelamento, usuários e permissões"
+        }
+      }
+    }
+  },
+  "result": {
+    "provider": "jev",
+    "model": "jev-1.13.0",
+    "answers": {
+      "fila": {
+        "value": "tecnico",
+        "confidence": 0.947,
+        "probabilities": {
+          "financeiro": 0.0096,
+          "tecnico": 0.947,
+          "comercial": 0.0152,
+          "conta": 0.0282
+        },
+        "expected": null
+      }
+    },
+    "latency_ms": 56.0,
+    "tokens_in": 109,
+    "tokens_out": 0,
+    "cost_usd": 4.578e-06,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": true,
+    "raw": {
+      "model": "jev-1.13.0",
+      "answers": {
+        "fila": {
+          "type": "choice",
+          "choice": "tecnico",
+          "confidence": 0.947,
+          "probabilities": {
+            "financeiro": 0.0096,
+            "tecnico": 0.947,
+            "comercial": 0.0152,
+            "conta": 0.0282
+          }
+        }
+      },
+      "usage": {
+        "input_tokens": 109,
+        "output_tokens": 0
+      }
+    }
+  }
+}

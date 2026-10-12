@@ -1,0 +1,59 @@
+{
+  "key": "4bc867ac25f9ee83c86e",
+  "target": "jev",
+  "recorded_at": "2026-10-12",
+  "synthetic": true,
+  "origin": "SINTÉTICA: gerada a partir dos rótulos do golden set com ruído determinístico (fixtures/gerar_jev_sintetico.py). Não é medição do Jev.",
+  "request": {
+    "state": {
+      "remetente": "whatsapp-suporte@verificacao-conta.me",
+      "assunto": "Código de verificação",
+      "corpo": "Para manter sua conta ativa, responda este e-mail com o código de 6 dígitos que enviamos por SMS."
+    },
+    "questions": {
+      "spam": {
+        "type": "noul",
+        "instructions": "Este e-mail é spam, golpe ou phishing?",
+        "criteria": {
+          "true": "Mensagem indesejada ou fraudulenta.",
+          "false": "Mensagem legítima, mesmo que seja comercial ou urgente."
+        }
+      }
+    }
+  },
+  "result": {
+    "provider": "jev",
+    "model": "jev-1.13.0",
+    "answers": {
+      "spam": {
+        "value": 0.9089,
+        "confidence": null,
+        "probabilities": {
+          "true": 0.9089,
+          "false": 0.09109999999999996
+        },
+        "expected": null
+      }
+    },
+    "latency_ms": 45.3,
+    "tokens_in": 104,
+    "tokens_out": 0,
+    "cost_usd": 4.368e-06,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": true,
+    "raw": {
+      "model": "jev-1.13.0",
+      "answers": {
+        "spam": {
+          "type": "noul",
+          "noul": 0.9089
+        }
+      },
+      "usage": {
+        "input_tokens": 104,
+        "output_tokens": 0
+      }
+    }
+  }
+}

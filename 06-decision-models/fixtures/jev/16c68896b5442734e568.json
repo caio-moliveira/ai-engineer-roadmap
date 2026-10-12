@@ -1,0 +1,68 @@
+{
+  "key": "16c68896b5442734e568",
+  "target": "jev",
+  "recorded_at": "2026-10-12",
+  "synthetic": true,
+  "origin": "SINTÉTICA: gerada a partir dos rótulos do golden set com ruído determinístico (fixtures/gerar_jev_sintetico.py). Não é medição do Jev.",
+  "request": {
+    "state": {
+      "ticket": "Quero passar do plano básico para o pro. A diferença é cobrada proporcional?"
+    },
+    "questions": {
+      "categoria": {
+        "type": "choice",
+        "instructions": "Este ticket já foi enviado para a fila conta. Qual a categoria dele?",
+        "criteria": {
+          "senha_acesso": "senha, login, bloqueio por senha, dois fatores ou invasão",
+          "dados_cadastro": "e-mail, endereço, CNPJ ou outros dados cadastrais",
+          "cancelamento": "cancelar a assinatura ou a conta",
+          "usuarios_permissoes": "usuários, permissões e limite de usuários"
+        }
+      }
+    }
+  },
+  "result": {
+    "provider": "jev",
+    "model": "jev-1.13.0",
+    "answers": {
+      "categoria": {
+        "value": "senha_acesso",
+        "confidence": 0.7986,
+        "probabilities": {
+          "senha_acesso": 0.7986,
+          "dados_cadastro": 0.0715,
+          "cancelamento": 0.0547,
+          "usuarios_permissoes": 0.0752
+        },
+        "expected": null
+      }
+    },
+    "latency_ms": 58.4,
+    "tokens_in": 125,
+    "tokens_out": 0,
+    "cost_usd": 5.25e-06,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": true,
+    "raw": {
+      "model": "jev-1.13.0",
+      "answers": {
+        "categoria": {
+          "type": "choice",
+          "choice": "senha_acesso",
+          "confidence": 0.7986,
+          "probabilities": {
+            "senha_acesso": 0.7986,
+            "dados_cadastro": 0.0715,
+            "cancelamento": 0.0547,
+            "usuarios_permissoes": 0.0752
+          }
+        }
+      },
+      "usage": {
+        "input_tokens": 125,
+        "output_tokens": 0
+      }
+    }
+  }
+}

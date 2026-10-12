@@ -1,0 +1,59 @@
+{
+  "key": "53be531230cbb54dec05",
+  "target": "jev",
+  "recorded_at": "2026-10-12",
+  "synthetic": true,
+  "origin": "SINTÉTICA: gerada a partir dos rótulos do golden set com ruído determinístico (fixtures/gerar_jev_sintetico.py). Não é medição do Jev.",
+  "request": {
+    "state": {
+      "remetente": "loja@ofertasrelampago.shop",
+      "assunto": "iPhone por R$ 299 - só hoje",
+      "corpo": "Liquidação de estoque! Últimas unidades. Pague via Pix e receba em 24h. Oferta encerra em 2 horas."
+    },
+    "questions": {
+      "spam": {
+        "type": "noul",
+        "instructions": "Este e-mail é spam, golpe ou phishing?",
+        "criteria": {
+          "true": "Mensagem indesejada ou fraudulenta.",
+          "false": "Mensagem legítima, mesmo que seja comercial ou urgente."
+        }
+      }
+    }
+  },
+  "result": {
+    "provider": "jev",
+    "model": "jev-1.13.0",
+    "answers": {
+      "spam": {
+        "value": 0.9402,
+        "confidence": null,
+        "probabilities": {
+          "true": 0.9402,
+          "false": 0.059799999999999964
+        },
+        "expected": null
+      }
+    },
+    "latency_ms": 61.4,
+    "tokens_in": 115,
+    "tokens_out": 0,
+    "cost_usd": 4.83e-06,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": true,
+    "raw": {
+      "model": "jev-1.13.0",
+      "answers": {
+        "spam": {
+          "type": "noul",
+          "noul": 0.9402
+        }
+      },
+      "usage": {
+        "input_tokens": 115,
+        "output_tokens": 0
+      }
+    }
+  }
+}

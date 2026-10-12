@@ -1,0 +1,70 @@
+{
+  "key": "4711b77ff706226c634b",
+  "target": "jev",
+  "recorded_at": "2026-10-12",
+  "synthetic": true,
+  "origin": "SINTÉTICA: gerada a partir dos rótulos do golden set com ruído determinístico (fixtures/gerar_jev_sintetico.py). Não é medição do Jev.",
+  "request": {
+    "state": {
+      "ticket": "Como altero o endereço de cobrança da empresa?"
+    },
+    "questions": {
+      "urgencia": {
+        "type": "score",
+        "instructions": "Qual a urgência deste ticket de suporte?",
+        "criteria": [
+          "Pode esperar: dúvida, pedido de informação ou incômodo sem impacto no trabalho do cliente.",
+          "Resolver esta semana: algo não funciona ou o cliente está insatisfeito, mas ele consegue trabalhar.",
+          "Resolver hoje: o cliente está parado, perde dinheiro agora, tem prazo nas próximas horas ou houve problema de segurança."
+        ]
+      }
+    }
+  },
+  "result": {
+    "provider": "jev",
+    "model": "jev-1.13.0",
+    "answers": {
+      "urgencia": {
+        "value": 1,
+        "confidence": 0.6291,
+        "probabilities": {
+          "0": 0.1927,
+          "1": 0.6291,
+          "2": 0.1782
+        },
+        "expected": 0.9855
+      }
+    },
+    "latency_ms": 61.8,
+    "tokens_in": 109,
+    "tokens_out": 0,
+    "cost_usd": 4.578e-06,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": true,
+    "raw": {
+      "model": "jev-1.13.0",
+      "answers": {
+        "urgencia": {
+          "type": "score",
+          "score": 0.9855,
+          "confidence": 0.6291,
+          "legend": {
+            "0": "Pode esperar: dúvida, pedido de informação ou incômodo sem impacto no trabalho do cliente.",
+            "1": "Resolver esta semana: algo não funciona ou o cliente está insatisfeito, mas ele consegue trabalhar.",
+            "2": "Resolver hoje: o cliente está parado, perde dinheiro agora, tem prazo nas próximas horas ou houve problema de segurança."
+          },
+          "probabilities": {
+            "0": 0.1927,
+            "1": 0.6291,
+            "2": 0.1782
+          }
+        }
+      },
+      "usage": {
+        "input_tokens": 109,
+        "output_tokens": 0
+      }
+    }
+  }
+}

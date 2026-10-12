@@ -1,0 +1,68 @@
+{
+  "key": "9d4006e527691b9fe0db",
+  "target": "jev",
+  "recorded_at": "2026-10-12",
+  "synthetic": true,
+  "origin": "SINTÉTICA: gerada a partir dos rótulos do golden set com ruído determinístico (fixtures/gerar_jev_sintetico.py). Não é medição do Jev.",
+  "request": {
+    "state": {
+      "ticket": "O relatório exportado em PDF corta as colunas da direita."
+    },
+    "questions": {
+      "categoria": {
+        "type": "choice",
+        "instructions": "Este ticket já foi enviado para a fila comercial. Qual a categoria dele?",
+        "criteria": {
+          "upgrade_plano": "mudar de plano, comparar planos ou aumentar limites",
+          "preco_desconto": "preço, desconto, promoção ou proposta da concorrência",
+          "contratacao_nova": "contratar o produto ou um módulo novo",
+          "demonstracao": "agendar ou pedir demonstração"
+        }
+      }
+    }
+  },
+  "result": {
+    "provider": "jev",
+    "model": "jev-1.13.0",
+    "answers": {
+      "categoria": {
+        "value": "upgrade_plano",
+        "confidence": 0.8496,
+        "probabilities": {
+          "upgrade_plano": 0.8496,
+          "preco_desconto": 0.0189,
+          "contratacao_nova": 0.073,
+          "demonstracao": 0.0585
+        },
+        "expected": null
+      }
+    },
+    "latency_ms": 46.4,
+    "tokens_in": 119,
+    "tokens_out": 0,
+    "cost_usd": 4.998e-06,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": true,
+    "raw": {
+      "model": "jev-1.13.0",
+      "answers": {
+        "categoria": {
+          "type": "choice",
+          "choice": "upgrade_plano",
+          "confidence": 0.8496,
+          "probabilities": {
+            "upgrade_plano": 0.8496,
+            "preco_desconto": 0.0189,
+            "contratacao_nova": 0.073,
+            "demonstracao": 0.0585
+          }
+        }
+      },
+      "usage": {
+        "input_tokens": 119,
+        "output_tokens": 0
+      }
+    }
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "key": "8a2025efa96423e1928e",
+  "target": "jev",
+  "recorded_at": "2026-10-12",
+  "synthetic": true,
+  "origin": "SINTÉTICA: gerada a partir dos rótulos do golden set com ruído determinístico (fixtures/gerar_jev_sintetico.py). Não é medição do Jev.",
+  "request": {
+    "state": {
+      "remetente": "notificacoes@bancohorizonte.com.br",
+      "assunto": "Compra aprovada no cartão final 4321",
+      "corpo": "Compra de R$ 152,30 aprovada em Mercado Bairro, hoje às 14h02. Não reconhece? Ligue para o número no verso do seu cartão."
+    },
+    "questions": {
+      "spam": {
+        "type": "noul",
+        "instructions": "Este e-mail é spam, golpe ou phishing?",
+        "criteria": {
+          "true": "Mensagem indesejada ou fraudulenta.",
+          "false": "Mensagem legítima, mesmo que seja comercial ou urgente."
+        }
+      }
+    }
+  },
+  "result": {
+    "provider": "jev",
+    "model": "jev-1.13.0",
+    "answers": {
+      "spam": {
+        "value": 0.1013,
+        "confidence": null,
+        "probabilities": {
+          "true": 0.1013,
+          "false": 0.8987
+        },
+        "expected": null
+      }
+    },
+    "latency_ms": 45.7,
+    "tokens_in": 126,
+    "tokens_out": 0,
+    "cost_usd": 5.292e-06,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": true,
+    "raw": {
+      "model": "jev-1.13.0",
+      "answers": {
+        "spam": {
+          "type": "noul",
+          "noul": 0.1013
+        }
+      },
+      "usage": {
+        "input_tokens": 126,
+        "output_tokens": 0
+      }
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "key": "ec73a316d4d824f0d017",
+  "target": "llm:anthropic:claude-haiku-4-5-20251001",
+  "recorded_at": "2026-10-12",
+  "synthetic": false,
+  "origin": "LangChain init_chat_model + with_structured_output (anthropic:claude-haiku-4-5-20251001)",
+  "request": {
+    "state": {
+      "remetente": "seguranca@bancohorizonte-atendimento.xyz",
+      "assunto": "Sua conta será bloqueada em 24h",
+      "corpo": "Prezado cliente, detectamos acesso incomum. Confirme sua agência, conta e senha em http://bancohorizonte-validacao.top/login para evitar o bloqueio."
+    },
+    "questions": {
+      "spam": {
+        "type": "noul",
+        "instructions": "Este e-mail é spam, golpe ou phishing?",
+        "criteria": {
+          "true": "Mensagem indesejada ou fraudulenta.",
+          "false": "Mensagem legítima, mesmo que seja comercial ou urgente."
+        }
+      }
+    }
+  },
+  "result": {
+    "provider": "llm:anthropic:claude-haiku-4-5-20251001",
+    "model": "claude-haiku-4-5-20251001",
+    "answers": {
+      "spam": {
+        "value": 0.98,
+        "confidence": 0.99,
+        "probabilities": null,
+        "expected": null
+      }
+    },
+    "latency_ms": 1258.1563999992795,
+    "tokens_in": 1055,
+    "tokens_out": 53,
+    "cost_usd": 0.00132,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": false,
+    "raw": {
+      "content": "[{\"id\": \"toolu_01SVUB9Bn5LnGtD6FtqJYGGN\", \"caller\": {\"type\": \"direct\"}, \"input\": {\"spam\": {\"value\": 0.98, \"confidence\": 0.99}}, \"name\": \"Respostas\", \"type\": \"tool_use\", \"toolset_name\": null}]",
+      "parsing_error": null
+    }
+  }
+}

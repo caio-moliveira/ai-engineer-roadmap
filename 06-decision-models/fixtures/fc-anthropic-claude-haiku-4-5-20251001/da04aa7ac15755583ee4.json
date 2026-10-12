@@ -1,0 +1,28 @@
+{
+  "key": "da04aa7ac15755583ee4",
+  "target": "fc:anthropic:claude-haiku-4-5-20251001",
+  "recorded_at": "2026-10-12",
+  "synthetic": false,
+  "origin": "bind_tools (anthropic:claude-haiku-4-5-20251001)",
+  "request": {
+    "tipo": "function_calling",
+    "modelo": "anthropic:claude-haiku-4-5-20251001",
+    "system": "Você é o assistente de dados de vendas da empresa Mercado Jornada. Chame a única tool que responde a pergunta. Se nenhuma tool tiver o dado, não chame nenhuma.",
+    "tools": {
+      "vendas_mensal": "Receita, número de pedidos, ticket médio e variação de cada mês, de jan/2025 a set/2026. Para evolução no tempo, sazonalidade e comparação entre meses.",
+      "vendas_por_categoria": "Receita, unidades, margem e participação de cada categoria de produto em 2026.",
+      "top_produtos": "Os 10 produtos de maior receita em 2026, com categoria e unidades.",
+      "vendas_por_vendedor": "Receita, pedidos, meta e atingimento da meta de cada vendedor em 2026, com a região de cada um. Para ranking de vendedores e quem bateu a meta.",
+      "vendas_por_regiao": "Receita, pedidos, clientes ativos e participação de cada região do país em 2026.",
+      "top_clientes": "Os 10 clientes (empresas) de maior receita em 2026, com segmento, região, pedidos e data da última compra.",
+      "kpis": "Números consolidados de jan a set de 2026: receita total, receita do mesmo período de 2025, crescimento, pedidos, ticket médio, clientes ativos, atingimento da meta da empresa, taxa de cancelamento e margem bruta."
+    },
+    "pergunta": "Como foi a receita mês a mês em 2026?"
+  },
+  "result": {
+    "tool": "vendas_mensal",
+    "latency_ms": 772.8700000006938,
+    "tokens_in": 1182,
+    "tokens_out": 39
+  }
+}

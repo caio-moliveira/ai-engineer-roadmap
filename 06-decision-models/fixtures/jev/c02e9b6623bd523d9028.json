@@ -1,0 +1,68 @@
+{
+  "key": "c02e9b6623bd523d9028",
+  "target": "jev",
+  "recorded_at": "2026-10-12",
+  "synthetic": true,
+  "origin": "SINTÉTICA: gerada a partir dos rótulos do golden set com ruído determinístico (fixtures/gerar_jev_sintetico.py). Não é medição do Jev.",
+  "request": {
+    "state": {
+      "ticket": "Tentei pagar com Pix e o QR code dá erro de valor inválido."
+    },
+    "questions": {
+      "categoria": {
+        "type": "choice",
+        "instructions": "Este ticket já foi enviado para a fila financeiro. Qual a categoria dele?",
+        "criteria": {
+          "cobranca_indevida": "cobrança duplicada ou de algo que o cliente não contratou",
+          "estorno": "pedido ou dúvida sobre devolução de dinheiro",
+          "nota_fiscal": "emissão, correção ou envio de nota fiscal",
+          "boleto_pagamento": "boleto, Pix, cartão, forma de pagamento ou acesso bloqueado por pagamento"
+        }
+      }
+    }
+  },
+  "result": {
+    "provider": "jev",
+    "model": "jev-1.13.0",
+    "answers": {
+      "categoria": {
+        "value": "nota_fiscal",
+        "confidence": 0.5667,
+        "probabilities": {
+          "cobranca_indevida": 0.0613,
+          "estorno": 0.1523,
+          "nota_fiscal": 0.5667,
+          "boleto_pagamento": 0.2197
+        },
+        "expected": null
+      }
+    },
+    "latency_ms": 43.4,
+    "tokens_in": 130,
+    "tokens_out": 0,
+    "cost_usd": 5.46e-06,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": true,
+    "raw": {
+      "model": "jev-1.13.0",
+      "answers": {
+        "categoria": {
+          "type": "choice",
+          "choice": "nota_fiscal",
+          "confidence": 0.5667,
+          "probabilities": {
+            "cobranca_indevida": 0.0613,
+            "estorno": 0.1523,
+            "nota_fiscal": 0.5667,
+            "boleto_pagamento": 0.2197
+          }
+        }
+      },
+      "usage": {
+        "input_tokens": 130,
+        "output_tokens": 0
+      }
+    }
+  }
+}

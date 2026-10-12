@@ -1,0 +1,86 @@
+{
+  "key": "3860a94e6c0854f51ef6",
+  "target": "laya",
+  "recorded_at": "2026-10-12",
+  "synthetic": false,
+  "origin": "laya-serve em http://127.0.0.1:8001, modelo multilingual",
+  "request": {
+    "state": {
+      "ticket": "Depois da atualização de ontem, o botão de salvar pedido não faz nada. Ninguém da equipe consegue trabalhar."
+    },
+    "questions": {
+      "urgencia": {
+        "type": "score",
+        "instructions": "Qual a urgência deste ticket de suporte?",
+        "criteria": [
+          "Pode esperar: dúvida, pedido de informação ou incômodo sem impacto no trabalho do cliente.",
+          "Resolver esta semana: algo não funciona ou o cliente está insatisfeito, mas ele consegue trabalhar.",
+          "Resolver hoje: o cliente está parado, perde dinheiro agora, tem prazo nas próximas horas ou houve problema de segurança."
+        ]
+      }
+    }
+  },
+  "result": {
+    "provider": "laya",
+    "model": "laya-rl-agent",
+    "answers": {
+      "urgencia": {
+        "value": 2,
+        "confidence": 0.1792,
+        "probabilities": {
+          "0": 0.0735,
+          "1": 0.4257,
+          "2": 0.5008
+        },
+        "expected": 1.4273
+      }
+    },
+    "latency_ms": 96.3344000010693,
+    "tokens_in": 120,
+    "tokens_out": 0,
+    "cost_usd": 0.0,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": false,
+    "raw": {
+      "model": "laya-rl-agent",
+      "answers": {
+        "urgencia": {
+          "type": "score",
+          "score": 1.4273,
+          "legend": {
+            "0": "Pode esperar: dúvida, pedido de informação ou incômodo sem impacto no trabalho do cliente.",
+            "1": "Resolver esta semana: algo não funciona ou o cliente está insatisfeito, mas ele consegue trabalhar.",
+            "2": "Resolver hoje: o cliente está parado, perde dinheiro agora, tem prazo nas próximas horas ou houve problema de segurança."
+          },
+          "probabilities": {
+            "0": 0.0735,
+            "1": 0.4257,
+            "2": 0.5008
+          },
+          "confidence": 0.1792,
+          "answer_confidence": 0.5008,
+          "action": {
+            "act_probability": 1.0
+          },
+          "x_jev_confidence": 0.141
+        }
+      },
+      "usage": {
+        "input_tokens": 120,
+        "output_tokens": 0,
+        "state_tokens": 27,
+        "state_tokens_dropped": 0,
+        "truncated": false,
+        "truncated_questions": []
+      },
+      "routing": {
+        "model": "multilingual",
+        "repo": "convaiinnovations/laya/multilingual",
+        "reason": "explicit model='multilingual'",
+        "detection": null,
+        "workflow": null
+      }
+    }
+  }
+}

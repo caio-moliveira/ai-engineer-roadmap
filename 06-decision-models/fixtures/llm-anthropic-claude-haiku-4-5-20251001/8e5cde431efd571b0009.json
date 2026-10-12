@@ -1,0 +1,47 @@
+{
+  "key": "8e5cde431efd571b0009",
+  "target": "llm:anthropic:claude-haiku-4-5-20251001",
+  "recorded_at": "2026-10-12",
+  "synthetic": false,
+  "origin": "LangChain init_chat_model + with_structured_output (anthropic:claude-haiku-4-5-20251001)",
+  "request": {
+    "state": {
+      "remetente": "nfe@papelariacentral.com.br",
+      "assunto": "NF-e 4587 emitida",
+      "corpo": "A nota fiscal eletrônica 4587, referente ao pedido 1290, foi emitida. O XML e o PDF estão anexados."
+    },
+    "questions": {
+      "spam": {
+        "type": "noul",
+        "instructions": "Este e-mail é spam, golpe ou phishing?",
+        "criteria": {
+          "true": "Mensagem indesejada ou fraudulenta.",
+          "false": "Mensagem legítima, mesmo que seja comercial ou urgente."
+        }
+      }
+    }
+  },
+  "result": {
+    "provider": "llm:anthropic:claude-haiku-4-5-20251001",
+    "model": "claude-haiku-4-5-20251001",
+    "answers": {
+      "spam": {
+        "value": 0.05,
+        "confidence": 0.9,
+        "probabilities": null,
+        "expected": null
+      }
+    },
+    "latency_ms": 866.4528999979666,
+    "tokens_in": 1044,
+    "tokens_out": 53,
+    "cost_usd": 0.001309,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": false,
+    "raw": {
+      "content": "[{\"id\": \"toolu_01PVnN7RfYJp3Q6k4uQBZbqD\", \"caller\": {\"type\": \"direct\"}, \"input\": {\"spam\": {\"value\": 0.05, \"confidence\": 0.9}}, \"name\": \"Respostas\", \"type\": \"tool_use\", \"toolset_name\": null}]",
+      "parsing_error": null
+    }
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "key": "bcdf2563358d6e4345e6",
+  "target": "jev",
+  "recorded_at": "2026-10-12",
+  "synthetic": true,
+  "origin": "SINTÉTICA: gerada a partir dos rótulos do golden set com ruído determinístico (fixtures/gerar_jev_sintetico.py). Não é medição do Jev.",
+  "request": {
+    "state": {
+      "remetente": "alertas@jornadacloud.com.br",
+      "assunto": "Uso do plano em 90%",
+      "corpo": "Sua conta usou 90% do armazenamento do plano pro. Para evitar interrupções, considere o upgrade ou apague arquivos antigos."
+    },
+    "questions": {
+      "spam": {
+        "type": "noul",
+        "instructions": "Este e-mail é spam, golpe ou phishing?",
+        "criteria": {
+          "true": "Mensagem indesejada ou fraudulenta.",
+          "false": "Mensagem legítima, mesmo que seja comercial ou urgente."
+        }
+      }
+    }
+  },
+  "result": {
+    "provider": "jev",
+    "model": "jev-1.13.0",
+    "answers": {
+      "spam": {
+        "value": 0.096,
+        "confidence": null,
+        "probabilities": {
+          "true": 0.096,
+          "false": 0.904
+        },
+        "expected": null
+      }
+    },
+    "latency_ms": 46.2,
+    "tokens_in": 109,
+    "tokens_out": 0,
+    "cost_usd": 4.578e-06,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": true,
+    "raw": {
+      "model": "jev-1.13.0",
+      "answers": {
+        "spam": {
+          "type": "noul",
+          "noul": 0.096
+        }
+      },
+      "usage": {
+        "input_tokens": 109,
+        "output_tokens": 0
+      }
+    }
+  }
+}

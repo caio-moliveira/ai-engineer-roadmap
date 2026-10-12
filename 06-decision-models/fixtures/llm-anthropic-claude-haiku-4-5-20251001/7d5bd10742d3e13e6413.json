@@ -1,0 +1,47 @@
+{
+  "key": "7d5bd10742d3e13e6413",
+  "target": "llm:anthropic:claude-haiku-4-5-20251001",
+  "recorded_at": "2026-10-12",
+  "synthetic": false,
+  "origin": "LangChain init_chat_model + with_structured_output (anthropic:claude-haiku-4-5-20251001)",
+  "request": {
+    "state": {
+      "ticket": "Como dou permissão para o estagiário ver só os relatórios, sem editar nada?"
+    },
+    "questions": {
+      "fila": {
+        "type": "choice",
+        "instructions": "Qual fila deve atender este ticket de suporte?",
+        "criteria": {
+          "financeiro": "cobranças, estornos, notas fiscais, boletos e pagamentos",
+          "tecnico": "erros no sistema, integrações, lentidão e exportação de dados",
+          "comercial": "planos, preços, descontos, contratação e demonstrações",
+          "conta": "senha e acesso, dados cadastrais, cancelamento, usuários e permissões"
+        }
+      }
+    }
+  },
+  "result": {
+    "provider": "llm:anthropic:claude-haiku-4-5-20251001",
+    "model": "claude-haiku-4-5-20251001",
+    "answers": {
+      "fila": {
+        "value": "conta",
+        "confidence": 0.95,
+        "probabilities": null,
+        "expected": null
+      }
+    },
+    "latency_ms": 906.8669999978738,
+    "tokens_in": 1127,
+    "tokens_out": 52,
+    "cost_usd": 0.001387,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": false,
+    "raw": {
+      "content": "[{\"id\": \"toolu_01GV7zxFggAwzZtciA2muscR\", \"caller\": {\"type\": \"direct\"}, \"input\": {\"fila\": {\"value\": \"conta\", \"confidence\": 0.95}}, \"name\": \"Respostas\", \"type\": \"tool_use\", \"toolset_name\": null}]",
+      "parsing_error": null
+    }
+  }
+}

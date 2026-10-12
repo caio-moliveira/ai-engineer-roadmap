@@ -1,0 +1,174 @@
+{
+  "key": "693ccc1ceefe442ba2fe",
+  "target": "laya",
+  "recorded_at": "2026-10-12",
+  "synthetic": false,
+  "origin": "laya-serve em http://127.0.0.1:8001, modelo multilingual",
+  "request": {
+    "state": {
+      "ticket": "Nossa equipe cresceu para 40 pessoas. Qual plano atende e quanto fica?"
+    },
+    "questions": {
+      "pede_reembolso": {
+        "type": "noul",
+        "instructions": "O cliente pede dinheiro de volta?"
+      },
+      "ameaca_cancelar": {
+        "type": "noul",
+        "instructions": "O cliente diz que vai cancelar, sair ou migrar para outro fornecedor?"
+      },
+      "relata_erro": {
+        "type": "noul",
+        "instructions": "O cliente relata algo que não funciona como deveria?"
+      },
+      "pede_informacao": {
+        "type": "noul",
+        "instructions": "O cliente faz uma pergunta para obter informação?"
+      },
+      "urgencia": {
+        "type": "score",
+        "instructions": "Qual a urgência deste ticket de suporte?",
+        "criteria": [
+          "Pode esperar: dúvida, pedido de informação ou incômodo sem impacto no trabalho do cliente.",
+          "Resolver esta semana: algo não funciona ou o cliente está insatisfeito, mas ele consegue trabalhar.",
+          "Resolver hoje: o cliente está parado, perde dinheiro agora, tem prazo nas próximas horas ou houve problema de segurança."
+        ]
+      }
+    }
+  },
+  "result": {
+    "provider": "laya",
+    "model": "laya-rl-agent",
+    "answers": {
+      "pede_reembolso": {
+        "value": 0.0009,
+        "confidence": 0.9991,
+        "probabilities": {
+          "true": 0.0009,
+          "false": 0.9991
+        },
+        "expected": null
+      },
+      "ameaca_cancelar": {
+        "value": 0.0076,
+        "confidence": 0.9924,
+        "probabilities": {
+          "true": 0.0076,
+          "false": 0.9924
+        },
+        "expected": null
+      },
+      "relata_erro": {
+        "value": 0.0232,
+        "confidence": 0.9768,
+        "probabilities": {
+          "true": 0.0232,
+          "false": 0.9768
+        },
+        "expected": null
+      },
+      "pede_informacao": {
+        "value": 0.9172,
+        "confidence": 0.9172,
+        "probabilities": {
+          "true": 0.9172,
+          "false": 0.08279999999999998
+        },
+        "expected": null
+      },
+      "urgencia": {
+        "value": 0,
+        "confidence": 0.2438,
+        "probabilities": {
+          "0": 0.6904,
+          "1": 0.1348,
+          "2": 0.1748
+        },
+        "expected": 0.4844
+      }
+    },
+    "latency_ms": 342.0030000015686,
+    "tokens_in": 354,
+    "tokens_out": 0,
+    "cost_usd": 0.0,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": false,
+    "raw": {
+      "model": "laya-rl-agent",
+      "answers": {
+        "pede_reembolso": {
+          "type": "noul",
+          "noul": 0.0009,
+          "confidence": 0.9991,
+          "answer_confidence": 0.9991,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "ameaca_cancelar": {
+          "type": "noul",
+          "noul": 0.0076,
+          "confidence": 0.9924,
+          "answer_confidence": 0.9924,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "relata_erro": {
+          "type": "noul",
+          "noul": 0.0232,
+          "confidence": 0.9768,
+          "answer_confidence": 0.9768,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "pede_informacao": {
+          "type": "noul",
+          "noul": 0.9172,
+          "confidence": 0.9172,
+          "answer_confidence": 0.9172,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "urgencia": {
+          "type": "score",
+          "score": 0.4844,
+          "legend": {
+            "0": "Pode esperar: dúvida, pedido de informação ou incômodo sem impacto no trabalho do cliente.",
+            "1": "Resolver esta semana: algo não funciona ou o cliente está insatisfeito, mas ele consegue trabalhar.",
+            "2": "Resolver hoje: o cliente está parado, perde dinheiro agora, tem prazo nas próximas horas ou houve problema de segurança."
+          },
+          "probabilities": {
+            "0": 0.6904,
+            "1": 0.1348,
+            "2": 0.1748
+          },
+          "confidence": 0.2438,
+          "answer_confidence": 0.6904,
+          "action": {
+            "act_probability": 1.0
+          },
+          "x_jev_confidence": 0.2734
+        }
+      },
+      "usage": {
+        "input_tokens": 354,
+        "output_tokens": 0,
+        "state_tokens": 23,
+        "state_tokens_dropped": 0,
+        "truncated": false,
+        "truncated_questions": []
+      },
+      "routing": {
+        "model": "multilingual",
+        "repo": "convaiinnovations/laya/multilingual",
+        "reason": "explicit model='multilingual'",
+        "detection": null,
+        "workflow": null
+      }
+    }
+  }
+}

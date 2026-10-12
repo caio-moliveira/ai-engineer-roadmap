@@ -1,0 +1,47 @@
+{
+  "key": "b876918495f9bf1c7dc8",
+  "target": "llm:anthropic:claude-haiku-4-5-20251001",
+  "recorded_at": "2026-10-12",
+  "synthetic": false,
+  "origin": "LangChain init_chat_model + with_structured_output (anthropic:claude-haiku-4-5-20251001)",
+  "request": {
+    "state": {
+      "remetente": "diretor.financeiro@grupoaurora-co.com",
+      "assunto": "Pagamento urgente e confidencial",
+      "corpo": "Preciso que você faça uma transferência de R$ 38.000 para o fornecedor abaixo ainda hoje. Estou em reunião, não me ligue. Depois explico."
+    },
+    "questions": {
+      "spam": {
+        "type": "noul",
+        "instructions": "Este e-mail é spam, golpe ou phishing?",
+        "criteria": {
+          "true": "Mensagem indesejada ou fraudulenta.",
+          "false": "Mensagem legítima, mesmo que seja comercial ou urgente."
+        }
+      }
+    }
+  },
+  "result": {
+    "provider": "llm:anthropic:claude-haiku-4-5-20251001",
+    "model": "claude-haiku-4-5-20251001",
+    "answers": {
+      "spam": {
+        "value": 0.85,
+        "confidence": 0.9,
+        "probabilities": null,
+        "expected": null
+      }
+    },
+    "latency_ms": 858.5066999985429,
+    "tokens_in": 1053,
+    "tokens_out": 53,
+    "cost_usd": 0.001318,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": false,
+    "raw": {
+      "content": "[{\"id\": \"toolu_01PvZV1g5n2aNJYBKuAH3NwE\", \"caller\": {\"type\": \"direct\"}, \"input\": {\"spam\": {\"value\": 0.85, \"confidence\": 0.9}}, \"name\": \"Respostas\", \"type\": \"tool_use\", \"toolset_name\": null}]",
+      "parsing_error": null
+    }
+  }
+}

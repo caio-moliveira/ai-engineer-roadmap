@@ -1,0 +1,84 @@
+{
+  "key": "107abdb896cef72983dc",
+  "target": "laya",
+  "recorded_at": "2026-10-12",
+  "synthetic": false,
+  "origin": "laya-serve em http://127.0.0.1:8001, modelo multilingual",
+  "request": {
+    "state": {
+      "ticket": "Assisti à demonstração gravada, mas queria ver o módulo de estoque funcionando com um especialista."
+    },
+    "questions": {
+      "fila": {
+        "type": "choice",
+        "instructions": "Qual fila deve atender este ticket de suporte?",
+        "criteria": {
+          "financeiro": "cobranças, estornos, notas fiscais, boletos e pagamentos",
+          "tecnico": "erros no sistema, integrações, lentidão e exportação de dados",
+          "comercial": "planos, preços, descontos, contratação e demonstrações",
+          "conta": "senha e acesso, dados cadastrais, cancelamento, usuários e permissões"
+        }
+      }
+    }
+  },
+  "result": {
+    "provider": "laya",
+    "model": "laya-rl-agent",
+    "answers": {
+      "fila": {
+        "value": "tecnico",
+        "confidence": 0.498,
+        "probabilities": {
+          "financeiro": 0.0072,
+          "tecnico": 0.6686,
+          "comercial": 0.3191,
+          "conta": 0.0051
+        },
+        "expected": null
+      }
+    },
+    "latency_ms": 84.06209999884595,
+    "tokens_in": 109,
+    "tokens_out": 0,
+    "cost_usd": 0.0,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": false,
+    "raw": {
+      "model": "laya-rl-agent",
+      "answers": {
+        "fila": {
+          "type": "choice",
+          "choice": "tecnico",
+          "probabilities": {
+            "financeiro": 0.0072,
+            "tecnico": 0.6686,
+            "comercial": 0.3191,
+            "conta": 0.0051
+          },
+          "confidence": 0.498,
+          "answer_confidence": 0.6686,
+          "action": {
+            "act_probability": 1.0
+          },
+          "x_jev_confidence": 0.5581
+        }
+      },
+      "usage": {
+        "input_tokens": 109,
+        "output_tokens": 0,
+        "state_tokens": 25,
+        "state_tokens_dropped": 0,
+        "truncated": false,
+        "truncated_questions": []
+      },
+      "routing": {
+        "model": "multilingual",
+        "repo": "convaiinnovations/laya/multilingual",
+        "reason": "explicit model='multilingual'",
+        "detection": null,
+        "workflow": null
+      }
+    }
+  }
+}

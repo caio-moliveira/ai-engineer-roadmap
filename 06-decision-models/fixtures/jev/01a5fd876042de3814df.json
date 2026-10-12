@@ -1,0 +1,70 @@
+{
+  "key": "01a5fd876042de3814df",
+  "target": "jev",
+  "recorded_at": "2026-10-12",
+  "synthetic": true,
+  "origin": "SINTÉTICA: gerada a partir dos rótulos do golden set com ruído determinístico (fixtures/gerar_jev_sintetico.py). Não é medição do Jev.",
+  "request": {
+    "state": {
+      "ticket": "Preciso de uma demonstração urgente: a decisão de compra é amanhã de manhã."
+    },
+    "questions": {
+      "urgencia": {
+        "type": "score",
+        "instructions": "Qual a urgência deste ticket de suporte?",
+        "criteria": [
+          "Pode esperar: dúvida, pedido de informação ou incômodo sem impacto no trabalho do cliente.",
+          "Resolver esta semana: algo não funciona ou o cliente está insatisfeito, mas ele consegue trabalhar.",
+          "Resolver hoje: o cliente está parado, perde dinheiro agora, tem prazo nas próximas horas ou houve problema de segurança."
+        ]
+      }
+    }
+  },
+  "result": {
+    "provider": "jev",
+    "model": "jev-1.13.0",
+    "answers": {
+      "urgencia": {
+        "value": 2,
+        "confidence": 0.8191,
+        "probabilities": {
+          "0": 0.1366,
+          "1": 0.0443,
+          "2": 0.8191
+        },
+        "expected": 1.6825
+      }
+    },
+    "latency_ms": 53.0,
+    "tokens_in": 115,
+    "tokens_out": 0,
+    "cost_usd": 4.83e-06,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": true,
+    "raw": {
+      "model": "jev-1.13.0",
+      "answers": {
+        "urgencia": {
+          "type": "score",
+          "score": 1.6825,
+          "confidence": 0.8191,
+          "legend": {
+            "0": "Pode esperar: dúvida, pedido de informação ou incômodo sem impacto no trabalho do cliente.",
+            "1": "Resolver esta semana: algo não funciona ou o cliente está insatisfeito, mas ele consegue trabalhar.",
+            "2": "Resolver hoje: o cliente está parado, perde dinheiro agora, tem prazo nas próximas horas ou houve problema de segurança."
+          },
+          "probabilities": {
+            "0": 0.1366,
+            "1": 0.0443,
+            "2": 0.8191
+          }
+        }
+      },
+      "usage": {
+        "input_tokens": 115,
+        "output_tokens": 0
+      }
+    }
+  }
+}

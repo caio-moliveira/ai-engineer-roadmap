@@ -1,0 +1,68 @@
+{
+  "key": "c834c049e978c08a5ba5",
+  "target": "jev",
+  "recorded_at": "2026-10-12",
+  "synthetic": true,
+  "origin": "SINTÉTICA: gerada a partir dos rótulos do golden set com ruído determinístico (fixtures/gerar_jev_sintetico.py). Não é medição do Jev.",
+  "request": {
+    "state": {
+      "ticket": "Recebi uma proposta do concorrente 30% mais barata. Conseguem cobrir ou vou ter que migrar."
+    },
+    "questions": {
+      "categoria": {
+        "type": "choice",
+        "instructions": "Este ticket já foi enviado para a fila conta. Qual a categoria dele?",
+        "criteria": {
+          "senha_acesso": "senha, login, bloqueio por senha, dois fatores ou invasão",
+          "dados_cadastro": "e-mail, endereço, CNPJ ou outros dados cadastrais",
+          "cancelamento": "cancelar a assinatura ou a conta",
+          "usuarios_permissoes": "usuários, permissões e limite de usuários"
+        }
+      }
+    }
+  },
+  "result": {
+    "provider": "jev",
+    "model": "jev-1.13.0",
+    "answers": {
+      "categoria": {
+        "value": "senha_acesso",
+        "confidence": 0.9272,
+        "probabilities": {
+          "senha_acesso": 0.9272,
+          "dados_cadastro": 0.0119,
+          "cancelamento": 0.0249,
+          "usuarios_permissoes": 0.0359
+        },
+        "expected": null
+      }
+    },
+    "latency_ms": 56.2,
+    "tokens_in": 129,
+    "tokens_out": 0,
+    "cost_usd": 5.4180000000000005e-06,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": true,
+    "raw": {
+      "model": "jev-1.13.0",
+      "answers": {
+        "categoria": {
+          "type": "choice",
+          "choice": "senha_acesso",
+          "confidence": 0.9272,
+          "probabilities": {
+            "senha_acesso": 0.9272,
+            "dados_cadastro": 0.0119,
+            "cancelamento": 0.0249,
+            "usuarios_permissoes": 0.0359
+          }
+        }
+      },
+      "usage": {
+        "input_tokens": 129,
+        "output_tokens": 0
+      }
+    }
+  }
+}

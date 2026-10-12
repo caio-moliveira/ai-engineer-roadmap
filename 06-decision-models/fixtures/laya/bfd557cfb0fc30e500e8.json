@@ -1,0 +1,78 @@
+{
+  "key": "bfd557cfb0fc30e500e8",
+  "target": "laya",
+  "recorded_at": "2026-10-12",
+  "synthetic": false,
+  "origin": "laya-serve em http://127.0.0.1:8001, modelo multilingual",
+  "request": {
+    "state": {
+      "ticket": "Preciso de mais 5 usuários ainda hoje porque contratamos uma equipe nova que começa amanhã."
+    },
+    "questions": {
+      "rota": {
+        "type": "choice",
+        "instructions": "Qual modelo deve redigir a resposta para este ticket?",
+        "criteria": {
+          "barato": "Pedido simples e bem delimitado, com resposta padrão: um modelo pequeno resolve.",
+          "caro": "Caso ambíguo, com vários problemas, investigação técnica ou cliente prestes a sair: precisa de um modelo forte."
+        }
+      }
+    }
+  },
+  "result": {
+    "provider": "laya",
+    "model": "laya-rl-agent",
+    "answers": {
+      "rota": {
+        "value": "caro",
+        "confidence": 0.2081,
+        "probabilities": {
+          "barato": 0.2381,
+          "caro": 0.7619
+        },
+        "expected": null
+      }
+    },
+    "latency_ms": 76.50460000149906,
+    "tokens_in": 89,
+    "tokens_out": 0,
+    "cost_usd": 0.0,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": false,
+    "raw": {
+      "model": "laya-rl-agent",
+      "answers": {
+        "rota": {
+          "type": "choice",
+          "choice": "caro",
+          "probabilities": {
+            "barato": 0.2381,
+            "caro": 0.7619
+          },
+          "confidence": 0.2081,
+          "answer_confidence": 0.7619,
+          "action": {
+            "act_probability": 1.0
+          },
+          "x_jev_confidence": 0.5238
+        }
+      },
+      "usage": {
+        "input_tokens": 89,
+        "output_tokens": 0,
+        "state_tokens": 24,
+        "state_tokens_dropped": 0,
+        "truncated": false,
+        "truncated_questions": []
+      },
+      "routing": {
+        "model": "multilingual",
+        "repo": "convaiinnovations/laya/multilingual",
+        "reason": "explicit model='multilingual'",
+        "detection": null,
+        "workflow": null
+      }
+    }
+  }
+}

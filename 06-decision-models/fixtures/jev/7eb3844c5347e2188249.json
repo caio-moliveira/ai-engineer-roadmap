@@ -1,0 +1,70 @@
+{
+  "key": "7eb3844c5347e2188249",
+  "target": "jev",
+  "recorded_at": "2026-10-12",
+  "synthetic": true,
+  "origin": "SINTÉTICA: gerada a partir dos rótulos do golden set com ruído determinístico (fixtures/gerar_jev_sintetico.py). Não é medição do Jev.",
+  "request": {
+    "state": {
+      "ticket": "Cancelei o plano adicional de armazenamento em agosto e continuo sendo cobrado. Quero o dinheiro de volta dos dois meses."
+    },
+    "questions": {
+      "urgencia": {
+        "type": "score",
+        "instructions": "Qual a urgência deste ticket de suporte?",
+        "criteria": [
+          "Pode esperar: dúvida, pedido de informação ou incômodo sem impacto no trabalho do cliente.",
+          "Resolver esta semana: algo não funciona ou o cliente está insatisfeito, mas ele consegue trabalhar.",
+          "Resolver hoje: o cliente está parado, perde dinheiro agora, tem prazo nas próximas horas ou houve problema de segurança."
+        ]
+      }
+    }
+  },
+  "result": {
+    "provider": "jev",
+    "model": "jev-1.13.0",
+    "answers": {
+      "urgencia": {
+        "value": 1,
+        "confidence": 0.9061,
+        "probabilities": {
+          "0": 0.04,
+          "1": 0.9061,
+          "2": 0.054
+        },
+        "expected": 1.0141
+      }
+    },
+    "latency_ms": 64.3,
+    "tokens_in": 124,
+    "tokens_out": 0,
+    "cost_usd": 5.208e-06,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": true,
+    "raw": {
+      "model": "jev-1.13.0",
+      "answers": {
+        "urgencia": {
+          "type": "score",
+          "score": 1.0141,
+          "confidence": 0.9061,
+          "legend": {
+            "0": "Pode esperar: dúvida, pedido de informação ou incômodo sem impacto no trabalho do cliente.",
+            "1": "Resolver esta semana: algo não funciona ou o cliente está insatisfeito, mas ele consegue trabalhar.",
+            "2": "Resolver hoje: o cliente está parado, perde dinheiro agora, tem prazo nas próximas horas ou houve problema de segurança."
+          },
+          "probabilities": {
+            "0": 0.04,
+            "1": 0.9061,
+            "2": 0.054
+          }
+        }
+      },
+      "usage": {
+        "input_tokens": 124,
+        "output_tokens": 0
+      }
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "key": "c49bf17ebde09e88f3d0",
+  "target": "llm:anthropic:claude-haiku-4-5-20251001",
+  "recorded_at": "2026-10-12",
+  "synthetic": false,
+  "origin": "LangChain init_chat_model + with_structured_output (anthropic:claude-haiku-4-5-20251001)",
+  "request": {
+    "state": {
+      "pergunta": "Por que o Ártico aquece mais rápido que o resto do planeta?",
+      "trecho": "Mudanças na circulação atmosférica e oceânica transportam mais calor para as altas latitudes."
+    },
+    "questions": {
+      "relevancia": {
+        "type": "score",
+        "instructions": "O `trecho` ajuda a responder a `pergunta`?",
+        "criteria": [
+          "Não responde: fala de outro assunto ou só compartilha palavras com a pergunta.",
+          "Relacionado: trata do tema, mas não responde à pergunta.",
+          "Responde: contém a informação que a pergunta pede."
+        ]
+      }
+    }
+  },
+  "result": {
+    "provider": "llm:anthropic:claude-haiku-4-5-20251001",
+    "model": "claude-haiku-4-5-20251001",
+    "answers": {
+      "relevancia": {
+        "value": 1,
+        "confidence": 0.7,
+        "probabilities": null,
+        "expected": null
+      }
+    },
+    "latency_ms": 956.6907000007632,
+    "tokens_in": 1089,
+    "tokens_out": 52,
+    "cost_usd": 0.001349,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": false,
+    "raw": {
+      "content": "[{\"id\": \"toolu_01R1XNFtEmM5XbTDwCVKRRA2\", \"caller\": {\"type\": \"direct\"}, \"input\": {\"relevancia\": {\"value\": 1, \"confidence\": 0.7}}, \"name\": \"Respostas\", \"type\": \"tool_use\", \"toolset_name\": null}]",
+      "parsing_error": null
+    }
+  }
+}

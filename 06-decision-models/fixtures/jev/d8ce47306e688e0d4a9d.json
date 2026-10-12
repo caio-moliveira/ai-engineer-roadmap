@@ -1,0 +1,70 @@
+{
+  "key": "d8ce47306e688e0d4a9d",
+  "target": "jev",
+  "recorded_at": "2026-10-12",
+  "synthetic": true,
+  "origin": "SINTÉTICA: gerada a partir dos rótulos do golden set com ruído determinístico (fixtures/gerar_jev_sintetico.py). Não é medição do Jev.",
+  "request": {
+    "state": {
+      "ticket": "Lentidão absurda desde a migração. Pagamos o plano empresarial justamente por desempenho. Se não melhorar até sexta, vamos procurar outro fornecedor."
+    },
+    "questions": {
+      "urgencia": {
+        "type": "score",
+        "instructions": "Qual a urgência deste ticket de suporte?",
+        "criteria": [
+          "Pode esperar: dúvida, pedido de informação ou incômodo sem impacto no trabalho do cliente.",
+          "Resolver esta semana: algo não funciona ou o cliente está insatisfeito, mas ele consegue trabalhar.",
+          "Resolver hoje: o cliente está parado, perde dinheiro agora, tem prazo nas próximas horas ou houve problema de segurança."
+        ]
+      }
+    }
+  },
+  "result": {
+    "provider": "jev",
+    "model": "jev-1.13.0",
+    "answers": {
+      "urgencia": {
+        "value": 1,
+        "confidence": 0.5064,
+        "probabilities": {
+          "0": 0.369,
+          "1": 0.5064,
+          "2": 0.1246
+        },
+        "expected": 0.7556
+      }
+    },
+    "latency_ms": 54.0,
+    "tokens_in": 129,
+    "tokens_out": 0,
+    "cost_usd": 5.4180000000000005e-06,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": true,
+    "raw": {
+      "model": "jev-1.13.0",
+      "answers": {
+        "urgencia": {
+          "type": "score",
+          "score": 0.7556,
+          "confidence": 0.5064,
+          "legend": {
+            "0": "Pode esperar: dúvida, pedido de informação ou incômodo sem impacto no trabalho do cliente.",
+            "1": "Resolver esta semana: algo não funciona ou o cliente está insatisfeito, mas ele consegue trabalhar.",
+            "2": "Resolver hoje: o cliente está parado, perde dinheiro agora, tem prazo nas próximas horas ou houve problema de segurança."
+          },
+          "probabilities": {
+            "0": 0.369,
+            "1": 0.5064,
+            "2": 0.1246
+          }
+        }
+      },
+      "usage": {
+        "input_tokens": 129,
+        "output_tokens": 0
+      }
+    }
+  }
+}

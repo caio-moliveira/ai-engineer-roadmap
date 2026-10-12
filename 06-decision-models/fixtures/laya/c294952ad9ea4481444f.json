@@ -1,0 +1,135 @@
+{
+  "key": "c294952ad9ea4481444f",
+  "target": "laya",
+  "recorded_at": "2026-10-12",
+  "synthetic": false,
+  "origin": "laya-serve em http://127.0.0.1:8001, modelo multilingual",
+  "request": {
+    "state": {
+      "ticket": "Como gero um token de API para conectar meu ERP?"
+    },
+    "questions": {
+      "pede_reembolso": {
+        "type": "noul",
+        "instructions": "O cliente pede dinheiro de volta?"
+      },
+      "ameaca_cancelar": {
+        "type": "noul",
+        "instructions": "O cliente diz que vai cancelar, sair ou migrar para outro fornecedor?"
+      },
+      "relata_erro": {
+        "type": "noul",
+        "instructions": "O cliente relata algo que não funciona como deveria?"
+      },
+      "pede_informacao": {
+        "type": "noul",
+        "instructions": "O cliente faz uma pergunta para obter informação?"
+      }
+    }
+  },
+  "result": {
+    "provider": "laya",
+    "model": "laya-rl-agent",
+    "answers": {
+      "pede_reembolso": {
+        "value": 0.0006,
+        "confidence": 0.9994,
+        "probabilities": {
+          "true": 0.0006,
+          "false": 0.9994
+        },
+        "expected": null
+      },
+      "ameaca_cancelar": {
+        "value": 0.0116,
+        "confidence": 0.9884,
+        "probabilities": {
+          "true": 0.0116,
+          "false": 0.9884
+        },
+        "expected": null
+      },
+      "relata_erro": {
+        "value": 0.0089,
+        "confidence": 0.9911,
+        "probabilities": {
+          "true": 0.0089,
+          "false": 0.9911
+        },
+        "expected": null
+      },
+      "pede_informacao": {
+        "value": 0.3877,
+        "confidence": 0.6123,
+        "probabilities": {
+          "true": 0.3877,
+          "false": 0.6123000000000001
+        },
+        "expected": null
+      }
+    },
+    "latency_ms": 249.70820000089589,
+    "tokens_in": 210,
+    "tokens_out": 0,
+    "cost_usd": 0.0,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": false,
+    "raw": {
+      "model": "laya-rl-agent",
+      "answers": {
+        "pede_reembolso": {
+          "type": "noul",
+          "noul": 0.0006,
+          "confidence": 0.9994,
+          "answer_confidence": 0.9994,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "ameaca_cancelar": {
+          "type": "noul",
+          "noul": 0.0116,
+          "confidence": 0.9884,
+          "answer_confidence": 0.9884,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "relata_erro": {
+          "type": "noul",
+          "noul": 0.0089,
+          "confidence": 0.9911,
+          "answer_confidence": 0.9911,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "pede_informacao": {
+          "type": "noul",
+          "noul": 0.3877,
+          "confidence": 0.6123,
+          "answer_confidence": 0.6123,
+          "action": {
+            "act_probability": 1.0
+          }
+        }
+      },
+      "usage": {
+        "input_tokens": 210,
+        "output_tokens": 0,
+        "state_tokens": 16,
+        "state_tokens_dropped": 0,
+        "truncated": false,
+        "truncated_questions": []
+      },
+      "routing": {
+        "model": "multilingual",
+        "repo": "convaiinnovations/laya/multilingual",
+        "reason": "explicit model='multilingual'",
+        "detection": null,
+        "workflow": null
+      }
+    }
+  }
+}

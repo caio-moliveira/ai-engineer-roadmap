@@ -1,0 +1,138 @@
+{
+  "key": "ec0c5245a8bd4c60c0d7",
+  "target": "jev",
+  "recorded_at": "2026-10-12",
+  "synthetic": true,
+  "origin": "SINTÉTICA: gerada a partir dos rótulos do golden set com ruído determinístico (fixtures/gerar_jev_sintetico.py). Não é medição do Jev.",
+  "request": {
+    "state": {
+      "ticket": "Como funciona a política de estorno caso eu desista do plano anual no meio do contrato?"
+    },
+    "questions": {
+      "pede_reembolso": {
+        "type": "noul",
+        "instructions": "O cliente pede dinheiro de volta?"
+      },
+      "ameaca_cancelar": {
+        "type": "noul",
+        "instructions": "O cliente diz que vai cancelar, sair ou migrar para outro fornecedor?"
+      },
+      "relata_erro": {
+        "type": "noul",
+        "instructions": "O cliente relata algo que não funciona como deveria?"
+      },
+      "pede_informacao": {
+        "type": "noul",
+        "instructions": "O cliente faz uma pergunta para obter informação?"
+      },
+      "urgencia": {
+        "type": "score",
+        "instructions": "Qual a urgência deste ticket de suporte?",
+        "criteria": [
+          "Pode esperar: dúvida, pedido de informação ou incômodo sem impacto no trabalho do cliente.",
+          "Resolver esta semana: algo não funciona ou o cliente está insatisfeito, mas ele consegue trabalhar.",
+          "Resolver hoje: o cliente está parado, perde dinheiro agora, tem prazo nas próximas horas ou houve problema de segurança."
+        ]
+      }
+    }
+  },
+  "result": {
+    "provider": "jev",
+    "model": "jev-1.13.0",
+    "answers": {
+      "pede_reembolso": {
+        "value": 0.1103,
+        "confidence": null,
+        "probabilities": {
+          "true": 0.1103,
+          "false": 0.8897
+        },
+        "expected": null
+      },
+      "ameaca_cancelar": {
+        "value": 0.0167,
+        "confidence": null,
+        "probabilities": {
+          "true": 0.0167,
+          "false": 0.9833
+        },
+        "expected": null
+      },
+      "relata_erro": {
+        "value": 0.1184,
+        "confidence": null,
+        "probabilities": {
+          "true": 0.1184,
+          "false": 0.8815999999999999
+        },
+        "expected": null
+      },
+      "pede_informacao": {
+        "value": 0.8793,
+        "confidence": null,
+        "probabilities": {
+          "true": 0.8793,
+          "false": 0.12070000000000003
+        },
+        "expected": null
+      },
+      "urgencia": {
+        "value": 1,
+        "confidence": 0.633,
+        "probabilities": {
+          "0": 0.222,
+          "1": 0.633,
+          "2": 0.145
+        },
+        "expected": 0.923
+      }
+    },
+    "latency_ms": 69.5,
+    "tokens_in": 359,
+    "tokens_out": 0,
+    "cost_usd": 1.5078000000000002e-05,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": true,
+    "raw": {
+      "model": "jev-1.13.0",
+      "answers": {
+        "pede_reembolso": {
+          "type": "noul",
+          "noul": 0.1103
+        },
+        "ameaca_cancelar": {
+          "type": "noul",
+          "noul": 0.0167
+        },
+        "relata_erro": {
+          "type": "noul",
+          "noul": 0.1184
+        },
+        "pede_informacao": {
+          "type": "noul",
+          "noul": 0.8793
+        },
+        "urgencia": {
+          "type": "score",
+          "score": 0.923,
+          "confidence": 0.633,
+          "legend": {
+            "0": "Pode esperar: dúvida, pedido de informação ou incômodo sem impacto no trabalho do cliente.",
+            "1": "Resolver esta semana: algo não funciona ou o cliente está insatisfeito, mas ele consegue trabalhar.",
+            "2": "Resolver hoje: o cliente está parado, perde dinheiro agora, tem prazo nas próximas horas ou houve problema de segurança."
+          },
+          "probabilities": {
+            "0": 0.222,
+            "1": 0.633,
+            "2": 0.145
+          }
+        }
+      },
+      "usage": {
+        "input_tokens": 359,
+        "output_tokens": 0
+      }
+    }
+  }
+}

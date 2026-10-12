@@ -1,0 +1,62 @@
+{
+  "key": "edf4ea97e4ceed4281a9",
+  "target": "jev",
+  "recorded_at": "2026-10-12",
+  "synthetic": true,
+  "origin": "SINTÉTICA: gerada a partir dos rótulos do golden set com ruído determinístico (fixtures/gerar_jev_sintetico.py). Não é medição do Jev.",
+  "request": {
+    "state": {
+      "ticket": "A exportação para CSV está trocando acentos por caracteres estranhos."
+    },
+    "questions": {
+      "rota": {
+        "type": "choice",
+        "instructions": "Qual modelo deve redigir a resposta para este ticket?",
+        "criteria": {
+          "barato": "Pedido simples e bem delimitado, com resposta padrão: um modelo pequeno resolve.",
+          "caro": "Caso ambíguo, com vários problemas, investigação técnica ou cliente prestes a sair: precisa de um modelo forte."
+        }
+      }
+    }
+  },
+  "result": {
+    "provider": "jev",
+    "model": "jev-1.13.0",
+    "answers": {
+      "rota": {
+        "value": "caro",
+        "confidence": 0.7964,
+        "probabilities": {
+          "barato": 0.2036,
+          "caro": 0.7964
+        },
+        "expected": null
+      }
+    },
+    "latency_ms": 44.4,
+    "tokens_in": 85,
+    "tokens_out": 0,
+    "cost_usd": 3.57e-06,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": true,
+    "raw": {
+      "model": "jev-1.13.0",
+      "answers": {
+        "rota": {
+          "type": "choice",
+          "choice": "caro",
+          "confidence": 0.7964,
+          "probabilities": {
+            "barato": 0.2036,
+            "caro": 0.7964
+          }
+        }
+      },
+      "usage": {
+        "input_tokens": 85,
+        "output_tokens": 0
+      }
+    }
+  }
+}

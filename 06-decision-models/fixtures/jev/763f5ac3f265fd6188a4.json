@@ -1,0 +1,138 @@
+{
+  "key": "763f5ac3f265fd6188a4",
+  "target": "jev",
+  "recorded_at": "2026-10-12",
+  "synthetic": true,
+  "origin": "SINTÉTICA: gerada a partir dos rótulos do golden set com ruído determinístico (fixtures/gerar_jev_sintetico.py). Não é medição do Jev.",
+  "request": {
+    "state": {
+      "ticket": "O relatório exportado em PDF corta as colunas da direita."
+    },
+    "questions": {
+      "pede_reembolso": {
+        "type": "noul",
+        "instructions": "O cliente pede dinheiro de volta?"
+      },
+      "ameaca_cancelar": {
+        "type": "noul",
+        "instructions": "O cliente diz que vai cancelar, sair ou migrar para outro fornecedor?"
+      },
+      "relata_erro": {
+        "type": "noul",
+        "instructions": "O cliente relata algo que não funciona como deveria?"
+      },
+      "pede_informacao": {
+        "type": "noul",
+        "instructions": "O cliente faz uma pergunta para obter informação?"
+      },
+      "urgencia": {
+        "type": "score",
+        "instructions": "Qual a urgência deste ticket de suporte?",
+        "criteria": [
+          "Pode esperar: dúvida, pedido de informação ou incômodo sem impacto no trabalho do cliente.",
+          "Resolver esta semana: algo não funciona ou o cliente está insatisfeito, mas ele consegue trabalhar.",
+          "Resolver hoje: o cliente está parado, perde dinheiro agora, tem prazo nas próximas horas ou houve problema de segurança."
+        ]
+      }
+    }
+  },
+  "result": {
+    "provider": "jev",
+    "model": "jev-1.13.0",
+    "answers": {
+      "pede_reembolso": {
+        "value": 0.094,
+        "confidence": null,
+        "probabilities": {
+          "true": 0.094,
+          "false": 0.906
+        },
+        "expected": null
+      },
+      "ameaca_cancelar": {
+        "value": 0.6902,
+        "confidence": null,
+        "probabilities": {
+          "true": 0.6902,
+          "false": 0.30979999999999996
+        },
+        "expected": null
+      },
+      "relata_erro": {
+        "value": 0.8532,
+        "confidence": null,
+        "probabilities": {
+          "true": 0.8532,
+          "false": 0.14680000000000004
+        },
+        "expected": null
+      },
+      "pede_informacao": {
+        "value": 0.032,
+        "confidence": null,
+        "probabilities": {
+          "true": 0.032,
+          "false": 0.968
+        },
+        "expected": null
+      },
+      "urgencia": {
+        "value": 1,
+        "confidence": 0.6694,
+        "probabilities": {
+          "0": 0.0735,
+          "1": 0.6694,
+          "2": 0.257
+        },
+        "expected": 1.1834
+      }
+    },
+    "latency_ms": 76.6,
+    "tokens_in": 329,
+    "tokens_out": 0,
+    "cost_usd": 1.3818000000000002e-05,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": true,
+    "raw": {
+      "model": "jev-1.13.0",
+      "answers": {
+        "pede_reembolso": {
+          "type": "noul",
+          "noul": 0.094
+        },
+        "ameaca_cancelar": {
+          "type": "noul",
+          "noul": 0.6902
+        },
+        "relata_erro": {
+          "type": "noul",
+          "noul": 0.8532
+        },
+        "pede_informacao": {
+          "type": "noul",
+          "noul": 0.032
+        },
+        "urgencia": {
+          "type": "score",
+          "score": 1.1834,
+          "confidence": 0.6694,
+          "legend": {
+            "0": "Pode esperar: dúvida, pedido de informação ou incômodo sem impacto no trabalho do cliente.",
+            "1": "Resolver esta semana: algo não funciona ou o cliente está insatisfeito, mas ele consegue trabalhar.",
+            "2": "Resolver hoje: o cliente está parado, perde dinheiro agora, tem prazo nas próximas horas ou houve problema de segurança."
+          },
+          "probabilities": {
+            "0": 0.0735,
+            "1": 0.6694,
+            "2": 0.257
+          }
+        }
+      },
+      "usage": {
+        "input_tokens": 329,
+        "output_tokens": 0
+      }
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "key": "bb4e187c0252729df8d2",
+  "target": "llm:anthropic:claude-haiku-4-5-20251001",
+  "recorded_at": "2026-10-12",
+  "synthetic": false,
+  "origin": "LangChain init_chat_model + with_structured_output (anthropic:claude-haiku-4-5-20251001)",
+  "request": {
+    "state": {
+      "remetente": "suporte@jornadacloud-com.support",
+      "assunto": "Atualização obrigatória de cadastro",
+      "corpo": "Sua licença da Jornada Cloud expira hoje. Faça login em http://jornadacloud-com.support/renovar com seu usuário e senha para não perder os dados."
+    },
+    "questions": {
+      "spam": {
+        "type": "noul",
+        "instructions": "Este e-mail é spam, golpe ou phishing?",
+        "criteria": {
+          "true": "Mensagem indesejada ou fraudulenta.",
+          "false": "Mensagem legítima, mesmo que seja comercial ou urgente."
+        }
+      }
+    }
+  },
+  "result": {
+    "provider": "llm:anthropic:claude-haiku-4-5-20251001",
+    "model": "claude-haiku-4-5-20251001",
+    "answers": {
+      "spam": {
+        "value": 0.95,
+        "confidence": 0.92,
+        "probabilities": null,
+        "expected": null
+      }
+    },
+    "latency_ms": 955.014499999379,
+    "tokens_in": 1052,
+    "tokens_out": 53,
+    "cost_usd": 0.001317,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": false,
+    "raw": {
+      "content": "[{\"id\": \"toolu_01JFZDK1of3oCX6Cy65Erhe6\", \"caller\": {\"type\": \"direct\"}, \"input\": {\"spam\": {\"value\": 0.95, \"confidence\": 0.92}}, \"name\": \"Respostas\", \"type\": \"tool_use\", \"toolset_name\": null}]",
+      "parsing_error": null
+    }
+  }
+}

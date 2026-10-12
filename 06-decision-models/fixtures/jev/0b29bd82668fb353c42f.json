@@ -1,0 +1,104 @@
+{
+  "key": "0b29bd82668fb353c42f",
+  "target": "jev",
+  "recorded_at": "2026-10-12",
+  "synthetic": true,
+  "origin": "SINTÉTICA: gerada a partir dos rótulos do golden set com ruído determinístico (fixtures/gerar_jev_sintetico.py). Não é medição do Jev.",
+  "request": {
+    "state": {
+      "ticket": "Recebi uma cobrança de um plano que nunca contratei."
+    },
+    "questions": {
+      "pede_reembolso": {
+        "type": "noul",
+        "instructions": "O cliente pede dinheiro de volta?"
+      },
+      "ameaca_cancelar": {
+        "type": "noul",
+        "instructions": "O cliente diz que vai cancelar, sair ou migrar para outro fornecedor?"
+      },
+      "relata_erro": {
+        "type": "noul",
+        "instructions": "O cliente relata algo que não funciona como deveria?"
+      },
+      "pede_informacao": {
+        "type": "noul",
+        "instructions": "O cliente faz uma pergunta para obter informação?"
+      }
+    }
+  },
+  "result": {
+    "provider": "jev",
+    "model": "jev-1.13.0",
+    "answers": {
+      "pede_reembolso": {
+        "value": 0.13,
+        "confidence": null,
+        "probabilities": {
+          "true": 0.13,
+          "false": 0.87
+        },
+        "expected": null
+      },
+      "ameaca_cancelar": {
+        "value": 0.064,
+        "confidence": null,
+        "probabilities": {
+          "true": 0.064,
+          "false": 0.9359999999999999
+        },
+        "expected": null
+      },
+      "relata_erro": {
+        "value": 0.1159,
+        "confidence": null,
+        "probabilities": {
+          "true": 0.1159,
+          "false": 0.8841
+        },
+        "expected": null
+      },
+      "pede_informacao": {
+        "value": 0.057,
+        "confidence": null,
+        "probabilities": {
+          "true": 0.057,
+          "false": 0.943
+        },
+        "expected": null
+      }
+    },
+    "latency_ms": 76.6,
+    "tokens_in": 222,
+    "tokens_out": 0,
+    "cost_usd": 9.324e-06,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": true,
+    "raw": {
+      "model": "jev-1.13.0",
+      "answers": {
+        "pede_reembolso": {
+          "type": "noul",
+          "noul": 0.13
+        },
+        "ameaca_cancelar": {
+          "type": "noul",
+          "noul": 0.064
+        },
+        "relata_erro": {
+          "type": "noul",
+          "noul": 0.1159
+        },
+        "pede_informacao": {
+          "type": "noul",
+          "noul": 0.057
+        }
+      },
+      "usage": {
+        "input_tokens": 222,
+        "output_tokens": 0
+      }
+    }
+  }
+}

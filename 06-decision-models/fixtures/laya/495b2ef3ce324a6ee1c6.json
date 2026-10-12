@@ -1,0 +1,87 @@
+{
+  "key": "495b2ef3ce324a6ee1c6",
+  "target": "laya",
+  "recorded_at": "2026-10-12",
+  "synthetic": false,
+  "origin": "laya-serve em http://127.0.0.1:8001, modelo multilingual",
+  "request": {
+    "state": {
+      "pergunta": "Quais setores mais emitem gases de efeito estufa?",
+      "trecho": "O efeito estufa é um fenômeno natural essencial para a vida."
+    },
+    "questions": {
+      "relevancia": {
+        "type": "score",
+        "instructions": "O `trecho` ajuda a responder a `pergunta`?",
+        "criteria": [
+          "Não responde: fala de outro assunto ou só compartilha palavras com a pergunta.",
+          "Relacionado: trata do tema, mas não responde à pergunta.",
+          "Responde: contém a informação que a pergunta pede."
+        ]
+      }
+    }
+  },
+  "result": {
+    "provider": "laya",
+    "model": "laya-rl-agent",
+    "answers": {
+      "relevancia": {
+        "value": 0,
+        "confidence": 0.5369,
+        "probabilities": {
+          "0": 0.846,
+          "1": 0.1217,
+          "2": 0.0323
+        },
+        "expected": 0.1864
+      }
+    },
+    "latency_ms": 226.40259999752743,
+    "tokens_in": 111,
+    "tokens_out": 0,
+    "cost_usd": 0.0,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": false,
+    "raw": {
+      "model": "laya-rl-agent",
+      "answers": {
+        "relevancia": {
+          "type": "score",
+          "score": 0.1864,
+          "legend": {
+            "0": "Não responde: fala de outro assunto ou só compartilha palavras com a pergunta.",
+            "1": "Relacionado: trata do tema, mas não responde à pergunta.",
+            "2": "Responde: contém a informação que a pergunta pede."
+          },
+          "probabilities": {
+            "0": 0.846,
+            "1": 0.1217,
+            "2": 0.0323
+          },
+          "confidence": 0.5369,
+          "answer_confidence": 0.846,
+          "action": {
+            "act_probability": 1.0
+          },
+          "x_jev_confidence": 0.7206
+        }
+      },
+      "usage": {
+        "input_tokens": 111,
+        "output_tokens": 0,
+        "state_tokens": 35,
+        "state_tokens_dropped": 0,
+        "truncated": false,
+        "truncated_questions": []
+      },
+      "routing": {
+        "model": "multilingual",
+        "repo": "convaiinnovations/laya/multilingual",
+        "reason": "explicit model='multilingual'",
+        "detection": null,
+        "workflow": null
+      }
+    }
+  }
+}

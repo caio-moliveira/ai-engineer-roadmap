@@ -1,0 +1,87 @@
+{
+  "key": "272154ee44abfcc0a746",
+  "target": "laya",
+  "recorded_at": "2026-10-12",
+  "synthetic": false,
+  "origin": "laya-serve em http://127.0.0.1:8001, modelo multilingual",
+  "request": {
+    "state": {
+      "pergunta": "Como o aquecimento global afeta o nível do mar?",
+      "trecho": "O manto de gelo da Groenlândia perdeu massa em ritmo acelerado nas últimas décadas, contribuindo para a alta do mar."
+    },
+    "questions": {
+      "relevancia": {
+        "type": "score",
+        "instructions": "O `trecho` ajuda a responder a `pergunta`?",
+        "criteria": [
+          "Não responde: fala de outro assunto ou só compartilha palavras com a pergunta.",
+          "Relacionado: trata do tema, mas não responde à pergunta.",
+          "Responde: contém a informação que a pergunta pede."
+        ]
+      }
+    }
+  },
+  "result": {
+    "provider": "laya",
+    "model": "laya-rl-agent",
+    "answers": {
+      "relevancia": {
+        "value": 2,
+        "confidence": 0.0045,
+        "probabilities": {
+          "0": 0.3541,
+          "1": 0.2873,
+          "2": 0.3585
+        },
+        "expected": 1.0044
+      }
+    },
+    "latency_ms": 225.28070000043954,
+    "tokens_in": 125,
+    "tokens_out": 0,
+    "cost_usd": 0.0,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": false,
+    "raw": {
+      "model": "laya-rl-agent",
+      "answers": {
+        "relevancia": {
+          "type": "score",
+          "score": 1.0044,
+          "legend": {
+            "0": "Não responde: fala de outro assunto ou só compartilha palavras com a pergunta.",
+            "1": "Relacionado: trata do tema, mas não responde à pergunta.",
+            "2": "Responde: contém a informação que a pergunta pede."
+          },
+          "probabilities": {
+            "0": 0.3541,
+            "1": 0.2873,
+            "2": 0.3585
+          },
+          "confidence": 0.0045,
+          "answer_confidence": 0.3585,
+          "action": {
+            "act_probability": 1.0
+          },
+          "x_jev_confidence": 0.0
+        }
+      },
+      "usage": {
+        "input_tokens": 125,
+        "output_tokens": 0,
+        "state_tokens": 49,
+        "state_tokens_dropped": 0,
+        "truncated": false,
+        "truncated_questions": []
+      },
+      "routing": {
+        "model": "multilingual",
+        "repo": "convaiinnovations/laya/multilingual",
+        "reason": "explicit model='multilingual'",
+        "detection": null,
+        "workflow": null
+      }
+    }
+  }
+}

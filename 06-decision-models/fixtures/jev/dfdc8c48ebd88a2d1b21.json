@@ -1,0 +1,68 @@
+{
+  "key": "dfdc8c48ebd88a2d1b21",
+  "target": "jev",
+  "recorded_at": "2026-10-12",
+  "synthetic": true,
+  "origin": "SINTÉTICA: gerada a partir dos rótulos do golden set com ruído determinístico (fixtures/gerar_jev_sintetico.py). Não é medição do Jev.",
+  "request": {
+    "state": {
+      "ticket": "Quero contratar o módulo de nota fiscal eletrônica. Ele já vem no plano pro?"
+    },
+    "questions": {
+      "categoria": {
+        "type": "choice",
+        "instructions": "Este ticket já foi enviado para a fila tecnico. Qual a categoria dele?",
+        "criteria": {
+          "erro_app": "falha, travamento ou botão que não funciona no sistema ou no app",
+          "integracao": "API, webhook, ERP, marketplace ou sincronização com outro sistema",
+          "lentidao": "sistema ou tela lenta",
+          "exportacao": "exportar, baixar ou fazer backup de dados e relatórios"
+        }
+      }
+    }
+  },
+  "result": {
+    "provider": "jev",
+    "model": "jev-1.13.0",
+    "answers": {
+      "categoria": {
+        "value": "integracao",
+        "confidence": 0.7406,
+        "probabilities": {
+          "erro_app": 0.0911,
+          "integracao": 0.7406,
+          "lentidao": 0.1077,
+          "exportacao": 0.0605
+        },
+        "expected": null
+      }
+    },
+    "latency_ms": 49.7,
+    "tokens_in": 106,
+    "tokens_out": 0,
+    "cost_usd": 4.452e-06,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": true,
+    "raw": {
+      "model": "jev-1.13.0",
+      "answers": {
+        "categoria": {
+          "type": "choice",
+          "choice": "integracao",
+          "confidence": 0.7406,
+          "probabilities": {
+            "erro_app": 0.0911,
+            "integracao": 0.7406,
+            "lentidao": 0.1077,
+            "exportacao": 0.0605
+          }
+        }
+      },
+      "usage": {
+        "input_tokens": 106,
+        "output_tokens": 0
+      }
+    }
+  }
+}

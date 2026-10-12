@@ -1,0 +1,59 @@
+{
+  "key": "650b9012bc2f09575e20",
+  "target": "jev",
+  "recorded_at": "2026-10-12",
+  "synthetic": true,
+  "origin": "SINTÉTICA: gerada a partir dos rótulos do golden set com ruído determinístico (fixtures/gerar_jev_sintetico.py). Não é medição do Jev.",
+  "request": {
+    "state": {
+      "remetente": "ana.souza@grupoaurora.co",
+      "assunto": "Relatório trimestral para revisão",
+      "corpo": "Oi, segue o relatório do trimestre. Consegue revisar até sexta? Qualquer dúvida me chama."
+    },
+    "questions": {
+      "spam": {
+        "type": "noul",
+        "instructions": "Este e-mail é spam, golpe ou phishing?",
+        "criteria": {
+          "true": "Mensagem indesejada ou fraudulenta.",
+          "false": "Mensagem legítima, mesmo que seja comercial ou urgente."
+        }
+      }
+    }
+  },
+  "result": {
+    "provider": "jev",
+    "model": "jev-1.13.0",
+    "answers": {
+      "spam": {
+        "value": 0.0405,
+        "confidence": null,
+        "probabilities": {
+          "true": 0.0405,
+          "false": 0.9595
+        },
+        "expected": null
+      }
+    },
+    "latency_ms": 48.8,
+    "tokens_in": 99,
+    "tokens_out": 0,
+    "cost_usd": 4.158000000000001e-06,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": true,
+    "raw": {
+      "model": "jev-1.13.0",
+      "answers": {
+        "spam": {
+          "type": "noul",
+          "noul": 0.0405
+        }
+      },
+      "usage": {
+        "input_tokens": 99,
+        "output_tokens": 0
+      }
+    }
+  }
+}

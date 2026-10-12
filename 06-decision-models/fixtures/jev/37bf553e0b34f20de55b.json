@@ -1,0 +1,68 @@
+{
+  "key": "37bf553e0b34f20de55b",
+  "target": "jev",
+  "recorded_at": "2026-10-12",
+  "synthetic": true,
+  "origin": "SINTÉTICA: gerada a partir dos rótulos do golden set com ruído determinístico (fixtures/gerar_jev_sintetico.py). Não é medição do Jev.",
+  "request": {
+    "state": {
+      "ticket": "O sistema está muito lento hoje, cada tela demora uns 20 segundos para abrir."
+    },
+    "questions": {
+      "categoria": {
+        "type": "choice",
+        "instructions": "Este ticket já foi enviado para a fila financeiro. Qual a categoria dele?",
+        "criteria": {
+          "cobranca_indevida": "cobrança duplicada ou de algo que o cliente não contratou",
+          "estorno": "pedido ou dúvida sobre devolução de dinheiro",
+          "nota_fiscal": "emissão, correção ou envio de nota fiscal",
+          "boleto_pagamento": "boleto, Pix, cartão, forma de pagamento ou acesso bloqueado por pagamento"
+        }
+      }
+    }
+  },
+  "result": {
+    "provider": "jev",
+    "model": "jev-1.13.0",
+    "answers": {
+      "categoria": {
+        "value": "cobranca_indevida",
+        "confidence": 0.9427,
+        "probabilities": {
+          "cobranca_indevida": 0.9427,
+          "estorno": 0.0228,
+          "nota_fiscal": 0.0175,
+          "boleto_pagamento": 0.017
+        },
+        "expected": null
+      }
+    },
+    "latency_ms": 51.7,
+    "tokens_in": 134,
+    "tokens_out": 0,
+    "cost_usd": 5.628e-06,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": true,
+    "raw": {
+      "model": "jev-1.13.0",
+      "answers": {
+        "categoria": {
+          "type": "choice",
+          "choice": "cobranca_indevida",
+          "confidence": 0.9427,
+          "probabilities": {
+            "cobranca_indevida": 0.9427,
+            "estorno": 0.0228,
+            "nota_fiscal": 0.0175,
+            "boleto_pagamento": 0.017
+          }
+        }
+      },
+      "usage": {
+        "input_tokens": 134,
+        "output_tokens": 0
+      }
+    }
+  }
+}

@@ -1,0 +1,84 @@
+{
+  "key": "346be734cd32bab23949",
+  "target": "laya",
+  "recorded_at": "2026-10-12",
+  "synthetic": false,
+  "origin": "laya-serve em http://127.0.0.1:8001, modelo multilingual",
+  "request": {
+    "state": {
+      "ticket": "Tentei pagar com Pix e o QR code dá erro de valor inválido."
+    },
+    "questions": {
+      "categoria": {
+        "type": "choice",
+        "instructions": "Este ticket já foi enviado para a fila tecnico. Qual a categoria dele?",
+        "criteria": {
+          "erro_app": "falha, travamento ou botão que não funciona no sistema ou no app",
+          "integracao": "API, webhook, ERP, marketplace ou sincronização com outro sistema",
+          "lentidao": "sistema ou tela lenta",
+          "exportacao": "exportar, baixar ou fazer backup de dados e relatórios"
+        }
+      }
+    }
+  },
+  "result": {
+    "provider": "laya",
+    "model": "laya-rl-agent",
+    "answers": {
+      "categoria": {
+        "value": "erro_app",
+        "confidence": 0.9954,
+        "probabilities": {
+          "erro_app": 0.9993,
+          "integracao": 0.0003,
+          "lentidao": 0.0001,
+          "exportacao": 0.0003
+        },
+        "expected": null
+      }
+    },
+    "latency_ms": 95.68679999938468,
+    "tokens_in": 105,
+    "tokens_out": 0,
+    "cost_usd": 0.0,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": false,
+    "raw": {
+      "model": "laya-rl-agent",
+      "answers": {
+        "categoria": {
+          "type": "choice",
+          "choice": "erro_app",
+          "probabilities": {
+            "erro_app": 0.9993,
+            "integracao": 0.0003,
+            "lentidao": 0.0001,
+            "exportacao": 0.0003
+          },
+          "confidence": 0.9954,
+          "answer_confidence": 0.9993,
+          "action": {
+            "act_probability": 1.0
+          },
+          "x_jev_confidence": 0.9991
+        }
+      },
+      "usage": {
+        "input_tokens": 105,
+        "output_tokens": 0,
+        "state_tokens": 22,
+        "state_tokens_dropped": 0,
+        "truncated": false,
+        "truncated_questions": []
+      },
+      "routing": {
+        "model": "multilingual",
+        "repo": "convaiinnovations/laya/multilingual",
+        "reason": "explicit model='multilingual'",
+        "detection": null,
+        "workflow": null
+      }
+    }
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "key": "c107930d9391ba11fb44",
+  "target": "jev",
+  "recorded_at": "2026-10-12",
+  "synthetic": true,
+  "origin": "SINTÉTICA: gerada a partir dos rótulos do golden set com ruído determinístico (fixtures/gerar_jev_sintetico.py). Não é medição do Jev.",
+  "request": {
+    "state": {
+      "ticket": "Dá erro 500 quando gero o relatório de vendas por vendedor. Já limpei o cache e testei em outro navegador."
+    },
+    "questions": {
+      "categoria": {
+        "type": "choice",
+        "instructions": "Este ticket já foi enviado para a fila financeiro. Qual a categoria dele?",
+        "criteria": {
+          "cobranca_indevida": "cobrança duplicada ou de algo que o cliente não contratou",
+          "estorno": "pedido ou dúvida sobre devolução de dinheiro",
+          "nota_fiscal": "emissão, correção ou envio de nota fiscal",
+          "boleto_pagamento": "boleto, Pix, cartão, forma de pagamento ou acesso bloqueado por pagamento"
+        }
+      }
+    }
+  },
+  "result": {
+    "provider": "jev",
+    "model": "jev-1.13.0",
+    "answers": {
+      "categoria": {
+        "value": "cobranca_indevida",
+        "confidence": 0.8211,
+        "probabilities": {
+          "cobranca_indevida": 0.8211,
+          "estorno": 0.0485,
+          "nota_fiscal": 0.031,
+          "boleto_pagamento": 0.0993
+        },
+        "expected": null
+      }
+    },
+    "latency_ms": 64.5,
+    "tokens_in": 141,
+    "tokens_out": 0,
+    "cost_usd": 5.922e-06,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": true,
+    "raw": {
+      "model": "jev-1.13.0",
+      "answers": {
+        "categoria": {
+          "type": "choice",
+          "choice": "cobranca_indevida",
+          "confidence": 0.8211,
+          "probabilities": {
+            "cobranca_indevida": 0.8211,
+            "estorno": 0.0485,
+            "nota_fiscal": 0.031,
+            "boleto_pagamento": 0.0993
+          }
+        }
+      },
+      "usage": {
+        "input_tokens": 141,
+        "output_tokens": 0
+      }
+    }
+  }
+}

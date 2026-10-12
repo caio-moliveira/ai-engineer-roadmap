@@ -1,0 +1,47 @@
+{
+  "key": "d19448775ddaabecfc45",
+  "target": "llm:anthropic:claude-haiku-4-5-20251001",
+  "recorded_at": "2026-10-12",
+  "synthetic": false,
+  "origin": "LangChain init_chat_model + with_structured_output (anthropic:claude-haiku-4-5-20251001)",
+  "request": {
+    "state": {
+      "remetente": "contato@academiaforma.com.br",
+      "assunto": "Mensalidade em aberto",
+      "corpo": "Olá! Consta em aberto a mensalidade de setembro, de R$ 99,00. Você pode pagar na recepção ou pelo app da academia."
+    },
+    "questions": {
+      "spam": {
+        "type": "noul",
+        "instructions": "Este e-mail é spam, golpe ou phishing?",
+        "criteria": {
+          "true": "Mensagem indesejada ou fraudulenta.",
+          "false": "Mensagem legítima, mesmo que seja comercial ou urgente."
+        }
+      }
+    }
+  },
+  "result": {
+    "provider": "llm:anthropic:claude-haiku-4-5-20251001",
+    "model": "claude-haiku-4-5-20251001",
+    "answers": {
+      "spam": {
+        "value": 0.05,
+        "confidence": 0.95,
+        "probabilities": null,
+        "expected": null
+      }
+    },
+    "latency_ms": 878.6140999982308,
+    "tokens_in": 1042,
+    "tokens_out": 53,
+    "cost_usd": 0.001307,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": false,
+    "raw": {
+      "content": "[{\"id\": \"toolu_019wWpV4JmdPLQdfrsLKJCXj\", \"caller\": {\"type\": \"direct\"}, \"input\": {\"spam\": {\"value\": 0.05, \"confidence\": 0.95}}, \"name\": \"Respostas\", \"type\": \"tool_use\", \"toolset_name\": null}]",
+      "parsing_error": null
+    }
+  }
+}

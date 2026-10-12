@@ -1,0 +1,68 @@
+{
+  "key": "208b17563e95477e5d70",
+  "target": "jev",
+  "recorded_at": "2026-10-12",
+  "synthetic": true,
+  "origin": "SINTÉTICA: gerada a partir dos rótulos do golden set com ruído determinístico (fixtures/gerar_jev_sintetico.py). Não é medição do Jev.",
+  "request": {
+    "state": {
+      "ticket": "O boleto venceu ontem porque não chegou no meu e-mail. Podem gerar um novo sem multa?"
+    },
+    "questions": {
+      "categoria": {
+        "type": "choice",
+        "instructions": "Este ticket já foi enviado para a fila financeiro. Qual a categoria dele?",
+        "criteria": {
+          "cobranca_indevida": "cobrança duplicada ou de algo que o cliente não contratou",
+          "estorno": "pedido ou dúvida sobre devolução de dinheiro",
+          "nota_fiscal": "emissão, correção ou envio de nota fiscal",
+          "boleto_pagamento": "boleto, Pix, cartão, forma de pagamento ou acesso bloqueado por pagamento"
+        }
+      }
+    }
+  },
+  "result": {
+    "provider": "jev",
+    "model": "jev-1.13.0",
+    "answers": {
+      "categoria": {
+        "value": "boleto_pagamento",
+        "confidence": 0.8938,
+        "probabilities": {
+          "cobranca_indevida": 0.0228,
+          "estorno": 0.0425,
+          "nota_fiscal": 0.0409,
+          "boleto_pagamento": 0.8938
+        },
+        "expected": null
+      }
+    },
+    "latency_ms": 48.3,
+    "tokens_in": 118,
+    "tokens_out": 0,
+    "cost_usd": 4.9560000000000005e-06,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": true,
+    "raw": {
+      "model": "jev-1.13.0",
+      "answers": {
+        "categoria": {
+          "type": "choice",
+          "choice": "boleto_pagamento",
+          "confidence": 0.8938,
+          "probabilities": {
+            "cobranca_indevida": 0.0228,
+            "estorno": 0.0425,
+            "nota_fiscal": 0.0409,
+            "boleto_pagamento": 0.8938
+          }
+        }
+      },
+      "usage": {
+        "input_tokens": 118,
+        "output_tokens": 0
+      }
+    }
+  }
+}

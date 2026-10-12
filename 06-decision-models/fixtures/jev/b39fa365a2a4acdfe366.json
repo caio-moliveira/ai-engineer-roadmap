@@ -1,0 +1,71 @@
+{
+  "key": "b39fa365a2a4acdfe366",
+  "target": "jev",
+  "recorded_at": "2026-10-12",
+  "synthetic": true,
+  "origin": "SINTÉTICA: gerada a partir dos rótulos do golden set com ruído determinístico (fixtures/gerar_jev_sintetico.py). Não é medição do Jev.",
+  "request": {
+    "state": {
+      "pergunta": "Quais setores mais emitem gases de efeito estufa?",
+      "trecho": "O consumo de energia per capita varia muito entre países."
+    },
+    "questions": {
+      "relevancia": {
+        "type": "score",
+        "instructions": "O `trecho` ajuda a responder a `pergunta`?",
+        "criteria": [
+          "Não responde: fala de outro assunto ou só compartilha palavras com a pergunta.",
+          "Relacionado: trata do tema, mas não responde à pergunta.",
+          "Responde: contém a informação que a pergunta pede."
+        ]
+      }
+    }
+  },
+  "result": {
+    "provider": "jev",
+    "model": "jev-1.13.0",
+    "answers": {
+      "relevancia": {
+        "value": 0,
+        "confidence": 0.8577,
+        "probabilities": {
+          "0": 0.8577,
+          "1": 0.1155,
+          "2": 0.0268
+        },
+        "expected": 0.1691
+      }
+    },
+    "latency_ms": 43.1,
+    "tokens_in": 109,
+    "tokens_out": 0,
+    "cost_usd": 4.578e-06,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": true,
+    "raw": {
+      "model": "jev-1.13.0",
+      "answers": {
+        "relevancia": {
+          "type": "score",
+          "score": 0.1691,
+          "confidence": 0.8577,
+          "legend": {
+            "0": "Não responde: fala de outro assunto ou só compartilha palavras com a pergunta.",
+            "1": "Relacionado: trata do tema, mas não responde à pergunta.",
+            "2": "Responde: contém a informação que a pergunta pede."
+          },
+          "probabilities": {
+            "0": 0.8577,
+            "1": 0.1155,
+            "2": 0.0268
+          }
+        }
+      },
+      "usage": {
+        "input_tokens": 109,
+        "output_tokens": 0
+      }
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "key": "368ba1c8e8f8f6411e30",
+  "target": "llm:anthropic:claude-haiku-4-5-20251001",
+  "recorded_at": "2026-10-12",
+  "synthetic": false,
+  "origin": "LangChain init_chat_model + with_structured_output (anthropic:claude-haiku-4-5-20251001)",
+  "request": {
+    "state": {
+      "ticket": "Como funciona a política de estorno caso eu desista do plano anual no meio do contrato?"
+    },
+    "questions": {
+      "categoria": {
+        "type": "choice",
+        "instructions": "Este ticket já foi enviado para a fila financeiro. Qual a categoria dele?",
+        "criteria": {
+          "cobranca_indevida": "cobrança duplicada ou de algo que o cliente não contratou",
+          "estorno": "pedido ou dúvida sobre devolução de dinheiro",
+          "nota_fiscal": "emissão, correção ou envio de nota fiscal",
+          "boleto_pagamento": "boleto, Pix, cartão, forma de pagamento ou acesso bloqueado por pagamento"
+        }
+      }
+    }
+  },
+  "result": {
+    "provider": "llm:anthropic:claude-haiku-4-5-20251001",
+    "model": "claude-haiku-4-5-20251001",
+    "answers": {
+      "categoria": {
+        "value": "estorno",
+        "confidence": 0.95,
+        "probabilities": null,
+        "expected": null
+      }
+    },
+    "latency_ms": 872.4134000003687,
+    "tokens_in": 1122,
+    "tokens_out": 52,
+    "cost_usd": 0.001382,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": false,
+    "raw": {
+      "content": "[{\"id\": \"toolu_01MjnQ9tnUgN8TGgMeQ8B15G\", \"caller\": {\"type\": \"direct\"}, \"input\": {\"categoria\": {\"value\": \"estorno\", \"confidence\": 0.95}}, \"name\": \"Respostas\", \"type\": \"tool_use\", \"toolset_name\": null}]",
+      "parsing_error": null
+    }
+  }
+}

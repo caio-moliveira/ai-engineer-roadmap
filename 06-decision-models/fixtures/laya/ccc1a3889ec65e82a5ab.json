@@ -1,0 +1,75 @@
+{
+  "key": "ccc1a3889ec65e82a5ab",
+  "target": "laya",
+  "recorded_at": "2026-10-12",
+  "synthetic": false,
+  "origin": "laya-serve em http://127.0.0.1:8001, modelo multilingual",
+  "request": {
+    "state": {
+      "remetente": "marina@familia-email.com",
+      "assunto": "Fotos do fim de semana",
+      "corpo": "Oi! Separei as fotos do aniversário da vó. Olha que lindas, depois me fala quais você quer imprimir."
+    },
+    "questions": {
+      "spam": {
+        "type": "noul",
+        "instructions": "Este e-mail é spam, golpe ou phishing?",
+        "criteria": {
+          "true": "Mensagem indesejada ou fraudulenta.",
+          "false": "Mensagem legítima, mesmo que seja comercial ou urgente."
+        }
+      }
+    }
+  },
+  "result": {
+    "provider": "laya",
+    "model": "laya-rl-agent",
+    "answers": {
+      "spam": {
+        "value": 0.9049,
+        "confidence": 0.9049,
+        "probabilities": {
+          "true": 0.9049,
+          "false": 0.09509999999999996
+        },
+        "expected": null
+      }
+    },
+    "latency_ms": 183.4378999992623,
+    "tokens_in": 100,
+    "tokens_out": 0,
+    "cost_usd": 0.0,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": false,
+    "raw": {
+      "model": "laya-rl-agent",
+      "answers": {
+        "spam": {
+          "type": "noul",
+          "noul": 0.9049,
+          "confidence": 0.9049,
+          "answer_confidence": 0.9049,
+          "action": {
+            "act_probability": 1.0
+          }
+        }
+      },
+      "usage": {
+        "input_tokens": 100,
+        "output_tokens": 0,
+        "state_tokens": 54,
+        "state_tokens_dropped": 0,
+        "truncated": false,
+        "truncated_questions": []
+      },
+      "routing": {
+        "model": "multilingual",
+        "repo": "convaiinnovations/laya/multilingual",
+        "reason": "explicit model='multilingual'",
+        "detection": null,
+        "workflow": null
+      }
+    }
+  }
+}

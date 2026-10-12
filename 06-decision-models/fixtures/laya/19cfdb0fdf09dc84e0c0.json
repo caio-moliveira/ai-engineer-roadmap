@@ -1,0 +1,75 @@
+{
+  "key": "19cfdb0fdf09dc84e0c0",
+  "target": "laya",
+  "recorded_at": "2026-10-12",
+  "synthetic": false,
+  "origin": "laya-serve em http://127.0.0.1:8001, modelo multilingual",
+  "request": {
+    "state": {
+      "remetente": "premios@sorteio-nacional-oficial.click",
+      "assunto": "PARABÉNS! Você ganhou um carro 0 km",
+      "corpo": "Seu CPF foi sorteado! Para liberar o prêmio, pague a taxa de cartório de R$ 49,90 via Pix até hoje às 18h."
+    },
+    "questions": {
+      "spam": {
+        "type": "noul",
+        "instructions": "Este e-mail é spam, golpe ou phishing?",
+        "criteria": {
+          "true": "Mensagem indesejada ou fraudulenta.",
+          "false": "Mensagem legítima, mesmo que seja comercial ou urgente."
+        }
+      }
+    }
+  },
+  "result": {
+    "provider": "laya",
+    "model": "laya-rl-agent",
+    "answers": {
+      "spam": {
+        "value": 1.0,
+        "confidence": 1.0,
+        "probabilities": {
+          "true": 1.0,
+          "false": 0.0
+        },
+        "expected": null
+      }
+    },
+    "latency_ms": 302.922300001228,
+    "tokens_in": 124,
+    "tokens_out": 0,
+    "cost_usd": 0.0,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": false,
+    "raw": {
+      "model": "laya-rl-agent",
+      "answers": {
+        "spam": {
+          "type": "noul",
+          "noul": 1.0,
+          "confidence": 1.0,
+          "answer_confidence": 1.0,
+          "action": {
+            "act_probability": 1.0
+          }
+        }
+      },
+      "usage": {
+        "input_tokens": 124,
+        "output_tokens": 0,
+        "state_tokens": 78,
+        "state_tokens_dropped": 0,
+        "truncated": false,
+        "truncated_questions": []
+      },
+      "routing": {
+        "model": "multilingual",
+        "repo": "convaiinnovations/laya/multilingual",
+        "reason": "explicit model='multilingual'",
+        "detection": null,
+        "workflow": null
+      }
+    }
+  }
+}

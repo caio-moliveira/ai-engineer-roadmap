@@ -1,0 +1,87 @@
+{
+  "key": "e896859ecfc4030c82d9",
+  "target": "laya",
+  "recorded_at": "2026-10-12",
+  "synthetic": false,
+  "origin": "laya-serve em http://127.0.0.1:8001, modelo multilingual",
+  "request": {
+    "state": {
+      "pergunta": "O que é mitigação e o que é adaptação às mudanças climáticas?",
+      "trecho": "As duas estratégias se complementam: quanto menos se mitiga, mais caro fica adaptar."
+    },
+    "questions": {
+      "relevancia": {
+        "type": "score",
+        "instructions": "O `trecho` ajuda a responder a `pergunta`?",
+        "criteria": [
+          "Não responde: fala de outro assunto ou só compartilha palavras com a pergunta.",
+          "Relacionado: trata do tema, mas não responde à pergunta.",
+          "Responde: contém a informação que a pergunta pede."
+        ]
+      }
+    }
+  },
+  "result": {
+    "provider": "laya",
+    "model": "laya-rl-agent",
+    "answers": {
+      "relevancia": {
+        "value": 0,
+        "confidence": 0.7896,
+        "probabilities": {
+          "0": 0.9498,
+          "1": 0.0336,
+          "2": 0.0166
+        },
+        "expected": 0.0669
+      }
+    },
+    "latency_ms": 222.2812999971211,
+    "tokens_in": 122,
+    "tokens_out": 0,
+    "cost_usd": 0.0,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": false,
+    "raw": {
+      "model": "laya-rl-agent",
+      "answers": {
+        "relevancia": {
+          "type": "score",
+          "score": 0.0669,
+          "legend": {
+            "0": "Não responde: fala de outro assunto ou só compartilha palavras com a pergunta.",
+            "1": "Relacionado: trata do tema, mas não responde à pergunta.",
+            "2": "Responde: contém a informação que a pergunta pede."
+          },
+          "probabilities": {
+            "0": 0.9498,
+            "1": 0.0336,
+            "2": 0.0166
+          },
+          "confidence": 0.7896,
+          "answer_confidence": 0.9498,
+          "action": {
+            "act_probability": 1.0
+          },
+          "x_jev_confidence": 0.8998
+        }
+      },
+      "usage": {
+        "input_tokens": 122,
+        "output_tokens": 0,
+        "state_tokens": 46,
+        "state_tokens_dropped": 0,
+        "truncated": false,
+        "truncated_questions": []
+      },
+      "routing": {
+        "model": "multilingual",
+        "repo": "convaiinnovations/laya/multilingual",
+        "reason": "explicit model='multilingual'",
+        "detection": null,
+        "workflow": null
+      }
+    }
+  }
+}

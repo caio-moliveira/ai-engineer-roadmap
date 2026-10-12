@@ -1,0 +1,47 @@
+{
+  "key": "be382f2c4580a2a3910f",
+  "target": "llm:anthropic:claude-haiku-4-5-20251001",
+  "recorded_at": "2026-10-12",
+  "synthetic": false,
+  "origin": "LangChain init_chat_model + with_structured_output (anthropic:claude-haiku-4-5-20251001)",
+  "request": {
+    "state": {
+      "pergunta": "O que é mitigação e o que é adaptação às mudanças climáticas?",
+      "trecho": "Adaptação é ajustar sistemas naturais e humanos aos efeitos já em curso, como construir diques ou mudar o calendário de plantio."
+    },
+    "questions": {
+      "relevancia": {
+        "type": "score",
+        "instructions": "O `trecho` ajuda a responder a `pergunta`?",
+        "criteria": [
+          "Não responde: fala de outro assunto ou só compartilha palavras com a pergunta.",
+          "Relacionado: trata do tema, mas não responde à pergunta.",
+          "Responde: contém a informação que a pergunta pede."
+        ]
+      }
+    }
+  },
+  "result": {
+    "provider": "llm:anthropic:claude-haiku-4-5-20251001",
+    "model": "claude-haiku-4-5-20251001",
+    "answers": {
+      "relevancia": {
+        "value": 1,
+        "confidence": 0.85,
+        "probabilities": null,
+        "expected": null
+      }
+    },
+    "latency_ms": 1221.4607000023534,
+    "tokens_in": 1100,
+    "tokens_out": 52,
+    "cost_usd": 0.00136,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": false,
+    "raw": {
+      "content": "[{\"id\": \"toolu_015VU4f92WNa7w4yDEVwMuhA\", \"caller\": {\"type\": \"direct\"}, \"input\": {\"relevancia\": {\"value\": 1, \"confidence\": 0.85}}, \"name\": \"Respostas\", \"type\": \"tool_use\", \"toolset_name\": null}]",
+      "parsing_error": null
+    }
+  }
+}

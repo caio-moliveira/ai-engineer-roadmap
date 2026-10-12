@@ -1,0 +1,75 @@
+{
+  "key": "8a2025efa96423e1928e",
+  "target": "laya",
+  "recorded_at": "2026-10-12",
+  "synthetic": false,
+  "origin": "laya-serve em http://127.0.0.1:8001, modelo multilingual",
+  "request": {
+    "state": {
+      "remetente": "notificacoes@bancohorizonte.com.br",
+      "assunto": "Compra aprovada no cartão final 4321",
+      "corpo": "Compra de R$ 152,30 aprovada em Mercado Bairro, hoje às 14h02. Não reconhece? Ligue para o número no verso do seu cartão."
+    },
+    "questions": {
+      "spam": {
+        "type": "noul",
+        "instructions": "Este e-mail é spam, golpe ou phishing?",
+        "criteria": {
+          "true": "Mensagem indesejada ou fraudulenta.",
+          "false": "Mensagem legítima, mesmo que seja comercial ou urgente."
+        }
+      }
+    }
+  },
+  "result": {
+    "provider": "laya",
+    "model": "laya-rl-agent",
+    "answers": {
+      "spam": {
+        "value": 1.0,
+        "confidence": 1.0,
+        "probabilities": {
+          "true": 1.0,
+          "false": 0.0
+        },
+        "expected": null
+      }
+    },
+    "latency_ms": 173.2613999993191,
+    "tokens_in": 126,
+    "tokens_out": 0,
+    "cost_usd": 0.0,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": false,
+    "raw": {
+      "model": "laya-rl-agent",
+      "answers": {
+        "spam": {
+          "type": "noul",
+          "noul": 1.0,
+          "confidence": 1.0,
+          "answer_confidence": 1.0,
+          "action": {
+            "act_probability": 1.0
+          }
+        }
+      },
+      "usage": {
+        "input_tokens": 126,
+        "output_tokens": 0,
+        "state_tokens": 80,
+        "state_tokens_dropped": 0,
+        "truncated": false,
+        "truncated_questions": []
+      },
+      "routing": {
+        "model": "multilingual",
+        "repo": "convaiinnovations/laya/multilingual",
+        "reason": "explicit model='multilingual'",
+        "detection": null,
+        "workflow": null
+      }
+    }
+  }
+}

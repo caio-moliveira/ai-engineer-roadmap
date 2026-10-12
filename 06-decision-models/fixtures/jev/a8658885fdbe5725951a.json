@@ -1,0 +1,59 @@
+{
+  "key": "a8658885fdbe5725951a",
+  "target": "jev",
+  "recorded_at": "2026-10-12",
+  "synthetic": true,
+  "origin": "SINTÉTICA: gerada a partir dos rótulos do golden set com ruído determinístico (fixtures/gerar_jev_sintetico.py). Não é medição do Jev.",
+  "request": {
+    "state": {
+      "remetente": "contato@investimentos-garantidos.biz",
+      "assunto": "Renda de 20% ao mês sem risco",
+      "corpo": "Método exclusivo de investimento em criptomoedas. Vagas limitadas, só até meia-noite. Deposite a partir de R$ 500 e veja seu dinheiro dobrar."
+    },
+    "questions": {
+      "spam": {
+        "type": "noul",
+        "instructions": "Este e-mail é spam, golpe ou phishing?",
+        "criteria": {
+          "true": "Mensagem indesejada ou fraudulenta.",
+          "false": "Mensagem legítima, mesmo que seja comercial ou urgente."
+        }
+      }
+    }
+  },
+  "result": {
+    "provider": "jev",
+    "model": "jev-1.13.0",
+    "answers": {
+      "spam": {
+        "value": 0.9785,
+        "confidence": null,
+        "probabilities": {
+          "true": 0.9785,
+          "false": 0.021499999999999964
+        },
+        "expected": null
+      }
+    },
+    "latency_ms": 55.6,
+    "tokens_in": 123,
+    "tokens_out": 0,
+    "cost_usd": 5.166e-06,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": true,
+    "raw": {
+      "model": "jev-1.13.0",
+      "answers": {
+        "spam": {
+          "type": "noul",
+          "noul": 0.9785
+        }
+      },
+      "usage": {
+        "input_tokens": 123,
+        "output_tokens": 0
+      }
+    }
+  }
+}

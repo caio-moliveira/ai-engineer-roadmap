@@ -1,0 +1,101 @@
+{
+  "key": "452c19b9d32af41b58de",
+  "target": "geracao:anthropic:claude-haiku-4-5-20251001",
+  "recorded_at": "2026-10-12",
+  "synthetic": false,
+  "origin": "init_chat_model (anthropic:claude-haiku-4-5-20251001)",
+  "request": {
+    "tipo": "geracao",
+    "modelo": "anthropic:claude-haiku-4-5-20251001",
+    "system": "Você é o assistente de dados de vendas da empresa Mercado Jornada. Responda em português, em até três frases, usando SÓ os dados recebidos. Cite os números como estão nos dados. Não faça previsões, não exponha dado pessoal e não recomende punição de pessoas.",
+    "pergunta": "Algum cliente do Sul está entre os maiores?",
+    "dados": [
+      {
+        "cliente": "Colégio Tropical S.A.",
+        "segmento": "Corporativo",
+        "regiao": "Sudeste",
+        "pedidos": 34,
+        "receita": 246270.65,
+        "ultima_compra": "2026-09-29"
+      },
+      {
+        "cliente": "Distribuidora Ipê ME",
+        "segmento": "Corporativo",
+        "regiao": "Sudeste",
+        "pedidos": 14,
+        "receita": 98020.42,
+        "ultima_compra": "2026-09-27"
+      },
+      {
+        "cliente": "Transportadora Mirante ME",
+        "segmento": "Corporativo",
+        "regiao": "Sudeste",
+        "pedidos": 12,
+        "receita": 90055.63,
+        "ultima_compra": "2026-09-30"
+      },
+      {
+        "cliente": "Transportadora Solar S.A.",
+        "segmento": "Corporativo",
+        "regiao": "Sul",
+        "pedidos": 9,
+        "receita": 86234.2,
+        "ultima_compra": "2026-09-15"
+      },
+      {
+        "cliente": "Escritório Tropical S.A.",
+        "segmento": "Corporativo",
+        "regiao": "Centro-Oeste",
+        "pedidos": 12,
+        "receita": 85958.81,
+        "ultima_compra": "2026-08-29"
+      },
+      {
+        "cliente": "Colégio Litoral Ltda",
+        "segmento": "PME",
+        "regiao": "Sudeste",
+        "pedidos": 14,
+        "receita": 80114.11,
+        "ultima_compra": "2026-09-26"
+      },
+      {
+        "cliente": "Comercial Aurora S.A.",
+        "segmento": "Corporativo",
+        "regiao": "Nordeste",
+        "pedidos": 11,
+        "receita": 80083.22,
+        "ultima_compra": "2026-09-15"
+      },
+      {
+        "cliente": "Colégio Brasil Sul EPP",
+        "segmento": "Corporativo",
+        "regiao": "Sul",
+        "pedidos": 11,
+        "receita": 77117.87,
+        "ultima_compra": "2026-09-11"
+      },
+      {
+        "cliente": "Transportadora Itaú S.A.",
+        "segmento": "Corporativo",
+        "regiao": "Sudeste",
+        "pedidos": 7,
+        "receita": 69436.8,
+        "ultima_compra": "2026-09-25"
+      },
+      {
+        "cliente": "Rede Nova Era EPP",
+        "segmento": "Corporativo",
+        "regiao": "Nordeste",
+        "pedidos": 9,
+        "receita": 67230.59,
+        "ultima_compra": "2026-09-21"
+      }
+    ]
+  },
+  "result": {
+    "texto": "Sim, há um cliente do Sul entre os maiores. A Transportadora Solar S.A., da região Sul, ocupa a 4ª posição em receita com 86234.2, e a Colégio Brasil Sul EPP também está entre os dez maiores com receita de 77117.87. Ambas são clientes corporativos com presença significativa no ranking de faturamento.",
+    "latency_ms": 1457.9664999982924,
+    "tokens_in": 830,
+    "tokens_out": 97
+  }
+}

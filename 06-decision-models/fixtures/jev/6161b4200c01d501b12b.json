@@ -1,0 +1,68 @@
+{
+  "key": "6161b4200c01d501b12b",
+  "target": "jev",
+  "recorded_at": "2026-10-12",
+  "synthetic": true,
+  "origin": "SINTÉTICA: gerada a partir dos rótulos do golden set com ruído determinístico (fixtures/gerar_jev_sintetico.py). Não é medição do Jev.",
+  "request": {
+    "state": {
+      "ticket": "Não consigo ativar a autenticação em dois fatores, o código sempre dá inválido."
+    },
+    "questions": {
+      "fila": {
+        "type": "choice",
+        "instructions": "Qual fila deve atender este ticket de suporte?",
+        "criteria": {
+          "financeiro": "cobranças, estornos, notas fiscais, boletos e pagamentos",
+          "tecnico": "erros no sistema, integrações, lentidão e exportação de dados",
+          "comercial": "planos, preços, descontos, contratação e demonstrações",
+          "conta": "senha e acesso, dados cadastrais, cancelamento, usuários e permissões"
+        }
+      }
+    }
+  },
+  "result": {
+    "provider": "jev",
+    "model": "jev-1.13.0",
+    "answers": {
+      "fila": {
+        "value": "conta",
+        "confidence": 0.9607,
+        "probabilities": {
+          "financeiro": 0.0143,
+          "tecnico": 0.0112,
+          "comercial": 0.0139,
+          "conta": 0.9607
+        },
+        "expected": null
+      }
+    },
+    "latency_ms": 47.5,
+    "tokens_in": 106,
+    "tokens_out": 0,
+    "cost_usd": 4.452e-06,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": true,
+    "raw": {
+      "model": "jev-1.13.0",
+      "answers": {
+        "fila": {
+          "type": "choice",
+          "choice": "conta",
+          "confidence": 0.9607,
+          "probabilities": {
+            "financeiro": 0.0143,
+            "tecnico": 0.0112,
+            "comercial": 0.0139,
+            "conta": 0.9607
+          }
+        }
+      },
+      "usage": {
+        "input_tokens": 106,
+        "output_tokens": 0
+      }
+    }
+  }
+}

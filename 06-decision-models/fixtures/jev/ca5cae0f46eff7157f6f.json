@@ -1,0 +1,71 @@
+{
+  "key": "ca5cae0f46eff7157f6f",
+  "target": "jev",
+  "recorded_at": "2026-10-12",
+  "synthetic": true,
+  "origin": "SINTÉTICA: gerada a partir dos rótulos do golden set com ruído determinístico (fixtures/gerar_jev_sintetico.py). Não é medição do Jev.",
+  "request": {
+    "state": {
+      "pergunta": "O que causa o efeito estufa?",
+      "trecho": "Estufas agrícolas usam plástico ou vidro para reter calor e proteger as plantas do frio."
+    },
+    "questions": {
+      "relevancia": {
+        "type": "score",
+        "instructions": "O `trecho` ajuda a responder a `pergunta`?",
+        "criteria": [
+          "Não responde: fala de outro assunto ou só compartilha palavras com a pergunta.",
+          "Relacionado: trata do tema, mas não responde à pergunta.",
+          "Responde: contém a informação que a pergunta pede."
+        ]
+      }
+    }
+  },
+  "result": {
+    "provider": "jev",
+    "model": "jev-1.13.0",
+    "answers": {
+      "relevancia": {
+        "value": 0,
+        "confidence": 0.8656,
+        "probabilities": {
+          "0": 0.8656,
+          "1": 0.0851,
+          "2": 0.0493
+        },
+        "expected": 0.1837
+      }
+    },
+    "latency_ms": 46.6,
+    "tokens_in": 114,
+    "tokens_out": 0,
+    "cost_usd": 4.7880000000000006e-06,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": true,
+    "raw": {
+      "model": "jev-1.13.0",
+      "answers": {
+        "relevancia": {
+          "type": "score",
+          "score": 0.1837,
+          "confidence": 0.8656,
+          "legend": {
+            "0": "Não responde: fala de outro assunto ou só compartilha palavras com a pergunta.",
+            "1": "Relacionado: trata do tema, mas não responde à pergunta.",
+            "2": "Responde: contém a informação que a pergunta pede."
+          },
+          "probabilities": {
+            "0": 0.8656,
+            "1": 0.0851,
+            "2": 0.0493
+          }
+        }
+      },
+      "usage": {
+        "input_tokens": 114,
+        "output_tokens": 0
+      }
+    }
+  }
+}

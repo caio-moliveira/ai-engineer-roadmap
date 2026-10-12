@@ -1,0 +1,62 @@
+{
+  "key": "f3c191e6e995a8ddfbb9",
+  "target": "jev",
+  "recorded_at": "2026-10-12",
+  "synthetic": true,
+  "origin": "SINTÉTICA: gerada a partir dos rótulos do golden set com ruído determinístico (fixtures/gerar_jev_sintetico.py). Não é medição do Jev.",
+  "request": {
+    "state": {
+      "ticket": "Olá, notei que a mensalidade veio em duplicidade no boleto deste mês. Podem verificar quando puderem?"
+    },
+    "questions": {
+      "rota": {
+        "type": "choice",
+        "instructions": "Qual modelo deve redigir a resposta para este ticket?",
+        "criteria": {
+          "barato": "Pedido simples e bem delimitado, com resposta padrão: um modelo pequeno resolve.",
+          "caro": "Caso ambíguo, com vários problemas, investigação técnica ou cliente prestes a sair: precisa de um modelo forte."
+        }
+      }
+    }
+  },
+  "result": {
+    "provider": "jev",
+    "model": "jev-1.13.0",
+    "answers": {
+      "rota": {
+        "value": "barato",
+        "confidence": 0.8998,
+        "probabilities": {
+          "barato": 0.8998,
+          "caro": 0.1002
+        },
+        "expected": null
+      }
+    },
+    "latency_ms": 41.4,
+    "tokens_in": 96,
+    "tokens_out": 0,
+    "cost_usd": 4.032e-06,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": true,
+    "raw": {
+      "model": "jev-1.13.0",
+      "answers": {
+        "rota": {
+          "type": "choice",
+          "choice": "barato",
+          "confidence": 0.8998,
+          "probabilities": {
+            "barato": 0.8998,
+            "caro": 0.1002
+          }
+        }
+      },
+      "usage": {
+        "input_tokens": 96,
+        "output_tokens": 0
+      }
+    }
+  }
+}

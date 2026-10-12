@@ -1,0 +1,75 @@
+{
+  "key": "8e5cde431efd571b0009",
+  "target": "laya",
+  "recorded_at": "2026-10-12",
+  "synthetic": false,
+  "origin": "laya-serve em http://127.0.0.1:8001, modelo multilingual",
+  "request": {
+    "state": {
+      "remetente": "nfe@papelariacentral.com.br",
+      "assunto": "NF-e 4587 emitida",
+      "corpo": "A nota fiscal eletrônica 4587, referente ao pedido 1290, foi emitida. O XML e o PDF estão anexados."
+    },
+    "questions": {
+      "spam": {
+        "type": "noul",
+        "instructions": "Este e-mail é spam, golpe ou phishing?",
+        "criteria": {
+          "true": "Mensagem indesejada ou fraudulenta.",
+          "false": "Mensagem legítima, mesmo que seja comercial ou urgente."
+        }
+      }
+    }
+  },
+  "result": {
+    "provider": "laya",
+    "model": "laya-rl-agent",
+    "answers": {
+      "spam": {
+        "value": 0.0077,
+        "confidence": 0.9923,
+        "probabilities": {
+          "true": 0.0077,
+          "false": 0.9923
+        },
+        "expected": null
+      }
+    },
+    "latency_ms": 283.31940000134637,
+    "tokens_in": 117,
+    "tokens_out": 0,
+    "cost_usd": 0.0,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": false,
+    "raw": {
+      "model": "laya-rl-agent",
+      "answers": {
+        "spam": {
+          "type": "noul",
+          "noul": 0.0077,
+          "confidence": 0.9923,
+          "answer_confidence": 0.9923,
+          "action": {
+            "act_probability": 1.0
+          }
+        }
+      },
+      "usage": {
+        "input_tokens": 117,
+        "output_tokens": 0,
+        "state_tokens": 71,
+        "state_tokens_dropped": 0,
+        "truncated": false,
+        "truncated_questions": []
+      },
+      "routing": {
+        "model": "multilingual",
+        "repo": "convaiinnovations/laya/multilingual",
+        "reason": "explicit model='multilingual'",
+        "detection": null,
+        "workflow": null
+      }
+    }
+  }
+}

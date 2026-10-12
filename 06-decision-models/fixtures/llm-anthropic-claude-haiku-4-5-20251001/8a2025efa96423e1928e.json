@@ -1,0 +1,47 @@
+{
+  "key": "8a2025efa96423e1928e",
+  "target": "llm:anthropic:claude-haiku-4-5-20251001",
+  "recorded_at": "2026-10-12",
+  "synthetic": false,
+  "origin": "LangChain init_chat_model + with_structured_output (anthropic:claude-haiku-4-5-20251001)",
+  "request": {
+    "state": {
+      "remetente": "notificacoes@bancohorizonte.com.br",
+      "assunto": "Compra aprovada no cartão final 4321",
+      "corpo": "Compra de R$ 152,30 aprovada em Mercado Bairro, hoje às 14h02. Não reconhece? Ligue para o número no verso do seu cartão."
+    },
+    "questions": {
+      "spam": {
+        "type": "noul",
+        "instructions": "Este e-mail é spam, golpe ou phishing?",
+        "criteria": {
+          "true": "Mensagem indesejada ou fraudulenta.",
+          "false": "Mensagem legítima, mesmo que seja comercial ou urgente."
+        }
+      }
+    }
+  },
+  "result": {
+    "provider": "llm:anthropic:claude-haiku-4-5-20251001",
+    "model": "claude-haiku-4-5-20251001",
+    "answers": {
+      "spam": {
+        "value": 0.15,
+        "confidence": 0.85,
+        "probabilities": null,
+        "expected": null
+      }
+    },
+    "latency_ms": 940.989200000331,
+    "tokens_in": 1058,
+    "tokens_out": 53,
+    "cost_usd": 0.001323,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": false,
+    "raw": {
+      "content": "[{\"id\": \"toolu_01S6eTbtYBZMVju53PMW7sou\", \"caller\": {\"type\": \"direct\"}, \"input\": {\"spam\": {\"value\": 0.15, \"confidence\": 0.85}}, \"name\": \"Respostas\", \"type\": \"tool_use\", \"toolset_name\": null}]",
+      "parsing_error": null
+    }
+  }
+}

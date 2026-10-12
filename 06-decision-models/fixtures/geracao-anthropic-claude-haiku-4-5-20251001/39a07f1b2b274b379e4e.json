@@ -1,0 +1,56 @@
+{
+  "key": "39a07f1b2b274b379e4e",
+  "target": "geracao:anthropic:claude-haiku-4-5-20251001",
+  "recorded_at": "2026-10-12",
+  "synthetic": false,
+  "origin": "init_chat_model (anthropic:claude-haiku-4-5-20251001)",
+  "request": {
+    "tipo": "geracao",
+    "modelo": "anthropic:claude-haiku-4-5-20251001",
+    "system": "Você é o assistente de dados de vendas da empresa Mercado Jornada. Responda em português, em até três frases, usando SÓ os dados recebidos. Cite os números como estão nos dados. Não faça previsões, não exponha dado pessoal e não recomende punição de pessoas.",
+    "pergunta": "Quanto o Sul faturou em 2026?",
+    "dados": [
+      {
+        "regiao": "Sudeste",
+        "receita": 1722175.42,
+        "pedidos": 390,
+        "clientes_ativos": 58,
+        "participacao_pct": 39.9
+      },
+      {
+        "regiao": "Nordeste",
+        "receita": 1016023.16,
+        "pedidos": 257,
+        "clientes_ativos": 38,
+        "participacao_pct": 23.5
+      },
+      {
+        "regiao": "Sul",
+        "receita": 679495.39,
+        "pedidos": 168,
+        "clientes_ativos": 26,
+        "participacao_pct": 15.7
+      },
+      {
+        "regiao": "Centro-Oeste",
+        "receita": 592958.91,
+        "pedidos": 141,
+        "clientes_ativos": 19,
+        "participacao_pct": 13.7
+      },
+      {
+        "regiao": "Norte",
+        "receita": 310014.12,
+        "pedidos": 55,
+        "clientes_ativos": 8,
+        "participacao_pct": 7.2
+      }
+    ]
+  },
+  "result": {
+    "texto": "A região Sul faturou 679495.39 em 2026. Esse valor representou 15.7% da participação total de receita da empresa. A região realizou 168 pedidos com 26 clientes ativos nesse período.",
+    "latency_ms": 1099.178700002085,
+    "tokens_in": 373,
+    "tokens_out": 61
+  }
+}

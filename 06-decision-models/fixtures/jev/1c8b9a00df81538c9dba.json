@@ -1,0 +1,68 @@
+{
+  "key": "1c8b9a00df81538c9dba",
+  "target": "jev",
+  "recorded_at": "2026-10-12",
+  "synthetic": true,
+  "origin": "SINTÉTICA: gerada a partir dos rótulos do golden set com ruído determinístico (fixtures/gerar_jev_sintetico.py). Não é medição do Jev.",
+  "request": {
+    "state": {
+      "ticket": "Quero trocar a forma de pagamento de boleto para cartão de crédito. Onde faço isso?"
+    },
+    "questions": {
+      "categoria": {
+        "type": "choice",
+        "instructions": "Este ticket já foi enviado para a fila financeiro. Qual a categoria dele?",
+        "criteria": {
+          "cobranca_indevida": "cobrança duplicada ou de algo que o cliente não contratou",
+          "estorno": "pedido ou dúvida sobre devolução de dinheiro",
+          "nota_fiscal": "emissão, correção ou envio de nota fiscal",
+          "boleto_pagamento": "boleto, Pix, cartão, forma de pagamento ou acesso bloqueado por pagamento"
+        }
+      }
+    }
+  },
+  "result": {
+    "provider": "jev",
+    "model": "jev-1.13.0",
+    "answers": {
+      "categoria": {
+        "value": "boleto_pagamento",
+        "confidence": 0.814,
+        "probabilities": {
+          "cobranca_indevida": 0.0767,
+          "estorno": 0.0344,
+          "nota_fiscal": 0.0749,
+          "boleto_pagamento": 0.814
+        },
+        "expected": null
+      }
+    },
+    "latency_ms": 49.2,
+    "tokens_in": 114,
+    "tokens_out": 0,
+    "cost_usd": 4.7880000000000006e-06,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": true,
+    "raw": {
+      "model": "jev-1.13.0",
+      "answers": {
+        "categoria": {
+          "type": "choice",
+          "choice": "boleto_pagamento",
+          "confidence": 0.814,
+          "probabilities": {
+            "cobranca_indevida": 0.0767,
+            "estorno": 0.0344,
+            "nota_fiscal": 0.0749,
+            "boleto_pagamento": 0.814
+          }
+        }
+      },
+      "usage": {
+        "input_tokens": 114,
+        "output_tokens": 0
+      }
+    }
+  }
+}

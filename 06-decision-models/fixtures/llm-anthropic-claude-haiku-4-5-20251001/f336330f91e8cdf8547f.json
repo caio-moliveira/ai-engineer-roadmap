@@ -1,0 +1,47 @@
+{
+  "key": "f336330f91e8cdf8547f",
+  "target": "llm:anthropic:claude-haiku-4-5-20251001",
+  "recorded_at": "2026-10-12",
+  "synthetic": false,
+  "origin": "LangChain init_chat_model + with_structured_output (anthropic:claude-haiku-4-5-20251001)",
+  "request": {
+    "state": {
+      "ticket": "Estávamos pensando em cancelar, mas se tiver um plano mais barato a gente fica."
+    },
+    "questions": {
+      "categoria": {
+        "type": "choice",
+        "instructions": "Este ticket já foi enviado para a fila comercial. Qual a categoria dele?",
+        "criteria": {
+          "upgrade_plano": "mudar de plano, comparar planos ou aumentar limites",
+          "preco_desconto": "preço, desconto, promoção ou proposta da concorrência",
+          "contratacao_nova": "contratar o produto ou um módulo novo",
+          "demonstracao": "agendar ou pedir demonstração"
+        }
+      }
+    }
+  },
+  "result": {
+    "provider": "llm:anthropic:claude-haiku-4-5-20251001",
+    "model": "claude-haiku-4-5-20251001",
+    "answers": {
+      "categoria": {
+        "value": "preco_desconto",
+        "confidence": 0.85,
+        "probabilities": null,
+        "expected": null
+      }
+    },
+    "latency_ms": 960.7959000022674,
+    "tokens_in": 1084,
+    "tokens_out": 55,
+    "cost_usd": 0.001359,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": false,
+    "raw": {
+      "content": "[{\"id\": \"toolu_01Ncug2Zt1jhAQ9EYTdouFAV\", \"caller\": {\"type\": \"direct\"}, \"input\": {\"categoria\": {\"value\": \"preco_desconto\", \"confidence\": 0.85}}, \"name\": \"Respostas\", \"type\": \"tool_use\", \"toolset_name\": null}]",
+      "parsing_error": null
+    }
+  }
+}

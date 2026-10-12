@@ -1,0 +1,59 @@
+{
+  "key": "d19448775ddaabecfc45",
+  "target": "jev",
+  "recorded_at": "2026-10-12",
+  "synthetic": true,
+  "origin": "SINTÉTICA: gerada a partir dos rótulos do golden set com ruído determinístico (fixtures/gerar_jev_sintetico.py). Não é medição do Jev.",
+  "request": {
+    "state": {
+      "remetente": "contato@academiaforma.com.br",
+      "assunto": "Mensalidade em aberto",
+      "corpo": "Olá! Consta em aberto a mensalidade de setembro, de R$ 99,00. Você pode pagar na recepção ou pelo app da academia."
+    },
+    "questions": {
+      "spam": {
+        "type": "noul",
+        "instructions": "Este e-mail é spam, golpe ou phishing?",
+        "criteria": {
+          "true": "Mensagem indesejada ou fraudulenta.",
+          "false": "Mensagem legítima, mesmo que seja comercial ou urgente."
+        }
+      }
+    }
+  },
+  "result": {
+    "provider": "jev",
+    "model": "jev-1.13.0",
+    "answers": {
+      "spam": {
+        "value": 0.106,
+        "confidence": null,
+        "probabilities": {
+          "true": 0.106,
+          "false": 0.894
+        },
+        "expected": null
+      }
+    },
+    "latency_ms": 41.2,
+    "tokens_in": 111,
+    "tokens_out": 0,
+    "cost_usd": 4.662e-06,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": true,
+    "raw": {
+      "model": "jev-1.13.0",
+      "answers": {
+        "spam": {
+          "type": "noul",
+          "noul": 0.106
+        }
+      },
+      "usage": {
+        "input_tokens": 111,
+        "output_tokens": 0
+      }
+    }
+  }
+}

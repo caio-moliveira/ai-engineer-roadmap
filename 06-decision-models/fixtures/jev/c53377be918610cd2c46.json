@@ -1,0 +1,63 @@
+{
+  "key": "c53377be918610cd2c46",
+  "target": "jev",
+  "recorded_at": "2026-10-12",
+  "synthetic": true,
+  "origin": "SINTÉTICA: gerada a partir dos rótulos do golden set com ruído determinístico (fixtures/gerar_jev_sintetico.py). Não é medição do Jev.",
+  "request": {
+    "state": {
+      "role": "user",
+      "content": "Removi um usuário por engano e ele perdeu todos os pedidos que tinha criado. Dá para recuperar?"
+    },
+    "questions": {
+      "model_route": {
+        "type": "choice",
+        "criteria": {
+          "barato": "Pedido simples e bem delimitado, com resposta padrão: um modelo pequeno resolve.",
+          "caro": "Caso ambíguo, com vários problemas, investigação técnica ou cliente prestes a sair: precisa de um modelo forte."
+        },
+        "instructions": "Qual modelo deve redigir a resposta para este ticket?"
+      }
+    }
+  },
+  "result": {
+    "provider": "jev",
+    "model": "jev-1.13.0",
+    "answers": {
+      "model_route": {
+        "value": "caro",
+        "confidence": 0.8913,
+        "probabilities": {
+          "barato": 0.1087,
+          "caro": 0.8913
+        },
+        "expected": null
+      }
+    },
+    "latency_ms": 47.3,
+    "tokens_in": 97,
+    "tokens_out": 0,
+    "cost_usd": 4.0739999999999994e-06,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": true,
+    "raw": {
+      "model": "jev-1.13.0",
+      "answers": {
+        "model_route": {
+          "type": "choice",
+          "choice": "caro",
+          "confidence": 0.8913,
+          "probabilities": {
+            "barato": 0.1087,
+            "caro": 0.8913
+          }
+        }
+      },
+      "usage": {
+        "input_tokens": 97,
+        "output_tokens": 0
+      }
+    }
+  }
+}

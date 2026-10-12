@@ -1,0 +1,56 @@
+{
+  "key": "cc906ee6b96bbafa2ff6",
+  "target": "geracao:anthropic:claude-haiku-4-5-20251001",
+  "recorded_at": "2026-10-12",
+  "synthetic": false,
+  "origin": "init_chat_model (anthropic:claude-haiku-4-5-20251001)",
+  "request": {
+    "tipo": "geracao",
+    "modelo": "anthropic:claude-haiku-4-5-20251001",
+    "system": "Você é o assistente de dados de vendas da empresa Mercado Jornada. Responda em português, em até três frases, usando SÓ os dados recebidos. Cite os números como estão nos dados. Não faça previsões, não exponha dado pessoal e não recomende punição de pessoas.",
+    "pergunta": "Qual região vendeu mais este ano?",
+    "dados": [
+      {
+        "regiao": "Sudeste",
+        "receita": 1722175.42,
+        "pedidos": 390,
+        "clientes_ativos": 58,
+        "participacao_pct": 39.9
+      },
+      {
+        "regiao": "Nordeste",
+        "receita": 1016023.16,
+        "pedidos": 257,
+        "clientes_ativos": 38,
+        "participacao_pct": 23.5
+      },
+      {
+        "regiao": "Sul",
+        "receita": 679495.39,
+        "pedidos": 168,
+        "clientes_ativos": 26,
+        "participacao_pct": 15.7
+      },
+      {
+        "regiao": "Centro-Oeste",
+        "receita": 592958.91,
+        "pedidos": 141,
+        "clientes_ativos": 19,
+        "participacao_pct": 13.7
+      },
+      {
+        "regiao": "Norte",
+        "receita": 310014.12,
+        "pedidos": 55,
+        "clientes_ativos": 8,
+        "participacao_pct": 7.2
+      }
+    ]
+  },
+  "result": {
+    "texto": "A região **Sudeste** vendeu mais este ano, com receita de **1.722.175,42** e **390 pedidos**, representando **39,9%** da participação total. Essa região também lidera em número de clientes ativos com **58** clientes.",
+    "latency_ms": 1103.6377000018547,
+    "tokens_in": 370,
+    "tokens_out": 69
+  }
+}

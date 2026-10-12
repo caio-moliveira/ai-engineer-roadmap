@@ -1,0 +1,47 @@
+{
+  "key": "c4f4161255698976d1a6",
+  "target": "llm:anthropic:claude-haiku-4-5-20251001",
+  "recorded_at": "2026-10-12",
+  "synthetic": false,
+  "origin": "LangChain init_chat_model + with_structured_output (anthropic:claude-haiku-4-5-20251001)",
+  "request": {
+    "state": {
+      "pergunta": "Como o aquecimento global afeta o nível do mar?",
+      "trecho": "Ressacas mais fortes aumentam a erosão de praias."
+    },
+    "questions": {
+      "relevancia": {
+        "type": "score",
+        "instructions": "O `trecho` ajuda a responder a `pergunta`?",
+        "criteria": [
+          "Não responde: fala de outro assunto ou só compartilha palavras com a pergunta.",
+          "Relacionado: trata do tema, mas não responde à pergunta.",
+          "Responde: contém a informação que a pergunta pede."
+        ]
+      }
+    }
+  },
+  "result": {
+    "provider": "llm:anthropic:claude-haiku-4-5-20251001",
+    "model": "claude-haiku-4-5-20251001",
+    "answers": {
+      "relevancia": {
+        "value": 1,
+        "confidence": 0.75,
+        "probabilities": null,
+        "expected": null
+      }
+    },
+    "latency_ms": 885.5260999989696,
+    "tokens_in": 1074,
+    "tokens_out": 52,
+    "cost_usd": 0.001334,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": false,
+    "raw": {
+      "content": "[{\"id\": \"toolu_01SGy8DxFWFLy7b3L4U99m6q\", \"caller\": {\"type\": \"direct\"}, \"input\": {\"relevancia\": {\"value\": 1, \"confidence\": 0.75}}, \"name\": \"Respostas\", \"type\": \"tool_use\", \"toolset_name\": null}]",
+      "parsing_error": null
+    }
+  }
+}

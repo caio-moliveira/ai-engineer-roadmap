@@ -1,0 +1,84 @@
+{
+  "key": "04cfa5db8e5a959412fc",
+  "target": "laya",
+  "recorded_at": "2026-10-12",
+  "synthetic": false,
+  "origin": "laya-serve em http://127.0.0.1:8001, modelo multilingual",
+  "request": {
+    "state": {
+      "ticket": "Cancelei o plano adicional de armazenamento em agosto e continuo sendo cobrado. Quero o dinheiro de volta dos dois meses."
+    },
+    "questions": {
+      "categoria": {
+        "type": "choice",
+        "instructions": "Este ticket já foi enviado para a fila financeiro. Qual a categoria dele?",
+        "criteria": {
+          "cobranca_indevida": "cobrança duplicada ou de algo que o cliente não contratou",
+          "estorno": "pedido ou dúvida sobre devolução de dinheiro",
+          "nota_fiscal": "emissão, correção ou envio de nota fiscal",
+          "boleto_pagamento": "boleto, Pix, cartão, forma de pagamento ou acesso bloqueado por pagamento"
+        }
+      }
+    }
+  },
+  "result": {
+    "provider": "laya",
+    "model": "laya-rl-agent",
+    "answers": {
+      "categoria": {
+        "value": "cobranca_indevida",
+        "confidence": 0.8542,
+        "probabilities": {
+          "cobranca_indevida": 0.9492,
+          "estorno": 0.0507,
+          "nota_fiscal": 0.0,
+          "boleto_pagamento": 0.0001
+        },
+        "expected": null
+      }
+    },
+    "latency_ms": 100.3171000011207,
+    "tokens_in": 122,
+    "tokens_out": 0,
+    "cost_usd": 0.0,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": false,
+    "raw": {
+      "model": "laya-rl-agent",
+      "answers": {
+        "categoria": {
+          "type": "choice",
+          "choice": "cobranca_indevida",
+          "probabilities": {
+            "cobranca_indevida": 0.9492,
+            "estorno": 0.0507,
+            "nota_fiscal": 0.0,
+            "boleto_pagamento": 0.0001
+          },
+          "confidence": 0.8542,
+          "answer_confidence": 0.9492,
+          "action": {
+            "act_probability": 1.0
+          },
+          "x_jev_confidence": 0.9323
+        }
+      },
+      "usage": {
+        "input_tokens": 122,
+        "output_tokens": 0,
+        "state_tokens": 31,
+        "state_tokens_dropped": 0,
+        "truncated": false,
+        "truncated_questions": []
+      },
+      "routing": {
+        "model": "multilingual",
+        "repo": "convaiinnovations/laya/multilingual",
+        "reason": "explicit model='multilingual'",
+        "detection": null,
+        "workflow": null
+      }
+    }
+  }
+}

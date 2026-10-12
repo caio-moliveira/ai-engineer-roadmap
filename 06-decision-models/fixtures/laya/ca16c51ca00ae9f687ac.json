@@ -1,0 +1,87 @@
+{
+  "key": "ca16c51ca00ae9f687ac",
+  "target": "laya",
+  "recorded_at": "2026-10-12",
+  "synthetic": false,
+  "origin": "laya-serve em http://127.0.0.1:8001, modelo multilingual",
+  "request": {
+    "state": {
+      "pergunta": "Como o aquecimento global afeta o nível do mar?",
+      "trecho": "O nível do mar sobe por dois motivos: a água do oceano se expande ao aquecer e o gelo de geleiras e mantos polares derrete e escoa para o mar."
+    },
+    "questions": {
+      "relevancia": {
+        "type": "score",
+        "instructions": "O `trecho` ajuda a responder a `pergunta`?",
+        "criteria": [
+          "Não responde: fala de outro assunto ou só compartilha palavras com a pergunta.",
+          "Relacionado: trata do tema, mas não responde à pergunta.",
+          "Responde: contém a informação que a pergunta pede."
+        ]
+      }
+    }
+  },
+  "result": {
+    "provider": "laya",
+    "model": "laya-rl-agent",
+    "answers": {
+      "relevancia": {
+        "value": 1,
+        "confidence": 0.1004,
+        "probabilities": {
+          "0": 0.185,
+          "1": 0.5562,
+          "2": 0.2589
+        },
+        "expected": 1.0739
+      }
+    },
+    "latency_ms": 225.2275999999256,
+    "tokens_in": 140,
+    "tokens_out": 0,
+    "cost_usd": 0.0,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": false,
+    "raw": {
+      "model": "laya-rl-agent",
+      "answers": {
+        "relevancia": {
+          "type": "score",
+          "score": 1.0739,
+          "legend": {
+            "0": "Não responde: fala de outro assunto ou só compartilha palavras com a pergunta.",
+            "1": "Relacionado: trata do tema, mas não responde à pergunta.",
+            "2": "Responde: contém a informação que a pergunta pede."
+          },
+          "probabilities": {
+            "0": 0.185,
+            "1": 0.5562,
+            "2": 0.2589
+          },
+          "confidence": 0.1004,
+          "answer_confidence": 0.5562,
+          "action": {
+            "act_probability": 1.0
+          },
+          "x_jev_confidence": 0.3342
+        }
+      },
+      "usage": {
+        "input_tokens": 140,
+        "output_tokens": 0,
+        "state_tokens": 64,
+        "state_tokens_dropped": 0,
+        "truncated": false,
+        "truncated_questions": []
+      },
+      "routing": {
+        "model": "multilingual",
+        "repo": "convaiinnovations/laya/multilingual",
+        "reason": "explicit model='multilingual'",
+        "detection": null,
+        "workflow": null
+      }
+    }
+  }
+}

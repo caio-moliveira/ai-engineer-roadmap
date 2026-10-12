@@ -1,0 +1,87 @@
+{
+  "key": "2422e66ea0b30321d823",
+  "target": "laya",
+  "recorded_at": "2026-10-12",
+  "synthetic": false,
+  "origin": "laya-serve em http://127.0.0.1:8001, modelo multilingual",
+  "request": {
+    "state": {
+      "pergunta": "Quais são os efeitos das mudanças climáticas na saúde humana?",
+      "trecho": "Eventos extremos causam estresse e problemas de saúde mental nas populações atingidas."
+    },
+    "questions": {
+      "relevancia": {
+        "type": "score",
+        "instructions": "O `trecho` ajuda a responder a `pergunta`?",
+        "criteria": [
+          "Não responde: fala de outro assunto ou só compartilha palavras com a pergunta.",
+          "Relacionado: trata do tema, mas não responde à pergunta.",
+          "Responde: contém a informação que a pergunta pede."
+        ]
+      }
+    }
+  },
+  "result": {
+    "provider": "laya",
+    "model": "laya-rl-agent",
+    "answers": {
+      "relevancia": {
+        "value": 1,
+        "confidence": 0.2119,
+        "probabilities": {
+          "0": 0.3873,
+          "1": 0.5518,
+          "2": 0.0609
+        },
+        "expected": 0.6736
+      }
+    },
+    "latency_ms": 274.6483000009903,
+    "tokens_in": 116,
+    "tokens_out": 0,
+    "cost_usd": 0.0,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": false,
+    "raw": {
+      "model": "laya-rl-agent",
+      "answers": {
+        "relevancia": {
+          "type": "score",
+          "score": 0.6736,
+          "legend": {
+            "0": "Não responde: fala de outro assunto ou só compartilha palavras com a pergunta.",
+            "1": "Relacionado: trata do tema, mas não responde à pergunta.",
+            "2": "Responde: contém a informação que a pergunta pede."
+          },
+          "probabilities": {
+            "0": 0.3873,
+            "1": 0.5518,
+            "2": 0.0609
+          },
+          "confidence": 0.2119,
+          "answer_confidence": 0.5518,
+          "action": {
+            "act_probability": 1.0
+          },
+          "x_jev_confidence": 0.3277
+        }
+      },
+      "usage": {
+        "input_tokens": 116,
+        "output_tokens": 0,
+        "state_tokens": 40,
+        "state_tokens_dropped": 0,
+        "truncated": false,
+        "truncated_questions": []
+      },
+      "routing": {
+        "model": "multilingual",
+        "repo": "convaiinnovations/laya/multilingual",
+        "reason": "explicit model='multilingual'",
+        "detection": null,
+        "workflow": null
+      }
+    }
+  }
+}

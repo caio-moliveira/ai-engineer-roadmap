@@ -1,0 +1,87 @@
+{
+  "key": "5a34847e76e163e77a7c",
+  "target": "laya",
+  "recorded_at": "2026-10-12",
+  "synthetic": false,
+  "origin": "laya-serve em http://127.0.0.1:8001, modelo multilingual",
+  "request": {
+    "state": {
+      "ticket": "Fui cobrado duas vezes na fatura de setembro. Preciso que estornem o valor duplicado ainda hoje."
+    },
+    "questions": {
+      "assunto_principal": {
+        "type": "choice",
+        "instructions": "Qual destas situações melhor descreve o ticket?",
+        "criteria": {
+          "pede_reembolso": "o cliente pede dinheiro de volta",
+          "ameaca_cancelar": "o cliente diz que vai cancelar, sair ou migrar",
+          "relata_erro": "o cliente relata algo que não funciona",
+          "pede_informacao": "o cliente faz uma pergunta para obter informação",
+          "nenhuma": "nenhuma das anteriores"
+        }
+      }
+    }
+  },
+  "result": {
+    "provider": "laya",
+    "model": "laya-rl-agent",
+    "answers": {
+      "assunto_principal": {
+        "value": "ameaca_cancelar",
+        "confidence": 0.3001,
+        "probabilities": {
+          "pede_reembolso": 0.0493,
+          "ameaca_cancelar": 0.5314,
+          "relata_erro": 0.3251,
+          "pede_informacao": 0.0248,
+          "nenhuma": 0.0694
+        },
+        "expected": null
+      }
+    },
+    "latency_ms": 101.96849999920232,
+    "tokens_in": 109,
+    "tokens_out": 0,
+    "cost_usd": 0.0,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": false,
+    "raw": {
+      "model": "laya-rl-agent",
+      "answers": {
+        "assunto_principal": {
+          "type": "choice",
+          "choice": "ameaca_cancelar",
+          "probabilities": {
+            "pede_reembolso": 0.0493,
+            "ameaca_cancelar": 0.5314,
+            "relata_erro": 0.3251,
+            "pede_informacao": 0.0248,
+            "nenhuma": 0.0694
+          },
+          "confidence": 0.3001,
+          "answer_confidence": 0.5314,
+          "action": {
+            "act_probability": 1.0
+          },
+          "x_jev_confidence": 0.4142
+        }
+      },
+      "usage": {
+        "input_tokens": 109,
+        "output_tokens": 0,
+        "state_tokens": 30,
+        "state_tokens_dropped": 0,
+        "truncated": false,
+        "truncated_questions": []
+      },
+      "routing": {
+        "model": "multilingual",
+        "repo": "convaiinnovations/laya/multilingual",
+        "reason": "explicit model='multilingual'",
+        "detection": null,
+        "workflow": null
+      }
+    }
+  }
+}

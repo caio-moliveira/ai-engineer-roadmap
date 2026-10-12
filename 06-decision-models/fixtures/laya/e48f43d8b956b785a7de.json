@@ -1,0 +1,153 @@
+{
+  "key": "e48f43d8b956b785a7de",
+  "target": "laya",
+  "recorded_at": "2026-10-12",
+  "synthetic": false,
+  "origin": "laya-serve em http://127.0.0.1:8001, modelo multilingual",
+  "request": {
+    "state": {
+      "pergunta": "Qual produto vendeu mais unidades entre os 10 de maior receita?",
+      "dados": [
+        {
+          "produto": "Notebook Pro 14",
+          "categoria": "Informática",
+          "unidades": 79,
+          "receita": 550319.43
+        },
+        {
+          "produto": "Notebook Essencial 15",
+          "categoria": "Informática",
+          "unidades": 96,
+          "receita": 342244.19
+        },
+        {
+          "produto": "Armário Alto",
+          "categoria": "Móveis de Escritório",
+          "unidades": 173,
+          "receita": 239311.8
+        },
+        {
+          "produto": "Cafeteira Expresso",
+          "categoria": "Eletrodomésticos",
+          "unidades": 173,
+          "receita": 231419.45
+        },
+        {
+          "produto": "Smartphone X12",
+          "categoria": "Eletrônicos",
+          "unidades": 67,
+          "receita": 222326.21
+        },
+        {
+          "produto": "Estação de Trabalho Dupla",
+          "categoria": "Móveis de Escritório",
+          "unidades": 54,
+          "receita": 220758.72
+        },
+        {
+          "produto": "Dock USB-C",
+          "categoria": "Informática",
+          "unidades": 206,
+          "receita": 190311.11
+        },
+        {
+          "produto": "Aspirador Vertical",
+          "categoria": "Eletrodomésticos",
+          "unidades": 171,
+          "receita": 172467.36
+        },
+        {
+          "produto": "Smartwatch Fit",
+          "categoria": "Eletrônicos",
+          "unidades": 139,
+          "receita": 169461.86
+        },
+        {
+          "produto": "Tablet 11",
+          "categoria": "Eletrônicos",
+          "unidades": 65,
+          "receita": 165943.6
+        }
+      ],
+      "resposta": "Entre os 10 produtos de maior receita, o Dock USB-C vendeu mais unidades: 206."
+    },
+    "questions": {
+      "qualidade": {
+        "type": "score",
+        "instructions": "Qual a qualidade da `resposta` para a `pergunta`, considerando os `dados`?",
+        "criteria": [
+          "Ruim: não responde ou afirma números errados.",
+          "Fraca: responde em parte, ou mistura acerto com erro, previsão ou opinião indevida.",
+          "Boa: responde corretamente, mas incompleta ou com algo desnecessário.",
+          "Excelente: responde completa e corretamente, só com os dados."
+        ]
+      }
+    }
+  },
+  "result": {
+    "provider": "laya",
+    "model": "laya-rl-agent",
+    "answers": {
+      "qualidade": {
+        "value": 2,
+        "confidence": 0.3067,
+        "probabilities": {
+          "0": 0.0869,
+          "1": 0.0624,
+          "2": 0.6713,
+          "3": 0.1794
+        },
+        "expected": 1.9433
+      }
+    },
+    "latency_ms": 1116.4022000011755,
+    "tokens_in": 557,
+    "tokens_out": 0,
+    "cost_usd": 0.0,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": false,
+    "raw": {
+      "model": "laya-rl-agent",
+      "answers": {
+        "qualidade": {
+          "type": "score",
+          "score": 1.9433,
+          "legend": {
+            "0": "Ruim: não responde ou afirma números errados.",
+            "1": "Fraca: responde em parte, ou mistura acerto com erro, previsão ou opinião indevida.",
+            "2": "Boa: responde corretamente, mas incompleta ou com algo desnecessário.",
+            "3": "Excelente: responde completa e corretamente, só com os dados."
+          },
+          "probabilities": {
+            "0": 0.0869,
+            "1": 0.0624,
+            "2": 0.6713,
+            "3": 0.1794
+          },
+          "confidence": 0.3067,
+          "answer_confidence": 0.6713,
+          "action": {
+            "act_probability": 1.0
+          },
+          "x_jev_confidence": 0.5844
+        }
+      },
+      "usage": {
+        "input_tokens": 557,
+        "output_tokens": 0,
+        "state_tokens": 453,
+        "state_tokens_dropped": 0,
+        "truncated": false,
+        "truncated_questions": []
+      },
+      "routing": {
+        "model": "multilingual",
+        "repo": "convaiinnovations/laya/multilingual",
+        "reason": "explicit model='multilingual'",
+        "detection": null,
+        "workflow": null
+      }
+    }
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "key": "4483e8b4a777857d9d07",
+  "target": "jev",
+  "recorded_at": "2026-10-12",
+  "synthetic": true,
+  "origin": "SINTÉTICA: gerada a partir dos rótulos do golden set com ruído determinístico (fixtures/gerar_jev_sintetico.py). Não é medição do Jev.",
+  "request": {
+    "state": {
+      "ticket": "Como altero o endereço de cobrança da empresa?"
+    },
+    "questions": {
+      "categoria": {
+        "type": "choice",
+        "instructions": "Este ticket já foi enviado para a fila comercial. Qual a categoria dele?",
+        "criteria": {
+          "upgrade_plano": "mudar de plano, comparar planos ou aumentar limites",
+          "preco_desconto": "preço, desconto, promoção ou proposta da concorrência",
+          "contratacao_nova": "contratar o produto ou um módulo novo",
+          "demonstracao": "agendar ou pedir demonstração"
+        }
+      }
+    }
+  },
+  "result": {
+    "provider": "jev",
+    "model": "jev-1.13.0",
+    "answers": {
+      "categoria": {
+        "value": "upgrade_plano",
+        "confidence": 0.9001,
+        "probabilities": {
+          "upgrade_plano": 0.9001,
+          "preco_desconto": 0.0303,
+          "contratacao_nova": 0.0215,
+          "demonstracao": 0.0481
+        },
+        "expected": null
+      }
+    },
+    "latency_ms": 63.2,
+    "tokens_in": 116,
+    "tokens_out": 0,
+    "cost_usd": 4.872e-06,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": true,
+    "raw": {
+      "model": "jev-1.13.0",
+      "answers": {
+        "categoria": {
+          "type": "choice",
+          "choice": "upgrade_plano",
+          "confidence": 0.9001,
+          "probabilities": {
+            "upgrade_plano": 0.9001,
+            "preco_desconto": 0.0303,
+            "contratacao_nova": 0.0215,
+            "demonstracao": 0.0481
+          }
+        }
+      },
+      "usage": {
+        "input_tokens": 116,
+        "output_tokens": 0
+      }
+    }
+  }
+}

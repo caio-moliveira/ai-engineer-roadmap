@@ -1,0 +1,70 @@
+{
+  "key": "054912fc42003f0e411b",
+  "target": "jev",
+  "recorded_at": "2026-10-12",
+  "synthetic": true,
+  "origin": "SINTÉTICA: gerada a partir dos rótulos do golden set com ruído determinístico (fixtures/gerar_jev_sintetico.py). Não é medição do Jev.",
+  "request": {
+    "state": {
+      "ticket": "Minha conta foi bloqueada depois de errar a senha três vezes e preciso emitir pedidos agora."
+    },
+    "questions": {
+      "urgencia": {
+        "type": "score",
+        "instructions": "Qual a urgência deste ticket de suporte?",
+        "criteria": [
+          "Pode esperar: dúvida, pedido de informação ou incômodo sem impacto no trabalho do cliente.",
+          "Resolver esta semana: algo não funciona ou o cliente está insatisfeito, mas ele consegue trabalhar.",
+          "Resolver hoje: o cliente está parado, perde dinheiro agora, tem prazo nas próximas horas ou houve problema de segurança."
+        ]
+      }
+    }
+  },
+  "result": {
+    "provider": "jev",
+    "model": "jev-1.13.0",
+    "answers": {
+      "urgencia": {
+        "value": 2,
+        "confidence": 0.8958,
+        "probabilities": {
+          "0": 0.0509,
+          "1": 0.0533,
+          "2": 0.8958
+        },
+        "expected": 1.8449
+      }
+    },
+    "latency_ms": 63.6,
+    "tokens_in": 118,
+    "tokens_out": 0,
+    "cost_usd": 4.9560000000000005e-06,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": true,
+    "raw": {
+      "model": "jev-1.13.0",
+      "answers": {
+        "urgencia": {
+          "type": "score",
+          "score": 1.8449,
+          "confidence": 0.8958,
+          "legend": {
+            "0": "Pode esperar: dúvida, pedido de informação ou incômodo sem impacto no trabalho do cliente.",
+            "1": "Resolver esta semana: algo não funciona ou o cliente está insatisfeito, mas ele consegue trabalhar.",
+            "2": "Resolver hoje: o cliente está parado, perde dinheiro agora, tem prazo nas próximas horas ou houve problema de segurança."
+          },
+          "probabilities": {
+            "0": 0.0509,
+            "1": 0.0533,
+            "2": 0.8958
+          }
+        }
+      },
+      "usage": {
+        "input_tokens": 118,
+        "output_tokens": 0
+      }
+    }
+  }
+}

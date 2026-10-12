@@ -1,0 +1,140 @@
+{
+  "key": "395d0df28c7f254f3139",
+  "target": "jev",
+  "recorded_at": "2026-10-12",
+  "synthetic": true,
+  "origin": "SINTÉTICA: gerada a partir dos rótulos do golden set com ruído determinístico (fixtures/gerar_jev_sintetico.py). Não é medição do Jev.",
+  "request": {
+    "state": {
+      "remetente": "suporte@jornadacloud.com.br",
+      "assunto": "Seu acesso premium grátis por 1 ano",
+      "corpo": "Você foi escolhido para ganhar 12 meses grátis! Clique em http://bit.ly/jc-premio-agora e confirme seus dados de pagamento."
+    },
+    "questions": {
+      "pede_credencial": {
+        "type": "noul",
+        "instructions": "O e-mail pede senha, código, login, dados de cartão ou dados bancários?"
+      },
+      "urgencia_artificial": {
+        "type": "noul",
+        "instructions": "O e-mail pressiona com prazo curto ou ameaça de bloqueio para forçar uma ação?"
+      },
+      "promete_premio": {
+        "type": "noul",
+        "instructions": "O e-mail promete prêmio, ganho fácil ou vantagem extraordinária?"
+      },
+      "remetente_inconsistente": {
+        "type": "noul",
+        "instructions": "O domínio do remetente é estranho ou não bate com a organização que a mensagem diz representar?"
+      },
+      "link_suspeito": {
+        "type": "noul",
+        "instructions": "O e-mail manda clicar em link de domínio estranho, encurtado ou abrir anexo executável?"
+      },
+      "pede_pagamento": {
+        "type": "noul",
+        "instructions": "O e-mail pede pagamento, transferência, Pix ou depósito?"
+      }
+    }
+  },
+  "result": {
+    "provider": "jev",
+    "model": "jev-1.13.0",
+    "answers": {
+      "pede_credencial": {
+        "value": 0.9187,
+        "confidence": null,
+        "probabilities": {
+          "true": 0.9187,
+          "false": 0.08130000000000004
+        },
+        "expected": null
+      },
+      "urgencia_artificial": {
+        "value": 0.0208,
+        "confidence": null,
+        "probabilities": {
+          "true": 0.0208,
+          "false": 0.9792
+        },
+        "expected": null
+      },
+      "promete_premio": {
+        "value": 0.9218,
+        "confidence": null,
+        "probabilities": {
+          "true": 0.9218,
+          "false": 0.07820000000000005
+        },
+        "expected": null
+      },
+      "remetente_inconsistente": {
+        "value": 0.0919,
+        "confidence": null,
+        "probabilities": {
+          "true": 0.0919,
+          "false": 0.9081
+        },
+        "expected": null
+      },
+      "link_suspeito": {
+        "value": 0.8779,
+        "confidence": null,
+        "probabilities": {
+          "true": 0.8779,
+          "false": 0.12209999999999999
+        },
+        "expected": null
+      },
+      "pede_pagamento": {
+        "value": 0.1319,
+        "confidence": null,
+        "probabilities": {
+          "true": 0.1319,
+          "false": 0.8681
+        },
+        "expected": null
+      }
+    },
+    "latency_ms": 72.1,
+    "tokens_in": 674,
+    "tokens_out": 0,
+    "cost_usd": 2.8308000000000004e-05,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": true,
+    "raw": {
+      "model": "jev-1.13.0",
+      "answers": {
+        "pede_credencial": {
+          "type": "noul",
+          "noul": 0.9187
+        },
+        "urgencia_artificial": {
+          "type": "noul",
+          "noul": 0.0208
+        },
+        "promete_premio": {
+          "type": "noul",
+          "noul": 0.9218
+        },
+        "remetente_inconsistente": {
+          "type": "noul",
+          "noul": 0.0919
+        },
+        "link_suspeito": {
+          "type": "noul",
+          "noul": 0.8779
+        },
+        "pede_pagamento": {
+          "type": "noul",
+          "noul": 0.1319
+        }
+      },
+      "usage": {
+        "input_tokens": 674,
+        "output_tokens": 0
+      }
+    }
+  }
+}

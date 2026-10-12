@@ -1,0 +1,86 @@
+{
+  "key": "43c4f4257f7782a4253e",
+  "target": "llm:anthropic:claude-haiku-4-5-20251001",
+  "recorded_at": "2026-10-12",
+  "synthetic": false,
+  "origin": "LangChain init_chat_model + with_structured_output (anthropic:claude-haiku-4-5-20251001)",
+  "request": {
+    "state": {
+      "ticket": "Nosso financeiro precisa das notas de janeiro a junho em XML, não só em PDF. O sistema só deixa baixar PDF."
+    },
+    "questions": {
+      "pede_reembolso": {
+        "type": "noul",
+        "instructions": "O cliente pede dinheiro de volta?"
+      },
+      "ameaca_cancelar": {
+        "type": "noul",
+        "instructions": "O cliente diz que vai cancelar, sair ou migrar para outro fornecedor?"
+      },
+      "relata_erro": {
+        "type": "noul",
+        "instructions": "O cliente relata algo que não funciona como deveria?"
+      },
+      "pede_informacao": {
+        "type": "noul",
+        "instructions": "O cliente faz uma pergunta para obter informação?"
+      },
+      "urgencia": {
+        "type": "score",
+        "instructions": "Qual a urgência deste ticket de suporte?",
+        "criteria": [
+          "Pode esperar: dúvida, pedido de informação ou incômodo sem impacto no trabalho do cliente.",
+          "Resolver esta semana: algo não funciona ou o cliente está insatisfeito, mas ele consegue trabalhar.",
+          "Resolver hoje: o cliente está parado, perde dinheiro agora, tem prazo nas próximas horas ou houve problema de segurança."
+        ]
+      }
+    }
+  },
+  "result": {
+    "provider": "llm:anthropic:claude-haiku-4-5-20251001",
+    "model": "claude-haiku-4-5-20251001",
+    "answers": {
+      "pede_reembolso": {
+        "value": 0.0,
+        "confidence": 0.95,
+        "probabilities": null,
+        "expected": null
+      },
+      "ameaca_cancelar": {
+        "value": 0.0,
+        "confidence": 0.9,
+        "probabilities": null,
+        "expected": null
+      },
+      "relata_erro": {
+        "value": 1.0,
+        "confidence": 0.95,
+        "probabilities": null,
+        "expected": null
+      },
+      "pede_informacao": {
+        "value": 0.3,
+        "confidence": 0.7,
+        "probabilities": null,
+        "expected": null
+      },
+      "urgencia": {
+        "value": 1,
+        "confidence": 0.8,
+        "probabilities": null,
+        "expected": null
+      }
+    },
+    "latency_ms": 1839.0662999991036,
+    "tokens_in": 2059,
+    "tokens_out": 182,
+    "cost_usd": 0.002969,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": false,
+    "raw": {
+      "content": "[{\"id\": \"toolu_01CJzC9MFsDKtTUATeAxfQ3P\", \"caller\": {\"type\": \"direct\"}, \"input\": {\"pede_reembolso\": {\"value\": 0, \"confidence\": 0.95}, \"ameaca_cancelar\": {\"value\": 0, \"confidence\": 0.9}, \"relata_erro\": {\"value\": 1, \"confidence\": 0.95}, \"pede_informacao\": {\"value\": 0.3, \"confidence\": 0.7}, \"urgencia\": {\"value\": 1, \"confidence\": 0.8}}, \"name\": \"Respostas\", \"type\": \"tool_use\", \"toolset_name\": null}]",
+      "parsing_error": null
+    }
+  }
+}

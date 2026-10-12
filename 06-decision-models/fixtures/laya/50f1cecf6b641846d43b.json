@@ -1,0 +1,84 @@
+{
+  "key": "50f1cecf6b641846d43b",
+  "target": "laya",
+  "recorded_at": "2026-10-12",
+  "synthetic": false,
+  "origin": "laya-serve em http://127.0.0.1:8001, modelo multilingual",
+  "request": {
+    "state": {
+      "ticket": "Dá erro 500 quando gero o relatório de vendas por vendedor. Já limpei o cache e testei em outro navegador."
+    },
+    "questions": {
+      "fila": {
+        "type": "choice",
+        "instructions": "Qual fila deve atender este ticket de suporte?",
+        "criteria": {
+          "financeiro": "cobranças, estornos, notas fiscais, boletos e pagamentos",
+          "tecnico": "erros no sistema, integrações, lentidão e exportação de dados",
+          "comercial": "planos, preços, descontos, contratação e demonstrações",
+          "conta": "senha e acesso, dados cadastrais, cancelamento, usuários e permissões"
+        }
+      }
+    }
+  },
+  "result": {
+    "provider": "laya",
+    "model": "laya-rl-agent",
+    "answers": {
+      "fila": {
+        "value": "tecnico",
+        "confidence": 0.2914,
+        "probabilities": {
+          "financeiro": 0.3449,
+          "tecnico": 0.5275,
+          "comercial": 0.1243,
+          "conta": 0.0033
+        },
+        "expected": null
+      }
+    },
+    "latency_ms": 96.87069999927189,
+    "tokens_in": 116,
+    "tokens_out": 0,
+    "cost_usd": 0.0,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": false,
+    "raw": {
+      "model": "laya-rl-agent",
+      "answers": {
+        "fila": {
+          "type": "choice",
+          "choice": "tecnico",
+          "probabilities": {
+            "financeiro": 0.3449,
+            "tecnico": 0.5275,
+            "comercial": 0.1243,
+            "conta": 0.0033
+          },
+          "confidence": 0.2914,
+          "answer_confidence": 0.5275,
+          "action": {
+            "act_probability": 1.0
+          },
+          "x_jev_confidence": 0.37
+        }
+      },
+      "usage": {
+        "input_tokens": 116,
+        "output_tokens": 0,
+        "state_tokens": 32,
+        "state_tokens_dropped": 0,
+        "truncated": false,
+        "truncated_questions": []
+      },
+      "routing": {
+        "model": "multilingual",
+        "repo": "convaiinnovations/laya/multilingual",
+        "reason": "explicit model='multilingual'",
+        "detection": null,
+        "workflow": null
+      }
+    }
+  }
+}

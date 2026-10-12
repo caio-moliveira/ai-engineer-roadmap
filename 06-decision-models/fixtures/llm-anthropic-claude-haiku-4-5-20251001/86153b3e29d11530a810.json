@@ -1,0 +1,47 @@
+{
+  "key": "86153b3e29d11530a810",
+  "target": "llm:anthropic:claude-haiku-4-5-20251001",
+  "recorded_at": "2026-10-12",
+  "synthetic": false,
+  "origin": "LangChain init_chat_model + with_structured_output (anthropic:claude-haiku-4-5-20251001)",
+  "request": {
+    "state": {
+      "ticket": "Estamos avaliando trocar nosso sistema atual. Vocês importam dados de outro ERP?"
+    },
+    "questions": {
+      "categoria": {
+        "type": "choice",
+        "instructions": "Este ticket já foi enviado para a fila comercial. Qual a categoria dele?",
+        "criteria": {
+          "upgrade_plano": "mudar de plano, comparar planos ou aumentar limites",
+          "preco_desconto": "preço, desconto, promoção ou proposta da concorrência",
+          "contratacao_nova": "contratar o produto ou um módulo novo",
+          "demonstracao": "agendar ou pedir demonstração"
+        }
+      }
+    }
+  },
+  "result": {
+    "provider": "llm:anthropic:claude-haiku-4-5-20251001",
+    "model": "claude-haiku-4-5-20251001",
+    "answers": {
+      "categoria": {
+        "value": "contratacao_nova",
+        "confidence": 0.85,
+        "probabilities": null,
+        "expected": null
+      }
+    },
+    "latency_ms": 950.4856000021391,
+    "tokens_in": 1082,
+    "tokens_out": 55,
+    "cost_usd": 0.001357,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": false,
+    "raw": {
+      "content": "[{\"id\": \"toolu_01NrCbN5vuoD2XqKfw5hK4rw\", \"caller\": {\"type\": \"direct\"}, \"input\": {\"categoria\": {\"value\": \"contratacao_nova\", \"confidence\": 0.85}}, \"name\": \"Respostas\", \"type\": \"tool_use\", \"toolset_name\": null}]",
+      "parsing_error": null
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "key": "be57783296abd781f55d",
+  "target": "llm:anthropic:claude-haiku-4-5-20251001",
+  "recorded_at": "2026-10-12",
+  "synthetic": false,
+  "origin": "LangChain init_chat_model + with_structured_output (anthropic:claude-haiku-4-5-20251001)",
+  "request": {
+    "state": {
+      "remetente": "lucas.ti@grupoaurora.co",
+      "assunto": "Troca de senha obrigatória da rede",
+      "corpo": "Pessoal, por política de segurança, todos devem trocar a senha da rede até sexta. A troca é feita no computador, com Ctrl+Alt+Del. Ninguém da TI vai pedir sua senha."
+    },
+    "questions": {
+      "spam": {
+        "type": "noul",
+        "instructions": "Este e-mail é spam, golpe ou phishing?",
+        "criteria": {
+          "true": "Mensagem indesejada ou fraudulenta.",
+          "false": "Mensagem legítima, mesmo que seja comercial ou urgente."
+        }
+      }
+    }
+  },
+  "result": {
+    "provider": "llm:anthropic:claude-haiku-4-5-20251001",
+    "model": "claude-haiku-4-5-20251001",
+    "answers": {
+      "spam": {
+        "value": 0.15,
+        "confidence": 0.85,
+        "probabilities": null,
+        "expected": null
+      }
+    },
+    "latency_ms": 882.2823000009521,
+    "tokens_in": 1064,
+    "tokens_out": 53,
+    "cost_usd": 0.001329,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": false,
+    "raw": {
+      "content": "[{\"id\": \"toolu_01JC6aAWhmi8DhQGfLGamn5w\", \"caller\": {\"type\": \"direct\"}, \"input\": {\"spam\": {\"value\": 0.15, \"confidence\": 0.85}}, \"name\": \"Respostas\", \"type\": \"tool_use\", \"toolset_name\": null}]",
+      "parsing_error": null
+    }
+  }
+}

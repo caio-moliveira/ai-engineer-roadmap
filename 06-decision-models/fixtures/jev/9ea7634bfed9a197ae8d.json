@@ -1,0 +1,68 @@
+{
+  "key": "9ea7634bfed9a197ae8d",
+  "target": "jev",
+  "recorded_at": "2026-10-12",
+  "synthetic": true,
+  "origin": "SINTÉTICA: gerada a partir dos rótulos do golden set com ruído determinístico (fixtures/gerar_jev_sintetico.py). Não é medição do Jev.",
+  "request": {
+    "state": {
+      "ticket": "É a quarta vez este mês que o sistema cai no fechamento do caixa. Vocês não testam nada antes de lançar? Assim não dá para continuar."
+    },
+    "questions": {
+      "categoria": {
+        "type": "choice",
+        "instructions": "Este ticket já foi enviado para a fila comercial. Qual a categoria dele?",
+        "criteria": {
+          "upgrade_plano": "mudar de plano, comparar planos ou aumentar limites",
+          "preco_desconto": "preço, desconto, promoção ou proposta da concorrência",
+          "contratacao_nova": "contratar o produto ou um módulo novo",
+          "demonstracao": "agendar ou pedir demonstração"
+        }
+      }
+    }
+  },
+  "result": {
+    "provider": "jev",
+    "model": "jev-1.13.0",
+    "answers": {
+      "categoria": {
+        "value": "upgrade_plano",
+        "confidence": 0.7014,
+        "probabilities": {
+          "upgrade_plano": 0.7014,
+          "preco_desconto": 0.1243,
+          "contratacao_nova": 0.0129,
+          "demonstracao": 0.1614
+        },
+        "expected": null
+      }
+    },
+    "latency_ms": 59.5,
+    "tokens_in": 138,
+    "tokens_out": 0,
+    "cost_usd": 5.796e-06,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": true,
+    "raw": {
+      "model": "jev-1.13.0",
+      "answers": {
+        "categoria": {
+          "type": "choice",
+          "choice": "upgrade_plano",
+          "confidence": 0.7014,
+          "probabilities": {
+            "upgrade_plano": 0.7014,
+            "preco_desconto": 0.1243,
+            "contratacao_nova": 0.0129,
+            "demonstracao": 0.1614
+          }
+        }
+      },
+      "usage": {
+        "input_tokens": 138,
+        "output_tokens": 0
+      }
+    }
+  }
+}

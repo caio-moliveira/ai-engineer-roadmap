@@ -1,0 +1,104 @@
+{
+  "key": "4654fc4db96d989914d7",
+  "target": "jev",
+  "recorded_at": "2026-10-12",
+  "synthetic": true,
+  "origin": "SINTÉTICA: gerada a partir dos rótulos do golden set com ruído determinístico (fixtures/gerar_jev_sintetico.py). Não é medição do Jev.",
+  "request": {
+    "state": {
+      "ticket": "Quero baixar um backup completo dos meus dados antes de decidir se renovo o contrato."
+    },
+    "questions": {
+      "categoria": {
+        "type": "choice",
+        "instructions": "Qual a categoria deste ticket de suporte?",
+        "criteria": {
+          "cobranca_indevida": "cobrança duplicada ou de algo que o cliente não contratou",
+          "estorno": "pedido ou dúvida sobre devolução de dinheiro",
+          "nota_fiscal": "emissão, correção ou envio de nota fiscal",
+          "boleto_pagamento": "boleto, Pix, cartão, forma de pagamento ou acesso bloqueado por pagamento",
+          "erro_app": "falha, travamento ou botão que não funciona no sistema ou no app",
+          "integracao": "API, webhook, ERP, marketplace ou sincronização com outro sistema",
+          "lentidao": "sistema ou tela lenta",
+          "exportacao": "exportar, baixar ou fazer backup de dados e relatórios",
+          "upgrade_plano": "mudar de plano, comparar planos ou aumentar limites",
+          "preco_desconto": "preço, desconto, promoção ou proposta da concorrência",
+          "contratacao_nova": "contratar o produto ou um módulo novo",
+          "demonstracao": "agendar ou pedir demonstração",
+          "senha_acesso": "senha, login, bloqueio por senha, dois fatores ou invasão",
+          "dados_cadastro": "e-mail, endereço, CNPJ ou outros dados cadastrais",
+          "cancelamento": "cancelar a assinatura ou a conta",
+          "usuarios_permissoes": "usuários, permissões e limite de usuários"
+        }
+      }
+    }
+  },
+  "result": {
+    "provider": "jev",
+    "model": "jev-1.13.0",
+    "answers": {
+      "categoria": {
+        "value": "exportacao",
+        "confidence": 0.9429,
+        "probabilities": {
+          "cobranca_indevida": 0.003,
+          "estorno": 0.0065,
+          "nota_fiscal": 0.0027,
+          "boleto_pagamento": 0.0059,
+          "erro_app": 0.0017,
+          "integracao": 0.0059,
+          "lentidao": 0.0061,
+          "exportacao": 0.9429,
+          "upgrade_plano": 0.0049,
+          "preco_desconto": 0.0029,
+          "contratacao_nova": 0.0056,
+          "demonstracao": 0.0024,
+          "senha_acesso": 0.001,
+          "dados_cadastro": 0.0012,
+          "cancelamento": 0.0018,
+          "usuarios_permissoes": 0.0056
+        },
+        "expected": null
+      }
+    },
+    "latency_ms": 53.3,
+    "tokens_in": 254,
+    "tokens_out": 0,
+    "cost_usd": 1.0668000000000002e-05,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": true,
+    "raw": {
+      "model": "jev-1.13.0",
+      "answers": {
+        "categoria": {
+          "type": "choice",
+          "choice": "exportacao",
+          "confidence": 0.9429,
+          "probabilities": {
+            "cobranca_indevida": 0.003,
+            "estorno": 0.0065,
+            "nota_fiscal": 0.0027,
+            "boleto_pagamento": 0.0059,
+            "erro_app": 0.0017,
+            "integracao": 0.0059,
+            "lentidao": 0.0061,
+            "exportacao": 0.9429,
+            "upgrade_plano": 0.0049,
+            "preco_desconto": 0.0029,
+            "contratacao_nova": 0.0056,
+            "demonstracao": 0.0024,
+            "senha_acesso": 0.001,
+            "dados_cadastro": 0.0012,
+            "cancelamento": 0.0018,
+            "usuarios_permissoes": 0.0056
+          }
+        }
+      },
+      "usage": {
+        "input_tokens": 254,
+        "output_tokens": 0
+      }
+    }
+  }
+}

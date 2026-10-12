@@ -1,0 +1,48 @@
+{
+  "key": "8d55a82369c855cba2e4",
+  "target": "llm:anthropic:claude-haiku-4-5-20251001",
+  "recorded_at": "2026-10-12",
+  "synthetic": false,
+  "origin": "LangChain init_chat_model + with_structured_output (anthropic:claude-haiku-4-5-20251001)",
+  "request": {
+    "state": {
+      "ticket": "Vou cancelar no fim do mês. Antes disso, quero exportar tudo e saber se tem multa."
+    },
+    "questions": {
+      "assunto_principal": {
+        "type": "choice",
+        "instructions": "Qual destas situações melhor descreve o ticket?",
+        "criteria": {
+          "pede_reembolso": "o cliente pede dinheiro de volta",
+          "ameaca_cancelar": "o cliente diz que vai cancelar, sair ou migrar",
+          "relata_erro": "o cliente relata algo que não funciona",
+          "pede_informacao": "o cliente faz uma pergunta para obter informação",
+          "nenhuma": "nenhuma das anteriores"
+        }
+      }
+    }
+  },
+  "result": {
+    "provider": "llm:anthropic:claude-haiku-4-5-20251001",
+    "model": "claude-haiku-4-5-20251001",
+    "answers": {
+      "assunto_principal": {
+        "value": "ameaca_cancelar",
+        "confidence": 0.85,
+        "probabilities": null,
+        "expected": null
+      }
+    },
+    "latency_ms": 948.6629000020912,
+    "tokens_in": 1099,
+    "tokens_out": 59,
+    "cost_usd": 0.001394,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": false,
+    "raw": {
+      "content": "[{\"id\": \"toolu_01Gqb6Ag8mM11BNyBYuaBWpG\", \"caller\": {\"type\": \"direct\"}, \"input\": {\"assunto_principal\": {\"value\": \"ameaca_cancelar\", \"confidence\": 0.85}}, \"name\": \"Respostas\", \"type\": \"tool_use\", \"toolset_name\": null}]",
+      "parsing_error": null
+    }
+  }
+}

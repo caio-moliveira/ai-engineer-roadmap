@@ -1,0 +1,63 @@
+{
+  "key": "e6e9db934a0164d0a965",
+  "target": "geracao:anthropic:claude-haiku-4-5-20251001",
+  "recorded_at": "2026-10-12",
+  "synthetic": false,
+  "origin": "init_chat_model (anthropic:claude-haiku-4-5-20251001)",
+  "request": {
+    "tipo": "geracao",
+    "modelo": "anthropic:claude-haiku-4-5-20251001",
+    "system": "Você é o assistente de dados de vendas da empresa Mercado Jornada. Responda em português, em até três frases, usando SÓ os dados recebidos. Cite os números como estão nos dados. Não faça previsões, não exponha dado pessoal e não recomende punição de pessoas.",
+    "pergunta": "Quanto Papelaria representa da receita de 2026?",
+    "dados": [
+      {
+        "categoria": "Informática",
+        "receita": 1359340.79,
+        "unidades": 915,
+        "margem_pct": 22.2,
+        "participacao_pct": 31.5
+      },
+      {
+        "categoria": "Eletrodomésticos",
+        "receita": 834925.94,
+        "unidades": 698,
+        "margem_pct": 30.7,
+        "participacao_pct": 19.3
+      },
+      {
+        "categoria": "Móveis de Escritório",
+        "receita": 815804.65,
+        "unidades": 647,
+        "margem_pct": 35.0,
+        "participacao_pct": 18.9
+      },
+      {
+        "categoria": "Eletrônicos",
+        "receita": 754134.94,
+        "unidades": 804,
+        "margem_pct": 26.3,
+        "participacao_pct": 17.5
+      },
+      {
+        "categoria": "Papelaria",
+        "receita": 357487.88,
+        "unidades": 2005,
+        "margem_pct": 43.2,
+        "participacao_pct": 8.3
+      },
+      {
+        "categoria": "Limpeza e Copa",
+        "receita": 198972.8,
+        "unidades": 1610,
+        "margem_pct": 38.5,
+        "participacao_pct": 4.6
+      }
+    ]
+  },
+  "result": {
+    "texto": "Papelaria representa 8.3% da receita de 2026, com um valor de 357487.88. Esta categoria, apesar da menor participação percentual, apresenta a segunda maior margem de lucro entre todas as categorias, com 43.2%.",
+    "latency_ms": 1190.1204999994661,
+    "tokens_in": 453,
+    "tokens_out": 65
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "key": "7d7823690c3c2f1a6d1b",
+  "target": "jev",
+  "recorded_at": "2026-10-12",
+  "synthetic": true,
+  "origin": "SINTÉTICA: gerada a partir dos rótulos do golden set com ruído determinístico (fixtures/gerar_jev_sintetico.py). Não é medição do Jev.",
+  "request": {
+    "state": {
+      "ticket": "Quero contratar o módulo de nota fiscal eletrônica. Ele já vem no plano pro?"
+    },
+    "questions": {
+      "categoria": {
+        "type": "choice",
+        "instructions": "Este ticket já foi enviado para a fila conta. Qual a categoria dele?",
+        "criteria": {
+          "senha_acesso": "senha, login, bloqueio por senha, dois fatores ou invasão",
+          "dados_cadastro": "e-mail, endereço, CNPJ ou outros dados cadastrais",
+          "cancelamento": "cancelar a assinatura ou a conta",
+          "usuarios_permissoes": "usuários, permissões e limite de usuários"
+        }
+      }
+    }
+  },
+  "result": {
+    "provider": "jev",
+    "model": "jev-1.13.0",
+    "answers": {
+      "categoria": {
+        "value": "senha_acesso",
+        "confidence": 0.7779,
+        "probabilities": {
+          "senha_acesso": 0.7779,
+          "dados_cadastro": 0.0803,
+          "cancelamento": 0.1322,
+          "usuarios_permissoes": 0.0096
+        },
+        "expected": null
+      }
+    },
+    "latency_ms": 51.5,
+    "tokens_in": 125,
+    "tokens_out": 0,
+    "cost_usd": 5.25e-06,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": true,
+    "raw": {
+      "model": "jev-1.13.0",
+      "answers": {
+        "categoria": {
+          "type": "choice",
+          "choice": "senha_acesso",
+          "confidence": 0.7779,
+          "probabilities": {
+            "senha_acesso": 0.7779,
+            "dados_cadastro": 0.0803,
+            "cancelamento": 0.1322,
+            "usuarios_permissoes": 0.0096
+          }
+        }
+      },
+      "usage": {
+        "input_tokens": 125,
+        "output_tokens": 0
+      }
+    }
+  }
+}

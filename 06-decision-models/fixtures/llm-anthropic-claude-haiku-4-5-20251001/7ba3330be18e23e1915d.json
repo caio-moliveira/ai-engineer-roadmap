@@ -1,0 +1,95 @@
+{
+  "key": "7ba3330be18e23e1915d",
+  "target": "llm:anthropic:claude-haiku-4-5-20251001",
+  "recorded_at": "2026-10-12",
+  "synthetic": false,
+  "origin": "LangChain init_chat_model + with_structured_output (anthropic:claude-haiku-4-5-20251001)",
+  "request": {
+    "state": {
+      "pergunta": "Qual foi o crescimento da receita em 2026?",
+      "dados": [
+        {
+          "indicador": "Receita jan-set 2026",
+          "valor": 4320667.0,
+          "unidade": "BRL"
+        },
+        {
+          "indicador": "Receita jan-set 2025",
+          "valor": 3809491.2,
+          "unidade": "BRL"
+        },
+        {
+          "indicador": "Crescimento da receita",
+          "valor": 13.4,
+          "unidade": "%"
+        },
+        {
+          "indicador": "Pedidos faturados",
+          "valor": 1011.0,
+          "unidade": "pedidos"
+        },
+        {
+          "indicador": "Ticket médio",
+          "valor": 4273.66,
+          "unidade": "BRL"
+        },
+        {
+          "indicador": "Clientes ativos",
+          "valor": 149.0,
+          "unidade": "clientes"
+        },
+        {
+          "indicador": "Atingimento da meta",
+          "valor": 99.6,
+          "unidade": "%"
+        },
+        {
+          "indicador": "Taxa de cancelamento",
+          "valor": 3.6,
+          "unidade": "%"
+        },
+        {
+          "indicador": "Margem bruta",
+          "valor": 29.5,
+          "unidade": "%"
+        }
+      ],
+      "resposta": "A receita de jan a set de 2026 cresceu 13,4% sobre o mesmo período de 2025, de R$ 3,81 milhões para R$ 4,32 milhões."
+    },
+    "questions": {
+      "qualidade": {
+        "type": "score",
+        "instructions": "Qual a qualidade da `resposta` para a `pergunta`, considerando os `dados`?",
+        "criteria": [
+          "Ruim: não responde ou afirma números errados.",
+          "Fraca: responde em parte, ou mistura acerto com erro, previsão ou opinião indevida.",
+          "Boa: responde corretamente, mas incompleta ou com algo desnecessário.",
+          "Excelente: responde completa e corretamente, só com os dados."
+        ]
+      }
+    }
+  },
+  "result": {
+    "provider": "llm:anthropic:claude-haiku-4-5-20251001",
+    "model": "claude-haiku-4-5-20251001",
+    "answers": {
+      "qualidade": {
+        "value": 3,
+        "confidence": 0.95,
+        "probabilities": null,
+        "expected": null
+      }
+    },
+    "latency_ms": 878.6237999993318,
+    "tokens_in": 1547,
+    "tokens_out": 52,
+    "cost_usd": 0.001807,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": false,
+    "raw": {
+      "content": "[{\"id\": \"toolu_01Hk8mf7CEpGKrGjcKP27Cdk\", \"caller\": {\"type\": \"direct\"}, \"input\": {\"qualidade\": {\"value\": 3, \"confidence\": 0.95}}, \"name\": \"Respostas\", \"type\": \"tool_use\", \"toolset_name\": null}]",
+      "parsing_error": null
+    }
+  }
+}

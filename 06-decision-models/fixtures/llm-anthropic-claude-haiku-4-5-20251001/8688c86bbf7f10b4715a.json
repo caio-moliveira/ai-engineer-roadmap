@@ -1,0 +1,48 @@
+{
+  "key": "8688c86bbf7f10b4715a",
+  "target": "llm:anthropic:claude-haiku-4-5-20251001",
+  "recorded_at": "2026-10-12",
+  "synthetic": false,
+  "origin": "LangChain init_chat_model + with_structured_output (anthropic:claude-haiku-4-5-20251001)",
+  "request": {
+    "state": {
+      "ticket": "Minha conta foi bloqueada depois de errar a senha três vezes e preciso emitir pedidos agora."
+    },
+    "questions": {
+      "assunto_principal": {
+        "type": "choice",
+        "instructions": "Qual destas situações melhor descreve o ticket?",
+        "criteria": {
+          "pede_reembolso": "o cliente pede dinheiro de volta",
+          "ameaca_cancelar": "o cliente diz que vai cancelar, sair ou migrar",
+          "relata_erro": "o cliente relata algo que não funciona",
+          "pede_informacao": "o cliente faz uma pergunta para obter informação",
+          "nenhuma": "nenhuma das anteriores"
+        }
+      }
+    }
+  },
+  "result": {
+    "provider": "llm:anthropic:claude-haiku-4-5-20251001",
+    "model": "claude-haiku-4-5-20251001",
+    "answers": {
+      "assunto_principal": {
+        "value": "relata_erro",
+        "confidence": 0.85,
+        "probabilities": null,
+        "expected": null
+      }
+    },
+    "latency_ms": 923.3032000011008,
+    "tokens_in": 1097,
+    "tokens_out": 57,
+    "cost_usd": 0.001382,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": false,
+    "raw": {
+      "content": "[{\"id\": \"toolu_01LcxAgvDyXcxptRswutD6j5\", \"caller\": {\"type\": \"direct\"}, \"input\": {\"assunto_principal\": {\"value\": \"relata_erro\", \"confidence\": 0.85}}, \"name\": \"Respostas\", \"type\": \"tool_use\", \"toolset_name\": null}]",
+      "parsing_error": null
+    }
+  }
+}

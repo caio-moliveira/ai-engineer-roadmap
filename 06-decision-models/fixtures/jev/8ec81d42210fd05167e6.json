@@ -1,0 +1,71 @@
+{
+  "key": "8ec81d42210fd05167e6",
+  "target": "jev",
+  "recorded_at": "2026-10-12",
+  "synthetic": true,
+  "origin": "SINTÉTICA: gerada a partir dos rótulos do golden set com ruído determinístico (fixtures/gerar_jev_sintetico.py). Não é medição do Jev.",
+  "request": {
+    "state": {
+      "pergunta": "O que causa o efeito estufa?",
+      "trecho": "O vapor d'água é o gás de efeito estufa mais abundante, mas sua concentração responde à temperatura em vez de controlá-la."
+    },
+    "questions": {
+      "relevancia": {
+        "type": "score",
+        "instructions": "O `trecho` ajuda a responder a `pergunta`?",
+        "criteria": [
+          "Não responde: fala de outro assunto ou só compartilha palavras com a pergunta.",
+          "Relacionado: trata do tema, mas não responde à pergunta.",
+          "Responde: contém a informação que a pergunta pede."
+        ]
+      }
+    }
+  },
+  "result": {
+    "provider": "jev",
+    "model": "jev-1.13.0",
+    "answers": {
+      "relevancia": {
+        "value": 2,
+        "confidence": 0.8466,
+        "probabilities": {
+          "0": 0.0901,
+          "1": 0.0633,
+          "2": 0.8466
+        },
+        "expected": 1.7565
+      }
+    },
+    "latency_ms": 55.8,
+    "tokens_in": 123,
+    "tokens_out": 0,
+    "cost_usd": 5.166e-06,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": true,
+    "raw": {
+      "model": "jev-1.13.0",
+      "answers": {
+        "relevancia": {
+          "type": "score",
+          "score": 1.7565,
+          "confidence": 0.8466,
+          "legend": {
+            "0": "Não responde: fala de outro assunto ou só compartilha palavras com a pergunta.",
+            "1": "Relacionado: trata do tema, mas não responde à pergunta.",
+            "2": "Responde: contém a informação que a pergunta pede."
+          },
+          "probabilities": {
+            "0": 0.0901,
+            "1": 0.0633,
+            "2": 0.8466
+          }
+        }
+      },
+      "usage": {
+        "input_tokens": 123,
+        "output_tokens": 0
+      }
+    }
+  }
+}

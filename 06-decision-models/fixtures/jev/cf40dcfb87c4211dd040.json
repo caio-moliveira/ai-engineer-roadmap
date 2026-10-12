@@ -1,0 +1,68 @@
+{
+  "key": "cf40dcfb87c4211dd040",
+  "target": "jev",
+  "recorded_at": "2026-10-12",
+  "synthetic": true,
+  "origin": "SINTÉTICA: gerada a partir dos rótulos do golden set com ruído determinístico (fixtures/gerar_jev_sintetico.py). Não é medição do Jev.",
+  "request": {
+    "state": {
+      "ticket": "Assisti à demonstração gravada, mas queria ver o módulo de estoque funcionando com um especialista."
+    },
+    "questions": {
+      "categoria": {
+        "type": "choice",
+        "instructions": "Este ticket já foi enviado para a fila comercial. Qual a categoria dele?",
+        "criteria": {
+          "upgrade_plano": "mudar de plano, comparar planos ou aumentar limites",
+          "preco_desconto": "preço, desconto, promoção ou proposta da concorrência",
+          "contratacao_nova": "contratar o produto ou um módulo novo",
+          "demonstracao": "agendar ou pedir demonstração"
+        }
+      }
+    }
+  },
+  "result": {
+    "provider": "jev",
+    "model": "jev-1.13.0",
+    "answers": {
+      "categoria": {
+        "value": "demonstracao",
+        "confidence": 0.8719,
+        "probabilities": {
+          "upgrade_plano": 0.0746,
+          "preco_desconto": 0.0111,
+          "contratacao_nova": 0.0424,
+          "demonstracao": 0.8719
+        },
+        "expected": null
+      }
+    },
+    "latency_ms": 61.6,
+    "tokens_in": 129,
+    "tokens_out": 0,
+    "cost_usd": 5.4180000000000005e-06,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": true,
+    "raw": {
+      "model": "jev-1.13.0",
+      "answers": {
+        "categoria": {
+          "type": "choice",
+          "choice": "demonstracao",
+          "confidence": 0.8719,
+          "probabilities": {
+            "upgrade_plano": 0.0746,
+            "preco_desconto": 0.0111,
+            "contratacao_nova": 0.0424,
+            "demonstracao": 0.8719
+          }
+        }
+      },
+      "usage": {
+        "input_tokens": 129,
+        "output_tokens": 0
+      }
+    }
+  }
+}

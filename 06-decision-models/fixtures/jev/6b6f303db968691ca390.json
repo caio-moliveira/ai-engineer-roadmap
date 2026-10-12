@@ -1,0 +1,68 @@
+{
+  "key": "6b6f303db968691ca390",
+  "target": "jev",
+  "recorded_at": "2026-10-12",
+  "synthetic": true,
+  "origin": "SINTÉTICA: gerada a partir dos rótulos do golden set com ruído determinístico (fixtures/gerar_jev_sintetico.py). Não é medição do Jev.",
+  "request": {
+    "state": {
+      "ticket": "O webhook de pedido criado está chegando duplicado no nosso servidor."
+    },
+    "questions": {
+      "categoria": {
+        "type": "choice",
+        "instructions": "Este ticket já foi enviado para a fila tecnico. Qual a categoria dele?",
+        "criteria": {
+          "erro_app": "falha, travamento ou botão que não funciona no sistema ou no app",
+          "integracao": "API, webhook, ERP, marketplace ou sincronização com outro sistema",
+          "lentidao": "sistema ou tela lenta",
+          "exportacao": "exportar, baixar ou fazer backup de dados e relatórios"
+        }
+      }
+    }
+  },
+  "result": {
+    "provider": "jev",
+    "model": "jev-1.13.0",
+    "answers": {
+      "categoria": {
+        "value": "integracao",
+        "confidence": 0.8662,
+        "probabilities": {
+          "erro_app": 0.0497,
+          "integracao": 0.8662,
+          "lentidao": 0.0286,
+          "exportacao": 0.0555
+        },
+        "expected": null
+      }
+    },
+    "latency_ms": 51.4,
+    "tokens_in": 101,
+    "tokens_out": 0,
+    "cost_usd": 4.242e-06,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": true,
+    "raw": {
+      "model": "jev-1.13.0",
+      "answers": {
+        "categoria": {
+          "type": "choice",
+          "choice": "integracao",
+          "confidence": 0.8662,
+          "probabilities": {
+            "erro_app": 0.0497,
+            "integracao": 0.8662,
+            "lentidao": 0.0286,
+            "exportacao": 0.0555
+          }
+        }
+      },
+      "usage": {
+        "input_tokens": 101,
+        "output_tokens": 0
+      }
+    }
+  }
+}

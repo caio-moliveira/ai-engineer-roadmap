@@ -1,0 +1,128 @@
+{
+  "key": "178edf7ba04d969a9cf3",
+  "target": "laya",
+  "recorded_at": "2026-10-12",
+  "synthetic": false,
+  "origin": "laya-serve em http://127.0.0.1:8001, modelo multilingual",
+  "request": {
+    "state": {
+      "pergunta": "Qual região vendeu mais em 2026?",
+      "dados": [
+        {
+          "regiao": "Sudeste",
+          "receita": 1722175.42,
+          "pedidos": 390,
+          "clientes_ativos": 58,
+          "participacao_pct": 39.9
+        },
+        {
+          "regiao": "Nordeste",
+          "receita": 1016023.16,
+          "pedidos": 257,
+          "clientes_ativos": 38,
+          "participacao_pct": 23.5
+        },
+        {
+          "regiao": "Sul",
+          "receita": 679495.39,
+          "pedidos": 168,
+          "clientes_ativos": 26,
+          "participacao_pct": 15.7
+        },
+        {
+          "regiao": "Centro-Oeste",
+          "receita": 592958.91,
+          "pedidos": 141,
+          "clientes_ativos": 19,
+          "participacao_pct": 13.7
+        },
+        {
+          "regiao": "Norte",
+          "receita": 310014.12,
+          "pedidos": 55,
+          "clientes_ativos": 8,
+          "participacao_pct": 7.2
+        }
+      ],
+      "resposta": "Temos cinco regiões: Sudeste, Nordeste, Sul, Centro-Oeste e Norte."
+    },
+    "questions": {
+      "qualidade": {
+        "type": "score",
+        "instructions": "Qual a qualidade da `resposta` para a `pergunta`, considerando os `dados`?",
+        "criteria": [
+          "Ruim: não responde ou afirma números errados.",
+          "Fraca: responde em parte, ou mistura acerto com erro, previsão ou opinião indevida.",
+          "Boa: responde corretamente, mas incompleta ou com algo desnecessário.",
+          "Excelente: responde completa e corretamente, só com os dados."
+        ]
+      }
+    }
+  },
+  "result": {
+    "provider": "laya",
+    "model": "laya-rl-agent",
+    "answers": {
+      "qualidade": {
+        "value": 2,
+        "confidence": 0.3715,
+        "probabilities": {
+          "0": 0.0902,
+          "1": 0.0307,
+          "2": 0.7075,
+          "3": 0.1716
+        },
+        "expected": 1.9605
+      }
+    },
+    "latency_ms": 768.8430000016524,
+    "tokens_in": 405,
+    "tokens_out": 0,
+    "cost_usd": 0.0,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": false,
+    "raw": {
+      "model": "laya-rl-agent",
+      "answers": {
+        "qualidade": {
+          "type": "score",
+          "score": 1.9605,
+          "legend": {
+            "0": "Ruim: não responde ou afirma números errados.",
+            "1": "Fraca: responde em parte, ou mistura acerto com erro, previsão ou opinião indevida.",
+            "2": "Boa: responde corretamente, mas incompleta ou com algo desnecessário.",
+            "3": "Excelente: responde completa e corretamente, só com os dados."
+          },
+          "probabilities": {
+            "0": 0.0902,
+            "1": 0.0307,
+            "2": 0.7075,
+            "3": 0.1716
+          },
+          "confidence": 0.3715,
+          "answer_confidence": 0.7075,
+          "action": {
+            "act_probability": 1.0
+          },
+          "x_jev_confidence": 0.6173
+        }
+      },
+      "usage": {
+        "input_tokens": 405,
+        "output_tokens": 0,
+        "state_tokens": 301,
+        "state_tokens_dropped": 0,
+        "truncated": false,
+        "truncated_questions": []
+      },
+      "routing": {
+        "model": "multilingual",
+        "repo": "convaiinnovations/laya/multilingual",
+        "reason": "explicit model='multilingual'",
+        "detection": null,
+        "workflow": null
+      }
+    }
+  }
+}

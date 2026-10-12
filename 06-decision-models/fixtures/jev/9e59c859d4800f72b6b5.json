@@ -1,0 +1,59 @@
+{
+  "key": "9e59c859d4800f72b6b5",
+  "target": "jev",
+  "recorded_at": "2026-10-12",
+  "synthetic": true,
+  "origin": "SINTÉTICA: gerada a partir dos rótulos do golden set com ruído determinístico (fixtures/gerar_jev_sintetico.py). Não é medição do Jev.",
+  "request": {
+    "state": {
+      "remetente": "cursos@escoladados.com.br",
+      "assunto": "Últimas vagas com desconto",
+      "corpo": "A turma de Engenharia de IA começa em novembro. Inscrições com 20% de desconto até sexta-feira."
+    },
+    "questions": {
+      "spam": {
+        "type": "noul",
+        "instructions": "Este e-mail é spam, golpe ou phishing?",
+        "criteria": {
+          "true": "Mensagem indesejada ou fraudulenta.",
+          "false": "Mensagem legítima, mesmo que seja comercial ou urgente."
+        }
+      }
+    }
+  },
+  "result": {
+    "provider": "jev",
+    "model": "jev-1.13.0",
+    "answers": {
+      "spam": {
+        "value": 0.1121,
+        "confidence": null,
+        "probabilities": {
+          "true": 0.1121,
+          "false": 0.8879
+        },
+        "expected": null
+      }
+    },
+    "latency_ms": 52.6,
+    "tokens_in": 103,
+    "tokens_out": 0,
+    "cost_usd": 4.326000000000001e-06,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": true,
+    "raw": {
+      "model": "jev-1.13.0",
+      "answers": {
+        "spam": {
+          "type": "noul",
+          "noul": 0.1121
+        }
+      },
+      "usage": {
+        "input_tokens": 103,
+        "output_tokens": 0
+      }
+    }
+  }
+}

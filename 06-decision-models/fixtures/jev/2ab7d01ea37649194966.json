@@ -1,0 +1,71 @@
+{
+  "key": "2ab7d01ea37649194966",
+  "target": "jev",
+  "recorded_at": "2026-10-12",
+  "synthetic": true,
+  "origin": "SINTÉTICA: gerada a partir dos rótulos do golden set com ruído determinístico (fixtures/gerar_jev_sintetico.py). Não é medição do Jev.",
+  "request": {
+    "state": {
+      "pergunta": "Por que o Ártico aquece mais rápido que o resto do planeta?",
+      "trecho": "Rotas de navegação pelo Ártico estão ficando abertas por mais meses do ano."
+    },
+    "questions": {
+      "relevancia": {
+        "type": "score",
+        "instructions": "O `trecho` ajuda a responder a `pergunta`?",
+        "criteria": [
+          "Não responde: fala de outro assunto ou só compartilha palavras com a pergunta.",
+          "Relacionado: trata do tema, mas não responde à pergunta.",
+          "Responde: contém a informação que a pergunta pede."
+        ]
+      }
+    }
+  },
+  "result": {
+    "provider": "jev",
+    "model": "jev-1.13.0",
+    "answers": {
+      "relevancia": {
+        "value": 0,
+        "confidence": 0.7627,
+        "probabilities": {
+          "0": 0.7627,
+          "1": 0.1261,
+          "2": 0.1112
+        },
+        "expected": 0.3485
+      }
+    },
+    "latency_ms": 57.4,
+    "tokens_in": 120,
+    "tokens_out": 0,
+    "cost_usd": 5.04e-06,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": true,
+    "raw": {
+      "model": "jev-1.13.0",
+      "answers": {
+        "relevancia": {
+          "type": "score",
+          "score": 0.3485,
+          "confidence": 0.7627,
+          "legend": {
+            "0": "Não responde: fala de outro assunto ou só compartilha palavras com a pergunta.",
+            "1": "Relacionado: trata do tema, mas não responde à pergunta.",
+            "2": "Responde: contém a informação que a pergunta pede."
+          },
+          "probabilities": {
+            "0": 0.7627,
+            "1": 0.1261,
+            "2": 0.1112
+          }
+        }
+      },
+      "usage": {
+        "input_tokens": 120,
+        "output_tokens": 0
+      }
+    }
+  }
+}

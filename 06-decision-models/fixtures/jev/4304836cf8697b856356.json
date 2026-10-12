@@ -1,0 +1,59 @@
+{
+  "key": "4304836cf8697b856356",
+  "target": "jev",
+  "recorded_at": "2026-10-12",
+  "synthetic": true,
+  "origin": "SINTÉTICA: gerada a partir dos rótulos do golden set com ruído determinístico (fixtures/gerar_jev_sintetico.py). Não é medição do Jev.",
+  "request": {
+    "state": {
+      "remetente": "promo@clubefidelidade-pontos.app",
+      "assunto": "Seus 85.000 pontos expiram hoje",
+      "corpo": "Resgate agora seus pontos antes que expirem à meia-noite. Informe login e senha do cartão em http://clubefidelidade-pontos.app/resgate"
+    },
+    "questions": {
+      "spam": {
+        "type": "noul",
+        "instructions": "Este e-mail é spam, golpe ou phishing?",
+        "criteria": {
+          "true": "Mensagem indesejada ou fraudulenta.",
+          "false": "Mensagem legítima, mesmo que seja comercial ou urgente."
+        }
+      }
+    }
+  },
+  "result": {
+    "provider": "jev",
+    "model": "jev-1.13.0",
+    "answers": {
+      "spam": {
+        "value": 0.8838,
+        "confidence": null,
+        "probabilities": {
+          "true": 0.8838,
+          "false": 0.11619999999999997
+        },
+        "expected": null
+      }
+    },
+    "latency_ms": 65.3,
+    "tokens_in": 123,
+    "tokens_out": 0,
+    "cost_usd": 5.166e-06,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": true,
+    "raw": {
+      "model": "jev-1.13.0",
+      "answers": {
+        "spam": {
+          "type": "noul",
+          "noul": 0.8838
+        }
+      },
+      "usage": {
+        "input_tokens": 123,
+        "output_tokens": 0
+      }
+    }
+  }
+}

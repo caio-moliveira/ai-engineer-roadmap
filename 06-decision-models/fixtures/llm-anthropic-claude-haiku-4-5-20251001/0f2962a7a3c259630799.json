@@ -1,0 +1,47 @@
+{
+  "key": "0f2962a7a3c259630799",
+  "target": "llm:anthropic:claude-haiku-4-5-20251001",
+  "recorded_at": "2026-10-12",
+  "synthetic": false,
+  "origin": "LangChain init_chat_model + with_structured_output (anthropic:claude-haiku-4-5-20251001)",
+  "request": {
+    "state": {
+      "pergunta": "Por que o Ártico aquece mais rápido que o resto do planeta?",
+      "trecho": "O Ártico aquece cerca de quatro vezes mais rápido que a média global, fenômeno chamado amplificação ártica."
+    },
+    "questions": {
+      "relevancia": {
+        "type": "score",
+        "instructions": "O `trecho` ajuda a responder a `pergunta`?",
+        "criteria": [
+          "Não responde: fala de outro assunto ou só compartilha palavras com a pergunta.",
+          "Relacionado: trata do tema, mas não responde à pergunta.",
+          "Responde: contém a informação que a pergunta pede."
+        ]
+      }
+    }
+  },
+  "result": {
+    "provider": "llm:anthropic:claude-haiku-4-5-20251001",
+    "model": "claude-haiku-4-5-20251001",
+    "answers": {
+      "relevancia": {
+        "value": 1,
+        "confidence": 0.85,
+        "probabilities": null,
+        "expected": null
+      }
+    },
+    "latency_ms": 1013.9906000003975,
+    "tokens_in": 1094,
+    "tokens_out": 52,
+    "cost_usd": 0.001354,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": false,
+    "raw": {
+      "content": "[{\"id\": \"toolu_01HCbfTCePApezD1Jx2qrpCF\", \"caller\": {\"type\": \"direct\"}, \"input\": {\"relevancia\": {\"value\": 1, \"confidence\": 0.85}}, \"name\": \"Respostas\", \"type\": \"tool_use\", \"toolset_name\": null}]",
+      "parsing_error": null
+    }
+  }
+}

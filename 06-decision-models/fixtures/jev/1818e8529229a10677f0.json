@@ -1,0 +1,80 @@
+{
+  "key": "1818e8529229a10677f0",
+  "target": "jev",
+  "recorded_at": "2026-10-12",
+  "synthetic": true,
+  "origin": "SINTÉTICA: gerada a partir dos rótulos do golden set com ruído determinístico (fixtures/gerar_jev_sintetico.py). Não é medição do Jev.",
+  "request": {
+    "state": {
+      "pergunta": "Em qual região estão mais clientes comprando?"
+    },
+    "questions": {
+      "tool": {
+        "type": "choice",
+        "instructions": "Qual consulta de dados responde a pergunta?",
+        "criteria": {
+          "vendas_mensal": "Receita, número de pedidos, ticket médio e variação de cada mês, de jan/2025 a set/2026. Para evolução no tempo, sazonalidade e comparação entre meses.",
+          "vendas_por_categoria": "Receita, unidades, margem e participação de cada categoria de produto em 2026.",
+          "top_produtos": "Os 10 produtos de maior receita em 2026, com categoria e unidades.",
+          "vendas_por_vendedor": "Receita, pedidos, meta e atingimento da meta de cada vendedor em 2026, com a região de cada um. Para ranking de vendedores e quem bateu a meta.",
+          "vendas_por_regiao": "Receita, pedidos, clientes ativos e participação de cada região do país em 2026.",
+          "top_clientes": "Os 10 clientes (empresas) de maior receita em 2026, com segmento, região, pedidos e data da última compra.",
+          "kpis": "Números consolidados de jan a set de 2026: receita total, receita do mesmo período de 2025, crescimento, pedidos, ticket médio, clientes ativos, atingimento da meta da empresa, taxa de cancelamento e margem bruta.",
+          "nenhuma": "É sobre vendas, mas nenhuma das consultas acima responde: estoque, previsão, detalhe de um pedido específico, dados fora de jan/2025 a set/2026."
+        }
+      }
+    }
+  },
+  "result": {
+    "provider": "jev",
+    "model": "jev-1.13.0",
+    "answers": {
+      "tool": {
+        "value": "vendas_por_regiao",
+        "confidence": 0.9142,
+        "probabilities": {
+          "vendas_mensal": 0.019,
+          "vendas_por_categoria": 0.0161,
+          "top_produtos": 0.0114,
+          "vendas_por_vendedor": 0.0148,
+          "vendas_por_regiao": 0.9142,
+          "top_clientes": 0.0115,
+          "kpis": 0.0022,
+          "nenhuma": 0.0109
+        },
+        "expected": null
+      }
+    },
+    "latency_ms": 65.9,
+    "tokens_in": 261,
+    "tokens_out": 0,
+    "cost_usd": 1.0962000000000001e-05,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": true,
+    "raw": {
+      "model": "jev-1.13.0",
+      "answers": {
+        "tool": {
+          "type": "choice",
+          "choice": "vendas_por_regiao",
+          "confidence": 0.9142,
+          "probabilities": {
+            "vendas_mensal": 0.019,
+            "vendas_por_categoria": 0.0161,
+            "top_produtos": 0.0114,
+            "vendas_por_vendedor": 0.0148,
+            "vendas_por_regiao": 0.9142,
+            "top_clientes": 0.0115,
+            "kpis": 0.0022,
+            "nenhuma": 0.0109
+          }
+        }
+      },
+      "usage": {
+        "input_tokens": 261,
+        "output_tokens": 0
+      }
+    }
+  }
+}

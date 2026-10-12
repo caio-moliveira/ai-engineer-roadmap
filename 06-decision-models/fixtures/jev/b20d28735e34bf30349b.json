@@ -1,0 +1,104 @@
+{
+  "key": "b20d28735e34bf30349b",
+  "target": "jev",
+  "recorded_at": "2026-10-12",
+  "synthetic": true,
+  "origin": "SINTÉTICA: gerada a partir dos rótulos do golden set com ruído determinístico (fixtures/gerar_jev_sintetico.py). Não é medição do Jev.",
+  "request": {
+    "state": {
+      "ticket": "Quero trocar a forma de pagamento de boleto para cartão de crédito. Onde faço isso?"
+    },
+    "questions": {
+      "categoria": {
+        "type": "choice",
+        "instructions": "Qual a categoria deste ticket de suporte?",
+        "criteria": {
+          "cobranca_indevida": "cobrança duplicada ou de algo que o cliente não contratou",
+          "estorno": "pedido ou dúvida sobre devolução de dinheiro",
+          "nota_fiscal": "emissão, correção ou envio de nota fiscal",
+          "boleto_pagamento": "boleto, Pix, cartão, forma de pagamento ou acesso bloqueado por pagamento",
+          "erro_app": "falha, travamento ou botão que não funciona no sistema ou no app",
+          "integracao": "API, webhook, ERP, marketplace ou sincronização com outro sistema",
+          "lentidao": "sistema ou tela lenta",
+          "exportacao": "exportar, baixar ou fazer backup de dados e relatórios",
+          "upgrade_plano": "mudar de plano, comparar planos ou aumentar limites",
+          "preco_desconto": "preço, desconto, promoção ou proposta da concorrência",
+          "contratacao_nova": "contratar o produto ou um módulo novo",
+          "demonstracao": "agendar ou pedir demonstração",
+          "senha_acesso": "senha, login, bloqueio por senha, dois fatores ou invasão",
+          "dados_cadastro": "e-mail, endereço, CNPJ ou outros dados cadastrais",
+          "cancelamento": "cancelar a assinatura ou a conta",
+          "usuarios_permissoes": "usuários, permissões e limite de usuários"
+        }
+      }
+    }
+  },
+  "result": {
+    "provider": "jev",
+    "model": "jev-1.13.0",
+    "answers": {
+      "categoria": {
+        "value": "boleto_pagamento",
+        "confidence": 0.8314,
+        "probabilities": {
+          "cobranca_indevida": 0.0051,
+          "estorno": 0.0077,
+          "nota_fiscal": 0.0122,
+          "boleto_pagamento": 0.8314,
+          "erro_app": 0.005,
+          "integracao": 0.0143,
+          "lentidao": 0.0119,
+          "exportacao": 0.0132,
+          "upgrade_plano": 0.0088,
+          "preco_desconto": 0.0168,
+          "contratacao_nova": 0.0086,
+          "demonstracao": 0.0157,
+          "senha_acesso": 0.0104,
+          "dados_cadastro": 0.0175,
+          "cancelamento": 0.0082,
+          "usuarios_permissoes": 0.0131
+        },
+        "expected": null
+      }
+    },
+    "latency_ms": 57.7,
+    "tokens_in": 254,
+    "tokens_out": 0,
+    "cost_usd": 1.0668000000000002e-05,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": true,
+    "raw": {
+      "model": "jev-1.13.0",
+      "answers": {
+        "categoria": {
+          "type": "choice",
+          "choice": "boleto_pagamento",
+          "confidence": 0.8314,
+          "probabilities": {
+            "cobranca_indevida": 0.0051,
+            "estorno": 0.0077,
+            "nota_fiscal": 0.0122,
+            "boleto_pagamento": 0.8314,
+            "erro_app": 0.005,
+            "integracao": 0.0143,
+            "lentidao": 0.0119,
+            "exportacao": 0.0132,
+            "upgrade_plano": 0.0088,
+            "preco_desconto": 0.0168,
+            "contratacao_nova": 0.0086,
+            "demonstracao": 0.0157,
+            "senha_acesso": 0.0104,
+            "dados_cadastro": 0.0175,
+            "cancelamento": 0.0082,
+            "usuarios_permissoes": 0.0131
+          }
+        }
+      },
+      "usage": {
+        "input_tokens": 254,
+        "output_tokens": 0
+      }
+    }
+  }
+}

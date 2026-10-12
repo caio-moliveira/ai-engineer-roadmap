@@ -1,0 +1,120 @@
+{
+  "key": "6e37dccab38d4a903ac6",
+  "target": "laya",
+  "recorded_at": "2026-10-12",
+  "synthetic": false,
+  "origin": "laya-serve em http://127.0.0.1:8001, modelo multilingual",
+  "request": {
+    "state": {
+      "ticket": "Removi um usuário por engano e ele perdeu todos os pedidos que tinha criado. Dá para recuperar?"
+    },
+    "questions": {
+      "categoria": {
+        "type": "choice",
+        "instructions": "Qual a categoria deste ticket de suporte?",
+        "criteria": {
+          "cobranca_indevida": "cobrança duplicada ou de algo que o cliente não contratou",
+          "estorno": "pedido ou dúvida sobre devolução de dinheiro",
+          "nota_fiscal": "emissão, correção ou envio de nota fiscal",
+          "boleto_pagamento": "boleto, Pix, cartão, forma de pagamento ou acesso bloqueado por pagamento",
+          "erro_app": "falha, travamento ou botão que não funciona no sistema ou no app",
+          "integracao": "API, webhook, ERP, marketplace ou sincronização com outro sistema",
+          "lentidao": "sistema ou tela lenta",
+          "exportacao": "exportar, baixar ou fazer backup de dados e relatórios",
+          "upgrade_plano": "mudar de plano, comparar planos ou aumentar limites",
+          "preco_desconto": "preço, desconto, promoção ou proposta da concorrência",
+          "contratacao_nova": "contratar o produto ou um módulo novo",
+          "demonstracao": "agendar ou pedir demonstração",
+          "senha_acesso": "senha, login, bloqueio por senha, dois fatores ou invasão",
+          "dados_cadastro": "e-mail, endereço, CNPJ ou outros dados cadastrais",
+          "cancelamento": "cancelar a assinatura ou a conta",
+          "usuarios_permissoes": "usuários, permissões e limite de usuários"
+        }
+      }
+    }
+  },
+  "result": {
+    "provider": "laya",
+    "model": "laya-rl-agent",
+    "answers": {
+      "categoria": {
+        "value": "erro_app",
+        "confidence": 0.8757,
+        "probabilities": {
+          "cobranca_indevida": 0.0001,
+          "estorno": 0.026,
+          "nota_fiscal": 0.0001,
+          "boleto_pagamento": 0.0001,
+          "erro_app": 0.9185,
+          "integracao": 0.0001,
+          "lentidao": 0.0001,
+          "exportacao": 0.0002,
+          "upgrade_plano": 0.0001,
+          "preco_desconto": 0.0001,
+          "contratacao_nova": 0.0001,
+          "demonstracao": 0.0001,
+          "senha_acesso": 0.0001,
+          "dados_cadastro": 0.0001,
+          "cancelamento": 0.0003,
+          "usuarios_permissoes": 0.054
+        },
+        "expected": null
+      }
+    },
+    "latency_ms": 175.22459999963758,
+    "tokens_in": 257,
+    "tokens_out": 0,
+    "cost_usd": 0.0,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": false,
+    "raw": {
+      "model": "laya-rl-agent",
+      "answers": {
+        "categoria": {
+          "type": "choice",
+          "choice": "erro_app",
+          "probabilities": {
+            "cobranca_indevida": 0.0001,
+            "estorno": 0.026,
+            "nota_fiscal": 0.0001,
+            "boleto_pagamento": 0.0001,
+            "erro_app": 0.9185,
+            "integracao": 0.0001,
+            "lentidao": 0.0001,
+            "exportacao": 0.0002,
+            "upgrade_plano": 0.0001,
+            "preco_desconto": 0.0001,
+            "contratacao_nova": 0.0001,
+            "demonstracao": 0.0001,
+            "senha_acesso": 0.0001,
+            "dados_cadastro": 0.0001,
+            "cancelamento": 0.0003,
+            "usuarios_permissoes": 0.054
+          },
+          "confidence": 0.8757,
+          "answer_confidence": 0.9185,
+          "action": {
+            "act_probability": 1.0
+          },
+          "x_jev_confidence": 0.913
+        }
+      },
+      "usage": {
+        "input_tokens": 257,
+        "output_tokens": 0,
+        "state_tokens": 26,
+        "state_tokens_dropped": 0,
+        "truncated": false,
+        "truncated_questions": []
+      },
+      "routing": {
+        "model": "multilingual",
+        "repo": "convaiinnovations/laya/multilingual",
+        "reason": "explicit model='multilingual'",
+        "detection": null,
+        "workflow": null
+      }
+    }
+  }
+}

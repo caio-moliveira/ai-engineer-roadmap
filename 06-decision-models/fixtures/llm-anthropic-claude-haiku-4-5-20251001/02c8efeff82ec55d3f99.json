@@ -1,0 +1,47 @@
+{
+  "key": "02c8efeff82ec55d3f99",
+  "target": "llm:anthropic:claude-haiku-4-5-20251001",
+  "recorded_at": "2026-10-12",
+  "synthetic": false,
+  "origin": "LangChain init_chat_model + with_structured_output (anthropic:claude-haiku-4-5-20251001)",
+  "request": {
+    "state": {
+      "remetente": "newsletter@livrariaestacao.com.br",
+      "assunto": "Black Friday: até 40% em livros técnicos",
+      "corpo": "Nossa Black Friday começou! Livros de programação e dados com até 40% de desconto até domingo. Confira no site."
+    },
+    "questions": {
+      "spam": {
+        "type": "noul",
+        "instructions": "Este e-mail é spam, golpe ou phishing?",
+        "criteria": {
+          "true": "Mensagem indesejada ou fraudulenta.",
+          "false": "Mensagem legítima, mesmo que seja comercial ou urgente."
+        }
+      }
+    }
+  },
+  "result": {
+    "provider": "llm:anthropic:claude-haiku-4-5-20251001",
+    "model": "claude-haiku-4-5-20251001",
+    "answers": {
+      "spam": {
+        "value": 0.15,
+        "confidence": 0.85,
+        "probabilities": null,
+        "expected": null
+      }
+    },
+    "latency_ms": 862.0515999973577,
+    "tokens_in": 1040,
+    "tokens_out": 53,
+    "cost_usd": 0.001305,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": false,
+    "raw": {
+      "content": "[{\"id\": \"toolu_01Qasv14A1KobdjCFhUaPUPZ\", \"caller\": {\"type\": \"direct\"}, \"input\": {\"spam\": {\"value\": 0.15, \"confidence\": 0.85}}, \"name\": \"Respostas\", \"type\": \"tool_use\", \"toolset_name\": null}]",
+      "parsing_error": null
+    }
+  }
+}

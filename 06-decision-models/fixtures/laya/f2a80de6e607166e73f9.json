@@ -1,0 +1,79 @@
+{
+  "key": "f2a80de6e607166e73f9",
+  "target": "laya",
+  "recorded_at": "2026-10-12",
+  "synthetic": false,
+  "origin": "langchain-typesafe -> http://127.0.0.1:8001",
+  "request": {
+    "state": {
+      "role": "user",
+      "content": "Como gero um token de API para conectar meu ERP?"
+    },
+    "questions": {
+      "model_route": {
+        "type": "choice",
+        "criteria": {
+          "barato": "Pedido simples e bem delimitado, com resposta padrão: um modelo pequeno resolve.",
+          "caro": "Caso ambíguo, com vários problemas, investigação técnica ou cliente prestes a sair: precisa de um modelo forte."
+        },
+        "instructions": "Qual modelo deve redigir a resposta para este ticket?"
+      }
+    }
+  },
+  "result": {
+    "provider": "laya",
+    "model": "laya-rl-agent",
+    "answers": {
+      "model_route": {
+        "value": "barato",
+        "confidence": 0.1615,
+        "probabilities": {
+          "barato": 0.7321,
+          "caro": 0.2679
+        },
+        "expected": null
+      }
+    },
+    "latency_ms": 125.27630000113277,
+    "tokens_in": 87,
+    "tokens_out": 0,
+    "cost_usd": 0.0,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": false,
+    "raw": {
+      "model": "laya-rl-agent",
+      "answers": {
+        "model_route": {
+          "type": "choice",
+          "choice": "barato",
+          "probabilities": {
+            "barato": 0.7321,
+            "caro": 0.2679
+          },
+          "confidence": 0.1615,
+          "answer_confidence": 0.7321,
+          "action": {
+            "act_probability": 1.0
+          },
+          "x_jev_confidence": 0.4642
+        }
+      },
+      "usage": {
+        "input_tokens": 87,
+        "output_tokens": 0,
+        "state_tokens": 22,
+        "state_tokens_dropped": 0,
+        "truncated": false,
+        "truncated_questions": []
+      },
+      "routing": {
+        "model": "multilingual",
+        "repo": "convaiinnovations/laya/multilingual",
+        "reason": "explicit model='multilingual'",
+        "detection": null,
+        "workflow": null
+      }
+    }
+  }
+}

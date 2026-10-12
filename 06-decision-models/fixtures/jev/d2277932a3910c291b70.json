@@ -1,0 +1,68 @@
+{
+  "key": "d2277932a3910c291b70",
+  "target": "jev",
+  "recorded_at": "2026-10-12",
+  "synthetic": true,
+  "origin": "SINTÉTICA: gerada a partir dos rótulos do golden set com ruído determinístico (fixtures/gerar_jev_sintetico.py). Não é medição do Jev.",
+  "request": {
+    "state": {
+      "ticket": "Como gero um token de API para conectar meu ERP?"
+    },
+    "questions": {
+      "fila": {
+        "type": "choice",
+        "instructions": "Qual fila deve atender este ticket de suporte?",
+        "criteria": {
+          "financeiro": "cobranças, estornos, notas fiscais, boletos e pagamentos",
+          "tecnico": "erros no sistema, integrações, lentidão e exportação de dados",
+          "comercial": "planos, preços, descontos, contratação e demonstrações",
+          "conta": "senha e acesso, dados cadastrais, cancelamento, usuários e permissões"
+        }
+      }
+    }
+  },
+  "result": {
+    "provider": "jev",
+    "model": "jev-1.13.0",
+    "answers": {
+      "fila": {
+        "value": "comercial",
+        "confidence": 0.5203,
+        "probabilities": {
+          "financeiro": 0.1263,
+          "tecnico": 0.136,
+          "comercial": 0.5203,
+          "conta": 0.2175
+        },
+        "expected": null
+      }
+    },
+    "latency_ms": 61.2,
+    "tokens_in": 100,
+    "tokens_out": 0,
+    "cost_usd": 4.2000000000000004e-06,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": true,
+    "raw": {
+      "model": "jev-1.13.0",
+      "answers": {
+        "fila": {
+          "type": "choice",
+          "choice": "comercial",
+          "confidence": 0.5203,
+          "probabilities": {
+            "financeiro": 0.1263,
+            "tecnico": 0.136,
+            "comercial": 0.5203,
+            "conta": 0.2175
+          }
+        }
+      },
+      "usage": {
+        "input_tokens": 100,
+        "output_tokens": 0
+      }
+    }
+  }
+}

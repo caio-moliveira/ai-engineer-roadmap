@@ -1,0 +1,84 @@
+{
+  "key": "54c8c6b9ee1c45e83b9f",
+  "target": "laya",
+  "recorded_at": "2026-10-12",
+  "synthetic": false,
+  "origin": "laya-serve em http://127.0.0.1:8001, modelo multilingual",
+  "request": {
+    "state": {
+      "ticket": "Quero baixar um backup completo dos meus dados antes de decidir se renovo o contrato."
+    },
+    "questions": {
+      "categoria": {
+        "type": "choice",
+        "instructions": "Este ticket já foi enviado para a fila financeiro. Qual a categoria dele?",
+        "criteria": {
+          "cobranca_indevida": "cobrança duplicada ou de algo que o cliente não contratou",
+          "estorno": "pedido ou dúvida sobre devolução de dinheiro",
+          "nota_fiscal": "emissão, correção ou envio de nota fiscal",
+          "boleto_pagamento": "boleto, Pix, cartão, forma de pagamento ou acesso bloqueado por pagamento"
+        }
+      }
+    }
+  },
+  "result": {
+    "provider": "laya",
+    "model": "laya-rl-agent",
+    "answers": {
+      "categoria": {
+        "value": "estorno",
+        "confidence": 0.9135,
+        "probabilities": {
+          "cobranca_indevida": 0.0025,
+          "estorno": 0.9789,
+          "nota_fiscal": 0.0143,
+          "boleto_pagamento": 0.0043
+        },
+        "expected": null
+      }
+    },
+    "latency_ms": 90.33579999959329,
+    "tokens_in": 114,
+    "tokens_out": 0,
+    "cost_usd": 0.0,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": false,
+    "raw": {
+      "model": "laya-rl-agent",
+      "answers": {
+        "categoria": {
+          "type": "choice",
+          "choice": "estorno",
+          "probabilities": {
+            "cobranca_indevida": 0.0025,
+            "estorno": 0.9789,
+            "nota_fiscal": 0.0143,
+            "boleto_pagamento": 0.0043
+          },
+          "confidence": 0.9135,
+          "answer_confidence": 0.9789,
+          "action": {
+            "act_probability": 1.0
+          },
+          "x_jev_confidence": 0.9719
+        }
+      },
+      "usage": {
+        "input_tokens": 114,
+        "output_tokens": 0,
+        "state_tokens": 23,
+        "state_tokens_dropped": 0,
+        "truncated": false,
+        "truncated_questions": []
+      },
+      "routing": {
+        "model": "multilingual",
+        "repo": "convaiinnovations/laya/multilingual",
+        "reason": "explicit model='multilingual'",
+        "detection": null,
+        "workflow": null
+      }
+    }
+  }
+}

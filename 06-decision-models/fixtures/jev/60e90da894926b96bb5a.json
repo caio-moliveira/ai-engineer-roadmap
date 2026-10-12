@@ -1,0 +1,68 @@
+{
+  "key": "60e90da894926b96bb5a",
+  "target": "jev",
+  "recorded_at": "2026-10-12",
+  "synthetic": true,
+  "origin": "SINTÉTICA: gerada a partir dos rótulos do golden set com ruído determinístico (fixtures/gerar_jev_sintetico.py). Não é medição do Jev.",
+  "request": {
+    "state": {
+      "ticket": "O sistema está muito lento hoje, cada tela demora uns 20 segundos para abrir."
+    },
+    "questions": {
+      "categoria": {
+        "type": "choice",
+        "instructions": "Este ticket já foi enviado para a fila conta. Qual a categoria dele?",
+        "criteria": {
+          "senha_acesso": "senha, login, bloqueio por senha, dois fatores ou invasão",
+          "dados_cadastro": "e-mail, endereço, CNPJ ou outros dados cadastrais",
+          "cancelamento": "cancelar a assinatura ou a conta",
+          "usuarios_permissoes": "usuários, permissões e limite de usuários"
+        }
+      }
+    }
+  },
+  "result": {
+    "provider": "jev",
+    "model": "jev-1.13.0",
+    "answers": {
+      "categoria": {
+        "value": "senha_acesso",
+        "confidence": 0.9092,
+        "probabilities": {
+          "senha_acesso": 0.9092,
+          "dados_cadastro": 0.0076,
+          "cancelamento": 0.0409,
+          "usuarios_permissoes": 0.0424
+        },
+        "expected": null
+      }
+    },
+    "latency_ms": 65.8,
+    "tokens_in": 125,
+    "tokens_out": 0,
+    "cost_usd": 5.25e-06,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": true,
+    "raw": {
+      "model": "jev-1.13.0",
+      "answers": {
+        "categoria": {
+          "type": "choice",
+          "choice": "senha_acesso",
+          "confidence": 0.9092,
+          "probabilities": {
+            "senha_acesso": 0.9092,
+            "dados_cadastro": 0.0076,
+            "cancelamento": 0.0409,
+            "usuarios_permissoes": 0.0424
+          }
+        }
+      },
+      "usage": {
+        "input_tokens": 125,
+        "output_tokens": 0
+      }
+    }
+  }
+}

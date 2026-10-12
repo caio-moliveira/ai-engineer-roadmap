@@ -1,0 +1,87 @@
+{
+  "key": "1e16a749dc3842e9f2be",
+  "target": "laya",
+  "recorded_at": "2026-10-12",
+  "synthetic": false,
+  "origin": "laya-serve em http://127.0.0.1:8001, modelo multilingual",
+  "request": {
+    "state": {
+      "pergunta": "Quais setores mais emitem gases de efeito estufa?",
+      "trecho": "Carros elétricos não emitem gases pelo escapamento."
+    },
+    "questions": {
+      "relevancia": {
+        "type": "score",
+        "instructions": "O `trecho` ajuda a responder a `pergunta`?",
+        "criteria": [
+          "Não responde: fala de outro assunto ou só compartilha palavras com a pergunta.",
+          "Relacionado: trata do tema, mas não responde à pergunta.",
+          "Responde: contém a informação que a pergunta pede."
+        ]
+      }
+    }
+  },
+  "result": {
+    "provider": "laya",
+    "model": "laya-rl-agent",
+    "answers": {
+      "relevancia": {
+        "value": 0,
+        "confidence": 0.7775,
+        "probabilities": {
+          "0": 0.9466,
+          "1": 0.0318,
+          "2": 0.0216
+        },
+        "expected": 0.075
+      }
+    },
+    "latency_ms": 214.29730000090785,
+    "tokens_in": 110,
+    "tokens_out": 0,
+    "cost_usd": 0.0,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": false,
+    "raw": {
+      "model": "laya-rl-agent",
+      "answers": {
+        "relevancia": {
+          "type": "score",
+          "score": 0.075,
+          "legend": {
+            "0": "Não responde: fala de outro assunto ou só compartilha palavras com a pergunta.",
+            "1": "Relacionado: trata do tema, mas não responde à pergunta.",
+            "2": "Responde: contém a informação que a pergunta pede."
+          },
+          "probabilities": {
+            "0": 0.9466,
+            "1": 0.0318,
+            "2": 0.0216
+          },
+          "confidence": 0.7775,
+          "answer_confidence": 0.9466,
+          "action": {
+            "act_probability": 1.0
+          },
+          "x_jev_confidence": 0.8875
+        }
+      },
+      "usage": {
+        "input_tokens": 110,
+        "output_tokens": 0,
+        "state_tokens": 34,
+        "state_tokens_dropped": 0,
+        "truncated": false,
+        "truncated_questions": []
+      },
+      "routing": {
+        "model": "multilingual",
+        "repo": "convaiinnovations/laya/multilingual",
+        "reason": "explicit model='multilingual'",
+        "detection": null,
+        "workflow": null
+      }
+    }
+  }
+}

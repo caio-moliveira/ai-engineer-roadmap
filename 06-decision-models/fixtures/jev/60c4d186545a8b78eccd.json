@@ -1,0 +1,68 @@
+{
+  "key": "60c4d186545a8b78eccd",
+  "target": "jev",
+  "recorded_at": "2026-10-12",
+  "synthetic": true,
+  "origin": "SINTÉTICA: gerada a partir dos rótulos do golden set com ruído determinístico (fixtures/gerar_jev_sintetico.py). Não é medição do Jev.",
+  "request": {
+    "state": {
+      "ticket": "Cancelei o plano adicional de armazenamento em agosto e continuo sendo cobrado. Quero o dinheiro de volta dos dois meses."
+    },
+    "questions": {
+      "categoria": {
+        "type": "choice",
+        "instructions": "Este ticket já foi enviado para a fila conta. Qual a categoria dele?",
+        "criteria": {
+          "senha_acesso": "senha, login, bloqueio por senha, dois fatores ou invasão",
+          "dados_cadastro": "e-mail, endereço, CNPJ ou outros dados cadastrais",
+          "cancelamento": "cancelar a assinatura ou a conta",
+          "usuarios_permissoes": "usuários, permissões e limite de usuários"
+        }
+      }
+    }
+  },
+  "result": {
+    "provider": "jev",
+    "model": "jev-1.13.0",
+    "answers": {
+      "categoria": {
+        "value": "senha_acesso",
+        "confidence": 0.8493,
+        "probabilities": {
+          "senha_acesso": 0.8493,
+          "dados_cadastro": 0.0497,
+          "cancelamento": 0.0269,
+          "usuarios_permissoes": 0.0741
+        },
+        "expected": null
+      }
+    },
+    "latency_ms": 60.8,
+    "tokens_in": 136,
+    "tokens_out": 0,
+    "cost_usd": 5.7120000000000005e-06,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": true,
+    "raw": {
+      "model": "jev-1.13.0",
+      "answers": {
+        "categoria": {
+          "type": "choice",
+          "choice": "senha_acesso",
+          "confidence": 0.8493,
+          "probabilities": {
+            "senha_acesso": 0.8493,
+            "dados_cadastro": 0.0497,
+            "cancelamento": 0.0269,
+            "usuarios_permissoes": 0.0741
+          }
+        }
+      },
+      "usage": {
+        "input_tokens": 136,
+        "output_tokens": 0
+      }
+    }
+  }
+}

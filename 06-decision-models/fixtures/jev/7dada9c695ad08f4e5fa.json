@@ -1,0 +1,68 @@
+{
+  "key": "7dada9c695ad08f4e5fa",
+  "target": "jev",
+  "recorded_at": "2026-10-12",
+  "synthetic": true,
+  "origin": "SINTÉTICA: gerada a partir dos rótulos do golden set com ruído determinístico (fixtures/gerar_jev_sintetico.py). Não é medição do Jev.",
+  "request": {
+    "state": {
+      "ticket": "Como altero o endereço de cobrança da empresa?"
+    },
+    "questions": {
+      "categoria": {
+        "type": "choice",
+        "instructions": "Este ticket já foi enviado para a fila tecnico. Qual a categoria dele?",
+        "criteria": {
+          "erro_app": "falha, travamento ou botão que não funciona no sistema ou no app",
+          "integracao": "API, webhook, ERP, marketplace ou sincronização com outro sistema",
+          "lentidao": "sistema ou tela lenta",
+          "exportacao": "exportar, baixar ou fazer backup de dados e relatórios"
+        }
+      }
+    }
+  },
+  "result": {
+    "provider": "jev",
+    "model": "jev-1.13.0",
+    "answers": {
+      "categoria": {
+        "value": "erro_app",
+        "confidence": 0.8293,
+        "probabilities": {
+          "erro_app": 0.8293,
+          "integracao": 0.0478,
+          "lentidao": 0.078,
+          "exportacao": 0.0449
+        },
+        "expected": null
+      }
+    },
+    "latency_ms": 52.6,
+    "tokens_in": 119,
+    "tokens_out": 0,
+    "cost_usd": 4.998e-06,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": true,
+    "raw": {
+      "model": "jev-1.13.0",
+      "answers": {
+        "categoria": {
+          "type": "choice",
+          "choice": "erro_app",
+          "confidence": 0.8293,
+          "probabilities": {
+            "erro_app": 0.8293,
+            "integracao": 0.0478,
+            "lentidao": 0.078,
+            "exportacao": 0.0449
+          }
+        }
+      },
+      "usage": {
+        "input_tokens": 119,
+        "output_tokens": 0
+      }
+    }
+  }
+}

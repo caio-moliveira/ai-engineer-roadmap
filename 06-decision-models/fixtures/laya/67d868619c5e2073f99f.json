@@ -1,0 +1,135 @@
+{
+  "key": "67d868619c5e2073f99f",
+  "target": "laya",
+  "recorded_at": "2026-10-12",
+  "synthetic": false,
+  "origin": "laya-serve em http://127.0.0.1:8001, modelo multilingual",
+  "request": {
+    "state": {
+      "pergunta": "Quanto Eletrodomésticos faturou?",
+      "dados": [
+        {
+          "categoria": "Informática",
+          "receita": 1359340.79,
+          "unidades": 915,
+          "margem_pct": 22.2,
+          "participacao_pct": 31.5
+        },
+        {
+          "categoria": "Eletrodomésticos",
+          "receita": 834925.94,
+          "unidades": 698,
+          "margem_pct": 30.7,
+          "participacao_pct": 19.3
+        },
+        {
+          "categoria": "Móveis de Escritório",
+          "receita": 815804.65,
+          "unidades": 647,
+          "margem_pct": 35.0,
+          "participacao_pct": 18.9
+        },
+        {
+          "categoria": "Eletrônicos",
+          "receita": 754134.94,
+          "unidades": 804,
+          "margem_pct": 26.3,
+          "participacao_pct": 17.5
+        },
+        {
+          "categoria": "Papelaria",
+          "receita": 357487.88,
+          "unidades": 2005,
+          "margem_pct": 43.2,
+          "participacao_pct": 8.3
+        },
+        {
+          "categoria": "Limpeza e Copa",
+          "receita": 198972.8,
+          "unidades": 1610,
+          "margem_pct": 38.5,
+          "participacao_pct": 4.6
+        }
+      ],
+      "resposta": "Eletrodomésticos faturou cerca de R$ 835 mil e vai crescer 15% no próximo trimestre."
+    },
+    "questions": {
+      "qualidade": {
+        "type": "score",
+        "instructions": "Qual a qualidade da `resposta` para a `pergunta`, considerando os `dados`?",
+        "criteria": [
+          "Ruim: não responde ou afirma números errados.",
+          "Fraca: responde em parte, ou mistura acerto com erro, previsão ou opinião indevida.",
+          "Boa: responde corretamente, mas incompleta ou com algo desnecessário.",
+          "Excelente: responde completa e corretamente, só com os dados."
+        ]
+      }
+    }
+  },
+  "result": {
+    "provider": "laya",
+    "model": "laya-rl-agent",
+    "answers": {
+      "qualidade": {
+        "value": 3,
+        "confidence": 0.4627,
+        "probabilities": {
+          "0": 0.0056,
+          "1": 0.0876,
+          "2": 0.1545,
+          "3": 0.7524
+        },
+        "expected": 2.6537
+      }
+    },
+    "latency_ms": 1099.8665999977675,
+    "tokens_in": 486,
+    "tokens_out": 0,
+    "cost_usd": 0.0,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": false,
+    "raw": {
+      "model": "laya-rl-agent",
+      "answers": {
+        "qualidade": {
+          "type": "score",
+          "score": 2.6537,
+          "legend": {
+            "0": "Ruim: não responde ou afirma números errados.",
+            "1": "Fraca: responde em parte, ou mistura acerto com erro, previsão ou opinião indevida.",
+            "2": "Boa: responde corretamente, mas incompleta ou com algo desnecessário.",
+            "3": "Excelente: responde completa e corretamente, só com os dados."
+          },
+          "probabilities": {
+            "0": 0.0056,
+            "1": 0.0876,
+            "2": 0.1545,
+            "3": 0.7524
+          },
+          "confidence": 0.4627,
+          "answer_confidence": 0.7524,
+          "action": {
+            "act_probability": 1.0
+          },
+          "x_jev_confidence": 0.6535
+        }
+      },
+      "usage": {
+        "input_tokens": 486,
+        "output_tokens": 0,
+        "state_tokens": 382,
+        "state_tokens_dropped": 0,
+        "truncated": false,
+        "truncated_questions": []
+      },
+      "routing": {
+        "model": "multilingual",
+        "repo": "convaiinnovations/laya/multilingual",
+        "reason": "explicit model='multilingual'",
+        "detection": null,
+        "workflow": null
+      }
+    }
+  }
+}

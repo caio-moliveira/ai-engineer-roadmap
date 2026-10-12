@@ -1,0 +1,59 @@
+{
+  "key": "9034e93dfe9c54bce5cd",
+  "target": "jev",
+  "recorded_at": "2026-10-12",
+  "synthetic": true,
+  "origin": "SINTÉTICA: gerada a partir dos rótulos do golden set com ruído determinístico (fixtures/gerar_jev_sintetico.py). Não é medição do Jev.",
+  "request": {
+    "state": {
+      "remetente": "ti@empresa-intranet-login.com",
+      "assunto": "Sua caixa de e-mail está cheia",
+      "corpo": "Sua caixa atingiu 99% da capacidade. Valide sua senha em http://empresa-intranet-login.com/owa para aumentar o espaço."
+    },
+    "questions": {
+      "spam": {
+        "type": "noul",
+        "instructions": "Este e-mail é spam, golpe ou phishing?",
+        "criteria": {
+          "true": "Mensagem indesejada ou fraudulenta.",
+          "false": "Mensagem legítima, mesmo que seja comercial ou urgente."
+        }
+      }
+    }
+  },
+  "result": {
+    "provider": "jev",
+    "model": "jev-1.13.0",
+    "answers": {
+      "spam": {
+        "value": 0.8515,
+        "confidence": null,
+        "probabilities": {
+          "true": 0.8515,
+          "false": 0.14849999999999997
+        },
+        "expected": null
+      }
+    },
+    "latency_ms": 64.1,
+    "tokens_in": 116,
+    "tokens_out": 0,
+    "cost_usd": 4.872e-06,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": true,
+    "raw": {
+      "model": "jev-1.13.0",
+      "answers": {
+        "spam": {
+          "type": "noul",
+          "noul": 0.8515
+        }
+      },
+      "usage": {
+        "input_tokens": 116,
+        "output_tokens": 0
+      }
+    }
+  }
+}

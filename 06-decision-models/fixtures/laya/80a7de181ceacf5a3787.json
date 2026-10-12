@@ -1,0 +1,78 @@
+{
+  "key": "80a7de181ceacf5a3787",
+  "target": "laya",
+  "recorded_at": "2026-10-12",
+  "synthetic": false,
+  "origin": "laya-serve em http://127.0.0.1:8001, modelo multilingual",
+  "request": {
+    "state": {
+      "ticket": "Quero cancelar minha assinatura. Como faço?"
+    },
+    "questions": {
+      "rota": {
+        "type": "choice",
+        "instructions": "Qual modelo deve redigir a resposta para este ticket?",
+        "criteria": {
+          "barato": "Pedido simples e bem delimitado, com resposta padrão: um modelo pequeno resolve.",
+          "caro": "Caso ambíguo, com vários problemas, investigação técnica ou cliente prestes a sair: precisa de um modelo forte."
+        }
+      }
+    }
+  },
+  "result": {
+    "provider": "laya",
+    "model": "laya-rl-agent",
+    "answers": {
+      "rota": {
+        "value": "barato",
+        "confidence": 0.0904,
+        "probabilities": {
+          "barato": 0.6751,
+          "caro": 0.3249
+        },
+        "expected": null
+      }
+    },
+    "latency_ms": 67.84929999776068,
+    "tokens_in": 79,
+    "tokens_out": 0,
+    "cost_usd": 0.0,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": false,
+    "raw": {
+      "model": "laya-rl-agent",
+      "answers": {
+        "rota": {
+          "type": "choice",
+          "choice": "barato",
+          "probabilities": {
+            "barato": 0.6751,
+            "caro": 0.3249
+          },
+          "confidence": 0.0904,
+          "answer_confidence": 0.6751,
+          "action": {
+            "act_probability": 1.0
+          },
+          "x_jev_confidence": 0.3502
+        }
+      },
+      "usage": {
+        "input_tokens": 79,
+        "output_tokens": 0,
+        "state_tokens": 14,
+        "state_tokens_dropped": 0,
+        "truncated": false,
+        "truncated_questions": []
+      },
+      "routing": {
+        "model": "multilingual",
+        "repo": "convaiinnovations/laya/multilingual",
+        "reason": "explicit model='multilingual'",
+        "detection": null,
+        "workflow": null
+      }
+    }
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "key": "5ae726225ff08f2af332",
+  "target": "jev",
+  "recorded_at": "2026-10-12",
+  "synthetic": true,
+  "origin": "SINTÉTICA: gerada a partir dos rótulos do golden set com ruído determinístico (fixtures/gerar_jev_sintetico.py). Não é medição do Jev.",
+  "request": {
+    "state": {
+      "ticket": "Nossa equipe cresceu para 40 pessoas. Qual plano atende e quanto fica?"
+    },
+    "questions": {
+      "categoria": {
+        "type": "choice",
+        "instructions": "Este ticket já foi enviado para a fila tecnico. Qual a categoria dele?",
+        "criteria": {
+          "erro_app": "falha, travamento ou botão que não funciona no sistema ou no app",
+          "integracao": "API, webhook, ERP, marketplace ou sincronização com outro sistema",
+          "lentidao": "sistema ou tela lenta",
+          "exportacao": "exportar, baixar ou fazer backup de dados e relatórios"
+        }
+      }
+    }
+  },
+  "result": {
+    "provider": "jev",
+    "model": "jev-1.13.0",
+    "answers": {
+      "categoria": {
+        "value": "erro_app",
+        "confidence": 0.9362,
+        "probabilities": {
+          "erro_app": 0.9362,
+          "integracao": 0.0163,
+          "lentidao": 0.0268,
+          "exportacao": 0.0207
+        },
+        "expected": null
+      }
+    },
+    "latency_ms": 63.7,
+    "tokens_in": 125,
+    "tokens_out": 0,
+    "cost_usd": 5.25e-06,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": true,
+    "raw": {
+      "model": "jev-1.13.0",
+      "answers": {
+        "categoria": {
+          "type": "choice",
+          "choice": "erro_app",
+          "confidence": 0.9362,
+          "probabilities": {
+            "erro_app": 0.9362,
+            "integracao": 0.0163,
+            "lentidao": 0.0268,
+            "exportacao": 0.0207
+          }
+        }
+      },
+      "usage": {
+        "input_tokens": 125,
+        "output_tokens": 0
+      }
+    }
+  }
+}

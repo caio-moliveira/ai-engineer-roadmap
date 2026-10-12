@@ -1,0 +1,62 @@
+{
+  "key": "4b75d0e6fa8dba1e4290",
+  "target": "jev",
+  "recorded_at": "2026-10-12",
+  "synthetic": true,
+  "origin": "SINTÉTICA: gerada a partir dos rótulos do golden set com ruído determinístico (fixtures/gerar_jev_sintetico.py). Não é medição do Jev.",
+  "request": {
+    "state": {
+      "ticket": "Dá erro 500 quando gero o relatório de vendas por vendedor. Já limpei o cache e testei em outro navegador."
+    },
+    "questions": {
+      "rota": {
+        "type": "choice",
+        "instructions": "Qual modelo deve redigir a resposta para este ticket?",
+        "criteria": {
+          "barato": "Pedido simples e bem delimitado, com resposta padrão: um modelo pequeno resolve.",
+          "caro": "Caso ambíguo, com vários problemas, investigação técnica ou cliente prestes a sair: precisa de um modelo forte."
+        }
+      }
+    }
+  },
+  "result": {
+    "provider": "jev",
+    "model": "jev-1.13.0",
+    "answers": {
+      "rota": {
+        "value": "barato",
+        "confidence": 0.9046,
+        "probabilities": {
+          "barato": 0.9046,
+          "caro": 0.0954
+        },
+        "expected": null
+      }
+    },
+    "latency_ms": 62.8,
+    "tokens_in": 97,
+    "tokens_out": 0,
+    "cost_usd": 4.0739999999999994e-06,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": true,
+    "raw": {
+      "model": "jev-1.13.0",
+      "answers": {
+        "rota": {
+          "type": "choice",
+          "choice": "barato",
+          "confidence": 0.9046,
+          "probabilities": {
+            "barato": 0.9046,
+            "caro": 0.0954
+          }
+        }
+      },
+      "usage": {
+        "input_tokens": 97,
+        "output_tokens": 0
+      }
+    }
+  }
+}

@@ -1,0 +1,181 @@
+{
+  "key": "91979c1a1032c2d2d31d",
+  "target": "laya",
+  "recorded_at": "2026-10-12",
+  "synthetic": false,
+  "origin": "laya-serve em http://127.0.0.1:8001, modelo multilingual",
+  "request": {
+    "state": {
+      "remetente": "financeiro@consultoria-norte.com.br",
+      "assunto": "Boleto da parcela 3",
+      "corpo": "Segue o boleto da parcela 3 do projeto, com vencimento em 15/11, conforme o contrato assinado."
+    },
+    "questions": {
+      "pede_credencial": {
+        "type": "noul",
+        "instructions": "O e-mail pede senha, código, login, dados de cartão ou dados bancários?"
+      },
+      "urgencia_artificial": {
+        "type": "noul",
+        "instructions": "O e-mail pressiona com prazo curto ou ameaça de bloqueio para forçar uma ação?"
+      },
+      "promete_premio": {
+        "type": "noul",
+        "instructions": "O e-mail promete prêmio, ganho fácil ou vantagem extraordinária?"
+      },
+      "remetente_inconsistente": {
+        "type": "noul",
+        "instructions": "O domínio do remetente é estranho ou não bate com a organização que a mensagem diz representar?"
+      },
+      "link_suspeito": {
+        "type": "noul",
+        "instructions": "O e-mail manda clicar em link de domínio estranho, encurtado ou abrir anexo executável?"
+      },
+      "pede_pagamento": {
+        "type": "noul",
+        "instructions": "O e-mail pede pagamento, transferência, Pix ou depósito?"
+      }
+    }
+  },
+  "result": {
+    "provider": "laya",
+    "model": "laya-rl-agent",
+    "answers": {
+      "pede_credencial": {
+        "value": 0.0111,
+        "confidence": 0.9889,
+        "probabilities": {
+          "true": 0.0111,
+          "false": 0.9889
+        },
+        "expected": null
+      },
+      "urgencia_artificial": {
+        "value": 0.022,
+        "confidence": 0.978,
+        "probabilities": {
+          "true": 0.022,
+          "false": 0.978
+        },
+        "expected": null
+      },
+      "promete_premio": {
+        "value": 0.001,
+        "confidence": 0.999,
+        "probabilities": {
+          "true": 0.001,
+          "false": 0.999
+        },
+        "expected": null
+      },
+      "remetente_inconsistente": {
+        "value": 0.0122,
+        "confidence": 0.9878,
+        "probabilities": {
+          "true": 0.0122,
+          "false": 0.9878
+        },
+        "expected": null
+      },
+      "link_suspeito": {
+        "value": 0.0,
+        "confidence": 1.0,
+        "probabilities": {
+          "true": 0.0,
+          "false": 1.0
+        },
+        "expected": null
+      },
+      "pede_pagamento": {
+        "value": 0.5278,
+        "confidence": 0.5278,
+        "probabilities": {
+          "true": 0.5278,
+          "false": 0.47219999999999995
+        },
+        "expected": null
+      }
+    },
+    "latency_ms": 411.0900000014226,
+    "tokens_in": 638,
+    "tokens_out": 0,
+    "cost_usd": 0.0,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": false,
+    "raw": {
+      "model": "laya-rl-agent",
+      "answers": {
+        "pede_credencial": {
+          "type": "noul",
+          "noul": 0.0111,
+          "confidence": 0.9889,
+          "answer_confidence": 0.9889,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "urgencia_artificial": {
+          "type": "noul",
+          "noul": 0.022,
+          "confidence": 0.978,
+          "answer_confidence": 0.978,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "promete_premio": {
+          "type": "noul",
+          "noul": 0.001,
+          "confidence": 0.999,
+          "answer_confidence": 0.999,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "remetente_inconsistente": {
+          "type": "noul",
+          "noul": 0.0122,
+          "confidence": 0.9878,
+          "answer_confidence": 0.9878,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "link_suspeito": {
+          "type": "noul",
+          "noul": 0.0,
+          "confidence": 1.0,
+          "answer_confidence": 1.0,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "pede_pagamento": {
+          "type": "noul",
+          "noul": 0.5278,
+          "confidence": 0.5278,
+          "answer_confidence": 0.5278,
+          "action": {
+            "act_probability": 1.0
+          }
+        }
+      },
+      "usage": {
+        "input_tokens": 638,
+        "output_tokens": 0,
+        "state_tokens": 62,
+        "state_tokens_dropped": 0,
+        "truncated": false,
+        "truncated_questions": []
+      },
+      "routing": {
+        "model": "multilingual",
+        "repo": "convaiinnovations/laya/multilingual",
+        "reason": "explicit model='multilingual'",
+        "detection": null,
+        "workflow": null
+      }
+    }
+  }
+}

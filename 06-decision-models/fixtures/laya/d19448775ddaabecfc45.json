@@ -1,0 +1,75 @@
+{
+  "key": "d19448775ddaabecfc45",
+  "target": "laya",
+  "recorded_at": "2026-10-12",
+  "synthetic": false,
+  "origin": "laya-serve em http://127.0.0.1:8001, modelo multilingual",
+  "request": {
+    "state": {
+      "remetente": "contato@academiaforma.com.br",
+      "assunto": "Mensalidade em aberto",
+      "corpo": "Olá! Consta em aberto a mensalidade de setembro, de R$ 99,00. Você pode pagar na recepção ou pelo app da academia."
+    },
+    "questions": {
+      "spam": {
+        "type": "noul",
+        "instructions": "Este e-mail é spam, golpe ou phishing?",
+        "criteria": {
+          "true": "Mensagem indesejada ou fraudulenta.",
+          "false": "Mensagem legítima, mesmo que seja comercial ou urgente."
+        }
+      }
+    }
+  },
+  "result": {
+    "provider": "laya",
+    "model": "laya-rl-agent",
+    "answers": {
+      "spam": {
+        "value": 0.9985,
+        "confidence": 0.9985,
+        "probabilities": {
+          "true": 0.9985,
+          "false": 0.0014999999999999458
+        },
+        "expected": null
+      }
+    },
+    "latency_ms": 160.04830000019865,
+    "tokens_in": 111,
+    "tokens_out": 0,
+    "cost_usd": 0.0,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": false,
+    "raw": {
+      "model": "laya-rl-agent",
+      "answers": {
+        "spam": {
+          "type": "noul",
+          "noul": 0.9985,
+          "confidence": 0.9985,
+          "answer_confidence": 0.9985,
+          "action": {
+            "act_probability": 1.0
+          }
+        }
+      },
+      "usage": {
+        "input_tokens": 111,
+        "output_tokens": 0,
+        "state_tokens": 65,
+        "state_tokens_dropped": 0,
+        "truncated": false,
+        "truncated_questions": []
+      },
+      "routing": {
+        "model": "multilingual",
+        "repo": "convaiinnovations/laya/multilingual",
+        "reason": "explicit model='multilingual'",
+        "detection": null,
+        "workflow": null
+      }
+    }
+  }
+}

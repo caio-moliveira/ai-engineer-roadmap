@@ -1,0 +1,68 @@
+{
+  "key": "6f94db4b589c05b4ea43",
+  "target": "jev",
+  "recorded_at": "2026-10-12",
+  "synthetic": true,
+  "origin": "SINTÉTICA: gerada a partir dos rótulos do golden set com ruído determinístico (fixtures/gerar_jev_sintetico.py). Não é medição do Jev.",
+  "request": {
+    "state": {
+      "ticket": "Preciso da nota fiscal de julho com o CNPJ atualizado para fechar a contabilidade."
+    },
+    "questions": {
+      "categoria": {
+        "type": "choice",
+        "instructions": "Este ticket já foi enviado para a fila conta. Qual a categoria dele?",
+        "criteria": {
+          "senha_acesso": "senha, login, bloqueio por senha, dois fatores ou invasão",
+          "dados_cadastro": "e-mail, endereço, CNPJ ou outros dados cadastrais",
+          "cancelamento": "cancelar a assinatura ou a conta",
+          "usuarios_permissoes": "usuários, permissões e limite de usuários"
+        }
+      }
+    }
+  },
+  "result": {
+    "provider": "jev",
+    "model": "jev-1.13.0",
+    "answers": {
+      "categoria": {
+        "value": "senha_acesso",
+        "confidence": 0.732,
+        "probabilities": {
+          "senha_acesso": 0.732,
+          "dados_cadastro": 0.0756,
+          "cancelamento": 0.0889,
+          "usuarios_permissoes": 0.1034
+        },
+        "expected": null
+      }
+    },
+    "latency_ms": 53.8,
+    "tokens_in": 127,
+    "tokens_out": 0,
+    "cost_usd": 5.334000000000001e-06,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": true,
+    "raw": {
+      "model": "jev-1.13.0",
+      "answers": {
+        "categoria": {
+          "type": "choice",
+          "choice": "senha_acesso",
+          "confidence": 0.732,
+          "probabilities": {
+            "senha_acesso": 0.732,
+            "dados_cadastro": 0.0756,
+            "cancelamento": 0.0889,
+            "usuarios_permissoes": 0.1034
+          }
+        }
+      },
+      "usage": {
+        "input_tokens": 127,
+        "output_tokens": 0
+      }
+    }
+  }
+}

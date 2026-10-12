@@ -1,0 +1,96 @@
+{
+  "key": "68bf593aac21ef507e32",
+  "target": "laya",
+  "recorded_at": "2026-10-12",
+  "synthetic": false,
+  "origin": "laya-serve em http://127.0.0.1:8001, modelo multilingual",
+  "request": {
+    "state": {
+      "pergunta": "Qual o ticket médio de 2026?"
+    },
+    "questions": {
+      "tool": {
+        "type": "choice",
+        "instructions": "Qual consulta de dados responde a pergunta?",
+        "criteria": {
+          "vendas_mensal": "Receita, número de pedidos, ticket médio e variação de cada mês, de jan/2025 a set/2026. Para evolução no tempo, sazonalidade e comparação entre meses.",
+          "vendas_por_categoria": "Receita, unidades, margem e participação de cada categoria de produto em 2026.",
+          "top_produtos": "Os 10 produtos de maior receita em 2026, com categoria e unidades.",
+          "vendas_por_vendedor": "Receita, pedidos, meta e atingimento da meta de cada vendedor em 2026, com a região de cada um. Para ranking de vendedores e quem bateu a meta.",
+          "vendas_por_regiao": "Receita, pedidos, clientes ativos e participação de cada região do país em 2026.",
+          "top_clientes": "Os 10 clientes (empresas) de maior receita em 2026, com segmento, região, pedidos e data da última compra.",
+          "kpis": "Números consolidados de jan a set de 2026: receita total, receita do mesmo período de 2025, crescimento, pedidos, ticket médio, clientes ativos, atingimento da meta da empresa, taxa de cancelamento e margem bruta.",
+          "nenhuma": "É sobre vendas, mas nenhuma das consultas acima responde: estoque, previsão, detalhe de um pedido específico, dados fora de jan/2025 a set/2026."
+        }
+      }
+    }
+  },
+  "result": {
+    "provider": "laya",
+    "model": "laya-rl-agent",
+    "answers": {
+      "tool": {
+        "value": "nenhuma",
+        "confidence": 0.2002,
+        "probabilities": {
+          "vendas_mensal": 0.0964,
+          "vendas_por_categoria": 0.0047,
+          "top_produtos": 0.0364,
+          "vendas_por_vendedor": 0.075,
+          "vendas_por_regiao": 0.0801,
+          "top_clientes": 0.223,
+          "kpis": 0.0756,
+          "nenhuma": 0.4088
+        },
+        "expected": null
+      }
+    },
+    "latency_ms": 197.70770000104676,
+    "tokens_in": 264,
+    "tokens_out": 0,
+    "cost_usd": 0.0,
+    "parse_ok": true,
+    "values_in_schema": true,
+    "synthetic": false,
+    "raw": {
+      "model": "laya-rl-agent",
+      "answers": {
+        "tool": {
+          "type": "choice",
+          "choice": "nenhuma",
+          "probabilities": {
+            "vendas_mensal": 0.0964,
+            "vendas_por_categoria": 0.0047,
+            "top_produtos": 0.0364,
+            "vendas_por_vendedor": 0.075,
+            "vendas_por_regiao": 0.0801,
+            "top_clientes": 0.223,
+            "kpis": 0.0756,
+            "nenhuma": 0.4088
+          },
+          "confidence": 0.2002,
+          "answer_confidence": 0.4088,
+          "action": {
+            "act_probability": 1.0
+          },
+          "x_jev_confidence": 0.3243
+        }
+      },
+      "usage": {
+        "input_tokens": 264,
+        "output_tokens": 0,
+        "state_tokens": 17,
+        "state_tokens_dropped": 0,
+        "truncated": false,
+        "truncated_questions": []
+      },
+      "routing": {
+        "model": "multilingual",
+        "repo": "convaiinnovations/laya/multilingual",
+        "reason": "explicit model='multilingual'",
+        "detection": null,
+        "workflow": null
+      }
+    }
+  }
+}
