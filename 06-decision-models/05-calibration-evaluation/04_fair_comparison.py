@@ -10,7 +10,7 @@ Rode:
 Em modo live, o harness estima o custo antes e pede --confirmar acima de US$ 1.
 
 Este é o harness que todo módulo usa para medir. Para comparar um provider novo (outro LLM,
-um Laya ajustado no módulo 07, um servidor /v1/systemone seu), aponte DECISION_TARGETS para ele.
+um Laya ajustado, qualquer servidor /v1/systemone), aponte DECISION_TARGETS para ele.
 """
 
 import argparse

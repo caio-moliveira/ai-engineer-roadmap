@@ -13,7 +13,6 @@ O PRD (`plano.md`, versão 0.1 de 12/10/2026) diz o que o bloco é. Uma SPEC diz
 | 4 | [SPEC-03](SPEC-03-noul-detection-verification.md) | Noul | concluída |
 | 5 | [SPEC-04](SPEC-04-score-ranking.md) | Score | concluída |
 | 6 | [SPEC-06](SPEC-06-final-project.md) | agente híbrido | concluída |
-| 7 | [SPEC-07](SPEC-07-bonus.md) | bônus | concluída |
 
 "Concluída" significa que todos os critérios de aceite passam em replay. As fixtures do Jev são sintéticas até alguém gravar com `TYPESAFE_API_KEY` (ver `06-decision-models/fixtures/README.md`).
 
@@ -36,4 +35,5 @@ O PRD (`plano.md`, versão 0.1 de 12/10/2026) diz o que o bloco é. Uma SPEC diz
 | Escolha de tool (módulo 02) | agente do Bloco 3 | agente de vendas do workshop-jev | precisa de golden set rotulado; o exercício leva o padrão ao Bloco 3 |
 | Python | 3.12+ | 3.13+ | é a versão do resto da trilha |
 | Laya | 421M, ONNX int8 | checkpoint multilíngue (mmBERT-base, 322M), PyTorch em CPU | 421M é o checkpoint em inglês; o multilíngue é o que serve para pt-BR |
+| Módulo bônus (07) | P1, opcional | não entra | o bloco fica com 6 aulas |
 | Infra compartilhada | `common/` importado por todos os módulos | igual | exceção consciente à regra da trilha, restrita ao Bloco 6 |

@@ -33,7 +33,7 @@
 
 Choice • Noul • Score • calibração (ECE, Brier) • limiar e curva de automação
 golden set • replay de fixtures • harness de comparação justa • guardrail e verificação
-roteamento de modelo • rerank • agente híbrido em LangGraph • fine-tune de modelo de decisão
+roteamento de modelo • rerank • agente híbrido em LangGraph
 
 </div>
 </div>
@@ -75,10 +75,6 @@ O bloco fecha um ciclo da trilha: volta ao agente do Bloco 3 e ao RAG do Bloco 2
 - **Pergunta-chave:** quanto custa cada decisão do seu agente, antes e depois?
 - Grafo LangGraph com guardrail, triagem, geração e verificação; provider por node; relatório de custo, latência p95, acurácia e concordância.
 
-### [Aula 7 (bônus): construa o seu próprio modelo de decisão](./07-bonus-build-your-own)
-- Cabeça de scoring sobre um encoder, fine-tune do Laya nos seus dados e um servidor `/v1/systemone` próprio.
-- Pré-requisito: [Bloco 5](../05-fine-tuning).
-
 ---
 
 ## Os modelos e as superfícies
@@ -91,7 +87,7 @@ O bloco fecha um ciclo da trilha: volta ao agente do Bloco 3 e ao RAG do Bloco 2
 
 O Laya fala o **mesmo esquema** do Jev. O SDK oficial do Jev conversa com ele trocando a `base_url`; é o que faz o `DecisionClient` do bloco atender os dois.
 
-**O que dizer em voz alta sobre o Laya:** zero-shot, ele fica bem abaixo do Jev e dos LLMs no nosso golden set (o módulo 05 mede). O checkpoint multilíngue sai **sem calibração** de fábrica, segundo o próprio model card. Ele tem viés de posição em Score e contexto padrão de 1.024 tokens por pergunta. A tese do Laya é ajustar nos seus dados, e o módulo 07 faz isso.
+**O que dizer em voz alta sobre o Laya:** zero-shot, ele fica bem abaixo do Jev e dos LLMs no nosso golden set (o módulo 05 mede). O checkpoint multilíngue sai **sem calibração** de fábrica, segundo o próprio model card. Ele tem viés de posição em Score e contexto padrão de 1.024 tokens por pergunta. A tese do Laya é ajustar nos seus dados (fine-tune), não usá-lo zero-shot.
 
 **Citados, sem código:** NanoJev (Qwen3-0.6B), Kev (Qwen + LoRA), OpenJev, GLiNER2 e SemIf (logits de um LLM open-weight). O cenário muda em semanas. Consulte a lista comunitária [awesome-decision-models](https://github.com/sfmqrb/awesome-decision-models) (verificada em 12/10/2026) antes de escolher.
 
@@ -156,7 +152,7 @@ Os números do Jev em replay **não medem o Jev**: ilustram o formato. O replay 
 ├── fixtures/                # replay gravado: um diretório por alvo
 ├── laya/Dockerfile          # Laya em CPU para o docker-compose da raiz (perfil `decision`)
 ├── tests/                   # métricas, contratos, replay, golden sets e smoke test de cada script
-└── 01-... a 07-...          # módulos: README + scripts NN_*.py
+└── 01-... a 06-...          # módulos: README + scripts NN_*.py
 ```
 
 **Exceção consciente às regras da trilha:** os módulos deste bloco importam `common/`. Medir providers lado a lado só é justo com as mesmas métricas, os mesmos dados e o mesmo cliente. Nos demais blocos, a regra de "nada compartilhado" continua.

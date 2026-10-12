@@ -68,6 +68,3 @@ Use o seu próprio domínio e o seu golden set. O `workshop-jev` é a referênci
 - [ ] Roda em replay sem chave (`DECISION_PROVIDER=replay`).
 - [ ] Fixtures sintéticas, se houver, aparecem marcadas no relatório.
 - [ ] Rotas FastAPI, se houver, chamam SDKs síncronos dentro de `asyncio.to_thread`.
-
-## ⏭️ Próximo Passo
-Quer entender o que há por baixo e ter um modelo de decisão sob medida? **[Módulo 7 (bônus)](../07-bonus-build-your-own)**.

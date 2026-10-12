@@ -72,5 +72,5 @@ print(
     "\n- Zero-shot, fica bem abaixo do Jev em benchmarks independentes. O módulo 05 mede no nosso golden set."
     "\n- O checkpoint multilíngue sai sem calibração (o próprio model card diz). Não confie no 0,99 antes de medir."
     "\n- Contexto de 1.024 tokens por pergunta por padrão: estados longos precisam ser fatiados."
-    "\n- A tese do Laya é ajustar nos seus dados: o módulo 07 faz isso e compara antes e depois."
+    "\n- A tese do Laya é ajustar nos seus dados (fine-tune), não usá-lo zero-shot."
 )

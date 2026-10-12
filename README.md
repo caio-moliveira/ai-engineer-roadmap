@@ -223,7 +223,6 @@ Este bloco cobre as chamadas que roteiam, classificam, bloqueiam e verificam: a 
 | 04 | [Score: Ranking e Priorização](./06-decision-models/04-score-ranking)                      | Urgência, rerank, judge       |
 | 05 | [Calibração, Limiares e Avaliação](./06-decision-models/05-calibration-evaluation)         | ECE, curva, harness           |
 | 06 | [Projeto Final: Agente Híbrido](./06-decision-models/06-final-project-hybrid-agent)        | LangGraph medido              |
-| 07 | [Bônus: Construa o Seu](./06-decision-models/07-bonus-build-your-own)                      | Scoring head, fine-tune       |
 
 ---
 

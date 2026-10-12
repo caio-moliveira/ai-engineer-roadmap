@@ -105,6 +105,6 @@ print(
     "\n  decisão também as lê, mas cobra por token de entrada uma fração do preço e não gera saída."
     "\n- Com o Choice, o código recebe uma distribuição e decide o que fazer com a confiança;"
     "\n  com function calling, o LLM já escolheu e você só vê a escolha."
-    "\n- Acurácia zero-shot baixa (como a do Laya aqui) não é o fim da conversa: é o caso de uso"
-    "\n  do fine-tune do módulo 07, com o próprio catálogo de tools como dado de treino."
+    "\n- Acurácia zero-shot baixa (como a do Laya aqui) não é o fim da conversa: a tese do Laya"
+    "\n  é ajustar nos seus dados, com o próprio catálogo de tools como dado de treino."
 )

@@ -37,7 +37,3 @@ models:
     input: 4.00
     output: 20.00
     source: "Anthropic, tabela de preços em 03/10/2026, sem prompt caching (via workshop-jev)"
-  meu-systemone:
-    input: 0
-    output: 0
-    source: "Servidor do módulo 07 (self-hosted); custo de hardware fora da tabela"

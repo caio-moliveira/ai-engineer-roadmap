@@ -1,8 +1,4 @@
-"""Smoke test: todo script de todo módulo roda em replay, sem chave e sem rede (RF-03).
-
-Os scripts do módulo 07 baixam modelos do Hugging Face e treinam em CPU: ficam fora por
-padrão. Rode com RUN_HEAVY=1 para incluí-los.
-"""
+"""Smoke test: todo script de todo módulo roda em replay, sem chave e sem rede (RF-03)."""
 
 import os
 import subprocess
@@ -20,13 +16,10 @@ MODULES = [
     "05-calibration-evaluation",
 ]
 SKIP = {"05_replay_record.py"}  # grava: precisa de rede por definição
-HEAVY = ["07-bonus-build-your-own/01_scoring_head.py --rapido", "07-bonus-build-your-own/02_finetune_laya.py --rapido"]
 
 SCRIPTS = [f"{m}/{p.name}" for m in MODULES for p in sorted((BLOCK / m).glob("[0-9][0-9]_*.py")) if p.name not in SKIP]
 SCRIPTS += ["01-decision-fundamentals/01_http_direct.py laya", "01-decision-fundamentals/02_sdk_first_call.py laya"]
-SCRIPTS += ["06-final-project-hybrid-agent/main.py --lote --comparar", "07-bonus-build-your-own/03_serve_systemone.py --backend cliente"]
-if os.environ.get("RUN_HEAVY") == "1":
-    SCRIPTS += HEAVY
+SCRIPTS += ["06-final-project-hybrid-agent/main.py --lote --comparar"]
 
 
 @pytest.mark.parametrize("script", SCRIPTS)
