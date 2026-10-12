@@ -198,6 +198,35 @@ Este bloco ensina quando treinar modelos — e principalmente quando não treina
 
 ---
 
+## 🎯 [Bloco 6 — Modelos de Decisão (System One Models)](./06-decision-models)
+
+Este bloco cobre as chamadas que roteiam, classificam, bloqueiam e verificam: a maioria das chamadas de um agente em produção, e a parte da conta que ninguém olha.
+
+### 🎯 Você vai aprender
+
+✔ quando usar código, modelo de decisão, LLM ou classificador treinado  
+✔ os três primitivos tipados: Choice, Noul e Score  
+✔ guardrail, verificação, roteamento e rerank sem gerar texto  
+✔ calibração, limiar e curva de automação  
+✔ comparação justa entre Jev, Laya (open-weight) e LLMs, com replay sem chave  
+✔ agente híbrido em LangGraph medido ponta a ponta
+
+---
+
+### 📦 Módulos
+
+| #  | Módulo                                                                                     | Tema                          |
+| -- | ------------------------------------------------------------------------------------------ | ----------------------------- |
+| 01 | [Fundamentos de Modelos de Decisão](./06-decision-models/01-decision-fundamentals)         | Primitivos e matriz de decisão |
+| 02 | [Choice: Roteamento e Seleção](./06-decision-models/02-choice-routing)                     | Fila, tool, modelo            |
+| 03 | [Noul: Detecção e Verificação](./06-decision-models/03-noul-detection-verification)        | Spam, guardrail, verificação  |
+| 04 | [Score: Ranking e Priorização](./06-decision-models/04-score-ranking)                      | Urgência, rerank, judge       |
+| 05 | [Calibração, Limiares e Avaliação](./06-decision-models/05-calibration-evaluation)         | ECE, curva, harness           |
+| 06 | [Projeto Final: Agente Híbrido](./06-decision-models/06-final-project-hybrid-agent)        | LangGraph medido              |
+| 07 | [Bônus: Construa o Seu](./06-decision-models/07-bonus-build-your-own)                      | Scoring head, fine-tune       |
+
+---
+
 ## 🚀 Como Começar
 
 1. **Clone o repositório:**
