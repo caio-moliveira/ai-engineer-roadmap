@@ -52,7 +52,7 @@ def cross_validate(X: pd.DataFrame) -> tuple[float, float]:
     scores = np.zeros(len(y))
     fold_aucs = []
     for train, test in StratifiedKFold(n_splits=5, shuffle=True, random_state=42).split(X, y):
-        model = CatBoostClassifier(iterations=300, depth=4, learning_rate=0.05, verbose=False, random_seed=42)
+        model = CatBoostClassifier(iterations=300, depth=4, learning_rate=0.05, verbose=False, random_seed=42, allow_writing_files=False)
         model.fit(X.iloc[train], y[train], cat_features=cat_features)
         scores[test] = model.predict_proba(X.iloc[test])[:, 1]
         if len(set(y[test])) == 2:
