@@ -12,6 +12,3 @@ wheels/
 CLAUDE.md
 .agents/
 .claude/
-# Bloco 6: saídas geradas pelos scripts (gráficos, CSV, checkpoints treinados)
-06-decision-models/**/saida/
-catboost_info/

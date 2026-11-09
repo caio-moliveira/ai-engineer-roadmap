@@ -78,7 +78,6 @@ version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
     { name = "azure-ai-documentintelligence" },
-    { name = "catboost" },
     { name = "datasets" },
     { name = "ddgs" },
     { name = "deepagents" },
@@ -100,12 +99,10 @@ dependencies = [
     { name = "langchain-qdrant" },
     { name = "langchain-tavily" },
     { name = "langchain-text-splitters" },
-    { name = "langchain-typesafe", extra = ["experimental"] },
     { name = "langfuse" },
     { name = "langgraph-checkpoint-postgres" },
     { name = "langgraph-checkpoint-redis" },
     { name = "lark" },
-    { name = "laya", extra = ["serve"] },
     { name = "llama-index" },
     { name = "llama-index-embeddings-openai" },
     { name = "llama-index-graph-stores-nebula" },
@@ -139,7 +136,6 @@ dependencies = [
 [package.metadata]
 requires-dist = [
     { name = "azure-ai-documentintelligence", specifier = ">=1.0.2" },
-    { name = "catboost", specifier = "==1.2.10" },
     { name = "datasets", specifier = ">=4.5.0" },
     { name = "ddgs", specifier = ">=9.10.0" },
     { name = "deepagents", specifier = ">=0.4.12" },
@@ -161,12 +157,10 @@ requires-dist = [
     { name = "langchain-qdrant", specifier = ">=1.1.0" },
     { name = "langchain-tavily", specifier = ">=0.2.17" },
     { name = "langchain-text-splitters", specifier = ">=1.1.0" },
-    { name = "langchain-typesafe", extras = ["experimental"], specifier = "==0.0.1a3" },
     { name = "langfuse", specifier = ">=3.14.5" },
     { name = "langgraph-checkpoint-postgres", specifier = ">=3.0.4" },
     { name = "langgraph-checkpoint-redis", specifier = ">=0.4.0" },
     { name = "lark", specifier = ">=1.3.1" },
-    { name = "laya", extras = ["serve"], specifier = "==0.4.6" },
     { name = "llama-index", specifier = ">=0.14.13" },
     { name = "llama-index-embeddings-openai", specifier = ">=0.5.1" },
     { name = "llama-index-graph-stores-nebula", specifier = ">=0.5.1" },
@@ -673,31 +667,6 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/87/a4/e534cf7d2d0e8d880e25dd61e8d921ffcfe15bd696734589826f5a2df727/caio-0.9.25-cp314-cp314-manylinux_2_34_aarch64.whl", hash = "sha256:628a630eb7fb22381dd8e3c8ab7f59e854b9c806639811fc3f4310c6bd711d79", size = 81565 },
     { url = "https://files.pythonhosted.org/packages/3f/ed/bf81aeac1d290017e5e5ac3e880fd56ee15e50a6d0353986799d1bc5cfd5/caio-0.9.25-cp314-cp314-manylinux_2_34_x86_64.whl", hash = "sha256:0ba16aa605ccb174665357fc729cf500679c2d94d5f1458a6f0d5ca48f2060a7", size = 80071 },
     { url = "https://files.pythonhosted.org/packages/86/93/1f76c8d1bafe3b0614e06b2195784a3765bbf7b0a067661af9e2dd47fc33/caio-0.9.25-py3-none-any.whl", hash = "sha256:06c0bb02d6b929119b1cfbe1ca403c768b2013a369e2db46bfa2a5761cf82e40", size = 19087 },
-]
-
-[[package]]
-name = "catboost"
-version = "1.2.10"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "graphviz" },
-    { name = "matplotlib" },
-    { name = "numpy" },
-    { name = "pandas" },
-    { name = "plotly" },
-    { name = "scipy" },
-    { name = "six" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/e9/0e/09e8fa0858570fda88090bc3f441b69c18ea3d6f4a02fd41aa5426c157bf/catboost-1.2.10.tar.gz", hash = "sha256:26ae6d423acaf0e9d8160f2477a990431057ed04522d993c2f42dac62743b4f7", size = 39925863 }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/2d/02/3c5f08a7c7969eaa2509d804461db26752fe1c7ecb8ad8510cab51a95fd2/catboost-1.2.10-cp313-cp313-macosx_11_0_universal2.whl", hash = "sha256:bd3d3b344894f61b5f70124658f302148bb9a51c41d0d5b6c453a72e9dfefc49", size = 28829400 },
-    { url = "https://files.pythonhosted.org/packages/98/fd/63be2ff7aa9f6a7d63e342f42948259a028bfa50203d5ff687c84804ffb7/catboost-1.2.10-cp313-cp313-manylinux2014_aarch64.whl", hash = "sha256:59aa166f075f0a5ea57b0ba46e5060bd6a22e849e91e4142f16c2df11295b184", size = 96680675 },
-    { url = "https://files.pythonhosted.org/packages/fe/2c/fa0479bd79226f037b495a30696b70741beb198f65227c975005e213aa8e/catboost-1.2.10-cp313-cp313-manylinux2014_x86_64.whl", hash = "sha256:42c1b6c7ae5c18cdbe00c8b9493987cc13338fe328baaf1a0b98ddaf58db96a2", size = 97111368 },
-    { url = "https://files.pythonhosted.org/packages/69/71/a9e9a06418832fbea9d7cefda585d53395358d498537b6bdd3cf7364cd29/catboost-1.2.10-cp313-cp313-win_amd64.whl", hash = "sha256:5ede858e634d6d0f521bf6dd6fad9374f23d37049ee48e0779ccd2a372632cb1", size = 100201430 },
-    { url = "https://files.pythonhosted.org/packages/56/58/f370f6c64db5e7da92e3b88ab62e2df72f113cf5a1eee35b48f69d54accd/catboost-1.2.10-cp314-cp314-macosx_11_0_universal2.whl", hash = "sha256:3efc5e4d414b7c13bff6dd0d6c938cf09bb1445097283c7790e54b8ee461820b", size = 28840256 },
-    { url = "https://files.pythonhosted.org/packages/9d/74/18597f0b2923e3660cd44f942fe9e7cddaa99afc252bc745c48f79566330/catboost-1.2.10-cp314-cp314-manylinux2014_aarch64.whl", hash = "sha256:bad9a70890cdc591080a908d54a3cd70002ab1e48b2017adff84726da0b3e16d", size = 96688527 },
-    { url = "https://files.pythonhosted.org/packages/6b/ac/7effae0e47fd9586e46a796f5af61b730c572570cedee333ee9ba8db85a8/catboost-1.2.10-cp314-cp314-manylinux2014_x86_64.whl", hash = "sha256:7b8cc4ea3a6ac4a8d05f3a79c8ee5454360a0a710fa12444963865ad3f0ddfec", size = 97119495 },
-    { url = "https://files.pythonhosted.org/packages/da/b7/8f9e284a9cdd034f01f017dc5dab0da03dc3eac171a2be205745da3becb6/catboost-1.2.10-cp314-cp314-win_amd64.whl", hash = "sha256:951c5bdf27b8edb6ca624f41134888c666ae68275488803d3c91ce83e154f0c5", size = 101749687 },
 ]
 
 [[package]]
@@ -2000,15 +1969,6 @@ wheels = [
 ]
 
 [[package]]
-name = "graphviz"
-version = "0.21"
-source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/f8/b3/3ac91e9be6b761a4b30d66ff165e54439dcd48b83f4e20d644867215f6ca/graphviz-0.21.tar.gz", hash = "sha256:20743e7183be82aaaa8ad6c93f8893c923bd6658a04c32ee115edb3c8a835f78", size = 200434 }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/91/4c/e0ce1ef95d4000ebc1c11801f9b944fa5910ecc15b5e351865763d8657f8/graphviz-0.21-py3-none-any.whl", hash = "sha256:54f33de9f4f911d7e84e4191749cac8cc5653f815b06738c54db9a15ab8b1e42", size = 47300 },
-]
-
-[[package]]
 name = "greenlet"
 version = "3.3.1"
 source = { registry = "https://pypi.org/simple" }
@@ -3032,24 +2992,6 @@ wheels = [
 ]
 
 [[package]]
-name = "langchain-typesafe"
-version = "0.0.1a3"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "httpx2" },
-    { name = "langchain-core" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/c9/54/460d126cb5db7b031e5b3b94c63fe36d58bce020f2692fd7661f8f84c7d3/langchain_typesafe-0.0.1a3.tar.gz", hash = "sha256:d77647a7a5bafaa82db8212a682b223a9bbcd52fb015e49464f211552f1f3272", size = 200970 }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/ca/5b/a14f30242eb36363ee757024a01727fef5efffbb542d2382468f457a7e2b/langchain_typesafe-0.0.1a3-py3-none-any.whl", hash = "sha256:f06f74ebdcb10cbc836dd89a275bbf4e2e13646cb919dcc02d4219e602cfe36e", size = 24962 },
-]
-
-[package.optional-dependencies]
-experimental = [
-    { name = "langchain" },
-]
-
-[[package]]
 name = "langfuse"
 version = "3.14.5"
 source = { registry = "https://pypi.org/simple" }
@@ -3195,31 +3137,6 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/1a/26/57b1034c08922d0aefea79430a5e0006ffaee4f0ec59d566613f667ab2f7/latex2mathml-3.78.1.tar.gz", hash = "sha256:f941db80bf41db33f31df87b304e8b588f8166b813b0257c11c98f7a9d0aac71", size = 74030 }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/3e/76/d661ea2e529c3d464f9efd73f9ac31626b45279eb4306e684054ea20e3d4/latex2mathml-3.78.1-py3-none-any.whl", hash = "sha256:f089b6d75e85b937f99693c93e8c16c0804008672c3dd2a3d25affd36f238100", size = 73892 },
-]
-
-[[package]]
-name = "laya"
-version = "0.4.6"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "huggingface-hub", version = "0.36.2", source = { registry = "https://pypi.org/simple" }, marker = "sys_platform != 'darwin'" },
-    { name = "huggingface-hub", version = "1.9.0", source = { registry = "https://pypi.org/simple" }, marker = "sys_platform == 'darwin'" },
-    { name = "numpy" },
-    { name = "safetensors" },
-    { name = "torch" },
-    { name = "transformers", version = "4.57.6", source = { registry = "https://pypi.org/simple" }, marker = "sys_platform != 'darwin'" },
-    { name = "transformers", version = "5.5.0", source = { registry = "https://pypi.org/simple" }, marker = "sys_platform == 'darwin'" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/60/dd/a66670c1327b0886b210c220337640d9a7aa2811a8db5746ed279e01f400/laya-0.4.6.tar.gz", hash = "sha256:64ec85c8650f2c6033898da6c9e7134ad4d06c48635b71e51f865970c9a1a901", size = 1163178 }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/c4/48/b3908f48b566fe5379a36e39f38d4531db0081807e9bc56a10bfe4ba875f/laya-0.4.6-py3-none-any.whl", hash = "sha256:93fab7677aab9cb71cd4f9cb4477e334618f85ccdff684520a5dd144c3316a88", size = 391896 },
-]
-
-[package.optional-dependencies]
-serve = [
-    { name = "fastapi" },
-    { name = "python-multipart" },
-    { name = "uvicorn" },
 ]
 
 [[package]]
@@ -4007,15 +3924,6 @@ wheels = [
 ]
 
 [[package]]
-name = "narwhals"
-version = "2.27.1"
-source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/bf/21/f64d6b2dbea7bf3f8c38cdc786dcc6ef012ca3d173ad208c782c9a7bedf6/narwhals-2.27.1.tar.gz", hash = "sha256:aed93076a3ea42d9c32c88e4eb5ea422a21937011cbe1f480f9572a523c82094", size = 735013 }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/d1/89/5d4c86da1130d9059681e5b6cd7645df5c10279a6a079c5c37dcb2cc6f3f/narwhals-2.27.1-py3-none-any.whl", hash = "sha256:d057df13f5852b8e157596e82eb5e955fad267425df5e420e0ee9863da483b31", size = 483211 },
-]
-
-[[package]]
 name = "nebula3-python"
 version = "3.8.3"
 source = { registry = "https://pypi.org/simple" }
@@ -4796,19 +4704,6 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/cf/86/0248f086a84f01b37aaec0fa567b397df1a119f73c16f6c7a9aac73ea309/platformdirs-4.5.1.tar.gz", hash = "sha256:61d5cdcc6065745cdd94f0f878977f8de9437be93de97c1c12f853c9c0cdcbda", size = 21715 }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/cb/28/3bfe2fa5a7b9c46fe7e13c97bda14c895fb10fa2ebf1d0abb90e0cea7ee1/platformdirs-4.5.1-py3-none-any.whl", hash = "sha256:d03afa3963c806a9bed9d5125c8f4cb2fdaf74a55ab60e5d59b3fde758104d31", size = 18731 },
-]
-
-[[package]]
-name = "plotly"
-version = "7.1.0"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "narwhals" },
-    { name = "packaging" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/49/c3/72b369f5ed7701b04ab0ea3dcf83e9bbce71c0b3bc6f07f87568550d09ea/plotly-7.1.0.tar.gz", hash = "sha256:f860166a4a3d78c69cb1f4a15f28a5c8283eade98a282a698f3bb853a449ace5", size = 6689315 }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/e5/7d/905a3a3d51087515719058c94cfbda2ff0fc14417c20d557ae3e82d8b250/plotly-7.1.0-py3-none-any.whl", hash = "sha256:dbb7fa18afce40d0a8e80d1bf162eceb3faa0ce5a77fe741ad09a74cf78f53f3", size = 9692368 },
 ]
 
 [[package]]

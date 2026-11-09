@@ -3,21 +3,17 @@
 
 # 🔹Bloco 6: Modelos de Decisão (System One Models)
 
-> Módulo de modelos de decisão para engenheiros de IA, outubro de 2026.
-> Modelos que não geram texto: recebem um estado e perguntas tipadas e devolvem decisões com probabilidade calibrada.
+> Modelos que não geram texto: recebem um estado e perguntas tipadas e devolvem decisões com probabilidade.
 
 <p align="center">
   <a href="https://www.python.org/">
     <img alt="Python" src="https://img.shields.io/badge/Python-3.13%2B-3776AB?style=for-the-badge&logo=python&logoColor=white" />
   </a>
   <a href="https://docs.typesafe.ai/">
-    <img alt="Jev" src="https://img.shields.io/badge/TypeSafe-Jev%201.13-111111?style=for-the-badge" />
+    <img alt="Jev" src="https://img.shields.io/badge/TypeSafe-Jev-111111?style=for-the-badge" />
   </a>
   <a href="https://huggingface.co/convaiinnovations/laya-multilingual">
     <img alt="Laya" src="https://img.shields.io/badge/Laya-Apache%202.0-FFD21E?style=for-the-badge&logo=huggingface&logoColor=000000" />
-  </a>
-  <a href="https://docs.langchain.com/oss/python/integrations/providers/typesafe">
-    <img alt="LangChain" src="https://img.shields.io/badge/langchain--typesafe-Runnable%20%2B%20Middleware-1C3C3C?style=for-the-badge&logo=langchain&logoColor=white" />
   </a>
   <a href="https://langchain-ai.github.io/langgraph/">
     <img alt="LangGraph" src="https://img.shields.io/badge/LangGraph-Agente%20h%C3%ADbrido-1C3C3C?style=for-the-badge" />
@@ -31,139 +27,84 @@
 
 ### Tecnologias e padrões utilizados ao longo do módulo
 
-Choice • Noul • Score • calibração (ECE, Brier) • limiar e curva de automação
-golden set • replay de fixtures • harness de comparação justa • guardrail e verificação
-roteamento de modelo • rerank • agente híbrido em LangGraph
+Jev • Laya • Choice • Noul • Score • guardrail • roteamento • verificação de saída • agente híbrido em LangGraph
 
 </div>
 </div>
 
 ## Por que este bloco existe
 
-Os blocos 1 a 5 ensinam a gerar texto com LLMs, conectá-los a dados, orquestrar agentes e ajustar modelos. Falta a categoria que mais aparece num agente de produção: as chamadas que **roteiam, classificam, bloqueiam e verificam**. Hoje a gente resolve isso com prompt e JSON. É caro, lento e não tem probabilidade confiável.
+Os blocos anteriores usam LLMs para tudo, inclusive para decidir: rotear um ticket, escolher uma tool, barrar uma mensagem, conferir uma resposta. Cada uma dessas decisões vira um prompt, um JSON gerado token a token e alguns segundos de espera.
 
-Um modelo de decisão (System One Model, no vocabulário de Kahneman: rápido e intuitivo) troca "gerar a palavra *financeiro*" por "devolver a distribuição sobre as quatro filas". A diferença muda a engenharia: com probabilidade calibrada, o código decide quanto automatizar.
-
-O bloco fecha um ciclo da trilha: volta ao agente do Bloco 3 e ao RAG do Bloco 2 e os reconstrói com decisões no lugar certo.
+Um modelo de decisão faz essas perguntas sem gerar texto. Devolve a probabilidade de cada resposta, em milissegundos e sem tokens de saída. O bloco mostra o que é isso, como usar os três tipos de pergunta e onde ele substitui o LLM num sistema real. Em todos os scripts, você vê os tokens e a latência de cada chamada.
 
 ## 📚 Ementa do Módulo
 
 ### [Aula 1: Fundamentos de modelos de decisão](./01-decision-fundamentals)
 - **Pergunta-chave:** por que gerar texto para responder uma pergunta de múltipla escolha?
-- A chamada HTTP crua, o SDK oficial, a mesma pergunta num LLM e no Laya local.
-- Os três primitivos lado a lado, calibração em uma frase e a matriz "código, decisão, LLM ou classificador".
+- O que é um modelo de decisão e o Jev; a mesma decisão no Jev, no GPT-5.6 Luna e no Claude Sonnet 5.5.
 
-### [Aula 2: Choice, roteamento e seleção](./02-choice-routing)
-- **Pergunta-chave:** quantas vezes o seu agente lê 10 descrições de tool só para escolher uma?
-- Fila de tickets, escolha de tool contra function calling, roteamento barato e caro, hierarquia de rótulos.
-- `TypeSafeClassifier` como Runnable e o `ModelRouterMiddleware` num `create_agent`.
+### [Aula 2: Choice](./02-choice)
+- **Pergunta-chave:** quantas vezes o seu agente lê a descrição de todas as tools só para escolher uma?
+- Roteamento de tickets com limiar de confiança e escolha de tool.
 
-### [Aula 3: Noul, detecção e verificação](./03-noul-detection-verification)
-- **Pergunta-chave:** "é spam?" é uma pergunta ou seis?
-- Spam decomposto em sinais, multirrótulo, guardrail de entrada, verificação da saída do LLM.
-- Gate de risco de tool call com o `AutoModeMiddleware`.
+### [Aula 3: Noul](./03-noul)
+- **Pergunta-chave:** "esta mensagem é perigosa?" é uma pergunta ou três?
+- Perguntas de sim ou não e um guardrail com vários Nouls numa chamada.
 
-### [Aula 4: Score, ranking e priorização](./04-score-ranking)
-- **Pergunta-chave:** o que o Cohere faz que você não consegue definir numa rubrica?
-- Urgência ordenada pelo valor esperado, rerank de RAG, judge barato de qualidade, texto virando feature para CatBoost.
+### [Aula 4: Score](./04-score)
+- **Pergunta-chave:** como transformar "quão urgente é isto?" num número que ordena uma fila?
+- Urgência numa rubrica ordenada e rerank de trechos de RAG.
 
-### [Aula 5: Calibração, limiares e avaliação](./05-calibration-evaluation)
-- **Pergunta-chave:** com limiar 0,85, quanto você automatiza e com que precisão?
-- Golden set, ECE e diagrama de confiabilidade, curva de automação, harness de comparação justa, gravação de fixtures.
+### [Aula 5: Quando usar o Jev](./05-when-to-use-jev)
+- **Pergunta-chave:** quantas das chamadas de LLM do seu sistema geram texto que alguém vai ler?
+- Decidir antes de gerar, verificar depois de gerar e o Laya, a alternativa open source.
 
-### [Aula 6: Projeto final, agente híbrido](./06-final-project-hybrid-agent)
-- **Pergunta-chave:** quanto custa cada decisão do seu agente, antes e depois?
-- Grafo LangGraph com guardrail, triagem, geração e verificação; provider por node; relatório de custo, latência p95, acurácia e concordância.
+### [Aula 6: Projeto final](./06-final-project)
+- **Pergunta-chave:** quantas das chamadas do seu agente precisam mesmo de um LLM?
+- Agente de atendimento em LangGraph: guardrail, triagem e verificação no Jev, resposta no LLM.
 
 ---
 
-## Os modelos e as superfícies
+## Os modelos
 
-| Modelo | Origem | Licença | Como o bloco acessa | Papel |
-|---|---|---|---|---|
-| Jev 1.13 | TypeSafe AI | proprietário, API, acesso antecipado | `typesafe-sdk`, `langchain-typesafe`, HTTP | referência de qualidade |
-| Laya multilíngue (`convaiinnovations/laya-multilingual`) | Convai Innovations | Apache 2.0 | `laya-serve` local em `/v1/systemone` | alternativa open-weight, privacidade, base para fine-tune |
-| Claude Haiku 4.5 e GPT-5.6 Luna | Anthropic, OpenAI | API | `init_chat_model` + `with_structured_output` | baseline "LLM decidindo" |
-
-O Laya fala o **mesmo esquema** do Jev. O SDK oficial do Jev conversa com ele trocando a `base_url`; é o que faz o `DecisionClient` do bloco atender os dois.
-
-**O que dizer em voz alta sobre o Laya:** zero-shot, ele fica bem abaixo do Jev e dos LLMs no nosso golden set (o módulo 05 mede). O checkpoint multilíngue sai **sem calibração** de fábrica, segundo o próprio model card. Ele tem viés de posição em Score e contexto padrão de 1.024 tokens por pergunta. A tese do Laya é ajustar nos seus dados (fine-tune), não usá-lo zero-shot.
-
-**Citados, sem código:** NanoJev (Qwen3-0.6B), Kev (Qwen + LoRA), OpenJev, GLiNER2 e SemIf (logits de um LLM open-weight). O cenário muda em semanas. Consulte a lista comunitária [awesome-decision-models](https://github.com/sfmqrb/awesome-decision-models) (verificada em 12/10/2026) antes de escolher.
+| Modelo | Origem | Como o bloco acessa | Aulas |
+|---|---|---|---|
+| **Jev** | TypeSafe AI, API | `typesafe-sdk` | todas |
+| **GPT-5.6 Luna** e **Claude Sonnet 5.5** | OpenAI e Anthropic | `init_chat_model` do LangChain | 1, 5 e 6 |
+| **Laya** (`convaiinnovations/laya-multilingual`) | Convai Innovations, Apache 2.0 | local, mesma API do Jev | 5 e 6 |
 
 ## Glossário
 
-- **Modelo de decisão / System One Model:** modelo que devolve decisões tipadas com probabilidade, sem gerar texto.
+- **Modelo de decisão (System One Model):** modelo que devolve decisões tipadas com probabilidade, sem gerar texto.
+- **Estado:** o contexto da decisão (um ticket, uma mensagem, uma resposta a conferir).
 - **Choice:** escolhe uma opção de uma lista. Devolve a opção, a confiança e a probabilidade de cada opção.
-- **Noul:** a probabilidade de uma afirmação ser verdadeira. Uma pergunta de sim ou não.
-- **Score:** um nível numa rubrica **ordenada**. Devolve a distribuição por nível e o valor esperado.
-- **Noul × Score:** Noul é "isto é verdade?" (0 a 1). Score é "em que degrau desta escada?" (0, 1, 2...). Urgência é Score; "pede reembolso?" é Noul.
-- **RLCD:** Reinforcement Learning for Calibrated Decisions, o treino que recompensa probabilidade honesta. O RLHF dos LLMs de chat recompensa a resposta que agrada.
-- **Calibração:** entre cem respostas com 74% de confiança, cerca de 74 estão certas.
-- **Golden set:** exemplos rotulados que servem de verdade para medir.
-- **Replay:** execução a partir de respostas gravadas, sem chamar APIs.
+- **Noul:** a probabilidade de uma afirmação ser verdadeira.
+- **Score:** um nível numa rubrica ordenada. Devolve a probabilidade de cada nível e o valor esperado.
+- **Limiar:** o valor de confiança a partir do qual o código age sozinho.
 
 ## Como rodar
 
-Tudo roda **sem chave de API**, em modo replay (o padrão):
+Configure o `.env` da raiz (veja o `.env.example`):
 
-```bash
-uv sync                              # da raiz do repositório
-cd 06-decision-models
-python 02-choice-routing/01_classify_tickets.py
-uv run pytest tests -q               # testes do common/ e smoke test de todos os scripts
-```
-
-Para chamar os modelos de verdade, configure o `.env` da raiz (veja o `.env.example`):
-
-```bash
-docker compose --profile decision up laya     # Laya em http://127.0.0.1:8001 (da raiz)
-DECISION_PROVIDER=live python 02-choice-routing/01_classify_tickets.py
-```
-
-| Variável | Valores | Para quê |
-|---|---|---|
-| `DECISION_PROVIDER` | `replay` (padrão), `live`, `record` | de onde vêm as decisões |
-| `DECISION_TARGETS` | ex. `jev,laya,llm:anthropic:claude-haiku-4-5-20251001` | alvos das comparações |
-| `DECISION_LLM` | `provedor:modelo` | LLM de baseline |
-| `TYPESAFE_API_KEY` | chave do Jev | modo live do Jev |
-| `LAYA_BASE_URL` | `http://127.0.0.1:8001` | onde o Laya responde |
-
-> No Windows, use `127.0.0.1` em vez de `localhost`: o `localhost` tenta IPv6 primeiro e cada chamada ao Laya leva cerca de 2 s a mais.
-
-## ⚠️ Sobre as fixtures deste repositório
-
-| Alvo | Origem das fixtures |
+| Variável | Para quê |
 |---|---|
-| Laya | **reais**: gravadas com `laya-serve` 0.4.6, checkpoint multilíngue, CPU, em 12/10/2026 |
-| Claude Haiku 4.5 | **reais**: gravadas pela API da Anthropic em 12/10/2026 |
-| Jev | **sintéticas**: geradas a partir dos rótulos do golden set com ruído determinístico, porque o repositório ainda não tem chave do Jev |
-| GPT-5.6 Luna | sem gravação; disponível em modo live |
+| `TYPESAFE_API_KEY` | chamar o Jev (todas as aulas) |
+| `ANTHROPIC_API_KEY` | Claude Sonnet 5.5 (aulas 1, 5 e 6) |
+| `OPENAI_API_KEY` | GPT-5.6 Luna (aula 1; nas aulas 5 e 6, com `LLM_MODEL=openai:gpt-5.6-luna`) |
+| `LAYA_BASE_URL` | onde o Laya responde (padrão `http://127.0.0.1:8001`) |
 
-Os números do Jev em replay **não medem o Jev**: ilustram o formato. O replay avisa no terminal e as tabelas marcam "(sintético)". Grave as reais com `python 05-calibration-evaluation/05_replay_record.py --alvos jev`. Detalhes em [`fixtures/README.md`](./fixtures/README.md).
-
-## Estrutura
-
-```
-06-decision-models/
-├── common/                  # DecisionSpec, DecisionClient, providers, métricas, golden sets, specs
-│   └── providers/           # jev_sdk (Jev e Laya), jev_langchain, llm, replay
-├── data/                    # golden sets em português (tickets, spam, rerank, verify, sales, tool_calls)
-├── fixtures/                # replay gravado: um diretório por alvo
-├── laya/Dockerfile          # Laya em CPU para o docker-compose da raiz (perfil `decision`)
-├── tests/                   # métricas, contratos, replay, golden sets e smoke test de cada script
-└── 01-... a 06-...          # módulos: README + scripts NN_*.py
+```bash
+uv sync                                                        # da raiz do repositório
+python 06-decision-models/01-decision-fundamentals/01_first_decision.py
+docker compose --profile decision up -d laya                   # o Laya, para a Aula 5
 ```
 
-**Exceção consciente às regras da trilha:** os módulos deste bloco importam `common/`. Medir providers lado a lado só é justo com as mesmas métricas, os mesmos dados e o mesmo cliente. Nos demais blocos, a regra de "nada compartilhado" continua.
-
-**Regra de ouro:** o mesmo `DecisionSpec` alimenta todos os providers; não existe prompt por modelo. Tokens vêm da resposta, latência do relógio e preço de [`common/pricing.yaml`](./common/pricing.yaml). Fora dos objetivos: afirmar que um provider é melhor. O bloco ensina a medir; a conclusão é sua, no seu caso.
+Cada script é independente: abra, leia de cima para baixo e rode.
 
 ## Referências
 
-- [TypeSafe: documentação](https://docs.typesafe.ai/), [SDK Python](https://docs.typesafe.ai/sdk/python/), [primitivos](https://docs.typesafe.ai/primitives/choice)
-- [langchain-typesafe](https://docs.langchain.com/oss/python/integrations/providers/typesafe)
-- [Laya: documentação](https://nandhakishorm.github.io/laya/), [model card multilíngue](https://huggingface.co/convaiinnovations/laya-multilingual), [GitHub](https://github.com/NandhaKishorM/laya)
-- [Guo et al. (2017). On Calibration of Modern Neural Networks](https://arxiv.org/abs/1706.04599)
+- [TypeSafe: documentação](https://docs.typesafe.ai/), [SDK Python](https://docs.typesafe.ai/sdk/python/) e [primitivos](https://docs.typesafe.ai/primitives/choice)
+- [Laya: documentação](https://nandhakishorm.github.io/laya/), [model card multilíngue](https://huggingface.co/convaiinnovations/laya-multilingual) e [GitHub](https://github.com/NandhaKishorM/laya)
 - [Kahneman (2011). Rápido e Devagar: Duas Formas de Pensar](https://en.wikipedia.org/wiki/Thinking,_Fast_and_Slow)
-- [Repositório do workshop-jev](https://github.com/caio-moliveira/workshop-jev), a referência de implementação do projeto final
+- [awesome-decision-models](https://github.com/sfmqrb/awesome-decision-models): lista comunitária de modelos de decisão

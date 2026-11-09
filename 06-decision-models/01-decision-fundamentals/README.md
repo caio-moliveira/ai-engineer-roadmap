@@ -1,79 +1,110 @@
-# 🧭 Módulo 1: Fundamentos de Modelos de Decisão
+# 🧭 Aula 1: Fundamentos de Modelos de Decisão
 
-> **Objetivo:** entender o que é um modelo de decisão, de onde vem e quando usar.
+> **Objetivo:** entender o que é um modelo de decisão, conhecer o Jev e comparar uma decisão no Jev com a mesma decisão num LLM.
 > **Pergunta-chave:** por que gerar texto para responder uma pergunta de múltipla escolha?
 
 ---
 
-## 📚 Índice Prático e Documentação
+## O problema
 
-1. **[A chamada HTTP crua](#1-não-há-mágica-um-endpoint)**
-   * Docs: [TypeSafe: System One](https://docs.typesafe.ai/concepts/system-one) | [Laya: HTTP API](https://nandhakishorm.github.io/laya/http-api/)
-   * Exemplo: `01_http_direct.py` (`python 01_http_direct.py laya` para o Laya)
-2. **[O SDK oficial e o Choice](#2-os-três-primitivos)**
-   * Docs: [SDK Python](https://docs.typesafe.ai/sdk/python/) | [Choice](https://docs.typesafe.ai/primitives/choice)
-   * Exemplo: `02_sdk_first_call.py`
-3. **[A mesma pergunta num LLM](#3-a-mesma-decisão-num-llm)**
-   * Docs: [LangChain: structured output](https://docs.langchain.com/oss/python/langchain/structured-output)
-   * Exemplo: `03_llm_same_question.py`
-4. **[O Laya local](#4-laya-o-mesmo-código-na-sua-máquina)**
-   * Docs: [Laya: Docker](https://nandhakishorm.github.io/laya/docker/) | [model card](https://huggingface.co/convaiinnovations/laya-multilingual)
-   * Exemplo: `04_laya_local.py`
-5. **[Exercício: a matriz de decisão](#5-código-decisão-llm-ou-classificador)**
-   * Exemplo: `05_decision_matrix.py`
+Boa parte das chamadas de LLM num sistema de produção não gera texto para ninguém ler. Elas **decidem**:
 
-Rode da pasta `06-decision-models`. Em replay (padrão), nada vai para a rede.
+- Para qual fila vai este ticket?
+- Esta mensagem é spam?
+- Qual tool o agente deve chamar?
+- A resposta que o LLM escreveu inventou algum número?
 
----
+Hoje a gente resolve isso com prompt e structured output: o LLM escreve um JSON com a resposta. Funciona, mas tem três custos:
 
-## 1. Não há mágica: um endpoint
+1. **Tokens de saída.** O LLM gera o JSON token a token, e token de saída é o mais caro e o mais lento.
+2. **Latência.** Gerar texto leva tempo, mesmo quando a resposta é uma palavra.
+3. **Confiança inventada.** Se você pede "sua confiança de 0 a 1", o LLM escreve um número. Esse número é texto gerado, não uma probabilidade.
 
-Um modelo de decisão é um `POST /v1/systemone` com duas coisas: um **estado** (texto, objeto JSON ou lista) e **perguntas tipadas**. A resposta é uma distribuição por pergunta. Não há texto a parsear, não há JSON quebrado, não há opção inventada: o modelo só consegue responder dentro das opções que você deu.
+## O que é um modelo de decisão
+
+Um modelo de decisão (o mercado também chama de *System One Model*) não gera texto. Ele recebe:
+
+- um **estado**: o contexto da decisão (um ticket, uma mensagem, uma conversa);
+- **perguntas tipadas**: o que você quer saber, com as respostas possíveis.
+
+E devolve, para cada pergunta, **a probabilidade de cada resposta**.
+
+```
+LLM:               prompt  ──►  gera "{"fila": "financeiro", "confianca": 0.95}"  (token a token)
+Modelo de decisão: estado + pergunta  ──►  {financeiro: 0.97, tecnico: 0.01, comercial: 0.01, conta: 0.01}
+```
+
+O nome vem de Kahneman (*Rápido e Devagar*): o Sistema 1 é o pensamento rápido e intuitivo, o Sistema 2 é o lento e deliberado. O LLM faz o papel do Sistema 2: raciocina e escreve. O modelo de decisão faz o do Sistema 1: decide na hora.
+
+## O Jev
+
+O **Jev** é o modelo de decisão da TypeSafe AI, acessado por API. Uma chamada é um `POST /v1/systemone`:
 
 ```json
-{"state": {"ticket": "Fui cobrado duas vezes..."},
- "model": "jev-1.13.0",
- "questions": {"fila": {"type": "choice", "instructions": "Qual fila?", "criteria": {"financeiro": "...", "tecnico": "..."}}}}
+{
+  "model": "jev-latest",
+  "state": {"ticket": "Fui cobrado duas vezes na fatura de setembro."},
+  "questions": {
+    "fila": {
+      "type": "choice",
+      "instructions": "Qual fila deve atender este ticket de suporte?",
+      "criteria": {"financeiro": "cobranças e estornos", "tecnico": "erros no sistema", "comercial": "planos e preços", "conta": "senha e acesso"}
+    }
+  }
+}
 ```
 
-## 2. Os três primitivos
+A resposta traz, para cada pergunta, a opção escolhida, a confiança e a distribuição completa, mais o uso de tokens:
 
-| Primitivo | Pergunta | Resposta | Exemplo |
+```json
+{
+  "model": "jev-1.13.0",
+  "answers": {
+    "fila": {"type": "choice", "choice": "financeiro", "confidence": 0.97,
+             "probabilities": {"financeiro": 0.97, "tecnico": 0.01, "comercial": 0.01, "conta": 0.01}}
+  },
+  "usage": {"input_tokens": 112, "output_tokens": 0}
+}
+```
+
+Nos scripts, usamos o SDK oficial (`typesafe-sdk`), que monta esse JSON, valida as perguntas e devolve objetos tipados.
+
+### Os três tipos de pergunta
+
+| Tipo | Pergunta | Resposta | Aula |
 |---|---|---|---|
-| **Choice** | qual destas opções? | opção, confiança, probabilidade de cada opção | fila do ticket |
-| **Noul** | isto é verdade? | P(verdadeiro), de 0 a 1 | "o cliente ameaça cancelar?" |
-| **Score** | em que degrau desta rubrica ordenada? | distribuição por nível e valor esperado | urgência 0, 1 ou 2 |
+| **Choice** | "qual destas opções?" | a opção escolhida e a probabilidade de cada uma | [Aula 2](../02-choice) |
+| **Noul** | "isto é verdade?" | a probabilidade de ser verdade, de 0 a 1 | [Aula 3](../03-noul) |
+| **Score** | "em que nível desta escala?" | o valor esperado e a probabilidade de cada nível | [Aula 4](../04-score) |
 
-**Noul × Score** confunde muita gente. Noul é uma afirmação que é verdadeira ou falsa. Score é uma escada: o nível 2 é mais que o 1. "Pede reembolso?" é Noul. "Quão urgente?" é Score.
+Numa mesma chamada, você pode misturar os três tipos sobre o mesmo estado.
 
-## 3. A mesma decisão num LLM
+## Scripts
 
-O `03` manda a **mesma** `DecisionSpec` para um LLM com `with_structured_output` e mede lado a lado: latência, tokens de entrada e saída, custo e se o JSON veio válido. A confiança do LLM é um número que ele escreveu. O módulo 05 mostra o que isso significa medindo calibração.
-
-## 4. Laya: o mesmo código na sua máquina
+| Script | O que mostra |
+|---|---|
+| `01_first_decision.py` | a primeira chamada ao Jev: escolha, probabilidades, tokens e latência |
+| `02_jev_vs_llm.py` | a mesma pergunta em três tickets no Jev, no GPT-5.6 Luna e no Claude Sonnet 5.5, com tokens e latência de cada um |
 
 ```bash
-docker compose --profile decision up laya   # da raiz; ou: uv run laya-serve
+python 06-decision-models/01-decision-fundamentals/01_first_decision.py
+python 06-decision-models/01-decision-fundamentals/02_jev_vs_llm.py
 ```
 
-O `04` repete o `02` trocando só a `base_url`. Fatos do model card que o curso não esconde: o checkpoint multilíngue tem 322M de parâmetros (mmBERT-base), contexto padrão de 1.024 tokens por pergunta, sai **sem calibração** e é fraco zero-shot em decisões de domínio. A acurácia medida no nosso golden set está no módulo 02.
+O GPT-5.6 Luna e o Sonnet 5.5 são LLMs baratos e rápidos, a escolha comum para esse tipo de tarefa. Do lado do LLM, usamos `with_structured_output(..., method="json_schema")`: o JSON sai validado contra um schema Pydantic, que é o melhor que dá para fazer com um LLM.
 
-## 5. Código, decisão, LLM ou classificador?
+## O que observar na comparação
 
-| Use | Quando |
-|---|---|
-| **Código** | regra determinística resolve: parse, lookup, conta, limiar sobre probabilidades já calculadas |
-| **Modelo de decisão** | pergunta fechada sobre texto livre, opções conhecidas, precisa de probabilidade |
-| **LLM** | precisa **gerar** texto ou raciocinar em vários passos com ferramentas |
-| **Classificador treinado** | pergunta fechada, volume enorme, rótulos estáveis e milhares de exemplos |
+- **Tokens de saída:** o LLM gera algumas dezenas por decisão. O Jev não gera texto; confira o número que a API devolve.
+- **Tokens de entrada:** os dois leem a pergunta e as opções. O LLM lê também o prompt e o schema do structured output.
+- **Latência:** compare a média. A diferença cresce quando você faz dezenas de decisões por requisição.
+- **Confiança:** no Jev, é a probabilidade que o modelo atribui à resposta. No LLM, é um número que ele escreveu no JSON.
 
-O exercício `05_decision_matrix.py` quebra o agente de e-mail do Bloco 3 em dez etapas. No gabarito, só uma precisa gerar texto.
-
-### De onde vem
-
-LM prevê o próximo token. LLM escala isso. RLHF e RLVR treinam o LLM a dar a resposta que agrada ou que passa num verificador. **RLCD** (Reinforcement Learning for Calibrated Decisions) treina um modelo a dar a **probabilidade honesta** de cada opção, com recompensa de regra de pontuação própria. É o treino do Jev e do Laya.
+A resposta (a fila) costuma coincidir nos casos fáceis. Um modelo de decisão não existe para acertar mais que o LLM numa pergunta fácil: existe para tomar a mesma decisão mais barato, mais rápido e com uma probabilidade em que o código pode se apoiar.
 
 ---
 
-## ⏭️ Próximo Passo
-Com os primitivos na mão, vamos trocar decisões de "qual" por um Choice: **[Módulo 2: Choice, roteamento e seleção](../02-choice-routing)**.
+## Referências
+
+- [TypeSafe: documentação](https://docs.typesafe.ai/) e [SDK Python](https://docs.typesafe.ai/sdk/python/)
+- [Kahneman (2011). Rápido e Devagar: Duas Formas de Pensar](https://en.wikipedia.org/wiki/Thinking,_Fast_and_Slow)
