@@ -1,0 +1,39 @@
+MARINA TAVARES DE SOUZA
+Engenheira de Dados
+Recife, PE | marina.tavares@exemplo.com | (81) 90000-0000 | linkedin.com/in/marina-tavares-exemplo
+
+RESUMO
+Engenheira de dados com 7 anos de experiência em pipelines de dados em nuvem, modelagem analítica e orquestração de cargas. Atuação em varejo e serviços financeiros, com foco em qualidade de dados e redução de custo de processamento.
+
+EXPERIÊNCIA PROFISSIONAL
+
+Engenheira de Dados Sênior | Mercado Coral S.A. | Recife, PE
+março de 2022 - atual
+- Liderou a migração do data warehouse local para a nuvem, reduzindo em 40% o tempo das cargas diárias.
+- Desenhou a camada de modelagem dimensional usada por 12 times de produto.
+- Implantou testes automáticos de qualidade em mais de 300 tabelas.
+
+Engenheira de Dados | Banco Atlântico Digital | São Paulo, SP
+janeiro de 2019 - fevereiro de 2022
+- Construiu pipelines de ingestão em tempo quase real para dados de transações.
+- Reduziu em 25% o custo mensal de processamento com particionamento e reescrita de consultas.
+- Participou do comitê de governança de dados da área de crédito.
+
+Analista de BI | Rede Farol Varejo | Recife, PE
+julho de 2017 - dezembro de 2018
+- Desenvolveu painéis de vendas e estoque para 80 lojas.
+- Automatizou relatórios semanais que antes eram feitos em planilhas.
+
+FORMAÇÃO ACADÊMICA
+Pós-graduação em Ciência de Dados | Universidade Federal de Pernambuco | 2020
+Bacharelado em Sistemas de Informação | Universidade de Pernambuco | 2017
+
+COMPETÊNCIAS
+Python, SQL, Spark, Airflow, dbt, modelagem dimensional, Docker, Terraform, versionamento com Git.
+
+CERTIFICAÇÕES
+Professional Data Engineer (2023)
+Fundamentos de Arquitetura em Nuvem (2021)
+
+IDIOMAS
+Português nativo. Inglês avançado. Espanhol intermediário.

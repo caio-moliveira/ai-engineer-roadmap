@@ -1,0 +1,7 @@
+ELISA PRADO - Estagiária de Dados
+Resumo: estudante do último ano, 1 ano de estágio em dados.
+Experiência:
+- Estagiária de Dados, Mercado Coral S.A. (2025 - atual): escreve consultas SQL e scripts em Python para carregar planilhas; acompanhou a criação de dois pipelines no Airflow com a ajuda do time.
+Projetos pessoais: pipeline de dados públicos de clima com Python e Airflow, publicado no GitHub.
+Competências: Python, SQL, noções de Airflow.
+Formação: Bacharelado em Engenharia da Computação (em andamento).

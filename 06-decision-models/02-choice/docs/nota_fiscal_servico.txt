@@ -1,0 +1,40 @@
+PREFEITURA MUNICIPAL DE UBERLÂNDIA
+SECRETARIA MUNICIPAL DE FINANÇAS
+NOTA FISCAL DE SERVIÇOS ELETRÔNICA - NFS-e
+
+Número da nota: 00004821          Data e hora de emissão: 05/04/2026 09:14:37
+Código de verificação: 7F3A-Q2LM-88XD
+
+PRESTADOR DE SERVIÇOS
+Razão social: NÓ DE REDE TECNOLOGIA LTDA.
+CNPJ: 98.765.432/0001-10          Inscrição municipal: 4410237
+Endereço: Avenida Central, 1200, sala 804, Centro, Uberlândia, MG, CEP 38400-000
+
+TOMADOR DE SERVIÇOS
+Razão social: ALVORADA COMÉRCIO DIGITAL LTDA.
+CNPJ: 12.345.678/0001-90
+Endereço: Rua das Acácias, 450, Savassi, Belo Horizonte, MG, CEP 30140-000
+
+DISCRIMINAÇÃO DOS SERVIÇOS
+Desenvolvimento e manutenção do sistema de gestão de pedidos, referente ao mês de março de 2026, conforme contrato de prestação de serviços.
+160 horas de desenvolvimento x R$ 150,00 ............ R$ 24.000,00
+30 horas de suporte e sustentação x R$ 150,00 ....... R$  4.500,00
+
+Código do serviço: 1.04 - Elaboração de programas de computadores, inclusive de jogos eletrônicos.
+
+VALOR TOTAL DOS SERVIÇOS ............................ R$ 28.500,00
+(-) Deduções ........................................ R$      0,00
+Base de cálculo ..................................... R$ 28.500,00
+Alíquota do ISS ..................................... 2,00%
+Valor do ISS ........................................ R$    570,00
+
+RETENÇÕES FEDERAIS
+PIS (0,65%) .... R$ 185,25     COFINS (3,00%) .... R$ 855,00
+IRRF (1,50%) ... R$ 427,50     CSLL (1,00%) ...... R$ 285,00
+
+VALOR LÍQUIDO DA NOTA ............................... R$ 26.747,25
+
+OUTRAS INFORMAÇÕES
+Vencimento: 10/04/2026. Pagamento por transferência bancária.
+Documento emitido por ME ou EPP optante pelo Simples Nacional: NÃO.
+Esta NFS-e foi emitida com respaldo na Lei Municipal nº 10.199/2009.

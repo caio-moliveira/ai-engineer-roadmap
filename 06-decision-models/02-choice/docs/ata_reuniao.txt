@@ -1,0 +1,38 @@
+ATA DA REUNIÃO DE ACOMPANHAMENTO DO PROJETO "NOVO SISTEMA DE PEDIDOS"
+
+Data: 17 de março de 2026          Horário: 14h00 às 15h10
+Local: sala de reuniões 3 e videoconferência
+
+Participantes:
+- Helena Prado (Alvorada, gerente de operações)
+- Rafael Nogueira (Alvorada, coordenador de TI)
+- Beatriz Lima (Nó de Rede, gerente do projeto)
+- Tiago Mendes (Nó de Rede, líder técnico)
+
+Pauta:
+1. Andamento da sprint 6
+2. Integração com o sistema de estoque
+3. Data da homologação
+
+1. Andamento da sprint 6
+Beatriz apresentou o andamento: 14 das 18 histórias foram concluídas. As quatro restantes dependem da integração com o estoque. Rafael perguntou sobre o atraso de dois dias na tela de devoluções; Tiago explicou que o atraso veio de uma mudança na regra de cálculo do frete reverso, pedida na semana anterior.
+
+2. Integração com o sistema de estoque
+Tiago relatou que a API do sistema de estoque devolve erro em cerca de 3% das consultas feitas em horário de pico. Rafael confirmou que o fornecedor do sistema já foi acionado. Ficou decidido que o novo sistema fará até três tentativas automáticas antes de exibir a mensagem de erro ao operador.
+
+3. Data da homologação
+Helena pediu que a homologação comece antes do fechamento do trimestre. Depois de discussão, as partes concordaram em iniciar a homologação no dia 30 de março, com duração de duas semanas.
+
+Decisões:
+- Homologação marcada para 30 de março de 2026.
+- O novo sistema fará até três tentativas automáticas nas consultas de estoque.
+- A tela de devoluções será entregue na sprint 7.
+
+Encaminhamentos:
+- Rafael: cobrar do fornecedor do estoque um prazo para a correção. Prazo: 20/03.
+- Tiago: enviar o plano de testes da homologação. Prazo: 24/03.
+- Helena: indicar os cinco operadores que participarão da homologação. Prazo: 24/03.
+
+Próxima reunião: 24 de março de 2026, às 14h00.
+
+Nada mais havendo a tratar, a reunião foi encerrada às 15h10. Ata lavrada por Beatriz Lima.

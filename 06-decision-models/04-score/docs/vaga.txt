@@ -1,0 +1,15 @@
+VAGA: Engenheiro(a) de Dados Pleno
+Empresa: Mercado Coral S.A. (varejo), Recife, PE. Modelo híbrido.
+
+O que a pessoa vai fazer:
+- Construir e manter pipelines de dados que alimentam os painéis de vendas e estoque.
+- Garantir a qualidade dos dados com testes automáticos.
+- Trabalhar com os times de produto para modelar novas tabelas.
+
+Requisitos:
+- Experiência construindo pipelines de dados em produção.
+- Python e SQL.
+- Orquestração de pipelines (Airflow ou similar).
+- Experiência com algum provedor de nuvem.
+
+Diferenciais: dbt, Spark, modelagem dimensional.

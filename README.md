@@ -198,6 +198,32 @@ Este bloco ensina quando treinar modelos — e principalmente quando não treina
 
 ---
 
+## 🎯 [Bloco 6 — Modelos de Decisão (System One Models)](./06-decision-models)
+
+Este bloco cobre as chamadas que roteiam, classificam, bloqueiam e verificam. Um modelo de decisão responde essas perguntas sem gerar texto, e você mede a diferença em tokens e latência.
+
+### 🎯 Você vai aprender
+
+✔ o que é um modelo de decisão e como ele se compara a um LLM  
+✔ os três tipos de pergunta: Choice, Noul e Score  
+✔ quando usar o Jev e quando usar um LLM  
+✔ o Laya, um modelo de decisão open source com a mesma API  
+✔ um agente híbrido em LangGraph: o Jev decide, o LLM escreve
+
+---
+
+### 📦 Módulos
+
+| #  | Módulo                                                                         | Tema                                  |
+| -- | ------------------------------------------------------------------------------ | ------------------------------------- |
+| 01 | [Fundamentos de Modelos de Decisão](./06-decision-models/01-decision-fundamentals) | Jev × GPT-5.6 Luna × Sonnet 5.5       |
+| 02 | [Choice](./06-decision-models/02-choice)                                       | Classificação de documentos e escolha de tool          |
+| 03 | [Noul](./06-decision-models/03-noul)                                           | Checklist, guardrail e auditoria de edital |
+| 04 | [Score](./06-decision-models/04-score)                                         | Ranking de currículos e juiz de respostas |
+| 05 | [Projeto Final](./06-decision-models/05-final-project)                         | Agente de atendimento híbrido         |
+
+---
+
 ## 🚀 Como Começar
 
 1. **Clone o repositório:**
