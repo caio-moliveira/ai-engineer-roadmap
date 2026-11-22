@@ -1,0 +1,36 @@
+CONTRATO DE PRESTAÇÃO DE SERVIÇOS DE DESENVOLVIMENTO DE SOFTWARE
+
+Pelo presente instrumento particular, de um lado ALVORADA COMÉRCIO DIGITAL LTDA., pessoa jurídica de direito privado, inscrita no CNPJ sob o nº 12.345.678/0001-90, com sede na Rua das Acácias, 450, Belo Horizonte, MG, doravante denominada CONTRATANTE, e de outro lado NÓ DE REDE TECNOLOGIA LTDA., inscrita no CNPJ sob o nº 98.765.432/0001-10, com sede na Avenida Central, 1200, sala 804, Uberlândia, MG, doravante denominada CONTRATADA, têm entre si justo e contratado o que segue.
+
+CLÁUSULA PRIMEIRA – DO OBJETO
+1.1. O presente contrato tem por objeto a prestação, pela CONTRATADA, de serviços de desenvolvimento e manutenção do sistema de gestão de pedidos da CONTRATANTE, conforme escopo descrito no Anexo I.
+
+CLÁUSULA SEGUNDA – DO PRAZO
+2.1. O contrato vigorará pelo prazo de 12 (doze) meses, contados da data de sua assinatura, podendo ser prorrogado mediante termo aditivo firmado pelas partes.
+
+CLÁUSULA TERCEIRA – DO PREÇO E DA FORMA DE PAGAMENTO
+3.1. Pelos serviços prestados, a CONTRATANTE pagará à CONTRATADA o valor mensal de R$ 28.500,00 (vinte e oito mil e quinhentos reais), mediante apresentação de nota fiscal, com vencimento no dia 10 do mês subsequente ao da prestação.
+3.2. O atraso no pagamento sujeitará a CONTRATANTE a multa de 2% (dois por cento) e juros de 1% (um por cento) ao mês.
+
+CLÁUSULA QUARTA – DAS OBRIGAÇÕES DA CONTRATADA
+4.1. Executar os serviços com zelo, dentro dos prazos acordados no cronograma.
+4.2. Manter sigilo sobre todas as informações a que tiver acesso em razão deste contrato.
+4.3. Corrigir, sem custo adicional, os defeitos identificados em até 90 (noventa) dias após cada entrega.
+
+CLÁUSULA QUINTA – DA CONFIDENCIALIDADE
+5.1. As partes se obrigam a não divulgar a terceiros as informações confidenciais recebidas, obrigação que permanecerá em vigor por 5 (cinco) anos após o término do contrato.
+
+CLÁUSULA SEXTA – DA RESCISÃO
+6.1. O contrato poderá ser rescindido por qualquer das partes, mediante aviso prévio por escrito de 30 (trinta) dias.
+6.2. O descumprimento de qualquer cláusula autoriza a parte inocente a rescindir o contrato de imediato, sem prejuízo de perdas e danos.
+
+CLÁUSULA SÉTIMA – DO FORO
+7.1. Fica eleito o foro da Comarca de Belo Horizonte, MG, para dirimir quaisquer controvérsias oriundas deste contrato.
+
+E, por estarem assim justas e contratadas, as partes assinam o presente instrumento em 2 (duas) vias de igual teor.
+
+Belo Horizonte, 3 de março de 2026.
+
+_______________________________          _______________________________
+ALVORADA COMÉRCIO DIGITAL LTDA.           NÓ DE REDE TECNOLOGIA LTDA.
+CONTRATANTE                               CONTRATADA
