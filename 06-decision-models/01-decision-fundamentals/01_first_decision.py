@@ -10,6 +10,7 @@ Precisa de TYPESAFE_API_KEY no .env da raiz.
 import os
 import sys
 import time
+import pprint as pp
 
 from dotenv import load_dotenv
 from typesafe_sdk import Choice, TypeSafeClient
@@ -18,7 +19,9 @@ load_dotenv()
 if not os.environ.get("TYPESAFE_API_KEY"):
     sys.exit("Defina TYPESAFE_API_KEY no .env da raiz para chamar o Jev.")
 
-ticket = "Fui cobrado duas vezes na fatura de setembro. Preciso que estornem o valor duplicado ainda hoje."
+# ticket = "Fui cobrado duas vezes na fatura de setembro. Preciso que estornem o valor duplicado ainda hoje."
+# ticket = "não estou conseguindo acessar minha conta, aparece erro de senha inválida mesmo digitando a correta"
+ticket = "A exportação para CSV trava em 99% desde a atualização de ontem. Não estou gostando do sistema e quero reembolso do valor pago."
 
 # A pergunta: qual fila atende o ticket? As opções e o que cada uma significa ficam no `criteria`.
 fila = Choice(
@@ -39,19 +42,13 @@ with TypeSafeClient() as client:
 
 answer = response.choices["fila"]
 
+pp.pprint(response.model_dump())  # Formato Bruto
+
 print(f"Ticket: {ticket}\n")
 print(f"modelo:    {response.model}")
 print(f"escolha:   {answer.choice}")
 print(f"confiança: {answer.confidence:.3f}\n")
-print("probabilidade de cada fila:")
-for label, p in sorted(answer.probabilities.items(), key=lambda kv: -kv[1]):
-    print(f"  {label:<11} {p:6.3f}  {'█' * round(p * 40)}")
 
 print(f"\ntokens de entrada: {response.usage.input_tokens}")
 print(f"tokens de saída:   {response.usage.output_tokens}")
 print(f"latência:          {latency_ms:.0f} ms")
-
-print(
-    "\nRepare: a resposta é uma distribuição sobre as quatro filas, e as probabilidades somam 1."
-    "\nCom ela, o seu código decide: confiança alta, encaminha sozinho; baixa, chama um humano."
-)

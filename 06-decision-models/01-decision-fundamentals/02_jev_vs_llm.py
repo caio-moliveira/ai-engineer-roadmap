@@ -21,8 +21,8 @@ load_dotenv()
 
 TICKETS = [
     "Fui cobrado duas vezes na fatura de setembro. Preciso que estornem o valor duplicado.",
-    "A exportação para CSV trava em 99% desde a atualização de ontem.",
-    "Quero saber se existe desconto no plano anual para ONGs.",
+    "A exportação para CSV trava em 99% desde a atualização de ontem. Não estou gostando do sistema e quero reembolso do valor pago.",
+    "Quero saber se existe desconto no plano anual para ONGs. Se não houver quero cancelar minha assinatura e receber o reembolso do valor pago.",
 ]
 
 FILAS = {
@@ -46,7 +46,7 @@ def ask_jev(ticket: str) -> dict:
     answer = response.choices["fila"]
     return {
         "fila": answer.choice,
-        "confianca": answer.confidence,
+        "probabilidades": dict(answer.probabilities),
         "tokens_in": response.usage.input_tokens,
         "tokens_out": response.usage.output_tokens,
         "latency_ms": latency_ms,
@@ -54,9 +54,18 @@ def ask_jev(ticket: str) -> dict:
 
 
 # --- LLM: prompt + structured output ---------------------------------------------------------
+class Probabilidades(BaseModel):
+    financeiro: float = Field(description="Probabilidade da fila financeiro, de 0 a 1.")
+    tecnico: float = Field(description="Probabilidade da fila tecnico, de 0 a 1.")
+    comercial: float = Field(description="Probabilidade da fila comercial, de 0 a 1.")
+    conta: float = Field(description="Probabilidade da fila conta, de 0 a 1.")
+
+
 class Decisao(BaseModel):
     fila: Literal["financeiro", "tecnico", "comercial", "conta"]
-    confianca: float = Field(description="Sua confiança na resposta, de 0 a 1.")
+    probabilidades: Probabilidades = Field(
+        description="Probabilidade de cada fila atender o ticket; as quatro devem somar 1."
+    )
 
 
 def ask_llm(model: str, ticket: str) -> dict:
@@ -73,7 +82,7 @@ def ask_llm(model: str, ticket: str) -> dict:
     usage = output["raw"].usage_metadata or {}
     return {
         "fila": output["parsed"].fila,
-        "confianca": output["parsed"].confianca,
+        "probabilidades": output["parsed"].probabilidades.model_dump(),
         "tokens_in": usage.get("input_tokens", 0),
         "tokens_out": usage.get("output_tokens", 0),
         "latency_ms": latency_ms,
@@ -82,7 +91,7 @@ def ask_llm(model: str, ticket: str) -> dict:
 
 PROVEDORES = {
     "Jev": ("TYPESAFE_API_KEY", ask_jev),
-    "GPT-5.6 Luna": ("OPENAI_API_KEY", lambda t: ask_llm("openai:gpt-5.6-luna", t)),
+    "GPT-6 Luna": ("OPENAI_API_KEY", lambda t: ask_llm("openai:gpt-6-luna", t)),
     "Claude Sonnet 5.5": (
         "ANTHROPIC_API_KEY",
         lambda t: ask_llm("anthropic:claude-sonnet-5-5", t),
@@ -101,14 +110,18 @@ for nome, (chave, ask) in PROVEDORES.items():
 
 for i, ticket in enumerate(TICKETS):
     print(f"\nTicket {i + 1}: {ticket}")
+    colunas_filas = " ".join(f"{fila:>10}" for fila in FILAS)
     print(
-        f"  {'provedor':<18} {'fila':<11} {'conf.':>6} {'tok. entrada':>13} {'tok. saída':>11} {'latência':>10}"
+        f"  {'provedor':<18} {'escolha':<11} {colunas_filas} {'soma':>6}"
+        f" {'tok. entrada':>13} {'tok. saída':>11} {'latência':>10}"
     )
     for nome, runs in resultados.items():
         r = runs[i]
+        probs = r["probabilidades"]
+        valores_filas = " ".join(f"{probs.get(fila, 0):>10.1%}" for fila in FILAS)
         print(
-            f"  {nome:<18} {r['fila']:<11} {r['confianca']:>6.2f} {r['tokens_in']:>13} "
-            f"{r['tokens_out']:>11} {r['latency_ms']:>8.0f} ms"
+            f"  {nome:<18} {r['fila']:<11} {valores_filas} {sum(probs.values()):>6.2f}"
+            f" {r['tokens_in']:>13} {r['tokens_out']:>11} {r['latency_ms']:>8.0f} ms"
         )
 
 if resultados:
@@ -126,8 +139,9 @@ if resultados:
 print(
     "\nO que observar:"
     "\n- Tokens de saída: o LLM gera o JSON token a token; o modelo de decisão não gera texto."
-    "\n- Confiança: no Jev, é a probabilidade da resposta. No LLM, é um número que ele escreveu"
-    "\n  no JSON, tão gerado quanto o resto. Não dá para usar como probabilidade."
+    "\n- Probabilidades: no Jev, são a distribuição que o modelo calcula sobre as quatro filas"
+    "\n  (a soma é sempre 1). No LLM, são números que ele escreveu no JSON, tão gerados quanto"
+    "\n  o resto: a soma pode não fechar em 1 e não dá para usá-los como probabilidade de verdade."
     "\n- Tokens de entrada: a pergunta e as opções entram nos dois casos. O prompt do LLM ainda"
     "\n  carrega as instruções de formato que o structured output acrescenta."
 )
