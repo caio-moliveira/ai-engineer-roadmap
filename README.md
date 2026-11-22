@@ -217,11 +217,10 @@ Este bloco cobre as chamadas que roteiam, classificam, bloqueiam e verificam. Um
 | #  | Módulo                                                                         | Tema                                  |
 | -- | ------------------------------------------------------------------------------ | ------------------------------------- |
 | 01 | [Fundamentos de Modelos de Decisão](./06-decision-models/01-decision-fundamentals) | Jev × GPT-5.6 Luna × Sonnet 5.5       |
-| 02 | [Choice](./06-decision-models/02-choice)                                       | Roteamento e escolha de tool          |
-| 03 | [Noul](./06-decision-models/03-noul)                                           | Sim ou não e guardrail                |
-| 04 | [Score](./06-decision-models/04-score)                                         | Urgência e rerank                     |
-| 05 | [Quando usar o Jev](./06-decision-models/05-when-to-use-jev)                   | Decidir, gerar, verificar e o Laya    |
-| 06 | [Projeto Final](./06-decision-models/06-final-project)                         | Agente de atendimento híbrido         |
+| 02 | [Choice](./06-decision-models/02-choice)                                       | Classificação de documentos e escolha de tool          |
+| 03 | [Noul](./06-decision-models/03-noul)                                           | Checklist, guardrail e auditoria de edital |
+| 04 | [Score](./06-decision-models/04-score)                                         | Ranking de currículos e juiz de respostas |
+| 05 | [Projeto Final](./06-decision-models/05-final-project)                         | Agente de atendimento híbrido         |
 
 ---
 

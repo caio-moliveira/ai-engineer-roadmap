@@ -30,6 +30,12 @@
 Jev • Laya • Choice • Noul • Score • guardrail • roteamento • verificação de saída • agente híbrido em LangGraph
 
 </div>
+
+
+<div align="center">
+<img src="../assets/decisao.png" alt="Modelos de Decisão" width="1000"/>
+</div>
+
 </div>
 
 ## Por que este bloco existe
@@ -42,25 +48,21 @@ Um modelo de decisão faz essas perguntas sem gerar texto. Devolve a probabilida
 
 ### [Aula 1: Fundamentos de modelos de decisão](./01-decision-fundamentals)
 - **Pergunta-chave:** por que gerar texto para responder uma pergunta de múltipla escolha?
-- O que é um modelo de decisão e o Jev; a mesma decisão no Jev, no GPT-5.6 Luna e no Claude Sonnet 5.5.
+- O que é um modelo de decisão e o Jev; a mesma decisão no Jev, no GPT-5.6 Luna e no Claude Sonnet 5.5; e nos outros modelos de decisão (Laya, Gemini Decision 1, OpenAI Decisions API).
 
 ### [Aula 2: Choice](./02-choice)
 - **Pergunta-chave:** quantas vezes o seu agente lê a descrição de todas as tools só para escolher uma?
-- Roteamento de tickets com limiar de confiança e escolha de tool.
+- Classificação de documentos (com os limites de entrada de cada modelo) e escolha de tool, nos quatro modelos de decisão.
 
 ### [Aula 3: Noul](./03-noul)
-- **Pergunta-chave:** "esta mensagem é perigosa?" é uma pergunta ou três?
-- Perguntas de sim ou não e um guardrail com vários Nouls numa chamada.
+- **Pergunta-chave:** "esta mensagem é perigosa?" é uma pergunta ou cinco?
+- Perguntas de sim ou não nos quatro modelos: checklist de contrato, guardrail com prompt injection e auditoria de edital de concurso.
 
 ### [Aula 4: Score](./04-score)
-- **Pergunta-chave:** como transformar "quão urgente é isto?" num número que ordena uma fila?
-- Urgência numa rubrica ordenada e rerank de trechos de RAG.
+- **Pergunta-chave:** como transformar "quão bom é este candidato?" em números que ordenam uma fila?
+- Escalas ordenadas nos quatro modelos: ranking de currículos e juiz de respostas.
 
-### [Aula 5: Quando usar o Jev](./05-when-to-use-jev)
-- **Pergunta-chave:** quantas das chamadas de LLM do seu sistema geram texto que alguém vai ler?
-- Decidir antes de gerar, verificar depois de gerar e o Laya, a alternativa open source.
-
-### [Aula 6: Projeto final](./06-final-project)
+### [Aula 5: Projeto final](./05-final-project)
 - **Pergunta-chave:** quantas das chamadas do seu agente precisam mesmo de um LLM?
 - Agente de atendimento em LangGraph: guardrail, triagem e verificação no Jev, resposta no LLM.
 
@@ -71,8 +73,9 @@ Um modelo de decisão faz essas perguntas sem gerar texto. Devolve a probabilida
 | Modelo | Origem | Como o bloco acessa | Aulas |
 |---|---|---|---|
 | **Jev** | TypeSafe AI, API | `typesafe-sdk` | todas |
-| **GPT-5.6 Luna** e **Claude Sonnet 5.5** | OpenAI e Anthropic | `init_chat_model` do LangChain | 1, 5 e 6 |
-| **Laya** (`convaiinnovations/laya-multilingual`) | Convai Innovations, Apache 2.0 | local, mesma API do Jev | 5 e 6 |
+| **GPT-5.6 Luna** e **Claude Sonnet 5.5** | OpenAI e Anthropic | `init_chat_model` do LangChain | 1 e 5 |
+| **Laya** (`convaiinnovations/laya-multilingual`) | Convai Innovations, Apache 2.0 | local, mesma API do Jev | todas |
+| **Gemini Decision 1** e **OpenAI Decisions API** | Google e OpenAI, API | HTTP direto (`httpx`) | 1, 2, 3 e 4 |
 
 ## Glossário
 
@@ -90,14 +93,15 @@ Configure o `.env` da raiz (veja o `.env.example`):
 | Variável | Para quê |
 |---|---|
 | `TYPESAFE_API_KEY` | chamar o Jev (todas as aulas) |
-| `ANTHROPIC_API_KEY` | Claude Sonnet 5.5 (aulas 1, 5 e 6) |
-| `OPENAI_API_KEY` | GPT-5.6 Luna (aula 1; nas aulas 5 e 6, com `LLM_MODEL=openai:gpt-5.6-luna`) |
+| `ANTHROPIC_API_KEY` | Claude Sonnet 5.5 (aulas 1 e 5) |
+| `OPENAI_API_KEY` | GPT-5.6 Luna (aula 1; na aula 5, com `LLM_MODEL=openai:gpt-5.6-luna`) e OpenAI Decisions API (aulas 1 a 4) |
+| `GEMINI_API_KEY` | Gemini Decision 1 (aulas 1 a 4) |
 | `LAYA_BASE_URL` | onde o Laya responde (padrão `http://127.0.0.1:8001`) |
 
 ```bash
 uv sync                                                        # da raiz do repositório
 python 06-decision-models/01-decision-fundamentals/01_first_decision.py
-docker compose --profile decision up -d laya                   # o Laya, para a Aula 5
+docker compose --profile decision up -d laya                   # o Laya, usado em todas as aulas
 ```
 
 Cada script é independente: abra, leia de cima para baixo e rode.
