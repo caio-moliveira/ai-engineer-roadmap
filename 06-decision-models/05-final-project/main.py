@@ -1,7 +1,7 @@
 """Projeto final: roda o agente de atendimento e mostra tokens e latência de cada etapa.
 
 Rode de dentro da pasta (imports flat):
-    cd 06-decision-models/06-final-project
+    cd 06-decision-models/05-final-project
     python main.py                                  # as mensagens de exemplo
     python main.py "Fui cobrado duas vezes"         # uma mensagem sua
     DECISION_BACKEND=laya python main.py            # decisões no Laya local em vez do Jev

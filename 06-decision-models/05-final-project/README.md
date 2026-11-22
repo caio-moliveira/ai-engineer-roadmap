@@ -1,4 +1,4 @@
-# 🏁 Aula 6: Projeto Final, Agente de Atendimento Híbrido
+# 🏁 Aula 5: Projeto Final, Agente de Atendimento Híbrido
 
 > **Objetivo:** montar um agente em LangGraph em que o modelo de decisão decide e o LLM só escreve, medindo tokens e latência de cada etapa.
 > **Pergunta-chave:** quantas das chamadas do seu agente precisam mesmo de um LLM?
@@ -7,7 +7,7 @@
 
 ## O agente
 
-Um atendente de suporte de um software de gestão. Ele usa os três tipos de pergunta das aulas anteriores e os padrões da Aula 5:
+Um atendente de suporte de um software de gestão. Ele usa os três tipos de pergunta das aulas anteriores:
 
 ```
 guardrail ─┬─ bloqueada ─────────────────────────────────────────► fim
@@ -37,10 +37,10 @@ Numa mensagem respondida, são quatro chamadas: três decisões e uma geração.
 Os imports são flat: rode **de dentro da pasta**.
 
 ```bash
-cd 06-decision-models/06-final-project
+cd 06-decision-models/05-final-project
 python main.py                                  # cinco mensagens de exemplo
 python main.py "Fui cobrado duas vezes"         # a sua mensagem
-DECISION_BACKEND=laya python main.py            # decisões no Laya local (Aula 5)
+DECISION_BACKEND=laya python main.py            # decisões no Laya local
 LLM_MODEL=openai:gpt-5.6-luna python main.py    # outro LLM para escrever
 ```
 
