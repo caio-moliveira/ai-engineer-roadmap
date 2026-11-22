@@ -1,0 +1,36 @@
+PROPOSTA COMERCIAL Nº 2026-031
+
+De: Nó de Rede Tecnologia Ltda.
+Para: Alvorada Comércio Digital Ltda., aos cuidados de Helena Prado
+Data: 12 de fevereiro de 2026          Validade da proposta: 30 dias
+
+1. APRESENTAÇÃO
+Agradecemos a oportunidade de apresentar nossa proposta para o desenvolvimento do novo sistema de gestão de pedidos da Alvorada. A Nó de Rede atua há nove anos no desenvolvimento de sistemas para o varejo e atende hoje mais de quarenta clientes em Minas Gerais e São Paulo.
+
+2. ENTENDIMENTO DA NECESSIDADE
+O sistema atual não acompanha o volume de pedidos nos períodos de pico e não se integra ao controle de estoque. A Alvorada busca um sistema que reduza o tempo de separação dos pedidos e dê visibilidade das devoluções.
+
+3. ESCOPO PROPOSTO
+- Módulo de entrada e acompanhamento de pedidos
+- Integração com o sistema de estoque
+- Módulo de devoluções e frete reverso
+- Painel gerencial com indicadores de prazo e ruptura
+
+4. PRAZO
+Estimamos 6 meses de desenvolvimento, em sprints de duas semanas, seguidos de 6 meses de sustentação.
+
+5. INVESTIMENTO
+Valor mensal de R$ 28.500,00 durante 12 meses, totalizando R$ 342.000,00. O valor inclui equipe dedicada de três desenvolvedores, um líder técnico e uma gerente de projeto.
+
+6. CONDIÇÕES GERAIS
+6.1. Pagamento mensal, mediante nota fiscal, com vencimento no dia 10 do mês seguinte.
+6.2. Os defeitos identificados em até 90 dias após cada entrega serão corrigidos sem custo.
+6.3. As partes manterão sigilo sobre as informações trocadas durante a negociação e a execução.
+6.4. Esta proposta não gera obrigação entre as partes até a assinatura do contrato de prestação de serviços.
+
+7. PRÓXIMOS PASSOS
+Havendo interesse, enviaremos a minuta do contrato para análise do seu departamento jurídico.
+
+Atenciosamente,
+Beatriz Lima
+Gerente de Projetos, Nó de Rede Tecnologia Ltda.
