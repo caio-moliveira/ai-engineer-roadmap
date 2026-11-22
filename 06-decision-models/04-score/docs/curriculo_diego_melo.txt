@@ -1,0 +1,7 @@
+DIEGO MELO - Desenvolvedor Backend
+Resumo: 6 anos desenvolvendo APIs e serviços para sistemas de pagamento.
+Experiência:
+- Desenvolvedor Backend Pleno, PagaJá (2020 - atual): APIs em Java e Node.js; banco de dados relacional; implantação em nuvem com contêineres; orienta dois desenvolvedores júnior.
+- Desenvolvedor Júnior, Software Litoral (2018 - 2020): manutenção de sistemas web.
+Competências: Java, Node.js, SQL, Docker, nuvem, testes automatizados.
+Formação: Bacharelado em Sistemas de Informação.

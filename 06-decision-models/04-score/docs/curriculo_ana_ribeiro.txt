@@ -1,0 +1,7 @@
+ANA RIBEIRO - Engenheira de Dados Sênior
+Resumo: 8 anos em engenharia de dados, com foco em varejo.
+Experiência:
+- Engenheira de Dados Sênior, Rede Farol Varejo (2021 - atual): lidera um time de 4 pessoas; desenhou a plataforma de dados em nuvem; pipelines em Python e Spark orquestrados com Airflow.
+- Engenheira de Dados, Banco Atlântico Digital (2017 - 2021): pipelines de ingestão em produção, SQL e modelagem dimensional.
+Competências: Python, SQL, Spark, Airflow, dbt, Terraform, nuvem.
+Formação: Bacharelado em Ciência da Computação.

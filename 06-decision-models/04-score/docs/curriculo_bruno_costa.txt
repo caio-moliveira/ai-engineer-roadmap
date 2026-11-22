@@ -1,0 +1,7 @@
+BRUNO COSTA - Engenheiro de Dados
+Resumo: 4 anos construindo pipelines de dados para e-commerce.
+Experiência:
+- Engenheiro de Dados, Loja Vértice (2022 - atual): mantém sozinho 30 pipelines em produção, em Python e SQL, orquestrados com Airflow em nuvem; criou testes de qualidade com dbt.
+- Analista de Dados, Loja Vértice (2020 - 2022): consultas SQL e relatórios de vendas.
+Competências: Python, SQL, Airflow, dbt, nuvem.
+Formação: Tecnólogo em Análise e Desenvolvimento de Sistemas.

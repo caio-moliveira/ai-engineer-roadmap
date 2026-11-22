@@ -1,0 +1,7 @@
+CARLA DIAS - Analista de BI
+Resumo: 5 anos criando painéis e relatórios para a área comercial.
+Experiência:
+- Analista de BI Pleno, Distribuidora Sol (2021 - atual): painéis de vendas e estoque; consultas SQL complexas; define indicadores com os gerentes regionais.
+- Analista de BI Júnior, Distribuidora Sol (2019 - 2021): relatórios semanais em planilhas e SQL.
+Competências: SQL avançado, ferramentas de painéis, Excel, noções de Python.
+Formação: Bacharelado em Administração.
