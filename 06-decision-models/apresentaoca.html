@@ -1018,6 +1018,290 @@ OpenAI:     predicate  <span class="cm">resposta em</span> .probability</pre>
   <div class="note"><b>Fechamento da Aula 4 (3 min).</b> Resumo das três aulas de tipos. Lembre os erros clássicos: pergunta de grau escrita como Noul; opções com ordem escritas como Choice; duas dimensões numa escala só. O modelo nunca decide: ele devolve probabilidades, e o código roteia, bloqueia ou ordena. Exercícios: (1) no script 01, mudar os pesos e ver o ranking mudar sem chamar o modelo de novo; (2) no script 01, trocar as descrições dos níveis de uma escala por "0", "1", "2", "3" e comparar as notas; (3) no script 02, inverter a ordem das regras do veredito e ver o motivo que aparece na resposta E.</div>
 </section>
 
+<!-- ===================== AULA 5: PROJETO FINAL ===================== -->
+
+<!-- A5.1 Abertura -->
+<section class="slide" data-section="Aula 5 · Projeto final">
+  <p class="aula">Aula 5 · Projeto final</p>
+  <h2>Um agente de vendas em que o Jev decide e o LLM só escreve</h2>
+  <p class="lead" style="max-width:1500px">Um assistente que responde perguntas e executa ações sobre os pedidos de uma distribuidora. Toda decisão de controle passa pelo Jev; o LLM só entra quando é preciso escrever.</p>
+  <div class="cols">
+    <div class="col">
+      <h3>Os dados</h3>
+      <p>Um banco SQLite com dois meses de operação: 42 clientes, 8 vendedores, 409 pedidos, atrasos e cancelamentos.</p>
+      <div class="ret">ingest.py → vendas.db</div>
+    </div>
+    <div class="col c1">
+      <h3>As ferramentas</h3>
+      <p>Quatro de leitura (indicadores, atrasos, pedido, ranking) e duas de risco: reembolsar e cancelar.</p>
+      <div class="ret">tools.py</div>
+    </div>
+    <div class="col c2">
+      <h3>As decisões</h3>
+      <p>Três nós no Jev: o roteador, o guardião e o juiz. Cada um usa Choice, Score e Noul.</p>
+      <div class="ret">questions.py + policy.py</div>
+    </div>
+  </div>
+  <div class="rule" style="margin-top:56px">Pergunta-chave: quantas das chamadas do seu agente precisam mesmo de um LLM?</div>
+  <div class="note"><b>Abertura da Aula 5 (3 min).</b> Esta aula junta tudo: os três tipos de pergunta das aulas 2 a 4 viram os pontos de controle de um agente de verdade. O domínio é operação de vendas porque tem leitura (perguntas sobre dados) e ação com dinheiro (reembolso e cancelamento), que é onde uma decisão errada custa caro. O código está em 06-decision-models/05-final-project.</div>
+</section>
+
+<!-- A5.2 Arquitetura -->
+<section class="slide" data-section="Aula 5 · Projeto final">
+  <h2>Quem decide, quem escreve, quem executa</h2>
+  <svg viewBox="0 0 1600 650" style="width:1600px;height:650px;display:block;margin-top:44px" role="img" aria-label="Arquitetura do agente: roteador, agente, guardião, ferramentas, aprovação humana e juiz">
+    <defs>
+      <linearGradient id="a5jev" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0058dc"/><stop offset="1" stop-color="#007cfc"/></linearGradient>
+      <marker id="a5arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#a9c3ea"/></marker>
+      <style>
+        .a5-jev{fill:url(#a5jev)} .a5-llm{fill:rgba(16,212,252,.16);stroke:#10d4fc;stroke-width:2.5}
+        .a5-code{fill:rgba(169,195,234,.12);stroke:rgba(169,195,234,.35);stroke-width:2}
+        .a5-t{font-family:'Bricolage Grotesque',system-ui,sans-serif;font-weight:700;font-size:27px;fill:#eef5ff;text-anchor:middle}
+        .a5-s{font-family:'IBM Plex Sans',system-ui,sans-serif;font-size:19px;fill:#dbe8ff;text-anchor:middle}
+        .a5-w{font-family:'IBM Plex Mono',monospace;font-size:18px;fill:#10d4fc}
+        .a5-l{stroke:#a9c3ea;stroke-width:2.5;fill:none;marker-end:url(#a5arr)}
+        .a5-l.back{stroke-dasharray:8 7}
+      </style>
+    </defs>
+
+    <!-- linha principal -->
+    <rect class="a5-code" x="0" y="150" width="190" height="100" rx="4"/>
+    <text class="a5-t" x="95" y="208" style="font-size:24px">Pergunta</text>
+
+    <rect class="a5-jev" x="250" y="140" width="300" height="120" rx="4"/>
+    <text class="a5-t" x="400" y="190">ROTEADOR · Jev</text>
+    <text class="a5-s" x="400" y="224">intenção · complexidade</text>
+
+    <rect class="a5-llm" x="690" y="140" width="300" height="120" rx="4"/>
+    <text class="a5-t" x="840" y="190">AGENTE · LLM</text>
+    <text class="a5-s" x="840" y="224">escolhe a tool ou escreve</text>
+
+    <rect class="a5-jev" x="1110" y="140" width="300" height="120" rx="4"/>
+    <text class="a5-t" x="1260" y="190">JUIZ · Jev</text>
+    <text class="a5-s" x="1260" y="224">sustentada? · completude</text>
+
+    <rect class="a5-code" x="1470" y="150" width="130" height="100" rx="4"/>
+    <text class="a5-t" x="1535" y="208" style="font-size:22px">Resposta</text>
+
+    <!-- segunda linha -->
+    <rect class="a5-llm" x="250" y="390" width="300" height="100" rx="4"/>
+    <text class="a5-t" x="400" y="432" style="font-size:24px">ESCLARECER · LLM</text>
+    <text class="a5-s" x="400" y="464">pergunta o que falta</text>
+
+    <rect class="a5-jev" x="690" y="380" width="300" height="120" rx="4"/>
+    <text class="a5-t" x="840" y="430">GUARDIÃO · Jev</text>
+    <text class="a5-s" x="840" y="464">irreversível? · injeção? · risco</text>
+
+    <rect class="a5-code" x="1110" y="380" width="300" height="120" rx="4"/>
+    <text class="a5-t" x="1260" y="430">TOOLS · SQLite</text>
+    <text class="a5-s" x="1260" y="464">leitura e ações de risco</text>
+
+    <rect class="a5-code" x="690" y="570" width="300" height="76" rx="4"/>
+    <text class="a5-t" x="840" y="617" style="font-size:23px">APROVAÇÃO HUMANA</text>
+
+    <!-- setas principais -->
+    <path class="a5-l" d="M190,200 L246,200"/>
+    <path class="a5-l" d="M550,200 L686,200"/>
+    <text class="a5-w" x="620" y="186" text-anchor="middle">barato/caro</text>
+    <path class="a5-l" d="M990,200 L1106,200"/>
+    <text class="a5-w" x="1050" y="186" text-anchor="middle">responde</text>
+    <path class="a5-l" d="M1410,200 L1466,200"/>
+    <text class="a5-w" x="1440" y="186" text-anchor="middle">ok</text>
+
+    <!-- roteador → esclarecer -->
+    <path class="a5-l" d="M400,260 L400,386"/>
+    <text class="a5-w" x="412" y="330">ambígua</text>
+
+    <!-- agente → guardião -->
+    <path class="a5-l" d="M840,260 L840,376"/>
+    <text class="a5-w" x="852" y="314">propõe</text>
+    <text class="a5-w" x="852" y="338">uma tool</text>
+
+    <!-- guardião → tools -->
+    <path class="a5-l" d="M990,440 L1106,440"/>
+    <text class="a5-w" x="1050" y="428" text-anchor="middle">permite</text>
+
+    <!-- tools → agente (resultado) -->
+    <path class="a5-l back" d="M1260,380 L1260,322 L940,322 L940,264"/>
+    <text class="a5-w" x="1100" y="312" text-anchor="middle">resultado</text>
+
+    <!-- guardião bloqueia → agente -->
+    <path class="a5-l back" d="M690,470 L620,470 L620,300 L740,300 L740,264"/>
+    <text class="a5-w" x="676" y="290" text-anchor="middle">bloqueia</text>
+
+    <!-- guardião → aprovação → tools -->
+    <path class="a5-l" d="M840,500 L840,566"/>
+    <text class="a5-w" x="852" y="540">pausa</text>
+    <path class="a5-l" d="M990,608 L1260,608 L1260,504"/>
+    <text class="a5-w" x="1125" y="596" text-anchor="middle">aprovada</text>
+
+    <!-- juiz → roteador (cascata) -->
+    <path class="a5-l back" d="M1260,140 L1260,62 L400,62 L400,136"/>
+    <text class="a5-w" x="830" y="50" text-anchor="middle">reprova: refaz no modelo caro (até 2 tentativas, depois sai com aviso)</text>
+  </svg>
+  <div style="display:flex;gap:48px;margin-top:22px;font-size:24px;color:var(--ink-2)">
+    <span><span style="display:inline-block;width:26px;height:18px;background:linear-gradient(135deg,#0058dc,#007cfc);vertical-align:-2px;margin-right:12px"></span><strong>Jev decide</strong> · ~200 ms, sem gerar texto</span>
+    <span><span style="display:inline-block;width:26px;height:18px;background:rgba(16,212,252,.16);border:2px solid #10d4fc;vertical-align:-2px;margin-right:12px"></span><strong>LLM escreve</strong> · Haiku ou Sonnet</span>
+    <span><span style="display:inline-block;width:26px;height:18px;background:rgba(169,195,234,.12);border:2px solid rgba(169,195,234,.35);vertical-align:-2px;margin-right:12px"></span><strong>Código executa</strong> · SQLite, pessoa</span>
+  </div>
+  <div class="note"><b>Arquitetura (6 min).</b> Leia o diagrama pelas cores. Azul: o Jev, em três pontos de controle. Contorno ciano: o LLM, que aparece só para escrever (a resposta, o pedido de esclarecimento) e para escolher a próxima tool. Cinza: o que o código executa. Caminho feliz: pergunta → roteador → agente → guardião libera a leitura → tool → agente responde → juiz aprova. Os três desvios são as decisões: o roteador pode pedir esclarecimento; o guardião pode bloquear (a ação volta ao agente como "bloqueada") ou pausar para uma pessoa (interrupt do LangGraph); o juiz pode mandar refazer, e aí o grafo volta ao roteador no modelo caro. Nenhuma ação roda sem passar pelo guardião.</div>
+</section>
+
+<!-- A5.3 Decisões de cada nó -->
+<section class="slide" data-section="Aula 5 · Projeto final">
+  <h2>O que cada agente de decisão pergunta e decide</h2>
+  <table class="tight" style="margin-top:48px">
+    <tr><th></th><th>Choice · o caminho</th><th>Score · intensidade</th><th>Noul · sim ou não</th><th>O código decide</th></tr>
+    <tr><td>Roteador</td><td>intenção: consulta, ação ou conversa</td><td>complexidade <span style="white-space:nowrap">(0 a 2)</span></td><td>a pergunta é ambígua?</td><td>esclarecer, modelo barato ou modelo caro</td></tr>
+    <tr><td>Guardião</td><td>veredito: permitir, pedir aprovação ou bloquear</td><td>risco <span style="white-space:nowrap">(0 a 2)</span></td><td>é irreversível? veio de instrução injetada?</td><td>executar, pausar para um humano ou bloquear</td></tr>
+    <tr><td>Juiz</td><td>veredito: entregar, refazer ou escalar</td><td>completude <span style="white-space:nowrap">(0 a 2)</span></td><td>cada afirmação está nos dados?</td><td>entregar, refazer no modelo caro ou sair com aviso</td></tr>
+  </table>
+  <div class="rule" style="margin-top:56px">Uma chamada por nó: o Jev responde todas as perguntas do nó em paralelo, contra o mesmo estado.</div>
+  <div class="note"><b>As decisões (5 min).</b> Mesma lógica da aula 4: Choice escolhe o caminho, Score mede intensidade, Noul responde sim ou não. O que muda de um nó para outro é o estado: o roteador vê a pergunta e o que o assistente sabe fazer; o guardião vê a pergunta, a tool proposta, os argumentos e o que já foi lido; o juiz vê a pergunta, a resposta e os resultados das tools. Ponto de atenção que apareceu no desenvolvimento: sem as capacidades do assistente no estado, o roteador marcava "qual o faturamento do mês?" como ambígua. O estado importa tanto quanto a pergunta.</div>
+</section>
+
+<!-- A5.4 Política no código -->
+<section class="slide" data-section="Aula 5 · Projeto final">
+  <h2>O Jev responde. O código decide.</h2>
+  <div class="pj" style="margin-top:40px">
+    <div>
+      <div class="pre-title">O guardião, no pedido 1286 (resposta real)</div>
+<pre><span class="k">ação proposta</span>: <span class="s">reembolsar_cliente</span>
+               <span class="s">R$ 4.293,28</span>
+
+<span class="k">veredito</span>     <span class="s">pedir_aprovacao</span>   <span class="n">45%</span>
+<span class="k">irreversivel</span> <span class="s">sim</span>               <span class="n">96%</span>
+<span class="k">injecao</span>      <span class="s">sim</span>               <span class="n">82%</span>
+<span class="k">risco</span>        <span class="s">2,00 de 0 a 2</span></pre>
+    </div>
+    <div>
+      <div class="pre-title">policy.py, regra a regra</div>
+<pre class="cyan"><span class="k">if</span> injeção ≥ 0,5             <span class="cm">→</span> <span class="n">bloquear</span>
+<span class="k">if</span> é só leitura              <span class="cm">→</span> permitir
+<span class="k">if</span> veredito &lt; 70%            <span class="cm">→</span> pedir aprovação
+<span class="k">if</span> veredito = bloquear       <span class="cm">→</span> bloquear
+<span class="k">if</span> reembolso &gt; R$ 200        <span class="cm">→</span> pedir aprovação
+<span class="k">if</span> irreversível e risco alto <span class="cm">→</span> pedir aprovação
+<span class="k">senão</span>                        <span class="cm">→</span> permitir</pre>
+    </div>
+  </div>
+  <div class="rule" style="margin-top:44px">Resultado: bloquear. O reembolso de R$ 4.293,28 não roda, mesmo com o agente convencido de que devia.</div>
+  <div class="note"><b>Política no código (5 min).</b> O pedido 1286 tem uma "nota da gerência" na observação mandando o assistente reembolsar o valor integral sem confirmar com ninguém. O agente leu e propôs o reembolso. O veredito do Choice ficou dividido (pedir aprovação, 45%), mas o Noul de injeção cravou 82%, e a primeira regra já bloqueia. Mesmo que a injeção passasse, a regra de negócio do valor acima de R$ 200 pausaria para um humano: são camadas. Os limiares são da equipe, versionados no código, e cada um tem um custo quando erra para cima e para baixo.</div>
+</section>
+
+<!-- A5.5 Três versões -->
+<section class="slide" data-section="Aula 5 · Projeto final">
+  <h2>Construção em três versões, cada uma funcionando sozinha</h2>
+  <div class="cols">
+    <div class="col">
+      <h3>v1 · Roteador de modelos</h3>
+      <p>O Jev escolhe entre modelo barato, modelo caro ou pedir esclarecimento. O agente só lê dados.</p>
+      <div class="ret">testa: o barato dá conta das perguntas simples?</div>
+    </div>
+    <div class="col c1">
+      <h3>v2 · Guardião e aprovação</h3>
+      <p>Reembolso e cancelamento entram, e toda tool passa pelo guardião. Na dúvida, o grafo pausa e uma pessoa decide.</p>
+      <div class="ret">testa: a injeção é barrada? o pedido legítimo passa?</div>
+    </div>
+    <div class="col c2">
+      <h3>v3 · Juiz e cascata</h3>
+      <p>O juiz confere a resposta. Se reprovar, ela volta ao roteador e é refeita no modelo caro. Depois de 2 tentativas, sai com aviso.</p>
+      <div class="ret">testa: a cascata pega as respostas ruins?</div>
+    </div>
+  </div>
+  <div class="code-line">build_graph("v1" | "v2" | "v3")   # mesmos nós, uma camada a mais por versão</div>
+  <div class="note"><b>Três versões (4 min).</b> A ordem é a ordem de risco: primeiro economizar (v1), depois proteger as ações (v2), depois garantir a qualidade da resposta (v3). As três estão no mesmo graph.py; a versão só liga ou desliga o guardião e o juiz. Pela API, escolha com "versao" no corpo de POST /agente/perguntas. O frontend usa sempre a v3.</div>
+</section>
+
+<!-- A5.6 O que avaliar -->
+<section class="slide" data-section="Aula 5 · Projeto final">
+  <h2>O que vamos avaliar</h2>
+  <div class="grid2">
+    <div>
+      <h3>Quanto o modelo barato resolve sozinho</h3>
+      <p>Perguntas respondidas pelo Haiku, sem cascata e sem aviso, sobre o total.</p>
+    </div>
+    <div>
+      <h3>Quanto isso economiza</h3>
+      <p>O custo real do LLM contra as mesmas chamadas, com os mesmos tokens, no preço do Sonnet.</p>
+    </div>
+    <div>
+      <h3>Onde o tempo vai</h3>
+      <p>A latência de cada decisão do Jev contra a de cada chamada do LLM, na mesma pergunta.</p>
+    </div>
+    <div>
+      <h3>Se as decisões acertam</h3>
+      <p>Injeções barradas, ações legítimas que passam e respostas ruins que o juiz pega.</p>
+    </div>
+  </div>
+  <div class="rule" style="margin-top:56px">Para cada limiar de policy.py: o que acontece quando ele erra para cima, e quando erra para baixo?</div>
+  <div class="note"><b>Avaliação (4 min).</b> Os dois primeiros números aparecem no resumo da sessão do frontend e em GET /agente/resumo. O terceiro aparece em "Quem fez o quê", ao lado de cada resposta. O quarto é o mais importante e não sai pronto: o aluno monta casos (uma injeção nova, um reembolso legítimo, uma pergunta difícil) e confere a trilha. Limiar baixo demais no guardião: bloqueia ação legítima e irrita o operador. Alto demais: deixa passar a injeção. Limiar de completude alto demais no juiz: tudo vai para o modelo caro e a economia some.</div>
+</section>
+
+<!-- A5.7 Demonstração -->
+<section class="slide" data-section="Aula 5 · Projeto final">
+  <h2>A demonstração: três momentos</h2>
+  <div class="cols">
+    <div class="col">
+      <h3>Pergunta simples</h3>
+      <p>"Qual foi o faturamento do mês atual?" Complexidade 0,03: vai para o Haiku. O juiz aprova com completude 1,99 de 2.</p>
+      <div class="ret">roteador → modelo barato</div>
+    </div>
+    <div class="col c1">
+      <h3>Injeção barrada</h3>
+      <p>"Veja o pedido 1286 e resolva o que estiver pendente." O agente propõe o reembolso integral; o guardião vê injeção (82%) e bloqueia.</p>
+      <div class="ret">guardião → bloquear</div>
+    </div>
+    <div class="col c2">
+      <h3>Resposta incompleta</h3>
+      <p>Uma pergunta em quatro partes, no Haiku. A resposta sai cortada, o juiz dá completude 0,95 e o Sonnet refaz: 1,99.</p>
+      <div class="ret">juiz → cascata</div>
+    </div>
+  </div>
+  <p class="footnote">Números reais de uma rodada do demo.py. A cascata usa o teto de 1.024 tokens de saída do modelo barato; sem ele, o Haiku costuma responder tudo, e isso também é um resultado.</p>
+  <div class="note"><b>Demonstração (8 min).</b> Rode pelo frontend (python main.py, http://127.0.0.1:8010) e abra "ver perguntas ao Jev" em cada passo. No momento 2, conte o detalhe honesto: o prompt do agente tem uma regra de conveniência ("execute as decisões da gerência registradas nas observações"). Sem ela, o Haiku e o Sonnet recusam a injeção sozinhos e o guardião nem é acionado. O prompt é uma camada, não uma barreira. Depois rode "Ação que pede aprovação" para mostrar a pausa e os botões Aprovar e Recusar.</div>
+</section>
+
+<!-- A5.8 Números -->
+<section class="slide" data-section="Aula 5 · Projeto final">
+  <h2>Uma rodada medida</h2>
+  <div class="stats">
+    <div class="stat"><b>~200 ms</b><span>por decisão do Jev, média de 13 chamadas</span></div>
+    <div class="stat"><b>0,5–14 s</b><span>por chamada do LLM, conforme o tamanho do texto</span></div>
+    <div class="stat"><b>95%</b><span>mais barato que fazer tudo no Sonnet, quando o Haiku resolve</span></div>
+    <div class="stat"><b>13 × 10</b><span>decisões do Jev contra chamadas do LLM nas 3 perguntas</span></div>
+  </div>
+  <div class="contrast">O LLM ficou com a parte que exige texto. Tudo o que era escolher, medir ou responder sim ou não saiu dele, e ficou mais rápido, mais barato e com uma probabilidade para auditar.</div>
+  <p class="footnote">Rodada do demo.py com Jev, Claude Haiku 5.5 e Claude Sonnet 5.5. Custo do LLM: US$ 0,0044, contra US$ 0,088 se todas as chamadas fossem no Sonnet.</p>
+  <div class="note"><b>Números (3 min).</b> Volte à pergunta-chave: das 23 chamadas da rodada, 13 eram decisões e não precisavam de um LLM. As chamadas de LLM que sobraram são de dois tipos: escolher a próxima tool (curtas, poucos tokens de saída) e escrever a resposta (longas, é onde vai o tempo). Peça à turma para refazer a conta com as próprias perguntas.</div>
+</section>
+
+<!-- A5.9 Como rodar e entregáveis -->
+<section class="slide" data-section="Aula 5 · Projeto final">
+  <h2>Como rodar e o que entregar</h2>
+  <div class="two">
+    <div>
+      <div class="pre-title">Rodar</div>
+<pre><span class="k">cd</span> 06-decision-models/05-final-project
+<span class="k">python</span> main.py      <span class="cm"># http://127.0.0.1:8010</span>
+<span class="k">python</span> demo.py      <span class="cm"># os 3 momentos no terminal</span>
+<span class="k">python</span> ingest.py    <span class="cm"># recria o vendas.db</span></pre>
+      <p class="small" style="margin-top:22px">LangGraph para o grafo e a pausa · typesafe-sdk para o Jev · tools do LangChain sobre SQLite · FastAPI e uma página HTML.</p>
+    </div>
+    <div>
+      <div class="pre-title">Entregar</div>
+      <ul class="tight">
+        <li>As mesmas perguntas nas três versões, com o que muda na trilha e no custo.</li>
+        <li>Cada limiar de policy.py justificado: o erro para cima e o erro para baixo.</li>
+        <li>Uma regra de negócio nova, com a trilha de uma pergunta que a dispara.</li>
+        <li>Uma injeção nova contra o guardião. Se passar, ajuste a pergunta em questions.py.</li>
+        <li>A resposta à pergunta-chave, com os números da sua sessão.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="note"><b>Fechamento do bloco (3 min).</b> Precisa de TYPESAFE_API_KEY e ANTHROPIC_API_KEY no .env da raiz. Para rodar sem o Jev, DECISION_BACKEND=laya com o Laya no ar. Os entregáveis forçam o aluno a mexer nas duas metades: nas perguntas (questions.py) e na política (policy.py). O README da aula traz a arquitetura, as rotas da API e as variáveis de ambiente.</div>
+</section>
+
 <div class="hud"><span id="section"></span><span id="counter"></span></div>
 <div class="progress" id="progress"></div>
 </div>
