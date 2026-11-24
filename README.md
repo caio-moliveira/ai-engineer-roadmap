@@ -220,7 +220,7 @@ Este bloco cobre as chamadas que roteiam, classificam, bloqueiam e verificam. Um
 | 02 | [Choice](./06-decision-models/02-choice)                                       | Classificação de documentos e escolha de tool          |
 | 03 | [Noul](./06-decision-models/03-noul)                                           | Checklist, guardrail e auditoria de edital |
 | 04 | [Score](./06-decision-models/04-score)                                         | Ranking de currículos e juiz de respostas |
-| 05 | [Projeto Final](./06-decision-models/05-final-project)                         | Agente de atendimento híbrido         |
+| 05 | [Projeto Final](./06-decision-models/05-final-project)                         | Agente de vendas com decisões tipadas |
 
 ---
 

@@ -64,7 +64,7 @@ Um modelo de decisão faz essas perguntas sem gerar texto. Devolve a probabilida
 
 ### [Aula 5: Projeto final](./05-final-project)
 - **Pergunta-chave:** quantas das chamadas do seu agente precisam mesmo de um LLM?
-- Agente de atendimento em LangGraph: guardrail, triagem e verificação no Jev, resposta no LLM.
+- Agente de operações de vendas em LangGraph, em três versões: roteador de modelos, guardião com aprovação humana e juiz com cascata. As decisões ficam no Jev, a redação no LLM, e os dados num SQLite.
 
 ---
 
@@ -74,6 +74,7 @@ Um modelo de decisão faz essas perguntas sem gerar texto. Devolve a probabilida
 |---|---|---|---|
 | **Jev** | TypeSafe AI, API | `typesafe-sdk` | todas |
 | **GPT-5.6 Luna** e **Claude Sonnet 5.5** | OpenAI e Anthropic | `init_chat_model` do LangChain | 1 e 5 |
+| **Claude Haiku 5.5** | Anthropic | `init_chat_model` do LangChain | 5 (o modelo barato do roteador) |
 | **Laya** (`convaiinnovations/laya-multilingual`) | Convai Innovations, Apache 2.0 | local, mesma API do Jev | todas |
 | **Gemini Decision 1** e **OpenAI Decisions API** | Google e OpenAI, API | HTTP direto (`httpx`) | 1, 2, 3 e 4 |
 
@@ -93,8 +94,8 @@ Configure o `.env` da raiz (veja o `.env.example`):
 | Variável | Para quê |
 |---|---|
 | `TYPESAFE_API_KEY` | chamar o Jev (todas as aulas) |
-| `ANTHROPIC_API_KEY` | Claude Sonnet 5.5 (aulas 1 e 5) |
-| `OPENAI_API_KEY` | GPT-5.6 Luna (aula 1; na aula 5, com `LLM_MODEL=openai:gpt-5.6-luna`) e OpenAI Decisions API (aulas 1 a 4) |
+| `ANTHROPIC_API_KEY` | Claude Sonnet 5.5 (aulas 1 e 5) e Claude Haiku 5.5 (aula 5) |
+| `OPENAI_API_KEY` | GPT-5.6 Luna (aula 1; na aula 5, com `LLM_LARGE=openai:gpt-5.6-luna`) e OpenAI Decisions API (aulas 1 a 4) |
 | `GEMINI_API_KEY` | Gemini Decision 1 (aulas 1 a 4) |
 | `LAYA_BASE_URL` | onde o Laya responde (padrão `http://127.0.0.1:8001`) |
 

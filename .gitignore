@@ -12,3 +12,6 @@ wheels/
 CLAUDE.md
 .agents/
 .claude/
+
+# Banco gerado pelo ingest.py do projeto final do bloco 6
+06-decision-models/05-final-project/vendas.db
